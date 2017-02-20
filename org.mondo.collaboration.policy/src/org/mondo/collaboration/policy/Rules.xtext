@@ -1,0 +1,50 @@
+grammar org.mondo.collaboration.policy.Rules with org.eclipse.xtext.common.Terminals
+
+generate rules "http://www.mondo.org/collaboration/policy/Rules"
+
+import "platform:/resource/org.mondo.collaboration.windturbine/windturbine.ecore" as ecore
+
+Model:
+	policy=Policy;
+	
+Policy:
+	'policy' name=ID & access=AccessibilityLevel & operation=OperationType 'by' 'default' '{'
+	rules+=Rule*
+	'}' 'with' resolution=ResolutionType 'resolution';
+	
+Rule:
+	'rule' name=ID & access=AccessibilityLevel & operation=OperationType 'to' user=User '{'
+	'select' asset=AssetType
+	'from' 'query' query=Query
+	('where'  'bound' 'to')?
+	'}' ('with' priority=INT 'priority')?;
+	
+User:
+	name=ID;
+	
+Query:
+	name=STRING;
+
+enum AccessibilityLevel:
+	ALLOW='allow' | OBFUSCATE='obfuscate' | DENY='deny';
+
+enum OperationType:
+	READ='R' | READWRITE='RW';
+
+enum AssetType:
+	ObjectFact | ReferenceFact | AttributeFact;
+	
+ObjectFact:
+	'obj(' object=[ecore::EObject] ',' type=[ecore::EClass] ')';
+
+ReferenceFact:
+	'ref(' srcObject=[ecore::EObject] '->' reference=[ecore::EReference] '->' trgObject=[ecore::EObject] ')';
+
+AttributeFact:
+	'attr(' object=[ecore::EObject] ',' attribute=[ecore::EAttribute] ',' value=Value ')';
+
+Value:
+	INT | STRING;
+	
+enum ResolutionType:
+	RESTRICTIVE='restrictive' | PERMISSIVE='permissive';
