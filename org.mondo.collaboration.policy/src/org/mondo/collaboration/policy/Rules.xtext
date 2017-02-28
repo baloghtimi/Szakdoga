@@ -2,7 +2,8 @@ grammar org.mondo.collaboration.policy.Rules with org.eclipse.xtext.common.Termi
 
 generate rules "http://www.mondo.org/collaboration/policy/Rules"
 
-import "platform:/resource/org.mondo.collaboration.windturbine/windturbine.ecore" as ecore
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.eclipse.org/viatra/query/patternlanguage/PatternLanguage" as iql
 
 Model:
 	policy=Policy;
@@ -16,7 +17,7 @@ Rule:
 	'rule' name=ID & access=AccessibilityLevel & operation=OperationType 'to' user=User '{'
 	'select' asset=AssetType
 	'from' 'query' query=Query
-	('where'  'bound' 'to')?
+	('where'  'bound' 'to')*
 	'}' ('with' priority=INT 'priority')?;
 	
 User:

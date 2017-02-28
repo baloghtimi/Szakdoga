@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="freshmancamp.FreshmanCampQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:freshmancamp.FreshmanCampQueries" id="freshmancamp.FreshmanCampQueries">
+      <query-specification fqn="freshmancamp.colors"/>
+      <query-specification fqn="freshmancamp.cardSeniors"/>
+      <query-specification fqn="freshmancamp.cardSeniorsOfColorSenior"/>
+    </group>
+  </extension>
+</plugin>

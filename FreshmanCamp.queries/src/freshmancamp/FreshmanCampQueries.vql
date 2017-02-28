@@ -1,0 +1,15 @@
+package freshmancamp
+
+import "platform:/resource/FreshmanCamp/model/freshmanCamp.ecore"
+
+pattern colors(color : Color) = {
+	Color(color);
+}
+
+pattern cardSeniors(card : CardSenior) = {
+	CardSenior(card);
+}
+
+pattern cardSeniorsOfColorSenior(card : CardSenior, color : ColorSenior) = {
+	ColorSenior.inferiors(color, card);
+}
