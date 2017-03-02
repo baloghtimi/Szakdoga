@@ -3,8 +3,12 @@
  */
 package org.mondo.collaboration.policy.rules.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,8 +16,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.mondo.collaboration.policy.rules.Model;
 import org.mondo.collaboration.policy.rules.Policy;
+import org.mondo.collaboration.policy.rules.Role;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
 /**
@@ -24,6 +32,7 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ModelImpl#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.ModelImpl#getPolicy <em>Policy</em>}</li>
  * </ul>
  *
@@ -31,6 +40,16 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  */
 public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
+  /**
+   * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRoles()
+   * @generated
+   * @ordered
+   */
+  protected EList<Role> roles;
+
   /**
    * The cached value of the '{@link #getPolicy() <em>Policy</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -60,6 +79,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected EClass eStaticClass()
   {
     return RulesPackage.Literals.MODEL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Role> getRoles()
+  {
+    if (roles == null)
+    {
+      roles = new EObjectContainmentEList<Role>(Role.class, this, RulesPackage.MODEL__ROLES);
+    }
+    return roles;
   }
 
   /**
@@ -120,6 +153,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case RulesPackage.MODEL__ROLES:
+        return ((InternalEList<?>)getRoles()).basicRemove(otherEnd, msgs);
       case RulesPackage.MODEL__POLICY:
         return basicSetPolicy(null, msgs);
     }
@@ -136,6 +171,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case RulesPackage.MODEL__ROLES:
+        return getRoles();
       case RulesPackage.MODEL__POLICY:
         return getPolicy();
     }
@@ -147,11 +184,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
+      case RulesPackage.MODEL__ROLES:
+        getRoles().clear();
+        getRoles().addAll((Collection<? extends Role>)newValue);
+        return;
       case RulesPackage.MODEL__POLICY:
         setPolicy((Policy)newValue);
         return;
@@ -169,6 +211,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case RulesPackage.MODEL__ROLES:
+        getRoles().clear();
+        return;
       case RulesPackage.MODEL__POLICY:
         setPolicy((Policy)null);
         return;
@@ -186,6 +231,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case RulesPackage.MODEL__ROLES:
+        return roles != null && !roles.isEmpty();
       case RulesPackage.MODEL__POLICY:
         return policy != null;
     }

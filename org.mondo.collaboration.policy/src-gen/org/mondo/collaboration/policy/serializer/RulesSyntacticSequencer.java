@@ -10,9 +10,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.mondo.collaboration.policy.services.RulesGrammarAccess;
@@ -21,12 +18,10 @@ import org.mondo.collaboration.policy.services.RulesGrammarAccess;
 public class RulesSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RulesGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Rule___WhereKeyword_2_9_0_BoundKeyword_2_9_1_ToKeyword_2_9_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RulesGrammarAccess) access;
-		match_Rule___WhereKeyword_2_9_0_BoundKeyword_2_9_1_ToKeyword_2_9_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getRuleAccess().getWhereKeyword_2_9_0()), new TokenAlias(false, false, grammarAccess.getRuleAccess().getBoundKeyword_2_9_1()), new TokenAlias(false, false, grammarAccess.getRuleAccess().getToKeyword_2_9_2()));
 	}
 	
 	@Override
@@ -41,25 +36,8 @@ public class RulesSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Rule___WhereKeyword_2_9_0_BoundKeyword_2_9_1_ToKeyword_2_9_2__q.equals(syntax))
-				emit_Rule___WhereKeyword_2_9_0_BoundKeyword_2_9_1_ToKeyword_2_9_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else acceptNodes(getLastNavigableState(), syntaxNodes);
+			acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * Ambiguous syntax:
-	 *     ('where' 'bound' 'to')?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     query=Query (ambiguity) '}' 'rule' name=ID
-	 *     query=Query (ambiguity) '}' 'with' priority=INT
-	 *     query=Query (ambiguity) '}' (rule end)
-	 *     query=Query (ambiguity) '}' access=AccessibilityLevel
-	 *     query=Query (ambiguity) '}' operation=OperationType
-	 */
-	protected void emit_Rule___WhereKeyword_2_9_0_BoundKeyword_2_9_1_ToKeyword_2_9_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 }

@@ -5,6 +5,8 @@ package org.mondo.collaboration.policy.rules;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Query</b></em>'.
@@ -14,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.Query#getName <em>Name</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.Query#getPattern <em>Pattern</em>}</li>
  * </ul>
  *
  * @see org.mondo.collaboration.policy.rules.RulesPackage#getQuery()
@@ -24,29 +26,29 @@ import org.eclipse.emf.ecore.EObject;
 public interface Query extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Pattern</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * If the meaning of the '<em>Pattern</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getQuery_Name()
+   * @return the value of the '<em>Pattern</em>' reference.
+   * @see #setPattern(Pattern)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getQuery_Pattern()
    * @model
    * @generated
    */
-  String getName();
+  Pattern getPattern();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Query#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Query#getPattern <em>Pattern</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
+   * @param value the new value of the '<em>Pattern</em>' reference.
+   * @see #getPattern()
    * @generated
    */
-  void setName(String value);
+  void setPattern(Pattern value);
 
 } // Query

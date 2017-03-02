@@ -3,6 +3,8 @@
  */
 package org.mondo.collaboration.policy.rules;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,9 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getName <em>Name</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getAccess <em>Access</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getOperation <em>Operation</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getUser <em>User</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getAsset <em>Asset</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getQuery <em>Query</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getBindings <em>Bindings</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getPriority <em>Priority</em>}</li>
  * </ul>
  *
@@ -114,59 +117,46 @@ public interface Rule extends EObject
   void setOperation(OperationType value);
 
   /**
-   * Returns the value of the '<em><b>User</b></em>' containment reference.
+   * Returns the value of the '<em><b>Roles</b></em>' reference list.
+   * The list contents are of type {@link org.mondo.collaboration.policy.rules.Role}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>User</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Roles</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>User</em>' containment reference.
-   * @see #setUser(User)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_User()
-   * @model containment="true"
-   * @generated
-   */
-  User getUser();
-
-  /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getUser <em>User</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>User</em>' containment reference.
-   * @see #getUser()
-   * @generated
-   */
-  void setUser(User value);
-
-  /**
-   * Returns the value of the '<em><b>Asset</b></em>' attribute.
-   * The literals are from the enumeration {@link org.mondo.collaboration.policy.rules.AssetType}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Asset</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Asset</em>' attribute.
-   * @see org.mondo.collaboration.policy.rules.AssetType
-   * @see #setAsset(AssetType)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Asset()
+   * @return the value of the '<em>Roles</em>' reference list.
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Roles()
    * @model
    * @generated
    */
-  AssetType getAsset();
+  EList<Role> getRoles();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getAsset <em>Asset</em>}' attribute.
+   * Returns the value of the '<em><b>Asset</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Asset</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Asset</em>' containment reference.
+   * @see #setAsset(Asset)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Asset()
+   * @model containment="true"
+   * @generated
+   */
+  Asset getAsset();
+
+  /**
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getAsset <em>Asset</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Asset</em>' attribute.
-   * @see org.mondo.collaboration.policy.rules.AssetType
+   * @param value the new value of the '<em>Asset</em>' containment reference.
    * @see #getAsset()
    * @generated
    */
-  void setAsset(AssetType value);
+  void setAsset(Asset value);
 
   /**
    * Returns the value of the '<em><b>Query</b></em>' containment reference.
@@ -193,6 +183,22 @@ public interface Rule extends EObject
    * @generated
    */
   void setQuery(Query value);
+
+  /**
+   * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
+   * The list contents are of type {@link org.mondo.collaboration.policy.rules.Binding}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Bindings</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Bindings</em>' containment reference list.
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Bindings()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Binding> getBindings();
 
   /**
    * Returns the value of the '<em><b>Priority</b></em>' attribute.

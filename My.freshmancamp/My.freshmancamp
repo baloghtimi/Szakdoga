@@ -15,4 +15,7 @@
   <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_aliKEP3uEeaEtN5JQjYL3g" name="Luca" superior="_ODjSYP39EeaEtN5JQjYL3g"/>
   <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_b-uKkP3uEeaEtN5JQjYL3g" name="Kitty" superior="_ODjSYP39EeaEtN5JQjYL3g"/>
   <participants xsi:type="freshmanCamp:ColorSenior" xmi:id="_ODjSYP39EeaEtN5JQjYL3g" name="Nur" color="BlueColor" inferiors="_W6A6kP3uEeaEtN5JQjYL3g _b-uKkP3uEeaEtN5JQjYL3g _aliKEP3uEeaEtN5JQjYL3g _ZIJmEP3uEeaEtN5JQjYL3g"/>
+  <participants xsi:type="freshmanCamp:ColorSenior" xmi:id="_zHWgQP8xEeaJAfJk0yZzhw" name="Éva" inferiors="_4r3RsP8xEeaJAfJk0yZzhw _8UtAoP8xEeaJAfJk0yZzhw"/>
+  <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_4r3RsP8xEeaJAfJk0yZzhw" name="Boora" superior="_zHWgQP8xEeaJAfJk0yZzhw"/>
+  <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_8UtAoP8xEeaJAfJk0yZzhw" name="Keve" superior="_zHWgQP8xEeaJAfJk0yZzhw"/>
 </freshmanCamp:Camp>

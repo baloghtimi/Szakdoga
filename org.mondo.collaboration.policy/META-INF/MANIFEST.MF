@@ -23,8 +23,8 @@ Export-Package: org.mondo.collaboration.policy.rules,
  org.mondo.collaboration.policy.generator,
  org.mondo.collaboration.policy.rules.util,
  org.mondo.collaboration.policy,
- org.mondo.collaboration.policy.serializer,
  org.mondo.collaboration.policy.parser.antlr,
+ org.mondo.collaboration.policy.serializer,
  org.mondo.collaboration.policy.scoping,
  org.mondo.collaboration.policy.services
 Import-Package: org.apache.log4j

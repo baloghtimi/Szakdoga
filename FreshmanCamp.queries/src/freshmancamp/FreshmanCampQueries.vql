@@ -6,10 +6,10 @@ pattern colors(color : Color) = {
 	Color(color);
 }
 
-pattern cardSeniors(card : CardSenior) = {
-	CardSenior(card);
+pattern cardSeniors(cardSenior : CardSenior) = {
+	CardSenior(cardSenior);
 }
 
-pattern cardSeniorsOfColorSenior(card : CardSenior, color : ColorSenior) = {
-	ColorSenior.inferiors(color, card);
+pattern cardSeniorsOfColorSenior(cardSenior : CardSenior, colorSenior : ColorSenior) = {
+	ColorSenior.inferiors(colorSenior, cardSenior);
 }

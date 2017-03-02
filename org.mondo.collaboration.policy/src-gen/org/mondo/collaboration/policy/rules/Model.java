@@ -3,6 +3,8 @@
  */
 package org.mondo.collaboration.policy.rules;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.mondo.collaboration.policy.rules.Model#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Model#getPolicy <em>Policy</em>}</li>
  * </ul>
  *
@@ -23,6 +26,22 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Model extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Roles</b></em>' containment reference list.
+   * The list contents are of type {@link org.mondo.collaboration.policy.rules.Role}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Roles</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Roles</em>' containment reference list.
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getModel_Roles()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Role> getRoles();
+
   /**
    * Returns the value of the '<em><b>Policy</b></em>' containment reference.
    * <!-- begin-user-doc -->

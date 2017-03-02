@@ -4,15 +4,14 @@
 package org.mondo.collaboration.policy.rules.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.mondo.collaboration.policy.rules.Parameter;
 import org.mondo.collaboration.policy.rules.ReferenceFact;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
@@ -24,44 +23,33 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getSrcObject <em>Src Object</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getReference <em>Reference</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getTrgObject <em>Trg Object</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getSourceParam <em>Source Param</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getTargetParam <em>Target Param</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements ReferenceFact
+public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
 {
   /**
-   * The cached value of the '{@link #getSrcObject() <em>Src Object</em>}' reference.
+   * The cached value of the '{@link #getSourceParam() <em>Source Param</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSrcObject()
+   * @see #getSourceParam()
    * @generated
    * @ordered
    */
-  protected EObject srcObject;
+  protected Parameter sourceParam;
 
   /**
-   * The cached value of the '{@link #getReference() <em>Reference</em>}' reference.
+   * The cached value of the '{@link #getTargetParam() <em>Target Param</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getReference()
+   * @see #getTargetParam()
    * @generated
    * @ordered
    */
-  protected EReference reference;
-
-  /**
-   * The cached value of the '{@link #getTrgObject() <em>Trg Object</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTrgObject()
-   * @generated
-   * @ordered
-   */
-  protected EObject trgObject;
+  protected Parameter targetParam;
 
   /**
    * <!-- begin-user-doc -->
@@ -89,19 +77,9 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getSrcObject()
+  public Parameter getSourceParam()
   {
-    if (srcObject != null && srcObject.eIsProxy())
-    {
-      InternalEObject oldSrcObject = (InternalEObject)srcObject;
-      srcObject = eResolveProxy(oldSrcObject);
-      if (srcObject != oldSrcObject)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.REFERENCE_FACT__SRC_OBJECT, oldSrcObject, srcObject));
-      }
-    }
-    return srcObject;
+    return sourceParam;
   }
 
   /**
@@ -109,42 +87,16 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject basicGetSrcObject()
+  public NotificationChain basicSetSourceParam(Parameter newSourceParam, NotificationChain msgs)
   {
-    return srcObject;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setSrcObject(EObject newSrcObject)
-  {
-    EObject oldSrcObject = srcObject;
-    srcObject = newSrcObject;
+    Parameter oldSourceParam = sourceParam;
+    sourceParam = newSourceParam;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__SRC_OBJECT, oldSrcObject, srcObject));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getReference()
-  {
-    if (reference != null && reference.eIsProxy())
     {
-      InternalEObject oldReference = (InternalEObject)reference;
-      reference = (EReference)eResolveProxy(oldReference);
-      if (reference != oldReference)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.REFERENCE_FACT__REFERENCE, oldReference, reference));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__SOURCE_PARAM, oldSourceParam, newSourceParam);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return reference;
+    return msgs;
   }
 
   /**
@@ -152,42 +104,20 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference basicGetReference()
+  public void setSourceParam(Parameter newSourceParam)
   {
-    return reference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setReference(EReference newReference)
-  {
-    EReference oldReference = reference;
-    reference = newReference;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__REFERENCE, oldReference, reference));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EObject getTrgObject()
-  {
-    if (trgObject != null && trgObject.eIsProxy())
+    if (newSourceParam != sourceParam)
     {
-      InternalEObject oldTrgObject = (InternalEObject)trgObject;
-      trgObject = eResolveProxy(oldTrgObject);
-      if (trgObject != oldTrgObject)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.REFERENCE_FACT__TRG_OBJECT, oldTrgObject, trgObject));
-      }
+      NotificationChain msgs = null;
+      if (sourceParam != null)
+        msgs = ((InternalEObject)sourceParam).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.REFERENCE_FACT__SOURCE_PARAM, null, msgs);
+      if (newSourceParam != null)
+        msgs = ((InternalEObject)newSourceParam).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.REFERENCE_FACT__SOURCE_PARAM, null, msgs);
+      msgs = basicSetSourceParam(newSourceParam, msgs);
+      if (msgs != null) msgs.dispatch();
     }
-    return trgObject;
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__SOURCE_PARAM, newSourceParam, newSourceParam));
   }
 
   /**
@@ -195,9 +125,9 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject basicGetTrgObject()
+  public Parameter getTargetParam()
   {
-    return trgObject;
+    return targetParam;
   }
 
   /**
@@ -205,12 +135,55 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTrgObject(EObject newTrgObject)
+  public NotificationChain basicSetTargetParam(Parameter newTargetParam, NotificationChain msgs)
   {
-    EObject oldTrgObject = trgObject;
-    trgObject = newTrgObject;
+    Parameter oldTargetParam = targetParam;
+    targetParam = newTargetParam;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__TRG_OBJECT, oldTrgObject, trgObject));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__TARGET_PARAM, oldTargetParam, newTargetParam);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTargetParam(Parameter newTargetParam)
+  {
+    if (newTargetParam != targetParam)
+    {
+      NotificationChain msgs = null;
+      if (targetParam != null)
+        msgs = ((InternalEObject)targetParam).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.REFERENCE_FACT__TARGET_PARAM, null, msgs);
+      if (newTargetParam != null)
+        msgs = ((InternalEObject)newTargetParam).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.REFERENCE_FACT__TARGET_PARAM, null, msgs);
+      msgs = basicSetTargetParam(newTargetParam, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__TARGET_PARAM, newTargetParam, newTargetParam));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
+        return basicSetSourceParam(null, msgs);
+      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
+        return basicSetTargetParam(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -223,15 +196,10 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
   {
     switch (featureID)
     {
-      case RulesPackage.REFERENCE_FACT__SRC_OBJECT:
-        if (resolve) return getSrcObject();
-        return basicGetSrcObject();
-      case RulesPackage.REFERENCE_FACT__REFERENCE:
-        if (resolve) return getReference();
-        return basicGetReference();
-      case RulesPackage.REFERENCE_FACT__TRG_OBJECT:
-        if (resolve) return getTrgObject();
-        return basicGetTrgObject();
+      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
+        return getSourceParam();
+      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
+        return getTargetParam();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -246,14 +214,11 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
   {
     switch (featureID)
     {
-      case RulesPackage.REFERENCE_FACT__SRC_OBJECT:
-        setSrcObject((EObject)newValue);
+      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
+        setSourceParam((Parameter)newValue);
         return;
-      case RulesPackage.REFERENCE_FACT__REFERENCE:
-        setReference((EReference)newValue);
-        return;
-      case RulesPackage.REFERENCE_FACT__TRG_OBJECT:
-        setTrgObject((EObject)newValue);
+      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
+        setTargetParam((Parameter)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -269,14 +234,11 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
   {
     switch (featureID)
     {
-      case RulesPackage.REFERENCE_FACT__SRC_OBJECT:
-        setSrcObject((EObject)null);
+      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
+        setSourceParam((Parameter)null);
         return;
-      case RulesPackage.REFERENCE_FACT__REFERENCE:
-        setReference((EReference)null);
-        return;
-      case RulesPackage.REFERENCE_FACT__TRG_OBJECT:
-        setTrgObject((EObject)null);
+      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
+        setTargetParam((Parameter)null);
         return;
     }
     super.eUnset(featureID);
@@ -292,12 +254,10 @@ public class ReferenceFactImpl extends MinimalEObjectImpl.Container implements R
   {
     switch (featureID)
     {
-      case RulesPackage.REFERENCE_FACT__SRC_OBJECT:
-        return srcObject != null;
-      case RulesPackage.REFERENCE_FACT__REFERENCE:
-        return reference != null;
-      case RulesPackage.REFERENCE_FACT__TRG_OBJECT:
-        return trgObject != null;
+      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
+        return sourceParam != null;
+      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
+        return targetParam != null;
     }
     return super.eIsSet(featureID);
   }

@@ -14,8 +14,10 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import org.mondo.collaboration.policy.rules.AttributeFact;
+import org.mondo.collaboration.policy.rules.Binding;
+import org.mondo.collaboration.policy.rules.Group;
 import org.mondo.collaboration.policy.rules.Model;
+import org.mondo.collaboration.policy.rules.ObjectBind;
 import org.mondo.collaboration.policy.rules.ObjectFact;
 import org.mondo.collaboration.policy.rules.Policy;
 import org.mondo.collaboration.policy.rules.Query;
@@ -39,14 +41,23 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == RulesPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case RulesPackage.ATTRIBUTE_FACT:
-				sequence_AttributeFact(context, (AttributeFact) semanticObject); 
+			case RulesPackage.BINDING:
+				sequence_Binding(context, (Binding) semanticObject); 
+				return; 
+			case RulesPackage.GROUP:
+				sequence_Group(context, (Group) semanticObject); 
 				return; 
 			case RulesPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
+			case RulesPackage.OBJECT_BIND:
+				sequence_ObjectBind(context, (ObjectBind) semanticObject); 
+				return; 
 			case RulesPackage.OBJECT_FACT:
 				sequence_ObjectFact(context, (ObjectFact) semanticObject); 
+				return; 
+			case RulesPackage.PARAMETER:
+				sequence_Parameter(context, (org.mondo.collaboration.policy.rules.Parameter) semanticObject); 
 				return; 
 			case RulesPackage.POLICY:
 				sequence_Policy(context, (Policy) semanticObject); 
@@ -70,25 +81,35 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     AttributeFact returns AttributeFact
+	 *     Binding returns Binding
 	 *
 	 * Constraint:
-	 *     (object=[EObject|ID] attribute=[EAttribute|ID] value=Value)
+	 *     (parameter=Parameter bind=Bind)
 	 */
-	protected void sequence_AttributeFact(ISerializationContext context, AttributeFact semanticObject) {
+	protected void sequence_Binding(ISerializationContext context, Binding semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.ATTRIBUTE_FACT__OBJECT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.ATTRIBUTE_FACT__OBJECT));
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.ATTRIBUTE_FACT__ATTRIBUTE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.ATTRIBUTE_FACT__ATTRIBUTE));
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.ATTRIBUTE_FACT__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.ATTRIBUTE_FACT__VALUE));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.BINDING__PARAMETER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.BINDING__PARAMETER));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.BINDING__BIND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.BINDING__BIND));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAttributeFactAccess().getObjectEObjectIDTerminalRuleCall_1_0_1(), semanticObject.getObject());
-		feeder.accept(grammarAccess.getAttributeFactAccess().getAttributeEAttributeIDTerminalRuleCall_3_0_1(), semanticObject.getAttribute());
-		feeder.accept(grammarAccess.getAttributeFactAccess().getValueValueParserRuleCall_5_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getBindingAccess().getParameterParameterParserRuleCall_1_0(), semanticObject.getParameter());
+		feeder.accept(grammarAccess.getBindingAccess().getBindBindParserRuleCall_4_0(), semanticObject.getBind());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Role returns Group
+	 *     Group returns Group
+	 *
+	 * Constraint:
+	 *     (name=ID users+=[User|ID] users+=[User|ID]*)
+	 */
+	protected void sequence_Group(ISerializationContext context, Group semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -97,36 +118,65 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     policy=Policy
+	 *     (roles+=Role* policy=Policy)
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Bind returns ObjectBind
+	 *     ObjectBind returns ObjectBind
+	 *
+	 * Constraint:
+	 *     object=[EObject|ID]
+	 */
+	protected void sequence_ObjectBind(ISerializationContext context, ObjectBind semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.MODEL__POLICY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.MODEL__POLICY));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.OBJECT_BIND__OBJECT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.OBJECT_BIND__OBJECT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getModelAccess().getPolicyPolicyParserRuleCall_0(), semanticObject.getPolicy());
+		feeder.accept(grammarAccess.getObjectBindAccess().getObjectEObjectIDTerminalRuleCall_0_1(), semanticObject.getObject());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
+	 *     Asset returns ObjectFact
 	 *     ObjectFact returns ObjectFact
 	 *
 	 * Constraint:
-	 *     (object=[EObject|ID] type=[EClass|ID])
+	 *     parameter=Parameter
 	 */
 	protected void sequence_ObjectFact(ISerializationContext context, ObjectFact semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.OBJECT_FACT__OBJECT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.OBJECT_FACT__OBJECT));
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.OBJECT_FACT__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.OBJECT_FACT__TYPE));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.OBJECT_FACT__PARAMETER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.OBJECT_FACT__PARAMETER));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getObjectFactAccess().getObjectEObjectIDTerminalRuleCall_1_0_1(), semanticObject.getObject());
-		feeder.accept(grammarAccess.getObjectFactAccess().getTypeEClassIDTerminalRuleCall_3_0_1(), semanticObject.getType());
+		feeder.accept(grammarAccess.getObjectFactAccess().getParameterParameterParserRuleCall_1_0(), semanticObject.getParameter());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Parameter returns Parameter
+	 *
+	 * Constraint:
+	 *     variable=[Variable|ID]
+	 */
+	protected void sequence_Parameter(ISerializationContext context, org.mondo.collaboration.policy.rules.Parameter semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.PARAMETER__VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.PARAMETER__VARIABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getParameterAccess().getVariableVariableIDTerminalRuleCall_0_1(), semanticObject.getVariable());
 		feeder.finish();
 	}
 	
@@ -136,7 +186,7 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Policy returns Policy
 	 *
 	 * Constraint:
-	 *     (name=ID | access=AccessibilityLevel | (operation=OperationType rules+=Rule* resolution=ResolutionType))+
+	 *     (name=ID access=AccessibilityLevel operation=OperationType rules+=Rule* resolution=ResolutionType)
 	 */
 	protected void sequence_Policy(ISerializationContext context, Policy semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -148,39 +198,37 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Query returns Query
 	 *
 	 * Constraint:
-	 *     name=STRING
+	 *     pattern=[Pattern|STRING]
 	 */
 	protected void sequence_Query(ISerializationContext context, Query semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.QUERY__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.QUERY__NAME));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.QUERY__PATTERN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.QUERY__PATTERN));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getQueryAccess().getNameSTRINGTerminalRuleCall_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getQueryAccess().getPatternPatternSTRINGTerminalRuleCall_0_1(), semanticObject.getPattern());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
+	 *     Asset returns ReferenceFact
 	 *     ReferenceFact returns ReferenceFact
 	 *
 	 * Constraint:
-	 *     (srcObject=[EObject|ID] reference=[EReference|ID] trgObject=[EObject|ID])
+	 *     (sourceParam=Parameter targetParam=Parameter)
 	 */
 	protected void sequence_ReferenceFact(ISerializationContext context, ReferenceFact semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__SRC_OBJECT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__SRC_OBJECT));
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__REFERENCE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__REFERENCE));
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__TRG_OBJECT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__TRG_OBJECT));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__SOURCE_PARAM) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__SOURCE_PARAM));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__TARGET_PARAM) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__TARGET_PARAM));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReferenceFactAccess().getSrcObjectEObjectIDTerminalRuleCall_1_0_1(), semanticObject.getSrcObject());
-		feeder.accept(grammarAccess.getReferenceFactAccess().getReferenceEReferenceIDTerminalRuleCall_3_0_1(), semanticObject.getReference());
-		feeder.accept(grammarAccess.getReferenceFactAccess().getTrgObjectEObjectIDTerminalRuleCall_5_0_1(), semanticObject.getTrgObject());
+		feeder.accept(grammarAccess.getReferenceFactAccess().getSourceParamParameterParserRuleCall_1_0(), semanticObject.getSourceParam());
+		feeder.accept(grammarAccess.getReferenceFactAccess().getTargetParamParameterParserRuleCall_4_0(), semanticObject.getTargetParam());
 		feeder.finish();
 	}
 	
@@ -190,7 +238,17 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Rule returns Rule
 	 *
 	 * Constraint:
-	 *     (name=ID | access=AccessibilityLevel | (operation=OperationType user=User asset=AssetType query=Query priority=INT?))+
+	 *     (
+	 *         name=ID 
+	 *         access=AccessibilityLevel 
+	 *         operation=OperationType 
+	 *         roles+=[Role|ID] 
+	 *         roles+=[Role|ID]* 
+	 *         asset=Asset 
+	 *         query=Query 
+	 *         bindings+=Binding* 
+	 *         priority=INT?
+	 *     )
 	 */
 	protected void sequence_Rule(ISerializationContext context, Rule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -199,6 +257,7 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     Role returns User
 	 *     User returns User
 	 *
 	 * Constraint:
@@ -206,11 +265,11 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 */
 	protected void sequence_User(ISerializationContext context, User semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.USER__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.USER__NAME));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.ROLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.ROLE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUserAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getUserAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

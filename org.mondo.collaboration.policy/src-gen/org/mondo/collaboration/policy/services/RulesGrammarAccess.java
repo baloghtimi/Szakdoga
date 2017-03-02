@@ -18,7 +18,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
@@ -29,462 +28,559 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Model");
-		private final Assignment cPolicyAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cPolicyPolicyParserRuleCall_0 = (RuleCall)cPolicyAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cRolesAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cRolesRoleParserRuleCall_0_0 = (RuleCall)cRolesAssignment_0.eContents().get(0);
+		private final Assignment cPolicyAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPolicyPolicyParserRuleCall_1_0 = (RuleCall)cPolicyAssignment_1.eContents().get(0);
 		
 		//Model:
+		//	roles+=Role*
 		//	policy=Policy;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//roles+=Role* policy=Policy
+		public Group getGroup() { return cGroup; }
+		
+		//roles+=Role*
+		public Assignment getRolesAssignment_0() { return cRolesAssignment_0; }
+		
+		//Role
+		public RuleCall getRolesRoleParserRuleCall_0_0() { return cRolesRoleParserRuleCall_0_0; }
+		
 		//policy=Policy
-		public Assignment getPolicyAssignment() { return cPolicyAssignment; }
+		public Assignment getPolicyAssignment_1() { return cPolicyAssignment_1; }
 		
 		//Policy
-		public RuleCall getPolicyPolicyParserRuleCall_0() { return cPolicyPolicyParserRuleCall_0; }
+		public RuleCall getPolicyPolicyParserRuleCall_1_0() { return cPolicyPolicyParserRuleCall_1_0; }
 	}
 	public class PolicyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Policy");
-		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
-		private final Keyword cPolicyKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
-		private final Assignment cAccessAssignment_1 = (Assignment)cUnorderedGroup.eContents().get(1);
-		private final RuleCall cAccessAccessibilityLevelEnumRuleCall_1_0 = (RuleCall)cAccessAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
-		private final Assignment cOperationAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cOperationOperationTypeEnumRuleCall_2_0_0 = (RuleCall)cOperationAssignment_2_0.eContents().get(0);
-		private final Keyword cByKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
-		private final Keyword cDefaultKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Keyword cLeftCurlyBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
-		private final Assignment cRulesAssignment_2_4 = (Assignment)cGroup_2.eContents().get(4);
-		private final RuleCall cRulesRuleParserRuleCall_2_4_0 = (RuleCall)cRulesAssignment_2_4.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_2_5 = (Keyword)cGroup_2.eContents().get(5);
-		private final Keyword cWithKeyword_2_6 = (Keyword)cGroup_2.eContents().get(6);
-		private final Assignment cResolutionAssignment_2_7 = (Assignment)cGroup_2.eContents().get(7);
-		private final RuleCall cResolutionResolutionTypeEnumRuleCall_2_7_0 = (RuleCall)cResolutionAssignment_2_7.eContents().get(0);
-		private final Keyword cResolutionKeyword_2_8 = (Keyword)cGroup_2.eContents().get(8);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPolicyKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cAccessAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAccessAccessibilityLevelEnumRuleCall_2_0 = (RuleCall)cAccessAssignment_2.eContents().get(0);
+		private final Assignment cOperationAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cOperationOperationTypeEnumRuleCall_3_0 = (RuleCall)cOperationAssignment_3.eContents().get(0);
+		private final Keyword cByKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cDefaultKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cLeftCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cRulesAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cRulesRuleParserRuleCall_7_0 = (RuleCall)cRulesAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Keyword cWithKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cResolutionAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cResolutionResolutionTypeEnumRuleCall_10_0 = (RuleCall)cResolutionAssignment_10.eContents().get(0);
+		private final Keyword cResolutionKeyword_11 = (Keyword)cGroup.eContents().get(11);
 		
 		//Policy:
-		//	'policy' name=ID & access=AccessibilityLevel & operation=OperationType 'by' 'default' '{'
+		//	'policy' name=ID access=AccessibilityLevel operation=OperationType 'by' 'default' '{'
 		//	rules+=Rule*
 		//	'}' 'with' resolution=ResolutionType 'resolution';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'policy' name=ID & access=AccessibilityLevel & operation=OperationType 'by' 'default' '{' rules+=Rule* '}' 'with'
+		//'policy' name=ID access=AccessibilityLevel operation=OperationType 'by' 'default' '{' rules+=Rule* '}' 'with'
 		//resolution=ResolutionType 'resolution'
-		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
-		
-		//'policy' name=ID
-		public Group getGroup_0() { return cGroup_0; }
+		public Group getGroup() { return cGroup; }
 		
 		//'policy'
-		public Keyword getPolicyKeyword_0_0() { return cPolicyKeyword_0_0; }
+		public Keyword getPolicyKeyword_0() { return cPolicyKeyword_0; }
 		
 		//name=ID
-		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
 		//access=AccessibilityLevel
-		public Assignment getAccessAssignment_1() { return cAccessAssignment_1; }
+		public Assignment getAccessAssignment_2() { return cAccessAssignment_2; }
 		
 		//AccessibilityLevel
-		public RuleCall getAccessAccessibilityLevelEnumRuleCall_1_0() { return cAccessAccessibilityLevelEnumRuleCall_1_0; }
-		
-		//operation=OperationType 'by' 'default' '{' rules+=Rule* '}' 'with' resolution=ResolutionType 'resolution'
-		public Group getGroup_2() { return cGroup_2; }
+		public RuleCall getAccessAccessibilityLevelEnumRuleCall_2_0() { return cAccessAccessibilityLevelEnumRuleCall_2_0; }
 		
 		//operation=OperationType
-		public Assignment getOperationAssignment_2_0() { return cOperationAssignment_2_0; }
+		public Assignment getOperationAssignment_3() { return cOperationAssignment_3; }
 		
 		//OperationType
-		public RuleCall getOperationOperationTypeEnumRuleCall_2_0_0() { return cOperationOperationTypeEnumRuleCall_2_0_0; }
+		public RuleCall getOperationOperationTypeEnumRuleCall_3_0() { return cOperationOperationTypeEnumRuleCall_3_0; }
 		
 		//'by'
-		public Keyword getByKeyword_2_1() { return cByKeyword_2_1; }
+		public Keyword getByKeyword_4() { return cByKeyword_4; }
 		
 		//'default'
-		public Keyword getDefaultKeyword_2_2() { return cDefaultKeyword_2_2; }
+		public Keyword getDefaultKeyword_5() { return cDefaultKeyword_5; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2_3() { return cLeftCurlyBracketKeyword_2_3; }
+		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
 		
 		//rules+=Rule*
-		public Assignment getRulesAssignment_2_4() { return cRulesAssignment_2_4; }
+		public Assignment getRulesAssignment_7() { return cRulesAssignment_7; }
 		
 		//Rule
-		public RuleCall getRulesRuleParserRuleCall_2_4_0() { return cRulesRuleParserRuleCall_2_4_0; }
+		public RuleCall getRulesRuleParserRuleCall_7_0() { return cRulesRuleParserRuleCall_7_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_2_5() { return cRightCurlyBracketKeyword_2_5; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 		
 		//'with'
-		public Keyword getWithKeyword_2_6() { return cWithKeyword_2_6; }
+		public Keyword getWithKeyword_9() { return cWithKeyword_9; }
 		
 		//resolution=ResolutionType
-		public Assignment getResolutionAssignment_2_7() { return cResolutionAssignment_2_7; }
+		public Assignment getResolutionAssignment_10() { return cResolutionAssignment_10; }
 		
 		//ResolutionType
-		public RuleCall getResolutionResolutionTypeEnumRuleCall_2_7_0() { return cResolutionResolutionTypeEnumRuleCall_2_7_0; }
+		public RuleCall getResolutionResolutionTypeEnumRuleCall_10_0() { return cResolutionResolutionTypeEnumRuleCall_10_0; }
 		
 		//'resolution'
-		public Keyword getResolutionKeyword_2_8() { return cResolutionKeyword_2_8; }
+		public Keyword getResolutionKeyword_11() { return cResolutionKeyword_11; }
 	}
 	public class RuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Rule");
-		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
-		private final Keyword cRuleKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
-		private final Assignment cAccessAssignment_1 = (Assignment)cUnorderedGroup.eContents().get(1);
-		private final RuleCall cAccessAccessibilityLevelEnumRuleCall_1_0 = (RuleCall)cAccessAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
-		private final Assignment cOperationAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cOperationOperationTypeEnumRuleCall_2_0_0 = (RuleCall)cOperationAssignment_2_0.eContents().get(0);
-		private final Keyword cToKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
-		private final Assignment cUserAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cUserUserParserRuleCall_2_2_0 = (RuleCall)cUserAssignment_2_2.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
-		private final Keyword cSelectKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
-		private final Assignment cAssetAssignment_2_5 = (Assignment)cGroup_2.eContents().get(5);
-		private final RuleCall cAssetAssetTypeEnumRuleCall_2_5_0 = (RuleCall)cAssetAssignment_2_5.eContents().get(0);
-		private final Keyword cFromKeyword_2_6 = (Keyword)cGroup_2.eContents().get(6);
-		private final Keyword cQueryKeyword_2_7 = (Keyword)cGroup_2.eContents().get(7);
-		private final Assignment cQueryAssignment_2_8 = (Assignment)cGroup_2.eContents().get(8);
-		private final RuleCall cQueryQueryParserRuleCall_2_8_0 = (RuleCall)cQueryAssignment_2_8.eContents().get(0);
-		private final Group cGroup_2_9 = (Group)cGroup_2.eContents().get(9);
-		private final Keyword cWhereKeyword_2_9_0 = (Keyword)cGroup_2_9.eContents().get(0);
-		private final Keyword cBoundKeyword_2_9_1 = (Keyword)cGroup_2_9.eContents().get(1);
-		private final Keyword cToKeyword_2_9_2 = (Keyword)cGroup_2_9.eContents().get(2);
-		private final Keyword cRightCurlyBracketKeyword_2_10 = (Keyword)cGroup_2.eContents().get(10);
-		private final Group cGroup_2_11 = (Group)cGroup_2.eContents().get(11);
-		private final Keyword cWithKeyword_2_11_0 = (Keyword)cGroup_2_11.eContents().get(0);
-		private final Assignment cPriorityAssignment_2_11_1 = (Assignment)cGroup_2_11.eContents().get(1);
-		private final RuleCall cPriorityINTTerminalRuleCall_2_11_1_0 = (RuleCall)cPriorityAssignment_2_11_1.eContents().get(0);
-		private final Keyword cPriorityKeyword_2_11_2 = (Keyword)cGroup_2_11.eContents().get(2);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRuleKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cAccessAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAccessAccessibilityLevelEnumRuleCall_2_0 = (RuleCall)cAccessAssignment_2.eContents().get(0);
+		private final Assignment cOperationAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cOperationOperationTypeEnumRuleCall_3_0 = (RuleCall)cOperationAssignment_3.eContents().get(0);
+		private final Keyword cToKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cRolesAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cRolesRoleCrossReference_5_0 = (CrossReference)cRolesAssignment_5.eContents().get(0);
+		private final RuleCall cRolesRoleIDTerminalRuleCall_5_0_1 = (RuleCall)cRolesRoleCrossReference_5_0.eContents().get(1);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cCommaKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cRolesAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final CrossReference cRolesRoleCrossReference_6_1_0 = (CrossReference)cRolesAssignment_6_1.eContents().get(0);
+		private final RuleCall cRolesRoleIDTerminalRuleCall_6_1_0_1 = (RuleCall)cRolesRoleCrossReference_6_1_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cSelectKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cAssetAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cAssetAssetParserRuleCall_9_0 = (RuleCall)cAssetAssignment_9.eContents().get(0);
+		private final Keyword cFromKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Keyword cQueryKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cQueryAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cQueryQueryParserRuleCall_12_0 = (RuleCall)cQueryAssignment_12.eContents().get(0);
+		private final Assignment cBindingsAssignment_13 = (Assignment)cGroup.eContents().get(13);
+		private final RuleCall cBindingsBindingParserRuleCall_13_0 = (RuleCall)cBindingsAssignment_13.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_14 = (Keyword)cGroup.eContents().get(14);
+		private final Group cGroup_15 = (Group)cGroup.eContents().get(15);
+		private final Keyword cWithKeyword_15_0 = (Keyword)cGroup_15.eContents().get(0);
+		private final Assignment cPriorityAssignment_15_1 = (Assignment)cGroup_15.eContents().get(1);
+		private final RuleCall cPriorityINTTerminalRuleCall_15_1_0 = (RuleCall)cPriorityAssignment_15_1.eContents().get(0);
+		private final Keyword cPriorityKeyword_15_2 = (Keyword)cGroup_15.eContents().get(2);
 		
 		//Rule:
-		//	'rule' name=ID & access=AccessibilityLevel & operation=OperationType 'to' user=User '{'
-		//	'select' asset=AssetType
-		//	'from' 'query' query=Query ('where' 'bound' 'to')?
+		//	'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{'
+		//	'select' asset=Asset
+		//	'from' 'query' query=Query
+		//	bindings+=Binding*
 		//	'}' ('with' priority=INT 'priority')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'rule' name=ID & access=AccessibilityLevel & operation=OperationType 'to' user=User '{' 'select' asset=AssetType 'from'
-		//'query' query=Query ('where' 'bound' 'to')? '}' ('with' priority=INT 'priority')?
-		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
-		
-		//'rule' name=ID
-		public Group getGroup_0() { return cGroup_0; }
+		//'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{' 'select'
+		//asset=Asset 'from' 'query' query=Query bindings+=Binding* '}' ('with' priority=INT 'priority')?
+		public Group getGroup() { return cGroup; }
 		
 		//'rule'
-		public Keyword getRuleKeyword_0_0() { return cRuleKeyword_0_0; }
+		public Keyword getRuleKeyword_0() { return cRuleKeyword_0; }
 		
 		//name=ID
-		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
 		//access=AccessibilityLevel
-		public Assignment getAccessAssignment_1() { return cAccessAssignment_1; }
+		public Assignment getAccessAssignment_2() { return cAccessAssignment_2; }
 		
 		//AccessibilityLevel
-		public RuleCall getAccessAccessibilityLevelEnumRuleCall_1_0() { return cAccessAccessibilityLevelEnumRuleCall_1_0; }
-		
-		//operation=OperationType 'to' user=User '{' 'select' asset=AssetType 'from' 'query' query=Query ('where' 'bound' 'to')?
-		//'}' ('with' priority=INT 'priority')?
-		public Group getGroup_2() { return cGroup_2; }
+		public RuleCall getAccessAccessibilityLevelEnumRuleCall_2_0() { return cAccessAccessibilityLevelEnumRuleCall_2_0; }
 		
 		//operation=OperationType
-		public Assignment getOperationAssignment_2_0() { return cOperationAssignment_2_0; }
+		public Assignment getOperationAssignment_3() { return cOperationAssignment_3; }
 		
 		//OperationType
-		public RuleCall getOperationOperationTypeEnumRuleCall_2_0_0() { return cOperationOperationTypeEnumRuleCall_2_0_0; }
+		public RuleCall getOperationOperationTypeEnumRuleCall_3_0() { return cOperationOperationTypeEnumRuleCall_3_0; }
 		
 		//'to'
-		public Keyword getToKeyword_2_1() { return cToKeyword_2_1; }
+		public Keyword getToKeyword_4() { return cToKeyword_4; }
 		
-		//user=User
-		public Assignment getUserAssignment_2_2() { return cUserAssignment_2_2; }
+		//roles+=[Role]
+		public Assignment getRolesAssignment_5() { return cRolesAssignment_5; }
 		
-		//User
-		public RuleCall getUserUserParserRuleCall_2_2_0() { return cUserUserParserRuleCall_2_2_0; }
+		//[Role]
+		public CrossReference getRolesRoleCrossReference_5_0() { return cRolesRoleCrossReference_5_0; }
+		
+		//ID
+		public RuleCall getRolesRoleIDTerminalRuleCall_5_0_1() { return cRolesRoleIDTerminalRuleCall_5_0_1; }
+		
+		//(',' roles+=[Role])*
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//','
+		public Keyword getCommaKeyword_6_0() { return cCommaKeyword_6_0; }
+		
+		//roles+=[Role]
+		public Assignment getRolesAssignment_6_1() { return cRolesAssignment_6_1; }
+		
+		//[Role]
+		public CrossReference getRolesRoleCrossReference_6_1_0() { return cRolesRoleCrossReference_6_1_0; }
+		
+		//ID
+		public RuleCall getRolesRoleIDTerminalRuleCall_6_1_0_1() { return cRolesRoleIDTerminalRuleCall_6_1_0_1; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2_3() { return cLeftCurlyBracketKeyword_2_3; }
+		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
 		
 		//'select'
-		public Keyword getSelectKeyword_2_4() { return cSelectKeyword_2_4; }
+		public Keyword getSelectKeyword_8() { return cSelectKeyword_8; }
 		
-		//asset=AssetType
-		public Assignment getAssetAssignment_2_5() { return cAssetAssignment_2_5; }
+		//asset=Asset
+		public Assignment getAssetAssignment_9() { return cAssetAssignment_9; }
 		
-		//AssetType
-		public RuleCall getAssetAssetTypeEnumRuleCall_2_5_0() { return cAssetAssetTypeEnumRuleCall_2_5_0; }
+		//Asset
+		public RuleCall getAssetAssetParserRuleCall_9_0() { return cAssetAssetParserRuleCall_9_0; }
 		
 		//'from'
-		public Keyword getFromKeyword_2_6() { return cFromKeyword_2_6; }
+		public Keyword getFromKeyword_10() { return cFromKeyword_10; }
 		
 		//'query'
-		public Keyword getQueryKeyword_2_7() { return cQueryKeyword_2_7; }
+		public Keyword getQueryKeyword_11() { return cQueryKeyword_11; }
 		
 		//query=Query
-		public Assignment getQueryAssignment_2_8() { return cQueryAssignment_2_8; }
+		public Assignment getQueryAssignment_12() { return cQueryAssignment_12; }
 		
 		//Query
-		public RuleCall getQueryQueryParserRuleCall_2_8_0() { return cQueryQueryParserRuleCall_2_8_0; }
+		public RuleCall getQueryQueryParserRuleCall_12_0() { return cQueryQueryParserRuleCall_12_0; }
 		
-		//('where' 'bound' 'to')?
-		public Group getGroup_2_9() { return cGroup_2_9; }
+		//bindings+=Binding*
+		public Assignment getBindingsAssignment_13() { return cBindingsAssignment_13; }
 		
-		//'where'
-		public Keyword getWhereKeyword_2_9_0() { return cWhereKeyword_2_9_0; }
-		
-		//'bound'
-		public Keyword getBoundKeyword_2_9_1() { return cBoundKeyword_2_9_1; }
-		
-		//'to'
-		public Keyword getToKeyword_2_9_2() { return cToKeyword_2_9_2; }
+		//Binding
+		public RuleCall getBindingsBindingParserRuleCall_13_0() { return cBindingsBindingParserRuleCall_13_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_2_10() { return cRightCurlyBracketKeyword_2_10; }
+		public Keyword getRightCurlyBracketKeyword_14() { return cRightCurlyBracketKeyword_14; }
 		
 		//('with' priority=INT 'priority')?
-		public Group getGroup_2_11() { return cGroup_2_11; }
+		public Group getGroup_15() { return cGroup_15; }
 		
 		//'with'
-		public Keyword getWithKeyword_2_11_0() { return cWithKeyword_2_11_0; }
+		public Keyword getWithKeyword_15_0() { return cWithKeyword_15_0; }
 		
 		//priority=INT
-		public Assignment getPriorityAssignment_2_11_1() { return cPriorityAssignment_2_11_1; }
+		public Assignment getPriorityAssignment_15_1() { return cPriorityAssignment_15_1; }
 		
 		//INT
-		public RuleCall getPriorityINTTerminalRuleCall_2_11_1_0() { return cPriorityINTTerminalRuleCall_2_11_1_0; }
+		public RuleCall getPriorityINTTerminalRuleCall_15_1_0() { return cPriorityINTTerminalRuleCall_15_1_0; }
 		
 		//'priority'
-		public Keyword getPriorityKeyword_2_11_2() { return cPriorityKeyword_2_11_2; }
+		public Keyword getPriorityKeyword_15_2() { return cPriorityKeyword_15_2; }
+	}
+	public class RoleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Role");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cUserParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cGroupParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Role:
+		//	User | Group;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//User | Group
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//User
+		public RuleCall getUserParserRuleCall_0() { return cUserParserRuleCall_0; }
+		
+		//Group
+		public RuleCall getGroupParserRuleCall_1() { return cGroupParserRuleCall_1; }
 	}
 	public class UserElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.User");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cUserKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//User:
-		//	name=ID;
+		//	'user' name=ID;
 		@Override public ParserRule getRule() { return rule; }
+		
+		//'user' name=ID
+		public Group getGroup() { return cGroup; }
+		
+		//'user'
+		public Keyword getUserKeyword_0() { return cUserKeyword_0; }
 		
 		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
-	public class QueryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Query");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+	public class GroupElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Group");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cGroupKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cUsersAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cUsersUserCrossReference_3_0 = (CrossReference)cUsersAssignment_3.eContents().get(0);
+		private final RuleCall cUsersUserIDTerminalRuleCall_3_0_1 = (RuleCall)cUsersUserCrossReference_3_0.eContents().get(1);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cUsersAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final CrossReference cUsersUserCrossReference_4_1_0 = (CrossReference)cUsersAssignment_4_1.eContents().get(0);
+		private final RuleCall cUsersUserIDTerminalRuleCall_4_1_0_1 = (RuleCall)cUsersUserCrossReference_4_1_0.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Query:
-		//	name=STRING;
+		//Group:
+		//	'group' name=ID '{' users+=[User] (',' users+=[User])* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=STRING
-		public Assignment getNameAssignment() { return cNameAssignment; }
+		//'group' name=ID '{' users+=[User] (',' users+=[User])* '}'
+		public Group getGroup() { return cGroup; }
 		
-		//STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_0() { return cNameSTRINGTerminalRuleCall_0; }
+		//'group'
+		public Keyword getGroupKeyword_0() { return cGroupKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//users+=[User]
+		public Assignment getUsersAssignment_3() { return cUsersAssignment_3; }
+		
+		//[User]
+		public CrossReference getUsersUserCrossReference_3_0() { return cUsersUserCrossReference_3_0; }
+		
+		//ID
+		public RuleCall getUsersUserIDTerminalRuleCall_3_0_1() { return cUsersUserIDTerminalRuleCall_3_0_1; }
+		
+		//(',' users+=[User])*
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//','
+		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
+		
+		//users+=[User]
+		public Assignment getUsersAssignment_4_1() { return cUsersAssignment_4_1; }
+		
+		//[User]
+		public CrossReference getUsersUserCrossReference_4_1_0() { return cUsersUserCrossReference_4_1_0; }
+		
+		//ID
+		public RuleCall getUsersUserIDTerminalRuleCall_4_1_0_1() { return cUsersUserIDTerminalRuleCall_4_1_0_1; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+	}
+	public class AssetElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Asset");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cObjectFactParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cReferenceFactParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Asset:
+		//	ObjectFact | ReferenceFact;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ObjectFact | ReferenceFact
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ObjectFact
+		public RuleCall getObjectFactParserRuleCall_0() { return cObjectFactParserRuleCall_0; }
+		
+		//ReferenceFact
+		public RuleCall getReferenceFactParserRuleCall_1() { return cReferenceFactParserRuleCall_1; }
 	}
 	public class ObjectFactElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ObjectFact");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cObjKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cObjectAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cObjectEObjectCrossReference_1_0 = (CrossReference)cObjectAssignment_1.eContents().get(0);
-		private final RuleCall cObjectEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cObjectEObjectCrossReference_1_0.eContents().get(1);
-		private final Keyword cCommaKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cTypeEClassCrossReference_3_0 = (CrossReference)cTypeAssignment_3.eContents().get(0);
-		private final RuleCall cTypeEClassIDTerminalRuleCall_3_0_1 = (RuleCall)cTypeEClassCrossReference_3_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cParameterAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cParameterParameterParserRuleCall_1_0 = (RuleCall)cParameterAssignment_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ObjectFact:
-		//	'obj(' object=[ecore::EObject] ',' type=[ecore::EClass] ')';
+		//	'obj(' parameter=Parameter ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'obj(' object=[ecore::EObject] ',' type=[ecore::EClass] ')'
+		//'obj(' parameter=Parameter ')'
 		public Group getGroup() { return cGroup; }
 		
 		//'obj('
 		public Keyword getObjKeyword_0() { return cObjKeyword_0; }
 		
-		//object=[ecore::EObject]
-		public Assignment getObjectAssignment_1() { return cObjectAssignment_1; }
+		//parameter=Parameter
+		public Assignment getParameterAssignment_1() { return cParameterAssignment_1; }
 		
-		//[ecore::EObject]
-		public CrossReference getObjectEObjectCrossReference_1_0() { return cObjectEObjectCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getObjectEObjectIDTerminalRuleCall_1_0_1() { return cObjectEObjectIDTerminalRuleCall_1_0_1; }
-		
-		//','
-		public Keyword getCommaKeyword_2() { return cCommaKeyword_2; }
-		
-		//type=[ecore::EClass]
-		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
-		
-		//[ecore::EClass]
-		public CrossReference getTypeEClassCrossReference_3_0() { return cTypeEClassCrossReference_3_0; }
-		
-		//ID
-		public RuleCall getTypeEClassIDTerminalRuleCall_3_0_1() { return cTypeEClassIDTerminalRuleCall_3_0_1; }
+		//Parameter
+		public RuleCall getParameterParameterParserRuleCall_1_0() { return cParameterParameterParserRuleCall_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 	public class ReferenceFactElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ReferenceFact");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRefKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSrcObjectAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cSrcObjectEObjectCrossReference_1_0 = (CrossReference)cSrcObjectAssignment_1.eContents().get(0);
-		private final RuleCall cSrcObjectEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cSrcObjectEObjectCrossReference_1_0.eContents().get(1);
+		private final Assignment cSourceParamAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSourceParamParameterParserRuleCall_1_0 = (RuleCall)cSourceParamAssignment_1.eContents().get(0);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cReferenceAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cReferenceEReferenceCrossReference_3_0 = (CrossReference)cReferenceAssignment_3.eContents().get(0);
-		private final RuleCall cReferenceEReferenceIDTerminalRuleCall_3_0_1 = (RuleCall)cReferenceEReferenceCrossReference_3_0.eContents().get(1);
-		private final Keyword cHyphenMinusGreaterThanSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cTrgObjectAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cTrgObjectEObjectCrossReference_5_0 = (CrossReference)cTrgObjectAssignment_5.eContents().get(0);
-		private final RuleCall cTrgObjectEObjectIDTerminalRuleCall_5_0_1 = (RuleCall)cTrgObjectEObjectCrossReference_5_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTargetParamAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTargetParamParameterParserRuleCall_4_0 = (RuleCall)cTargetParamAssignment_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ReferenceFact:
-		//	'ref(' srcObject=[ecore::EObject] '->' reference=[ecore::EReference] '->' trgObject=[ecore::EObject] ')';
+		//	'ref(' sourceParam=Parameter '->' '->' targetParam=Parameter ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ref(' srcObject=[ecore::EObject] '->' reference=[ecore::EReference] '->' trgObject=[ecore::EObject] ')'
+		//'ref(' sourceParam=Parameter '->' '->' targetParam=Parameter ')'
 		public Group getGroup() { return cGroup; }
 		
 		//'ref('
 		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
 		
-		//srcObject=[ecore::EObject]
-		public Assignment getSrcObjectAssignment_1() { return cSrcObjectAssignment_1; }
+		//sourceParam=Parameter
+		public Assignment getSourceParamAssignment_1() { return cSourceParamAssignment_1; }
 		
-		//[ecore::EObject]
-		public CrossReference getSrcObjectEObjectCrossReference_1_0() { return cSrcObjectEObjectCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getSrcObjectEObjectIDTerminalRuleCall_1_0_1() { return cSrcObjectEObjectIDTerminalRuleCall_1_0_1; }
+		//Parameter
+		public RuleCall getSourceParamParameterParserRuleCall_1_0() { return cSourceParamParameterParserRuleCall_1_0; }
 		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 		
-		//reference=[ecore::EReference]
-		public Assignment getReferenceAssignment_3() { return cReferenceAssignment_3; }
-		
-		//[ecore::EReference]
-		public CrossReference getReferenceEReferenceCrossReference_3_0() { return cReferenceEReferenceCrossReference_3_0; }
-		
-		//ID
-		public RuleCall getReferenceEReferenceIDTerminalRuleCall_3_0_1() { return cReferenceEReferenceIDTerminalRuleCall_3_0_1; }
-		
 		//'->'
-		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
+		public Keyword getHyphenMinusGreaterThanSignKeyword_3() { return cHyphenMinusGreaterThanSignKeyword_3; }
 		
-		//trgObject=[ecore::EObject]
-		public Assignment getTrgObjectAssignment_5() { return cTrgObjectAssignment_5; }
+		//targetParam=Parameter
+		public Assignment getTargetParamAssignment_4() { return cTargetParamAssignment_4; }
 		
-		//[ecore::EObject]
-		public CrossReference getTrgObjectEObjectCrossReference_5_0() { return cTrgObjectEObjectCrossReference_5_0; }
-		
-		//ID
-		public RuleCall getTrgObjectEObjectIDTerminalRuleCall_5_0_1() { return cTrgObjectEObjectIDTerminalRuleCall_5_0_1; }
+		//Parameter
+		public RuleCall getTargetParamParameterParserRuleCall_4_0() { return cTargetParamParameterParserRuleCall_4_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
-	public class AttributeFactElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.AttributeFact");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAttrKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cObjectAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cObjectEObjectCrossReference_1_0 = (CrossReference)cObjectAssignment_1.eContents().get(0);
-		private final RuleCall cObjectEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cObjectEObjectCrossReference_1_0.eContents().get(1);
-		private final Keyword cCommaKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cAttributeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cAttributeEAttributeCrossReference_3_0 = (CrossReference)cAttributeAssignment_3.eContents().get(0);
-		private final RuleCall cAttributeEAttributeIDTerminalRuleCall_3_0_1 = (RuleCall)cAttributeEAttributeCrossReference_3_0.eContents().get(1);
-		private final Keyword cCommaKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cValueAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cValueValueParserRuleCall_5_0 = (RuleCall)cValueAssignment_5.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
+	public class QueryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Query");
+		private final Assignment cPatternAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cPatternPatternCrossReference_0 = (CrossReference)cPatternAssignment.eContents().get(0);
+		private final RuleCall cPatternPatternSTRINGTerminalRuleCall_0_1 = (RuleCall)cPatternPatternCrossReference_0.eContents().get(1);
 		
-		//AttributeFact:
-		//	'attr(' object=[ecore::EObject] ',' attribute=[ecore::EAttribute] ',' value=Value ')';
+		//Query:
+		//	pattern=[iql::Pattern|STRING];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'attr(' object=[ecore::EObject] ',' attribute=[ecore::EAttribute] ',' value=Value ')'
-		public Group getGroup() { return cGroup; }
+		//pattern=[iql::Pattern|STRING]
+		public Assignment getPatternAssignment() { return cPatternAssignment; }
 		
-		//'attr('
-		public Keyword getAttrKeyword_0() { return cAttrKeyword_0; }
-		
-		//object=[ecore::EObject]
-		public Assignment getObjectAssignment_1() { return cObjectAssignment_1; }
-		
-		//[ecore::EObject]
-		public CrossReference getObjectEObjectCrossReference_1_0() { return cObjectEObjectCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getObjectEObjectIDTerminalRuleCall_1_0_1() { return cObjectEObjectIDTerminalRuleCall_1_0_1; }
-		
-		//','
-		public Keyword getCommaKeyword_2() { return cCommaKeyword_2; }
-		
-		//attribute=[ecore::EAttribute]
-		public Assignment getAttributeAssignment_3() { return cAttributeAssignment_3; }
-		
-		//[ecore::EAttribute]
-		public CrossReference getAttributeEAttributeCrossReference_3_0() { return cAttributeEAttributeCrossReference_3_0; }
-		
-		//ID
-		public RuleCall getAttributeEAttributeIDTerminalRuleCall_3_0_1() { return cAttributeEAttributeIDTerminalRuleCall_3_0_1; }
-		
-		//','
-		public Keyword getCommaKeyword_4() { return cCommaKeyword_4; }
-		
-		//value=Value
-		public Assignment getValueAssignment_5() { return cValueAssignment_5; }
-		
-		//Value
-		public RuleCall getValueValueParserRuleCall_5_0() { return cValueValueParserRuleCall_5_0; }
-		
-		//')'
-		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
-	}
-	public class ValueElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Value");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cSTRINGTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//Value:
-		//	INT | STRING;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//INT | STRING
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
+		//[iql::Pattern|STRING]
+		public CrossReference getPatternPatternCrossReference_0() { return cPatternPatternCrossReference_0; }
 		
 		//STRING
-		public RuleCall getSTRINGTerminalRuleCall_1() { return cSTRINGTerminalRuleCall_1; }
+		public RuleCall getPatternPatternSTRINGTerminalRuleCall_0_1() { return cPatternPatternSTRINGTerminalRuleCall_0_1; }
+	}
+	public class BindingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Binding");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cWhereKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cParameterAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cParameterParameterParserRuleCall_1_0 = (RuleCall)cParameterAssignment_1.eContents().get(0);
+		private final Keyword cBoundKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cToKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cBindAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cBindBindParserRuleCall_4_0 = (RuleCall)cBindAssignment_4.eContents().get(0);
+		
+		//Binding:
+		//	'where' parameter=Parameter 'bound' 'to' bind=Bind;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'where' parameter=Parameter 'bound' 'to' bind=Bind
+		public Group getGroup() { return cGroup; }
+		
+		//'where'
+		public Keyword getWhereKeyword_0() { return cWhereKeyword_0; }
+		
+		//parameter=Parameter
+		public Assignment getParameterAssignment_1() { return cParameterAssignment_1; }
+		
+		//Parameter
+		public RuleCall getParameterParameterParserRuleCall_1_0() { return cParameterParameterParserRuleCall_1_0; }
+		
+		//'bound'
+		public Keyword getBoundKeyword_2() { return cBoundKeyword_2; }
+		
+		//'to'
+		public Keyword getToKeyword_3() { return cToKeyword_3; }
+		
+		//bind=Bind
+		public Assignment getBindAssignment_4() { return cBindAssignment_4; }
+		
+		//Bind
+		public RuleCall getBindBindParserRuleCall_4_0() { return cBindBindParserRuleCall_4_0; }
+	}
+	public class ParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Parameter");
+		private final Assignment cVariableAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cVariableVariableCrossReference_0 = (CrossReference)cVariableAssignment.eContents().get(0);
+		private final RuleCall cVariableVariableIDTerminalRuleCall_0_1 = (RuleCall)cVariableVariableCrossReference_0.eContents().get(1);
+		
+		//Parameter:
+		//	variable=[iql::Variable];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//variable=[iql::Variable]
+		public Assignment getVariableAssignment() { return cVariableAssignment; }
+		
+		//[iql::Variable]
+		public CrossReference getVariableVariableCrossReference_0() { return cVariableVariableCrossReference_0; }
+		
+		//ID
+		public RuleCall getVariableVariableIDTerminalRuleCall_0_1() { return cVariableVariableIDTerminalRuleCall_0_1; }
+	}
+	public class BindElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Bind");
+		private final RuleCall cObjectBindParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Bind:
+		//	ObjectBind;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ObjectBind
+		public RuleCall getObjectBindParserRuleCall() { return cObjectBindParserRuleCall; }
+	}
+	public class ObjectBindElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ObjectBind");
+		private final Assignment cObjectAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cObjectEObjectCrossReference_0 = (CrossReference)cObjectAssignment.eContents().get(0);
+		private final RuleCall cObjectEObjectIDTerminalRuleCall_0_1 = (RuleCall)cObjectEObjectCrossReference_0.eContents().get(1);
+		
+		////| ClassBind;
+		//ObjectBind:
+		//	object=[ecore::EObject];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//object=[ecore::EObject]
+		public Assignment getObjectAssignment() { return cObjectAssignment; }
+		
+		//[ecore::EObject]
+		public CrossReference getObjectEObjectCrossReference_0() { return cObjectEObjectCrossReference_0; }
+		
+		//ID
+		public RuleCall getObjectEObjectIDTerminalRuleCall_0_1() { return cObjectEObjectIDTerminalRuleCall_0_1; }
 	}
 	
 	public class AccessibilityLevelElements extends AbstractEnumRuleElementFinder {
@@ -492,16 +588,14 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cALLOWEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cALLOWAllowKeyword_0_0 = (Keyword)cALLOWEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cOBFUSCATEEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cOBFUSCATEObfuscateKeyword_1_0 = (Keyword)cOBFUSCATEEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cDENYEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cDENYDenyKeyword_2_0 = (Keyword)cDENYEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cDENYEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cDENYDenyKeyword_1_0 = (Keyword)cDENYEnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum AccessibilityLevel:
-		//	ALLOW='allow' | OBFUSCATE='obfuscate' | DENY='deny';
+		//	ALLOW='allow' | DENY='deny';
 		public EnumRule getRule() { return rule; }
 		
-		//ALLOW='allow' | OBFUSCATE='obfuscate' | DENY='deny'
+		//ALLOW='allow' | DENY='deny'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ALLOW='allow'
@@ -510,31 +604,27 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		//'allow'
 		public Keyword getALLOWAllowKeyword_0_0() { return cALLOWAllowKeyword_0_0; }
 		
-		//OBFUSCATE='obfuscate'
-		public EnumLiteralDeclaration getOBFUSCATEEnumLiteralDeclaration_1() { return cOBFUSCATEEnumLiteralDeclaration_1; }
-		
-		//'obfuscate'
-		public Keyword getOBFUSCATEObfuscateKeyword_1_0() { return cOBFUSCATEObfuscateKeyword_1_0; }
-		
 		//DENY='deny'
-		public EnumLiteralDeclaration getDENYEnumLiteralDeclaration_2() { return cDENYEnumLiteralDeclaration_2; }
+		public EnumLiteralDeclaration getDENYEnumLiteralDeclaration_1() { return cDENYEnumLiteralDeclaration_1; }
 		
 		//'deny'
-		public Keyword getDENYDenyKeyword_2_0() { return cDENYDenyKeyword_2_0; }
+		public Keyword getDENYDenyKeyword_1_0() { return cDENYDenyKeyword_1_0; }
 	}
 	public class OperationTypeElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.OperationType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cREADEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cREADRKeyword_0_0 = (Keyword)cREADEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cREADWRITEEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cREADWRITERWKeyword_1_0 = (Keyword)cREADWRITEEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cWRITEEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cWRITEWKeyword_1_0 = (Keyword)cWRITEEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cREADWRITEEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cREADWRITERWKeyword_2_0 = (Keyword)cREADWRITEEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum OperationType:
-		//	READ='R' | READWRITE='RW';
+		//	READ='R' | WRITE='W' | READWRITE='RW';
 		public EnumRule getRule() { return rule; }
 		
-		//READ='R' | READWRITE='RW'
+		//READ='R' | WRITE='W' | READWRITE='RW'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//READ='R'
@@ -543,46 +633,17 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		//'R'
 		public Keyword getREADRKeyword_0_0() { return cREADRKeyword_0_0; }
 		
+		//WRITE='W'
+		public EnumLiteralDeclaration getWRITEEnumLiteralDeclaration_1() { return cWRITEEnumLiteralDeclaration_1; }
+		
+		//'W'
+		public Keyword getWRITEWKeyword_1_0() { return cWRITEWKeyword_1_0; }
+		
 		//READWRITE='RW'
-		public EnumLiteralDeclaration getREADWRITEEnumLiteralDeclaration_1() { return cREADWRITEEnumLiteralDeclaration_1; }
+		public EnumLiteralDeclaration getREADWRITEEnumLiteralDeclaration_2() { return cREADWRITEEnumLiteralDeclaration_2; }
 		
 		//'RW'
-		public Keyword getREADWRITERWKeyword_1_0() { return cREADWRITERWKeyword_1_0; }
-	}
-	public class AssetTypeElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.AssetType");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cObjectFactEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cObjectFactObjectFactKeyword_0_0 = (Keyword)cObjectFactEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cReferenceFactEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cReferenceFactReferenceFactKeyword_1_0 = (Keyword)cReferenceFactEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cAttributeFactEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cAttributeFactAttributeFactKeyword_2_0 = (Keyword)cAttributeFactEnumLiteralDeclaration_2.eContents().get(0);
-		
-		//enum AssetType:
-		//	ObjectFact | ReferenceFact | AttributeFact;
-		public EnumRule getRule() { return rule; }
-		
-		//ObjectFact | ReferenceFact | AttributeFact
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//ObjectFact
-		public EnumLiteralDeclaration getObjectFactEnumLiteralDeclaration_0() { return cObjectFactEnumLiteralDeclaration_0; }
-		
-		//"ObjectFact"
-		public Keyword getObjectFactObjectFactKeyword_0_0() { return cObjectFactObjectFactKeyword_0_0; }
-		
-		//ReferenceFact
-		public EnumLiteralDeclaration getReferenceFactEnumLiteralDeclaration_1() { return cReferenceFactEnumLiteralDeclaration_1; }
-		
-		//"ReferenceFact"
-		public Keyword getReferenceFactReferenceFactKeyword_1_0() { return cReferenceFactReferenceFactKeyword_1_0; }
-		
-		//AttributeFact
-		public EnumLiteralDeclaration getAttributeFactEnumLiteralDeclaration_2() { return cAttributeFactEnumLiteralDeclaration_2; }
-		
-		//"AttributeFact"
-		public Keyword getAttributeFactAttributeFactKeyword_2_0() { return cAttributeFactAttributeFactKeyword_2_0; }
+		public Keyword getREADWRITERWKeyword_2_0() { return cREADWRITERWKeyword_2_0; }
 	}
 	public class ResolutionTypeElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ResolutionType");
@@ -615,15 +676,19 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	private final ModelElements pModel;
 	private final PolicyElements pPolicy;
 	private final RuleElements pRule;
+	private final RoleElements pRole;
 	private final UserElements pUser;
-	private final QueryElements pQuery;
-	private final AccessibilityLevelElements eAccessibilityLevel;
-	private final OperationTypeElements eOperationType;
-	private final AssetTypeElements eAssetType;
+	private final GroupElements pGroup;
+	private final AssetElements pAsset;
 	private final ObjectFactElements pObjectFact;
 	private final ReferenceFactElements pReferenceFact;
-	private final AttributeFactElements pAttributeFact;
-	private final ValueElements pValue;
+	private final QueryElements pQuery;
+	private final BindingElements pBinding;
+	private final ParameterElements pParameter;
+	private final BindElements pBind;
+	private final ObjectBindElements pObjectBind;
+	private final AccessibilityLevelElements eAccessibilityLevel;
+	private final OperationTypeElements eOperationType;
 	private final ResolutionTypeElements eResolutionType;
 	
 	private final Grammar grammar;
@@ -638,15 +703,19 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		this.pModel = new ModelElements();
 		this.pPolicy = new PolicyElements();
 		this.pRule = new RuleElements();
+		this.pRole = new RoleElements();
 		this.pUser = new UserElements();
-		this.pQuery = new QueryElements();
-		this.eAccessibilityLevel = new AccessibilityLevelElements();
-		this.eOperationType = new OperationTypeElements();
-		this.eAssetType = new AssetTypeElements();
+		this.pGroup = new GroupElements();
+		this.pAsset = new AssetElements();
 		this.pObjectFact = new ObjectFactElements();
 		this.pReferenceFact = new ReferenceFactElements();
-		this.pAttributeFact = new AttributeFactElements();
-		this.pValue = new ValueElements();
+		this.pQuery = new QueryElements();
+		this.pBinding = new BindingElements();
+		this.pParameter = new ParameterElements();
+		this.pBind = new BindElements();
+		this.pObjectBind = new ObjectBindElements();
+		this.eAccessibilityLevel = new AccessibilityLevelElements();
+		this.eOperationType = new OperationTypeElements();
 		this.eResolutionType = new ResolutionTypeElements();
 	}
 	
@@ -678,6 +747,7 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
+	//	roles+=Role*
 	//	policy=Policy;
 	public ModelElements getModelAccess() {
 		return pModel;
@@ -688,7 +758,7 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Policy:
-	//	'policy' name=ID & access=AccessibilityLevel & operation=OperationType 'by' 'default' '{'
+	//	'policy' name=ID access=AccessibilityLevel operation=OperationType 'by' 'default' '{'
 	//	rules+=Rule*
 	//	'}' 'with' resolution=ResolutionType 'resolution';
 	public PolicyElements getPolicyAccess() {
@@ -700,9 +770,10 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Rule:
-	//	'rule' name=ID & access=AccessibilityLevel & operation=OperationType 'to' user=User '{'
-	//	'select' asset=AssetType
-	//	'from' 'query' query=Query ('where' 'bound' 'to')?
+	//	'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{'
+	//	'select' asset=Asset
+	//	'from' 'query' query=Query
+	//	bindings+=Binding*
 	//	'}' ('with' priority=INT 'priority')?;
 	public RuleElements getRuleAccess() {
 		return pRule;
@@ -712,8 +783,18 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		return getRuleAccess().getRule();
 	}
 	
+	//Role:
+	//	User | Group;
+	public RoleElements getRoleAccess() {
+		return pRole;
+	}
+	
+	public ParserRule getRoleRule() {
+		return getRoleAccess().getRule();
+	}
+	
 	//User:
-	//	name=ID;
+	//	'user' name=ID;
 	public UserElements getUserAccess() {
 		return pUser;
 	}
@@ -722,48 +803,28 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		return getUserAccess().getRule();
 	}
 	
-	//Query:
-	//	name=STRING;
-	public QueryElements getQueryAccess() {
-		return pQuery;
+	//Group:
+	//	'group' name=ID '{' users+=[User] (',' users+=[User])* '}';
+	public GroupElements getGroupAccess() {
+		return pGroup;
 	}
 	
-	public ParserRule getQueryRule() {
-		return getQueryAccess().getRule();
+	public ParserRule getGroupRule() {
+		return getGroupAccess().getRule();
 	}
 	
-	//enum AccessibilityLevel:
-	//	ALLOW='allow' | OBFUSCATE='obfuscate' | DENY='deny';
-	public AccessibilityLevelElements getAccessibilityLevelAccess() {
-		return eAccessibilityLevel;
+	//Asset:
+	//	ObjectFact | ReferenceFact;
+	public AssetElements getAssetAccess() {
+		return pAsset;
 	}
 	
-	public EnumRule getAccessibilityLevelRule() {
-		return getAccessibilityLevelAccess().getRule();
-	}
-	
-	//enum OperationType:
-	//	READ='R' | READWRITE='RW';
-	public OperationTypeElements getOperationTypeAccess() {
-		return eOperationType;
-	}
-	
-	public EnumRule getOperationTypeRule() {
-		return getOperationTypeAccess().getRule();
-	}
-	
-	//enum AssetType:
-	//	ObjectFact | ReferenceFact | AttributeFact;
-	public AssetTypeElements getAssetTypeAccess() {
-		return eAssetType;
-	}
-	
-	public EnumRule getAssetTypeRule() {
-		return getAssetTypeAccess().getRule();
+	public ParserRule getAssetRule() {
+		return getAssetAccess().getRule();
 	}
 	
 	//ObjectFact:
-	//	'obj(' object=[ecore::EObject] ',' type=[ecore::EClass] ')';
+	//	'obj(' parameter=Parameter ')';
 	public ObjectFactElements getObjectFactAccess() {
 		return pObjectFact;
 	}
@@ -773,7 +834,7 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ReferenceFact:
-	//	'ref(' srcObject=[ecore::EObject] '->' reference=[ecore::EReference] '->' trgObject=[ecore::EObject] ')';
+	//	'ref(' sourceParam=Parameter '->' '->' targetParam=Parameter ')';
 	public ReferenceFactElements getReferenceFactAccess() {
 		return pReferenceFact;
 	}
@@ -782,24 +843,75 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		return getReferenceFactAccess().getRule();
 	}
 	
-	//AttributeFact:
-	//	'attr(' object=[ecore::EObject] ',' attribute=[ecore::EAttribute] ',' value=Value ')';
-	public AttributeFactElements getAttributeFactAccess() {
-		return pAttributeFact;
+	//Query:
+	//	pattern=[iql::Pattern|STRING];
+	public QueryElements getQueryAccess() {
+		return pQuery;
 	}
 	
-	public ParserRule getAttributeFactRule() {
-		return getAttributeFactAccess().getRule();
+	public ParserRule getQueryRule() {
+		return getQueryAccess().getRule();
 	}
 	
-	//Value:
-	//	INT | STRING;
-	public ValueElements getValueAccess() {
-		return pValue;
+	//Binding:
+	//	'where' parameter=Parameter 'bound' 'to' bind=Bind;
+	public BindingElements getBindingAccess() {
+		return pBinding;
 	}
 	
-	public ParserRule getValueRule() {
-		return getValueAccess().getRule();
+	public ParserRule getBindingRule() {
+		return getBindingAccess().getRule();
+	}
+	
+	//Parameter:
+	//	variable=[iql::Variable];
+	public ParameterElements getParameterAccess() {
+		return pParameter;
+	}
+	
+	public ParserRule getParameterRule() {
+		return getParameterAccess().getRule();
+	}
+	
+	//Bind:
+	//	ObjectBind;
+	public BindElements getBindAccess() {
+		return pBind;
+	}
+	
+	public ParserRule getBindRule() {
+		return getBindAccess().getRule();
+	}
+	
+	////| ClassBind;
+	//ObjectBind:
+	//	object=[ecore::EObject];
+	public ObjectBindElements getObjectBindAccess() {
+		return pObjectBind;
+	}
+	
+	public ParserRule getObjectBindRule() {
+		return getObjectBindAccess().getRule();
+	}
+	
+	//enum AccessibilityLevel:
+	//	ALLOW='allow' | DENY='deny';
+	public AccessibilityLevelElements getAccessibilityLevelAccess() {
+		return eAccessibilityLevel;
+	}
+	
+	public EnumRule getAccessibilityLevelRule() {
+		return getAccessibilityLevelAccess().getRule();
+	}
+	
+	//enum OperationType:
+	//	READ='R' | WRITE='W' | READWRITE='RW';
+	public OperationTypeElements getOperationTypeAccess() {
+		return eOperationType;
+	}
+	
+	public EnumRule getOperationTypeRule() {
+		return getOperationTypeAccess().getRule();
 	}
 	
 	//enum ResolutionType:

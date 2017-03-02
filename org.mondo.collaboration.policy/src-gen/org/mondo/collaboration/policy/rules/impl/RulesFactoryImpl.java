@@ -69,11 +69,17 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
       case RulesPackage.MODEL: return createModel();
       case RulesPackage.POLICY: return createPolicy();
       case RulesPackage.RULE: return createRule();
+      case RulesPackage.ROLE: return createRole();
       case RulesPackage.USER: return createUser();
-      case RulesPackage.QUERY: return createQuery();
+      case RulesPackage.GROUP: return createGroup();
+      case RulesPackage.ASSET: return createAsset();
       case RulesPackage.OBJECT_FACT: return createObjectFact();
       case RulesPackage.REFERENCE_FACT: return createReferenceFact();
-      case RulesPackage.ATTRIBUTE_FACT: return createAttributeFact();
+      case RulesPackage.QUERY: return createQuery();
+      case RulesPackage.BINDING: return createBinding();
+      case RulesPackage.PARAMETER: return createParameter();
+      case RulesPackage.BIND: return createBind();
+      case RulesPackage.OBJECT_BIND: return createObjectBind();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -93,8 +99,6 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
         return createAccessibilityLevelFromString(eDataType, initialValue);
       case RulesPackage.OPERATION_TYPE:
         return createOperationTypeFromString(eDataType, initialValue);
-      case RulesPackage.ASSET_TYPE:
-        return createAssetTypeFromString(eDataType, initialValue);
       case RulesPackage.RESOLUTION_TYPE:
         return createResolutionTypeFromString(eDataType, initialValue);
       default:
@@ -116,8 +120,6 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
         return convertAccessibilityLevelToString(eDataType, instanceValue);
       case RulesPackage.OPERATION_TYPE:
         return convertOperationTypeToString(eDataType, instanceValue);
-      case RulesPackage.ASSET_TYPE:
-        return convertAssetTypeToString(eDataType, instanceValue);
       case RulesPackage.RESOLUTION_TYPE:
         return convertResolutionTypeToString(eDataType, instanceValue);
       default:
@@ -163,6 +165,17 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public Role createRole()
+  {
+    RoleImpl role = new RoleImpl();
+    return role;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public User createUser()
   {
     UserImpl user = new UserImpl();
@@ -174,10 +187,21 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Query createQuery()
+  public Group createGroup()
   {
-    QueryImpl query = new QueryImpl();
-    return query;
+    GroupImpl group = new GroupImpl();
+    return group;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Asset createAsset()
+  {
+    AssetImpl asset = new AssetImpl();
+    return asset;
   }
 
   /**
@@ -207,10 +231,54 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public AttributeFact createAttributeFact()
+  public Query createQuery()
   {
-    AttributeFactImpl attributeFact = new AttributeFactImpl();
-    return attributeFact;
+    QueryImpl query = new QueryImpl();
+    return query;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Binding createBinding()
+  {
+    BindingImpl binding = new BindingImpl();
+    return binding;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Parameter createParameter()
+  {
+    ParameterImpl parameter = new ParameterImpl();
+    return parameter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bind createBind()
+  {
+    BindImpl bind = new BindImpl();
+    return bind;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ObjectBind createObjectBind()
+  {
+    ObjectBindImpl objectBind = new ObjectBindImpl();
+    return objectBind;
   }
 
   /**
@@ -253,28 +321,6 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
    * @generated
    */
   public String convertOperationTypeToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AssetType createAssetTypeFromString(EDataType eDataType, String initialValue)
-  {
-    AssetType result = AssetType.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertAssetTypeToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

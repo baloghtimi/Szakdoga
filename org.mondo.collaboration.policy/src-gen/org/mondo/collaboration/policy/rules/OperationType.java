@@ -31,6 +31,16 @@ public enum OperationType implements Enumerator
   READ(0, "READ", "R"),
 
   /**
+   * The '<em><b>WRITE</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #WRITE_VALUE
+   * @generated
+   * @ordered
+   */
+  WRITE(1, "WRITE", "W"),
+
+  /**
    * The '<em><b>READWRITE</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -38,7 +48,7 @@ public enum OperationType implements Enumerator
    * @generated
    * @ordered
    */
-  READWRITE(1, "READWRITE", "RW");
+  READWRITE(2, "READWRITE", "RW");
 
   /**
    * The '<em><b>READ</b></em>' literal value.
@@ -56,6 +66,21 @@ public enum OperationType implements Enumerator
   public static final int READ_VALUE = 0;
 
   /**
+   * The '<em><b>WRITE</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>WRITE</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #WRITE
+   * @model literal="W"
+   * @generated
+   * @ordered
+   */
+  public static final int WRITE_VALUE = 1;
+
+  /**
    * The '<em><b>READWRITE</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
@@ -68,7 +93,7 @@ public enum OperationType implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int READWRITE_VALUE = 1;
+  public static final int READWRITE_VALUE = 2;
 
   /**
    * An array of all the '<em><b>Operation Type</b></em>' enumerators.
@@ -80,6 +105,7 @@ public enum OperationType implements Enumerator
     new OperationType[]
     {
       READ,
+      WRITE,
       READWRITE,
     };
 
@@ -146,6 +172,7 @@ public enum OperationType implements Enumerator
     switch (value)
     {
       case READ_VALUE: return READ;
+      case WRITE_VALUE: return WRITE;
       case READWRITE_VALUE: return READWRITE;
     }
     return null;

@@ -94,10 +94,49 @@ public class RulesSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RulesPackage.ROLE:
+      {
+        Role role = (Role)theEObject;
+        T result = caseRole(role);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RulesPackage.USER:
       {
         User user = (User)theEObject;
         T result = caseUser(user);
+        if (result == null) result = caseRole(user);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RulesPackage.GROUP:
+      {
+        Group group = (Group)theEObject;
+        T result = caseGroup(group);
+        if (result == null) result = caseRole(group);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RulesPackage.ASSET:
+      {
+        Asset asset = (Asset)theEObject;
+        T result = caseAsset(asset);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RulesPackage.OBJECT_FACT:
+      {
+        ObjectFact objectFact = (ObjectFact)theEObject;
+        T result = caseObjectFact(objectFact);
+        if (result == null) result = caseAsset(objectFact);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RulesPackage.REFERENCE_FACT:
+      {
+        ReferenceFact referenceFact = (ReferenceFact)theEObject;
+        T result = caseReferenceFact(referenceFact);
+        if (result == null) result = caseAsset(referenceFact);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -108,24 +147,32 @@ public class RulesSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RulesPackage.OBJECT_FACT:
+      case RulesPackage.BINDING:
       {
-        ObjectFact objectFact = (ObjectFact)theEObject;
-        T result = caseObjectFact(objectFact);
+        Binding binding = (Binding)theEObject;
+        T result = caseBinding(binding);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RulesPackage.REFERENCE_FACT:
+      case RulesPackage.PARAMETER:
       {
-        ReferenceFact referenceFact = (ReferenceFact)theEObject;
-        T result = caseReferenceFact(referenceFact);
+        Parameter parameter = (Parameter)theEObject;
+        T result = caseParameter(parameter);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RulesPackage.ATTRIBUTE_FACT:
+      case RulesPackage.BIND:
       {
-        AttributeFact attributeFact = (AttributeFact)theEObject;
-        T result = caseAttributeFact(attributeFact);
+        Bind bind = (Bind)theEObject;
+        T result = caseBind(bind);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RulesPackage.OBJECT_BIND:
+      {
+        ObjectBind objectBind = (ObjectBind)theEObject;
+        T result = caseObjectBind(objectBind);
+        if (result == null) result = caseBind(objectBind);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -182,6 +229,22 @@ public class RulesSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Role</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Role</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRole(Role object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>User</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -198,17 +261,33 @@ public class RulesSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Query</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Group</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Query</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Group</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseQuery(Query object)
+  public T caseGroup(Group object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Asset</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Asset</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAsset(Asset object)
   {
     return null;
   }
@@ -246,17 +325,81 @@ public class RulesSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Attribute Fact</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Query</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Attribute Fact</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Query</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAttributeFact(AttributeFact object)
+  public T caseQuery(Query object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Binding</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Binding</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBinding(Binding object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameter(Parameter object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bind</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bind</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBind(Bind object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Object Bind</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Object Bind</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseObjectBind(ObjectBind object)
   {
     return null;
   }

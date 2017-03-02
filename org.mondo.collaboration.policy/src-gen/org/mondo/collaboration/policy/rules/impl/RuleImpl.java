@@ -3,8 +3,12 @@
  */
 package org.mondo.collaboration.policy.rules.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,13 +16,18 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.mondo.collaboration.policy.rules.AccessibilityLevel;
-import org.mondo.collaboration.policy.rules.AssetType;
+import org.mondo.collaboration.policy.rules.Asset;
+import org.mondo.collaboration.policy.rules.Binding;
 import org.mondo.collaboration.policy.rules.OperationType;
 import org.mondo.collaboration.policy.rules.Query;
+import org.mondo.collaboration.policy.rules.Role;
 import org.mondo.collaboration.policy.rules.Rule;
 import org.mondo.collaboration.policy.rules.RulesPackage;
-import org.mondo.collaboration.policy.rules.User;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,9 +40,10 @@ import org.mondo.collaboration.policy.rules.User;
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getAccess <em>Access</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getOperation <em>Operation</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getUser <em>User</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getAsset <em>Asset</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getQuery <em>Query</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getBindings <em>Bindings</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getPriority <em>Priority</em>}</li>
  * </ul>
  *
@@ -102,34 +112,24 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   protected OperationType operation = OPERATION_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getUser() <em>User</em>}' containment reference.
+   * The cached value of the '{@link #getRoles() <em>Roles</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getUser()
+   * @see #getRoles()
    * @generated
    * @ordered
    */
-  protected User user;
+  protected EList<Role> roles;
 
   /**
-   * The default value of the '{@link #getAsset() <em>Asset</em>}' attribute.
+   * The cached value of the '{@link #getAsset() <em>Asset</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getAsset()
    * @generated
    * @ordered
    */
-  protected static final AssetType ASSET_EDEFAULT = AssetType.OBJECT_FACT;
-
-  /**
-   * The cached value of the '{@link #getAsset() <em>Asset</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAsset()
-   * @generated
-   * @ordered
-   */
-  protected AssetType asset = ASSET_EDEFAULT;
+  protected Asset asset;
 
   /**
    * The cached value of the '{@link #getQuery() <em>Query</em>}' containment reference.
@@ -140,6 +140,16 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * @ordered
    */
   protected Query query;
+
+  /**
+   * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBindings()
+   * @generated
+   * @ordered
+   */
+  protected EList<Binding> bindings;
 
   /**
    * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
@@ -256,9 +266,13 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public User getUser()
+  public EList<Role> getRoles()
   {
-    return user;
+    if (roles == null)
+    {
+      roles = new EObjectResolvingEList<Role>(Role.class, this, RulesPackage.RULE__ROLES);
+    }
+    return roles;
   }
 
   /**
@@ -266,13 +280,23 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetUser(User newUser, NotificationChain msgs)
+  public Asset getAsset()
   {
-    User oldUser = user;
-    user = newUser;
+    return asset;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAsset(Asset newAsset, NotificationChain msgs)
+  {
+    Asset oldAsset = asset;
+    asset = newAsset;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__USER, oldUser, newUser);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__ASSET, oldAsset, newAsset);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -283,43 +307,20 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setUser(User newUser)
+  public void setAsset(Asset newAsset)
   {
-    if (newUser != user)
+    if (newAsset != asset)
     {
       NotificationChain msgs = null;
-      if (user != null)
-        msgs = ((InternalEObject)user).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.RULE__USER, null, msgs);
-      if (newUser != null)
-        msgs = ((InternalEObject)newUser).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.RULE__USER, null, msgs);
-      msgs = basicSetUser(newUser, msgs);
+      if (asset != null)
+        msgs = ((InternalEObject)asset).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.RULE__ASSET, null, msgs);
+      if (newAsset != null)
+        msgs = ((InternalEObject)newAsset).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.RULE__ASSET, null, msgs);
+      msgs = basicSetAsset(newAsset, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__USER, newUser, newUser));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AssetType getAsset()
-  {
-    return asset;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAsset(AssetType newAsset)
-  {
-    AssetType oldAsset = asset;
-    asset = newAsset == null ? ASSET_EDEFAULT : newAsset;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__ASSET, oldAsset, asset));
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__ASSET, newAsset, newAsset));
   }
 
   /**
@@ -375,6 +376,20 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Binding> getBindings()
+  {
+    if (bindings == null)
+    {
+      bindings = new EObjectContainmentEList<Binding>(Binding.class, this, RulesPackage.RULE__BINDINGS);
+    }
+    return bindings;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public int getPriority()
   {
     return priority;
@@ -403,10 +418,12 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case RulesPackage.RULE__USER:
-        return basicSetUser(null, msgs);
+      case RulesPackage.RULE__ASSET:
+        return basicSetAsset(null, msgs);
       case RulesPackage.RULE__QUERY:
         return basicSetQuery(null, msgs);
+      case RulesPackage.RULE__BINDINGS:
+        return ((InternalEList<?>)getBindings()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -427,12 +444,14 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
         return getAccess();
       case RulesPackage.RULE__OPERATION:
         return getOperation();
-      case RulesPackage.RULE__USER:
-        return getUser();
+      case RulesPackage.RULE__ROLES:
+        return getRoles();
       case RulesPackage.RULE__ASSET:
         return getAsset();
       case RulesPackage.RULE__QUERY:
         return getQuery();
+      case RulesPackage.RULE__BINDINGS:
+        return getBindings();
       case RulesPackage.RULE__PRIORITY:
         return getPriority();
     }
@@ -444,6 +463,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -458,14 +478,19 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
       case RulesPackage.RULE__OPERATION:
         setOperation((OperationType)newValue);
         return;
-      case RulesPackage.RULE__USER:
-        setUser((User)newValue);
+      case RulesPackage.RULE__ROLES:
+        getRoles().clear();
+        getRoles().addAll((Collection<? extends Role>)newValue);
         return;
       case RulesPackage.RULE__ASSET:
-        setAsset((AssetType)newValue);
+        setAsset((Asset)newValue);
         return;
       case RulesPackage.RULE__QUERY:
         setQuery((Query)newValue);
+        return;
+      case RulesPackage.RULE__BINDINGS:
+        getBindings().clear();
+        getBindings().addAll((Collection<? extends Binding>)newValue);
         return;
       case RulesPackage.RULE__PRIORITY:
         setPriority((Integer)newValue);
@@ -493,14 +518,17 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
       case RulesPackage.RULE__OPERATION:
         setOperation(OPERATION_EDEFAULT);
         return;
-      case RulesPackage.RULE__USER:
-        setUser((User)null);
+      case RulesPackage.RULE__ROLES:
+        getRoles().clear();
         return;
       case RulesPackage.RULE__ASSET:
-        setAsset(ASSET_EDEFAULT);
+        setAsset((Asset)null);
         return;
       case RulesPackage.RULE__QUERY:
         setQuery((Query)null);
+        return;
+      case RulesPackage.RULE__BINDINGS:
+        getBindings().clear();
         return;
       case RulesPackage.RULE__PRIORITY:
         setPriority(PRIORITY_EDEFAULT);
@@ -525,12 +553,14 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
         return access != ACCESS_EDEFAULT;
       case RulesPackage.RULE__OPERATION:
         return operation != OPERATION_EDEFAULT;
-      case RulesPackage.RULE__USER:
-        return user != null;
+      case RulesPackage.RULE__ROLES:
+        return roles != null && !roles.isEmpty();
       case RulesPackage.RULE__ASSET:
-        return asset != ASSET_EDEFAULT;
+        return asset != null;
       case RulesPackage.RULE__QUERY:
         return query != null;
+      case RulesPackage.RULE__BINDINGS:
+        return bindings != null && !bindings.isEmpty();
       case RulesPackage.RULE__PRIORITY:
         return priority != PRIORITY_EDEFAULT;
     }
@@ -554,8 +584,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     result.append(access);
     result.append(", operation: ");
     result.append(operation);
-    result.append(", asset: ");
-    result.append(asset);
     result.append(", priority: ");
     result.append(priority);
     result.append(')');

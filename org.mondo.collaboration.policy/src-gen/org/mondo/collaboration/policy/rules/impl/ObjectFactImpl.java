@@ -4,15 +4,15 @@
 package org.mondo.collaboration.policy.rules.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.mondo.collaboration.policy.rules.ObjectFact;
+import org.mondo.collaboration.policy.rules.Parameter;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
 /**
@@ -23,33 +23,22 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ObjectFactImpl#getObject <em>Object</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ObjectFactImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ObjectFactImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ObjectFactImpl extends MinimalEObjectImpl.Container implements ObjectFact
+public class ObjectFactImpl extends AssetImpl implements ObjectFact
 {
   /**
-   * The cached value of the '{@link #getObject() <em>Object</em>}' reference.
+   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getObject()
+   * @see #getParameter()
    * @generated
    * @ordered
    */
-  protected EObject object;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected EClass type;
+  protected Parameter parameter;
 
   /**
    * <!-- begin-user-doc -->
@@ -77,19 +66,9 @@ public class ObjectFactImpl extends MinimalEObjectImpl.Container implements Obje
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getObject()
+  public Parameter getParameter()
   {
-    if (object != null && object.eIsProxy())
-    {
-      InternalEObject oldObject = (InternalEObject)object;
-      object = eResolveProxy(oldObject);
-      if (object != oldObject)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.OBJECT_FACT__OBJECT, oldObject, object));
-      }
-    }
-    return object;
+    return parameter;
   }
 
   /**
@@ -97,42 +76,16 @@ public class ObjectFactImpl extends MinimalEObjectImpl.Container implements Obje
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject basicGetObject()
+  public NotificationChain basicSetParameter(Parameter newParameter, NotificationChain msgs)
   {
-    return object;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setObject(EObject newObject)
-  {
-    EObject oldObject = object;
-    object = newObject;
+    Parameter oldParameter = parameter;
+    parameter = newParameter;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.OBJECT_FACT__OBJECT, oldObject, object));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getType()
-  {
-    if (type != null && type.eIsProxy())
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (EClass)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.OBJECT_FACT__TYPE, oldType, type));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.OBJECT_FACT__PARAMETER, oldParameter, newParameter);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return type;
+    return msgs;
   }
 
   /**
@@ -140,9 +93,20 @@ public class ObjectFactImpl extends MinimalEObjectImpl.Container implements Obje
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass basicGetType()
+  public void setParameter(Parameter newParameter)
   {
-    return type;
+    if (newParameter != parameter)
+    {
+      NotificationChain msgs = null;
+      if (parameter != null)
+        msgs = ((InternalEObject)parameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.OBJECT_FACT__PARAMETER, null, msgs);
+      if (newParameter != null)
+        msgs = ((InternalEObject)newParameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.OBJECT_FACT__PARAMETER, null, msgs);
+      msgs = basicSetParameter(newParameter, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.OBJECT_FACT__PARAMETER, newParameter, newParameter));
   }
 
   /**
@@ -150,12 +114,15 @@ public class ObjectFactImpl extends MinimalEObjectImpl.Container implements Obje
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(EClass newType)
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    EClass oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.OBJECT_FACT__TYPE, oldType, type));
+    switch (featureID)
+    {
+      case RulesPackage.OBJECT_FACT__PARAMETER:
+        return basicSetParameter(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -168,12 +135,8 @@ public class ObjectFactImpl extends MinimalEObjectImpl.Container implements Obje
   {
     switch (featureID)
     {
-      case RulesPackage.OBJECT_FACT__OBJECT:
-        if (resolve) return getObject();
-        return basicGetObject();
-      case RulesPackage.OBJECT_FACT__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+      case RulesPackage.OBJECT_FACT__PARAMETER:
+        return getParameter();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -188,11 +151,8 @@ public class ObjectFactImpl extends MinimalEObjectImpl.Container implements Obje
   {
     switch (featureID)
     {
-      case RulesPackage.OBJECT_FACT__OBJECT:
-        setObject((EObject)newValue);
-        return;
-      case RulesPackage.OBJECT_FACT__TYPE:
-        setType((EClass)newValue);
+      case RulesPackage.OBJECT_FACT__PARAMETER:
+        setParameter((Parameter)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -208,11 +168,8 @@ public class ObjectFactImpl extends MinimalEObjectImpl.Container implements Obje
   {
     switch (featureID)
     {
-      case RulesPackage.OBJECT_FACT__OBJECT:
-        setObject((EObject)null);
-        return;
-      case RulesPackage.OBJECT_FACT__TYPE:
-        setType((EClass)null);
+      case RulesPackage.OBJECT_FACT__PARAMETER:
+        setParameter((Parameter)null);
         return;
     }
     super.eUnset(featureID);
@@ -228,10 +185,8 @@ public class ObjectFactImpl extends MinimalEObjectImpl.Container implements Obje
   {
     switch (featureID)
     {
-      case RulesPackage.OBJECT_FACT__OBJECT:
-        return object != null;
-      case RulesPackage.OBJECT_FACT__TYPE:
-        return type != null;
+      case RulesPackage.OBJECT_FACT__PARAMETER:
+        return parameter != null;
     }
     return super.eIsSet(featureID);
   }

@@ -3,8 +3,6 @@
  */
 package org.mondo.collaboration.policy.rules;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,66 +13,39 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.ObjectFact#getObject <em>Object</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.ObjectFact#getType <em>Type</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.ObjectFact#getParameter <em>Parameter</em>}</li>
  * </ul>
  *
  * @see org.mondo.collaboration.policy.rules.RulesPackage#getObjectFact()
  * @model
  * @generated
  */
-public interface ObjectFact extends EObject
+public interface ObjectFact extends Asset
 {
   /**
-   * Returns the value of the '<em><b>Object</b></em>' reference.
+   * Returns the value of the '<em><b>Parameter</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Object</em>' reference isn't clear,
+   * If the meaning of the '<em>Parameter</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Object</em>' reference.
-   * @see #setObject(EObject)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getObjectFact_Object()
-   * @model
+   * @return the value of the '<em>Parameter</em>' containment reference.
+   * @see #setParameter(Parameter)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getObjectFact_Parameter()
+   * @model containment="true"
    * @generated
    */
-  EObject getObject();
+  Parameter getParameter();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ObjectFact#getObject <em>Object</em>}' reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ObjectFact#getParameter <em>Parameter</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Object</em>' reference.
-   * @see #getObject()
+   * @param value the new value of the '<em>Parameter</em>' containment reference.
+   * @see #getParameter()
    * @generated
    */
-  void setObject(EObject value);
-
-  /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(EClass)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getObjectFact_Type()
-   * @model
-   * @generated
-   */
-  EClass getType();
-
-  /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ObjectFact#getType <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(EClass value);
+  void setParameter(Parameter value);
 
 } // ObjectFact

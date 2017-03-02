@@ -51,6 +51,15 @@ public interface RulesFactory extends EFactory
   Rule createRule();
 
   /**
+   * Returns a new object of class '<em>Role</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Role</em>'.
+   * @generated
+   */
+  Role createRole();
+
+  /**
    * Returns a new object of class '<em>User</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -60,13 +69,22 @@ public interface RulesFactory extends EFactory
   User createUser();
 
   /**
-   * Returns a new object of class '<em>Query</em>'.
+   * Returns a new object of class '<em>Group</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Query</em>'.
+   * @return a new object of class '<em>Group</em>'.
    * @generated
    */
-  Query createQuery();
+  Group createGroup();
+
+  /**
+   * Returns a new object of class '<em>Asset</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Asset</em>'.
+   * @generated
+   */
+  Asset createAsset();
 
   /**
    * Returns a new object of class '<em>Object Fact</em>'.
@@ -87,13 +105,49 @@ public interface RulesFactory extends EFactory
   ReferenceFact createReferenceFact();
 
   /**
-   * Returns a new object of class '<em>Attribute Fact</em>'.
+   * Returns a new object of class '<em>Query</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Attribute Fact</em>'.
+   * @return a new object of class '<em>Query</em>'.
    * @generated
    */
-  AttributeFact createAttributeFact();
+  Query createQuery();
+
+  /**
+   * Returns a new object of class '<em>Binding</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Binding</em>'.
+   * @generated
+   */
+  Binding createBinding();
+
+  /**
+   * Returns a new object of class '<em>Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter</em>'.
+   * @generated
+   */
+  Parameter createParameter();
+
+  /**
+   * Returns a new object of class '<em>Bind</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bind</em>'.
+   * @generated
+   */
+  Bind createBind();
+
+  /**
+   * Returns a new object of class '<em>Object Bind</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Object Bind</em>'.
+   * @generated
+   */
+  ObjectBind createObjectBind();
 
   /**
    * Returns the package supported by this factory.

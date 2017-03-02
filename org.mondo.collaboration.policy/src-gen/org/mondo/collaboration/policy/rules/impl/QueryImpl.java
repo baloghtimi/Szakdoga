@@ -6,9 +6,12 @@ package org.mondo.collaboration.policy.rules.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
 
 import org.mondo.collaboration.policy.rules.Query;
 import org.mondo.collaboration.policy.rules.RulesPackage;
@@ -21,7 +24,7 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.QueryImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.QueryImpl#getPattern <em>Pattern</em>}</li>
  * </ul>
  *
  * @generated
@@ -29,24 +32,14 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
 public class QueryImpl extends MinimalEObjectImpl.Container implements Query
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getPattern() <em>Pattern</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getPattern()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected Pattern pattern;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,9 +67,19 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public Pattern getPattern()
   {
-    return name;
+    if (pattern != null && pattern.eIsProxy())
+    {
+      InternalEObject oldPattern = (InternalEObject)pattern;
+      pattern = (Pattern)eResolveProxy(oldPattern);
+      if (pattern != oldPattern)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.QUERY__PATTERN, oldPattern, pattern));
+      }
+    }
+    return pattern;
   }
 
   /**
@@ -84,12 +87,22 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public Pattern basicGetPattern()
   {
-    String oldName = name;
-    name = newName;
+    return pattern;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPattern(Pattern newPattern)
+  {
+    Pattern oldPattern = pattern;
+    pattern = newPattern;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.QUERY__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.QUERY__PATTERN, oldPattern, pattern));
   }
 
   /**
@@ -102,8 +115,9 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   {
     switch (featureID)
     {
-      case RulesPackage.QUERY__NAME:
-        return getName();
+      case RulesPackage.QUERY__PATTERN:
+        if (resolve) return getPattern();
+        return basicGetPattern();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -118,8 +132,8 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   {
     switch (featureID)
     {
-      case RulesPackage.QUERY__NAME:
-        setName((String)newValue);
+      case RulesPackage.QUERY__PATTERN:
+        setPattern((Pattern)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -135,8 +149,8 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   {
     switch (featureID)
     {
-      case RulesPackage.QUERY__NAME:
-        setName(NAME_EDEFAULT);
+      case RulesPackage.QUERY__PATTERN:
+        setPattern((Pattern)null);
         return;
     }
     super.eUnset(featureID);
@@ -152,27 +166,10 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   {
     switch (featureID)
     {
-      case RulesPackage.QUERY__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RulesPackage.QUERY__PATTERN:
+        return pattern != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //QueryImpl

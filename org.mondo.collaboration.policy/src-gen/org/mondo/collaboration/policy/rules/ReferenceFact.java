@@ -3,8 +3,6 @@
  */
 package org.mondo.collaboration.policy.rules;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,93 +13,66 @@ import org.eclipse.emf.ecore.EReference;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSrcObject <em>Src Object</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getReference <em>Reference</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTrgObject <em>Trg Object</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSourceParam <em>Source Param</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTargetParam <em>Target Param</em>}</li>
  * </ul>
  *
  * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact()
  * @model
  * @generated
  */
-public interface ReferenceFact extends EObject
+public interface ReferenceFact extends Asset
 {
   /**
-   * Returns the value of the '<em><b>Src Object</b></em>' reference.
+   * Returns the value of the '<em><b>Source Param</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Src Object</em>' reference isn't clear,
+   * If the meaning of the '<em>Source Param</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Src Object</em>' reference.
-   * @see #setSrcObject(EObject)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_SrcObject()
-   * @model
+   * @return the value of the '<em>Source Param</em>' containment reference.
+   * @see #setSourceParam(Parameter)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_SourceParam()
+   * @model containment="true"
    * @generated
    */
-  EObject getSrcObject();
+  Parameter getSourceParam();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSrcObject <em>Src Object</em>}' reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSourceParam <em>Source Param</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Src Object</em>' reference.
-   * @see #getSrcObject()
+   * @param value the new value of the '<em>Source Param</em>' containment reference.
+   * @see #getSourceParam()
    * @generated
    */
-  void setSrcObject(EObject value);
+  void setSourceParam(Parameter value);
 
   /**
-   * Returns the value of the '<em><b>Reference</b></em>' reference.
+   * Returns the value of the '<em><b>Target Param</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Reference</em>' reference isn't clear,
+   * If the meaning of the '<em>Target Param</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Reference</em>' reference.
-   * @see #setReference(EReference)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_Reference()
-   * @model
+   * @return the value of the '<em>Target Param</em>' containment reference.
+   * @see #setTargetParam(Parameter)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_TargetParam()
+   * @model containment="true"
    * @generated
    */
-  EReference getReference();
+  Parameter getTargetParam();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getReference <em>Reference</em>}' reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTargetParam <em>Target Param</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Reference</em>' reference.
-   * @see #getReference()
+   * @param value the new value of the '<em>Target Param</em>' containment reference.
+   * @see #getTargetParam()
    * @generated
    */
-  void setReference(EReference value);
-
-  /**
-   * Returns the value of the '<em><b>Trg Object</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Trg Object</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Trg Object</em>' reference.
-   * @see #setTrgObject(EObject)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_TrgObject()
-   * @model
-   * @generated
-   */
-  EObject getTrgObject();
-
-  /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTrgObject <em>Trg Object</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Trg Object</em>' reference.
-   * @see #getTrgObject()
-   * @generated
-   */
-  void setTrgObject(EObject value);
+  void setTargetParam(Parameter value);
 
 } // ReferenceFact
