@@ -16,8 +16,8 @@ Policy:
 	
 Rule:
 	'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{'
+	'from' 'query' pattern=[iql::Pattern|STRING]
 	'select' asset=Asset
-	'from' 'query' query=Query 
 	bindings+=Binding*
 	'}' ('with' priority=INT 'priority')?;
 	
@@ -32,31 +32,34 @@ Group:
 ;
 	
 Asset:
-	ObjectFact | ReferenceFact;
+	ObjectFact | ReferenceFact | AttributeFact;
 	
 ObjectFact:
-	'obj(' parameter=Parameter ')';
+	'obj(' variable=[iql::Variable] ')';
 	
 ReferenceFact:
-	'ref(' sourceParam=Parameter '->' '->' targetParam=Parameter ')';
+	'ref(' sourceVar=[iql::Variable] '->' targetVar=[iql::Variable] ':' reference=[ecore::EReference] ')';
 	
-Query:
-	pattern=[iql::Pattern|STRING];
+AttributeFact:
+	'attr(' variable=[iql::Variable] ')';
 	
 Binding:
-	'where' parameter=Parameter 'bound' 'to' bind=Bind;
-	
-Parameter:
-	variable=[iql::Variable];
+	'where' variable=[iql::Variable] 'bound' 'to' bind=Bind;
 	
 Bind:
-	ObjectBind; //| ClassBind;
+	ObjectBind | ValueBind; //| ClassBind;
 
 ObjectBind:
-	object=[ecore::EObject];
+	'object' object=[ecore::EObject];
+	
+ValueBind:
+	'value' value=ValueType;
 	
 /*ClassBind:
 	class=[ecore::EClass];*/
+
+enum ValueType:
+	STRING | INT;
 	
 enum AccessibilityLevel:
 	ALLOW='allow' | DENY='deny';

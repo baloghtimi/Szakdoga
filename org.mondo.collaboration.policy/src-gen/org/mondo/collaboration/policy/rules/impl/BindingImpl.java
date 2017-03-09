@@ -12,9 +12,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
+
 import org.mondo.collaboration.policy.rules.Bind;
 import org.mondo.collaboration.policy.rules.Binding;
-import org.mondo.collaboration.policy.rules.Parameter;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
 /**
@@ -25,7 +26,7 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.BindingImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.BindingImpl#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.BindingImpl#getBind <em>Bind</em>}</li>
  * </ul>
  *
@@ -34,14 +35,14 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
 public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
 {
   /**
-   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference.
+   * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getParameter()
+   * @see #getVariable()
    * @generated
    * @ordered
    */
-  protected Parameter parameter;
+  protected Variable variable;
 
   /**
    * The cached value of the '{@link #getBind() <em>Bind</em>}' containment reference.
@@ -79,9 +80,19 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter getParameter()
+  public Variable getVariable()
   {
-    return parameter;
+    if (variable != null && variable.eIsProxy())
+    {
+      InternalEObject oldVariable = (InternalEObject)variable;
+      variable = (Variable)eResolveProxy(oldVariable);
+      if (variable != oldVariable)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.BINDING__VARIABLE, oldVariable, variable));
+      }
+    }
+    return variable;
   }
 
   /**
@@ -89,37 +100,22 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetParameter(Parameter newParameter, NotificationChain msgs)
+  public Variable basicGetVariable()
   {
-    Parameter oldParameter = parameter;
-    parameter = newParameter;
+    return variable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setVariable(Variable newVariable)
+  {
+    Variable oldVariable = variable;
+    variable = newVariable;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.BINDING__PARAMETER, oldParameter, newParameter);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setParameter(Parameter newParameter)
-  {
-    if (newParameter != parameter)
-    {
-      NotificationChain msgs = null;
-      if (parameter != null)
-        msgs = ((InternalEObject)parameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.BINDING__PARAMETER, null, msgs);
-      if (newParameter != null)
-        msgs = ((InternalEObject)newParameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.BINDING__PARAMETER, null, msgs);
-      msgs = basicSetParameter(newParameter, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.BINDING__PARAMETER, newParameter, newParameter));
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.BINDING__VARIABLE, oldVariable, variable));
   }
 
   /**
@@ -180,8 +176,6 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
   {
     switch (featureID)
     {
-      case RulesPackage.BINDING__PARAMETER:
-        return basicSetParameter(null, msgs);
       case RulesPackage.BINDING__BIND:
         return basicSetBind(null, msgs);
     }
@@ -198,8 +192,9 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
   {
     switch (featureID)
     {
-      case RulesPackage.BINDING__PARAMETER:
-        return getParameter();
+      case RulesPackage.BINDING__VARIABLE:
+        if (resolve) return getVariable();
+        return basicGetVariable();
       case RulesPackage.BINDING__BIND:
         return getBind();
     }
@@ -216,8 +211,8 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
   {
     switch (featureID)
     {
-      case RulesPackage.BINDING__PARAMETER:
-        setParameter((Parameter)newValue);
+      case RulesPackage.BINDING__VARIABLE:
+        setVariable((Variable)newValue);
         return;
       case RulesPackage.BINDING__BIND:
         setBind((Bind)newValue);
@@ -236,8 +231,8 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
   {
     switch (featureID)
     {
-      case RulesPackage.BINDING__PARAMETER:
-        setParameter((Parameter)null);
+      case RulesPackage.BINDING__VARIABLE:
+        setVariable((Variable)null);
         return;
       case RulesPackage.BINDING__BIND:
         setBind((Bind)null);
@@ -256,8 +251,8 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
   {
     switch (featureID)
     {
-      case RulesPackage.BINDING__PARAMETER:
-        return parameter != null;
+      case RulesPackage.BINDING__VARIABLE:
+        return variable != null;
       case RulesPackage.BINDING__BIND:
         return bind != null;
     }

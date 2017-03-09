@@ -20,11 +20,12 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
+
 import org.mondo.collaboration.policy.rules.AccessibilityLevel;
 import org.mondo.collaboration.policy.rules.Asset;
 import org.mondo.collaboration.policy.rules.Binding;
 import org.mondo.collaboration.policy.rules.OperationType;
-import org.mondo.collaboration.policy.rules.Query;
 import org.mondo.collaboration.policy.rules.Role;
 import org.mondo.collaboration.policy.rules.Rule;
 import org.mondo.collaboration.policy.rules.RulesPackage;
@@ -41,8 +42,8 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getAccess <em>Access</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getRoles <em>Roles</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getPattern <em>Pattern</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getAsset <em>Asset</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getQuery <em>Query</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getBindings <em>Bindings</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getPriority <em>Priority</em>}</li>
  * </ul>
@@ -122,6 +123,16 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   protected EList<Role> roles;
 
   /**
+   * The cached value of the '{@link #getPattern() <em>Pattern</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPattern()
+   * @generated
+   * @ordered
+   */
+  protected Pattern pattern;
+
+  /**
    * The cached value of the '{@link #getAsset() <em>Asset</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -130,16 +141,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * @ordered
    */
   protected Asset asset;
-
-  /**
-   * The cached value of the '{@link #getQuery() <em>Query</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getQuery()
-   * @generated
-   * @ordered
-   */
-  protected Query query;
 
   /**
    * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
@@ -280,6 +281,49 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  public Pattern getPattern()
+  {
+    if (pattern != null && pattern.eIsProxy())
+    {
+      InternalEObject oldPattern = (InternalEObject)pattern;
+      pattern = (Pattern)eResolveProxy(oldPattern);
+      if (pattern != oldPattern)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.RULE__PATTERN, oldPattern, pattern));
+      }
+    }
+    return pattern;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Pattern basicGetPattern()
+  {
+    return pattern;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPattern(Pattern newPattern)
+  {
+    Pattern oldPattern = pattern;
+    pattern = newPattern;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__PATTERN, oldPattern, pattern));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Asset getAsset()
   {
     return asset;
@@ -321,54 +365,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__ASSET, newAsset, newAsset));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Query getQuery()
-  {
-    return query;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetQuery(Query newQuery, NotificationChain msgs)
-  {
-    Query oldQuery = query;
-    query = newQuery;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__QUERY, oldQuery, newQuery);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setQuery(Query newQuery)
-  {
-    if (newQuery != query)
-    {
-      NotificationChain msgs = null;
-      if (query != null)
-        msgs = ((InternalEObject)query).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.RULE__QUERY, null, msgs);
-      if (newQuery != null)
-        msgs = ((InternalEObject)newQuery).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.RULE__QUERY, null, msgs);
-      msgs = basicSetQuery(newQuery, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__QUERY, newQuery, newQuery));
   }
 
   /**
@@ -420,8 +416,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     {
       case RulesPackage.RULE__ASSET:
         return basicSetAsset(null, msgs);
-      case RulesPackage.RULE__QUERY:
-        return basicSetQuery(null, msgs);
       case RulesPackage.RULE__BINDINGS:
         return ((InternalEList<?>)getBindings()).basicRemove(otherEnd, msgs);
     }
@@ -446,10 +440,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
         return getOperation();
       case RulesPackage.RULE__ROLES:
         return getRoles();
+      case RulesPackage.RULE__PATTERN:
+        if (resolve) return getPattern();
+        return basicGetPattern();
       case RulesPackage.RULE__ASSET:
         return getAsset();
-      case RulesPackage.RULE__QUERY:
-        return getQuery();
       case RulesPackage.RULE__BINDINGS:
         return getBindings();
       case RulesPackage.RULE__PRIORITY:
@@ -482,11 +477,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
         getRoles().clear();
         getRoles().addAll((Collection<? extends Role>)newValue);
         return;
+      case RulesPackage.RULE__PATTERN:
+        setPattern((Pattern)newValue);
+        return;
       case RulesPackage.RULE__ASSET:
         setAsset((Asset)newValue);
-        return;
-      case RulesPackage.RULE__QUERY:
-        setQuery((Query)newValue);
         return;
       case RulesPackage.RULE__BINDINGS:
         getBindings().clear();
@@ -521,11 +516,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
       case RulesPackage.RULE__ROLES:
         getRoles().clear();
         return;
+      case RulesPackage.RULE__PATTERN:
+        setPattern((Pattern)null);
+        return;
       case RulesPackage.RULE__ASSET:
         setAsset((Asset)null);
-        return;
-      case RulesPackage.RULE__QUERY:
-        setQuery((Query)null);
         return;
       case RulesPackage.RULE__BINDINGS:
         getBindings().clear();
@@ -555,10 +550,10 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
         return operation != OPERATION_EDEFAULT;
       case RulesPackage.RULE__ROLES:
         return roles != null && !roles.isEmpty();
+      case RulesPackage.RULE__PATTERN:
+        return pattern != null;
       case RulesPackage.RULE__ASSET:
         return asset != null;
-      case RulesPackage.RULE__QUERY:
-        return query != null;
       case RulesPackage.RULE__BINDINGS:
         return bindings != null && !bindings.isEmpty();
       case RulesPackage.RULE__PRIORITY:

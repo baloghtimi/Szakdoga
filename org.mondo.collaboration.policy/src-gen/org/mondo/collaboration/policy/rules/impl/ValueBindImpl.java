@@ -6,47 +6,54 @@ package org.mondo.collaboration.policy.rules.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
-
-import org.mondo.collaboration.policy.rules.Query;
 import org.mondo.collaboration.policy.rules.RulesPackage;
+import org.mondo.collaboration.policy.rules.ValueBind;
+import org.mondo.collaboration.policy.rules.ValueType;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Query</b></em>'.
+ * An implementation of the model object '<em><b>Value Bind</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.QueryImpl#getPattern <em>Pattern</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ValueBindImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class QueryImpl extends MinimalEObjectImpl.Container implements Query
+public class ValueBindImpl extends BindImpl implements ValueBind
 {
   /**
-   * The cached value of the '{@link #getPattern() <em>Pattern</em>}' reference.
+   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPattern()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected Pattern pattern;
+  protected static final ValueType VALUE_EDEFAULT = ValueType.STRING;
+
+  /**
+   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValue()
+   * @generated
+   * @ordered
+   */
+  protected ValueType value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected QueryImpl()
+  protected ValueBindImpl()
   {
     super();
   }
@@ -59,7 +66,7 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   @Override
   protected EClass eStaticClass()
   {
-    return RulesPackage.Literals.QUERY;
+    return RulesPackage.Literals.VALUE_BIND;
   }
 
   /**
@@ -67,19 +74,9 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
    * <!-- end-user-doc -->
    * @generated
    */
-  public Pattern getPattern()
+  public ValueType getValue()
   {
-    if (pattern != null && pattern.eIsProxy())
-    {
-      InternalEObject oldPattern = (InternalEObject)pattern;
-      pattern = (Pattern)eResolveProxy(oldPattern);
-      if (pattern != oldPattern)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.QUERY__PATTERN, oldPattern, pattern));
-      }
-    }
-    return pattern;
+    return value;
   }
 
   /**
@@ -87,22 +84,12 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
    * <!-- end-user-doc -->
    * @generated
    */
-  public Pattern basicGetPattern()
+  public void setValue(ValueType newValue)
   {
-    return pattern;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setPattern(Pattern newPattern)
-  {
-    Pattern oldPattern = pattern;
-    pattern = newPattern;
+    ValueType oldValue = value;
+    value = newValue == null ? VALUE_EDEFAULT : newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.QUERY__PATTERN, oldPattern, pattern));
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.VALUE_BIND__VALUE, oldValue, value));
   }
 
   /**
@@ -115,9 +102,8 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   {
     switch (featureID)
     {
-      case RulesPackage.QUERY__PATTERN:
-        if (resolve) return getPattern();
-        return basicGetPattern();
+      case RulesPackage.VALUE_BIND__VALUE:
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -132,8 +118,8 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   {
     switch (featureID)
     {
-      case RulesPackage.QUERY__PATTERN:
-        setPattern((Pattern)newValue);
+      case RulesPackage.VALUE_BIND__VALUE:
+        setValue((ValueType)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -149,8 +135,8 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   {
     switch (featureID)
     {
-      case RulesPackage.QUERY__PATTERN:
-        setPattern((Pattern)null);
+      case RulesPackage.VALUE_BIND__VALUE:
+        setValue(VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -166,10 +152,27 @@ public class QueryImpl extends MinimalEObjectImpl.Container implements Query
   {
     switch (featureID)
     {
-      case RulesPackage.QUERY__PATTERN:
-        return pattern != null;
+      case RulesPackage.VALUE_BIND__VALUE:
+        return value != VALUE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
 
-} //QueryImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (value: ");
+    result.append(value);
+    result.append(')');
+    return result.toString();
+  }
+
+} //ValueBindImpl

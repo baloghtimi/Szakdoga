@@ -140,10 +140,11 @@ public class RulesSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RulesPackage.QUERY:
+      case RulesPackage.ATTRIBUTE_FACT:
       {
-        Query query = (Query)theEObject;
-        T result = caseQuery(query);
+        AttributeFact attributeFact = (AttributeFact)theEObject;
+        T result = caseAttributeFact(attributeFact);
+        if (result == null) result = caseAsset(attributeFact);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -151,13 +152,6 @@ public class RulesSwitch<T> extends Switch<T>
       {
         Binding binding = (Binding)theEObject;
         T result = caseBinding(binding);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RulesPackage.PARAMETER:
-      {
-        Parameter parameter = (Parameter)theEObject;
-        T result = caseParameter(parameter);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -173,6 +167,14 @@ public class RulesSwitch<T> extends Switch<T>
         ObjectBind objectBind = (ObjectBind)theEObject;
         T result = caseObjectBind(objectBind);
         if (result == null) result = caseBind(objectBind);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RulesPackage.VALUE_BIND:
+      {
+        ValueBind valueBind = (ValueBind)theEObject;
+        T result = caseValueBind(valueBind);
+        if (result == null) result = caseBind(valueBind);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -325,17 +327,17 @@ public class RulesSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Query</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Attribute Fact</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Query</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Attribute Fact</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseQuery(Query object)
+  public T caseAttributeFact(AttributeFact object)
   {
     return null;
   }
@@ -352,22 +354,6 @@ public class RulesSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseBinding(Binding object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseParameter(Parameter object)
   {
     return null;
   }
@@ -400,6 +386,22 @@ public class RulesSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseObjectBind(ObjectBind object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Value Bind</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Value Bind</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseValueBind(ValueBind object)
   {
     return null;
   }

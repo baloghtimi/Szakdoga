@@ -206,22 +206,22 @@ public interface RulesPackage extends EPackage
   int RULE__ROLES = 3;
 
   /**
+   * The feature id for the '<em><b>Pattern</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__PATTERN = 4;
+
+  /**
    * The feature id for the '<em><b>Asset</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE__ASSET = 4;
-
-  /**
-   * The feature id for the '<em><b>Query</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__QUERY = 5;
+  int RULE__ASSET = 5;
 
   /**
    * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
@@ -373,13 +373,13 @@ public interface RulesPackage extends EPackage
   int OBJECT_FACT = 7;
 
   /**
-   * The feature id for the '<em><b>Parameter</b></em>' containment reference.
+   * The feature id for the '<em><b>Variable</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int OBJECT_FACT__PARAMETER = ASSET_FEATURE_COUNT + 0;
+  int OBJECT_FACT__VARIABLE = ASSET_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Object Fact</em>' class.
@@ -401,22 +401,31 @@ public interface RulesPackage extends EPackage
   int REFERENCE_FACT = 8;
 
   /**
-   * The feature id for the '<em><b>Source Param</b></em>' containment reference.
+   * The feature id for the '<em><b>Source Var</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFERENCE_FACT__SOURCE_PARAM = ASSET_FEATURE_COUNT + 0;
+  int REFERENCE_FACT__SOURCE_VAR = ASSET_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Target Param</b></em>' containment reference.
+   * The feature id for the '<em><b>Target Var</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFERENCE_FACT__TARGET_PARAM = ASSET_FEATURE_COUNT + 1;
+  int REFERENCE_FACT__TARGET_VAR = ASSET_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Reference</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFERENCE_FACT__REFERENCE = ASSET_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Reference Fact</em>' class.
@@ -425,35 +434,35 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_FACT_FEATURE_COUNT = ASSET_FEATURE_COUNT + 2;
+  int REFERENCE_FACT_FEATURE_COUNT = ASSET_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.QueryImpl <em>Query</em>}' class.
+   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.AttributeFactImpl <em>Attribute Fact</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.mondo.collaboration.policy.rules.impl.QueryImpl
-   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getQuery()
+   * @see org.mondo.collaboration.policy.rules.impl.AttributeFactImpl
+   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getAttributeFact()
    * @generated
    */
-  int QUERY = 9;
+  int ATTRIBUTE_FACT = 9;
 
   /**
-   * The feature id for the '<em><b>Pattern</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int QUERY__PATTERN = 0;
-
-  /**
-   * The number of structural features of the '<em>Query</em>' class.
+   * The feature id for the '<em><b>Variable</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int QUERY_FEATURE_COUNT = 1;
+  int ATTRIBUTE_FACT__VARIABLE = ASSET_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Attribute Fact</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUTE_FACT_FEATURE_COUNT = ASSET_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.BindingImpl <em>Binding</em>}' class.
@@ -466,13 +475,13 @@ public interface RulesPackage extends EPackage
   int BINDING = 10;
 
   /**
-   * The feature id for the '<em><b>Parameter</b></em>' containment reference.
+   * The feature id for the '<em><b>Variable</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BINDING__PARAMETER = 0;
+  int BINDING__VARIABLE = 0;
 
   /**
    * The feature id for the '<em><b>Bind</b></em>' containment reference.
@@ -493,34 +502,6 @@ public interface RulesPackage extends EPackage
   int BINDING_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.ParameterImpl <em>Parameter</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.mondo.collaboration.policy.rules.impl.ParameterImpl
-   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getParameter()
-   * @generated
-   */
-  int PARAMETER = 11;
-
-  /**
-   * The feature id for the '<em><b>Variable</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARAMETER__VARIABLE = 0;
-
-  /**
-   * The number of structural features of the '<em>Parameter</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARAMETER_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.BindImpl <em>Bind</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -528,7 +509,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getBind()
    * @generated
    */
-  int BIND = 12;
+  int BIND = 11;
 
   /**
    * The number of structural features of the '<em>Bind</em>' class.
@@ -547,7 +528,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getObjectBind()
    * @generated
    */
-  int OBJECT_BIND = 13;
+  int OBJECT_BIND = 12;
 
   /**
    * The feature id for the '<em><b>Object</b></em>' reference.
@@ -568,6 +549,44 @@ public interface RulesPackage extends EPackage
   int OBJECT_BIND_FEATURE_COUNT = BIND_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.ValueBindImpl <em>Value Bind</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.mondo.collaboration.policy.rules.impl.ValueBindImpl
+   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getValueBind()
+   * @generated
+   */
+  int VALUE_BIND = 13;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_BIND__VALUE = BIND_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Value Bind</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_BIND_FEATURE_COUNT = BIND_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.ValueType <em>Value Type</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.mondo.collaboration.policy.rules.ValueType
+   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getValueType()
+   * @generated
+   */
+  int VALUE_TYPE = 14;
+
+  /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.AccessibilityLevel <em>Accessibility Level</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -575,7 +594,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getAccessibilityLevel()
    * @generated
    */
-  int ACCESSIBILITY_LEVEL = 14;
+  int ACCESSIBILITY_LEVEL = 15;
 
   /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.OperationType <em>Operation Type</em>}' enum.
@@ -585,7 +604,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getOperationType()
    * @generated
    */
-  int OPERATION_TYPE = 15;
+  int OPERATION_TYPE = 16;
 
   /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.ResolutionType <em>Resolution Type</em>}' enum.
@@ -595,7 +614,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getResolutionType()
    * @generated
    */
-  int RESOLUTION_TYPE = 16;
+  int RESOLUTION_TYPE = 17;
 
 
   /**
@@ -750,6 +769,17 @@ public interface RulesPackage extends EPackage
   EReference getRule_Roles();
 
   /**
+   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.Rule#getPattern <em>Pattern</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Pattern</em>'.
+   * @see org.mondo.collaboration.policy.rules.Rule#getPattern()
+   * @see #getRule()
+   * @generated
+   */
+  EReference getRule_Pattern();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.Rule#getAsset <em>Asset</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -759,17 +789,6 @@ public interface RulesPackage extends EPackage
    * @generated
    */
   EReference getRule_Asset();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.Rule#getQuery <em>Query</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Query</em>'.
-   * @see org.mondo.collaboration.policy.rules.Rule#getQuery()
-   * @see #getRule()
-   * @generated
-   */
-  EReference getRule_Query();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.mondo.collaboration.policy.rules.Rule#getBindings <em>Bindings</em>}'.
@@ -866,15 +885,15 @@ public interface RulesPackage extends EPackage
   EClass getObjectFact();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.ObjectFact#getParameter <em>Parameter</em>}'.
+   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.ObjectFact#getVariable <em>Variable</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Parameter</em>'.
-   * @see org.mondo.collaboration.policy.rules.ObjectFact#getParameter()
+   * @return the meta object for the reference '<em>Variable</em>'.
+   * @see org.mondo.collaboration.policy.rules.ObjectFact#getVariable()
    * @see #getObjectFact()
    * @generated
    */
-  EReference getObjectFact_Parameter();
+  EReference getObjectFact_Variable();
 
   /**
    * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.ReferenceFact <em>Reference Fact</em>}'.
@@ -887,47 +906,58 @@ public interface RulesPackage extends EPackage
   EClass getReferenceFact();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSourceParam <em>Source Param</em>}'.
+   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSourceVar <em>Source Var</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Source Param</em>'.
-   * @see org.mondo.collaboration.policy.rules.ReferenceFact#getSourceParam()
+   * @return the meta object for the reference '<em>Source Var</em>'.
+   * @see org.mondo.collaboration.policy.rules.ReferenceFact#getSourceVar()
    * @see #getReferenceFact()
    * @generated
    */
-  EReference getReferenceFact_SourceParam();
+  EReference getReferenceFact_SourceVar();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTargetParam <em>Target Param</em>}'.
+   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTargetVar <em>Target Var</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Target Param</em>'.
-   * @see org.mondo.collaboration.policy.rules.ReferenceFact#getTargetParam()
+   * @return the meta object for the reference '<em>Target Var</em>'.
+   * @see org.mondo.collaboration.policy.rules.ReferenceFact#getTargetVar()
    * @see #getReferenceFact()
    * @generated
    */
-  EReference getReferenceFact_TargetParam();
+  EReference getReferenceFact_TargetVar();
 
   /**
-   * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.Query <em>Query</em>}'.
+   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getReference <em>Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Query</em>'.
-   * @see org.mondo.collaboration.policy.rules.Query
+   * @return the meta object for the reference '<em>Reference</em>'.
+   * @see org.mondo.collaboration.policy.rules.ReferenceFact#getReference()
+   * @see #getReferenceFact()
    * @generated
    */
-  EClass getQuery();
+  EReference getReferenceFact_Reference();
 
   /**
-   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.Query#getPattern <em>Pattern</em>}'.
+   * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.AttributeFact <em>Attribute Fact</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Pattern</em>'.
-   * @see org.mondo.collaboration.policy.rules.Query#getPattern()
-   * @see #getQuery()
+   * @return the meta object for class '<em>Attribute Fact</em>'.
+   * @see org.mondo.collaboration.policy.rules.AttributeFact
    * @generated
    */
-  EReference getQuery_Pattern();
+  EClass getAttributeFact();
+
+  /**
+   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.AttributeFact#getVariable <em>Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Variable</em>'.
+   * @see org.mondo.collaboration.policy.rules.AttributeFact#getVariable()
+   * @see #getAttributeFact()
+   * @generated
+   */
+  EReference getAttributeFact_Variable();
 
   /**
    * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.Binding <em>Binding</em>}'.
@@ -940,15 +970,15 @@ public interface RulesPackage extends EPackage
   EClass getBinding();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.Binding#getParameter <em>Parameter</em>}'.
+   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.Binding#getVariable <em>Variable</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Parameter</em>'.
-   * @see org.mondo.collaboration.policy.rules.Binding#getParameter()
+   * @return the meta object for the reference '<em>Variable</em>'.
+   * @see org.mondo.collaboration.policy.rules.Binding#getVariable()
    * @see #getBinding()
    * @generated
    */
-  EReference getBinding_Parameter();
+  EReference getBinding_Variable();
 
   /**
    * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.Binding#getBind <em>Bind</em>}'.
@@ -960,27 +990,6 @@ public interface RulesPackage extends EPackage
    * @generated
    */
   EReference getBinding_Bind();
-
-  /**
-   * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.Parameter <em>Parameter</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Parameter</em>'.
-   * @see org.mondo.collaboration.policy.rules.Parameter
-   * @generated
-   */
-  EClass getParameter();
-
-  /**
-   * Returns the meta object for the reference '{@link org.mondo.collaboration.policy.rules.Parameter#getVariable <em>Variable</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Variable</em>'.
-   * @see org.mondo.collaboration.policy.rules.Parameter#getVariable()
-   * @see #getParameter()
-   * @generated
-   */
-  EReference getParameter_Variable();
 
   /**
    * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.Bind <em>Bind</em>}'.
@@ -1012,6 +1021,37 @@ public interface RulesPackage extends EPackage
    * @generated
    */
   EReference getObjectBind_Object();
+
+  /**
+   * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.ValueBind <em>Value Bind</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Value Bind</em>'.
+   * @see org.mondo.collaboration.policy.rules.ValueBind
+   * @generated
+   */
+  EClass getValueBind();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.mondo.collaboration.policy.rules.ValueBind#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.mondo.collaboration.policy.rules.ValueBind#getValue()
+   * @see #getValueBind()
+   * @generated
+   */
+  EAttribute getValueBind_Value();
+
+  /**
+   * Returns the meta object for enum '{@link org.mondo.collaboration.policy.rules.ValueType <em>Value Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Value Type</em>'.
+   * @see org.mondo.collaboration.policy.rules.ValueType
+   * @generated
+   */
+  EEnum getValueType();
 
   /**
    * Returns the meta object for enum '{@link org.mondo.collaboration.policy.rules.AccessibilityLevel <em>Accessibility Level</em>}'.
@@ -1185,20 +1225,20 @@ public interface RulesPackage extends EPackage
     EReference RULE__ROLES = eINSTANCE.getRule_Roles();
 
     /**
+     * The meta object literal for the '<em><b>Pattern</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE__PATTERN = eINSTANCE.getRule_Pattern();
+
+    /**
      * The meta object literal for the '<em><b>Asset</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference RULE__ASSET = eINSTANCE.getRule_Asset();
-
-    /**
-     * The meta object literal for the '<em><b>Query</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE__QUERY = eINSTANCE.getRule_Query();
 
     /**
      * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
@@ -1283,12 +1323,12 @@ public interface RulesPackage extends EPackage
     EClass OBJECT_FACT = eINSTANCE.getObjectFact();
 
     /**
-     * The meta object literal for the '<em><b>Parameter</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference OBJECT_FACT__PARAMETER = eINSTANCE.getObjectFact_Parameter();
+    EReference OBJECT_FACT__VARIABLE = eINSTANCE.getObjectFact_Variable();
 
     /**
      * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl <em>Reference Fact</em>}' class.
@@ -1301,38 +1341,46 @@ public interface RulesPackage extends EPackage
     EClass REFERENCE_FACT = eINSTANCE.getReferenceFact();
 
     /**
-     * The meta object literal for the '<em><b>Source Param</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Source Var</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference REFERENCE_FACT__SOURCE_PARAM = eINSTANCE.getReferenceFact_SourceParam();
+    EReference REFERENCE_FACT__SOURCE_VAR = eINSTANCE.getReferenceFact_SourceVar();
 
     /**
-     * The meta object literal for the '<em><b>Target Param</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Target Var</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference REFERENCE_FACT__TARGET_PARAM = eINSTANCE.getReferenceFact_TargetParam();
+    EReference REFERENCE_FACT__TARGET_VAR = eINSTANCE.getReferenceFact_TargetVar();
 
     /**
-     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.QueryImpl <em>Query</em>}' class.
+     * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.mondo.collaboration.policy.rules.impl.QueryImpl
-     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getQuery()
      * @generated
      */
-    EClass QUERY = eINSTANCE.getQuery();
+    EReference REFERENCE_FACT__REFERENCE = eINSTANCE.getReferenceFact_Reference();
 
     /**
-     * The meta object literal for the '<em><b>Pattern</b></em>' reference feature.
+     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.AttributeFactImpl <em>Attribute Fact</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.mondo.collaboration.policy.rules.impl.AttributeFactImpl
+     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getAttributeFact()
+     * @generated
+     */
+    EClass ATTRIBUTE_FACT = eINSTANCE.getAttributeFact();
+
+    /**
+     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference QUERY__PATTERN = eINSTANCE.getQuery_Pattern();
+    EReference ATTRIBUTE_FACT__VARIABLE = eINSTANCE.getAttributeFact_Variable();
 
     /**
      * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.BindingImpl <em>Binding</em>}' class.
@@ -1345,12 +1393,12 @@ public interface RulesPackage extends EPackage
     EClass BINDING = eINSTANCE.getBinding();
 
     /**
-     * The meta object literal for the '<em><b>Parameter</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference BINDING__PARAMETER = eINSTANCE.getBinding_Parameter();
+    EReference BINDING__VARIABLE = eINSTANCE.getBinding_Variable();
 
     /**
      * The meta object literal for the '<em><b>Bind</b></em>' containment reference feature.
@@ -1359,24 +1407,6 @@ public interface RulesPackage extends EPackage
      * @generated
      */
     EReference BINDING__BIND = eINSTANCE.getBinding_Bind();
-
-    /**
-     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.ParameterImpl <em>Parameter</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.mondo.collaboration.policy.rules.impl.ParameterImpl
-     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getParameter()
-     * @generated
-     */
-    EClass PARAMETER = eINSTANCE.getParameter();
-
-    /**
-     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PARAMETER__VARIABLE = eINSTANCE.getParameter_Variable();
 
     /**
      * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.BindImpl <em>Bind</em>}' class.
@@ -1405,6 +1435,34 @@ public interface RulesPackage extends EPackage
      * @generated
      */
     EReference OBJECT_BIND__OBJECT = eINSTANCE.getObjectBind_Object();
+
+    /**
+     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.ValueBindImpl <em>Value Bind</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.mondo.collaboration.policy.rules.impl.ValueBindImpl
+     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getValueBind()
+     * @generated
+     */
+    EClass VALUE_BIND = eINSTANCE.getValueBind();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VALUE_BIND__VALUE = eINSTANCE.getValueBind_Value();
+
+    /**
+     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.ValueType <em>Value Type</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.mondo.collaboration.policy.rules.ValueType
+     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getValueType()
+     * @generated
+     */
+    EEnum VALUE_TYPE = eINSTANCE.getValueType();
 
     /**
      * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.AccessibilityLevel <em>Accessibility Level</em>}' enum.

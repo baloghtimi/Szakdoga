@@ -14,17 +14,18 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.mondo.collaboration.policy.rules.AttributeFact;
 import org.mondo.collaboration.policy.rules.Binding;
 import org.mondo.collaboration.policy.rules.Group;
 import org.mondo.collaboration.policy.rules.Model;
 import org.mondo.collaboration.policy.rules.ObjectBind;
 import org.mondo.collaboration.policy.rules.ObjectFact;
 import org.mondo.collaboration.policy.rules.Policy;
-import org.mondo.collaboration.policy.rules.Query;
 import org.mondo.collaboration.policy.rules.ReferenceFact;
 import org.mondo.collaboration.policy.rules.Rule;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 import org.mondo.collaboration.policy.rules.User;
+import org.mondo.collaboration.policy.rules.ValueBind;
 import org.mondo.collaboration.policy.services.RulesGrammarAccess;
 
 @SuppressWarnings("all")
@@ -41,6 +42,9 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == RulesPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case RulesPackage.ATTRIBUTE_FACT:
+				sequence_AttributeFact(context, (AttributeFact) semanticObject); 
+				return; 
 			case RulesPackage.BINDING:
 				sequence_Binding(context, (Binding) semanticObject); 
 				return; 
@@ -56,14 +60,8 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case RulesPackage.OBJECT_FACT:
 				sequence_ObjectFact(context, (ObjectFact) semanticObject); 
 				return; 
-			case RulesPackage.PARAMETER:
-				sequence_Parameter(context, (org.mondo.collaboration.policy.rules.Parameter) semanticObject); 
-				return; 
 			case RulesPackage.POLICY:
 				sequence_Policy(context, (Policy) semanticObject); 
-				return; 
-			case RulesPackage.QUERY:
-				sequence_Query(context, (Query) semanticObject); 
 				return; 
 			case RulesPackage.REFERENCE_FACT:
 				sequence_ReferenceFact(context, (ReferenceFact) semanticObject); 
@@ -74,6 +72,9 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case RulesPackage.USER:
 				sequence_User(context, (User) semanticObject); 
 				return; 
+			case RulesPackage.VALUE_BIND:
+				sequence_ValueBind(context, (ValueBind) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -81,20 +82,39 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     Asset returns AttributeFact
+	 *     AttributeFact returns AttributeFact
+	 *
+	 * Constraint:
+	 *     variable=[Variable|ID]
+	 */
+	protected void sequence_AttributeFact(ISerializationContext context, AttributeFact semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.ATTRIBUTE_FACT__VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.ATTRIBUTE_FACT__VARIABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAttributeFactAccess().getVariableVariableIDTerminalRuleCall_1_0_1(), semanticObject.getVariable());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Binding returns Binding
 	 *
 	 * Constraint:
-	 *     (parameter=Parameter bind=Bind)
+	 *     (variable=[Variable|ID] bind=Bind)
 	 */
 	protected void sequence_Binding(ISerializationContext context, Binding semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.BINDING__PARAMETER) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.BINDING__PARAMETER));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.BINDING__VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.BINDING__VARIABLE));
 			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.BINDING__BIND) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.BINDING__BIND));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBindingAccess().getParameterParameterParserRuleCall_1_0(), semanticObject.getParameter());
+		feeder.accept(grammarAccess.getBindingAccess().getVariableVariableIDTerminalRuleCall_1_0_1(), semanticObject.getVariable());
 		feeder.accept(grammarAccess.getBindingAccess().getBindBindParserRuleCall_4_0(), semanticObject.getBind());
 		feeder.finish();
 	}
@@ -139,7 +159,7 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.OBJECT_BIND__OBJECT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getObjectBindAccess().getObjectEObjectIDTerminalRuleCall_0_1(), semanticObject.getObject());
+		feeder.accept(grammarAccess.getObjectBindAccess().getObjectEObjectIDTerminalRuleCall_1_0_1(), semanticObject.getObject());
 		feeder.finish();
 	}
 	
@@ -150,33 +170,15 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     ObjectFact returns ObjectFact
 	 *
 	 * Constraint:
-	 *     parameter=Parameter
+	 *     variable=[Variable|ID]
 	 */
 	protected void sequence_ObjectFact(ISerializationContext context, ObjectFact semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.OBJECT_FACT__PARAMETER) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.OBJECT_FACT__PARAMETER));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.OBJECT_FACT__VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.OBJECT_FACT__VARIABLE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getObjectFactAccess().getParameterParameterParserRuleCall_1_0(), semanticObject.getParameter());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Parameter returns Parameter
-	 *
-	 * Constraint:
-	 *     variable=[Variable|ID]
-	 */
-	protected void sequence_Parameter(ISerializationContext context, org.mondo.collaboration.policy.rules.Parameter semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.PARAMETER__VARIABLE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.PARAMETER__VARIABLE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParameterAccess().getVariableVariableIDTerminalRuleCall_0_1(), semanticObject.getVariable());
+		feeder.accept(grammarAccess.getObjectFactAccess().getVariableVariableIDTerminalRuleCall_1_0_1(), semanticObject.getVariable());
 		feeder.finish();
 	}
 	
@@ -195,40 +197,25 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     Query returns Query
-	 *
-	 * Constraint:
-	 *     pattern=[Pattern|STRING]
-	 */
-	protected void sequence_Query(ISerializationContext context, Query semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.QUERY__PATTERN) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.QUERY__PATTERN));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getQueryAccess().getPatternPatternSTRINGTerminalRuleCall_0_1(), semanticObject.getPattern());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Asset returns ReferenceFact
 	 *     ReferenceFact returns ReferenceFact
 	 *
 	 * Constraint:
-	 *     (sourceParam=Parameter targetParam=Parameter)
+	 *     (sourceVar=[Variable|ID] targetVar=[Variable|ID] reference=[EReference|ID])
 	 */
 	protected void sequence_ReferenceFact(ISerializationContext context, ReferenceFact semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__SOURCE_PARAM) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__SOURCE_PARAM));
-			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__TARGET_PARAM) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__TARGET_PARAM));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__SOURCE_VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__SOURCE_VAR));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__TARGET_VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__TARGET_VAR));
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.REFERENCE_FACT__REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.REFERENCE_FACT__REFERENCE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReferenceFactAccess().getSourceParamParameterParserRuleCall_1_0(), semanticObject.getSourceParam());
-		feeder.accept(grammarAccess.getReferenceFactAccess().getTargetParamParameterParserRuleCall_4_0(), semanticObject.getTargetParam());
+		feeder.accept(grammarAccess.getReferenceFactAccess().getSourceVarVariableIDTerminalRuleCall_1_0_1(), semanticObject.getSourceVar());
+		feeder.accept(grammarAccess.getReferenceFactAccess().getTargetVarVariableIDTerminalRuleCall_3_0_1(), semanticObject.getTargetVar());
+		feeder.accept(grammarAccess.getReferenceFactAccess().getReferenceEReferenceIDTerminalRuleCall_5_0_1(), semanticObject.getReference());
 		feeder.finish();
 	}
 	
@@ -244,8 +231,8 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *         operation=OperationType 
 	 *         roles+=[Role|ID] 
 	 *         roles+=[Role|ID]* 
+	 *         pattern=[Pattern|STRING] 
 	 *         asset=Asset 
-	 *         query=Query 
 	 *         bindings+=Binding* 
 	 *         priority=INT?
 	 *     )
@@ -270,6 +257,25 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getUserAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Bind returns ValueBind
+	 *     ValueBind returns ValueBind
+	 *
+	 * Constraint:
+	 *     value=ValueType
+	 */
+	protected void sequence_ValueBind(ISerializationContext context, ValueBind semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RulesPackage.Literals.VALUE_BIND__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RulesPackage.Literals.VALUE_BIND__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getValueBindAccess().getValueValueTypeEnumRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	

@@ -105,13 +105,13 @@ public interface RulesFactory extends EFactory
   ReferenceFact createReferenceFact();
 
   /**
-   * Returns a new object of class '<em>Query</em>'.
+   * Returns a new object of class '<em>Attribute Fact</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Query</em>'.
+   * @return a new object of class '<em>Attribute Fact</em>'.
    * @generated
    */
-  Query createQuery();
+  AttributeFact createAttributeFact();
 
   /**
    * Returns a new object of class '<em>Binding</em>'.
@@ -121,15 +121,6 @@ public interface RulesFactory extends EFactory
    * @generated
    */
   Binding createBinding();
-
-  /**
-   * Returns a new object of class '<em>Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Parameter</em>'.
-   * @generated
-   */
-  Parameter createParameter();
 
   /**
    * Returns a new object of class '<em>Bind</em>'.
@@ -148,6 +139,15 @@ public interface RulesFactory extends EFactory
    * @generated
    */
   ObjectBind createObjectBind();
+
+  /**
+   * Returns a new object of class '<em>Value Bind</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Value Bind</em>'.
+   * @generated
+   */
+  ValueBind createValueBind();
 
   /**
    * Returns the package supported by this factory.

@@ -13,3 +13,7 @@ pattern cardSeniors(cardSenior : CardSenior) = {
 pattern cardSeniorsOfColorSenior(cardSenior : CardSenior, colorSenior : ColorSenior) = {
 	ColorSenior.inferiors(colorSenior, cardSenior);
 }
+
+pattern cardSeniorsStartedIn2014(cardSenior : CardSenior) = {
+	CardSenior.year(cardSenior, 2014);
+}

@@ -4,15 +4,15 @@
 package org.mondo.collaboration.policy.rules.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
+
 import org.mondo.collaboration.policy.rules.ObjectFact;
-import org.mondo.collaboration.policy.rules.Parameter;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
 /**
@@ -23,7 +23,7 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ObjectFactImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ObjectFactImpl#getVariable <em>Variable</em>}</li>
  * </ul>
  *
  * @generated
@@ -31,14 +31,14 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
 public class ObjectFactImpl extends AssetImpl implements ObjectFact
 {
   /**
-   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference.
+   * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getParameter()
+   * @see #getVariable()
    * @generated
    * @ordered
    */
-  protected Parameter parameter;
+  protected Variable variable;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,9 +66,19 @@ public class ObjectFactImpl extends AssetImpl implements ObjectFact
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter getParameter()
+  public Variable getVariable()
   {
-    return parameter;
+    if (variable != null && variable.eIsProxy())
+    {
+      InternalEObject oldVariable = (InternalEObject)variable;
+      variable = (Variable)eResolveProxy(oldVariable);
+      if (variable != oldVariable)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.OBJECT_FACT__VARIABLE, oldVariable, variable));
+      }
+    }
+    return variable;
   }
 
   /**
@@ -76,53 +86,22 @@ public class ObjectFactImpl extends AssetImpl implements ObjectFact
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetParameter(Parameter newParameter, NotificationChain msgs)
+  public Variable basicGetVariable()
   {
-    Parameter oldParameter = parameter;
-    parameter = newParameter;
+    return variable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setVariable(Variable newVariable)
+  {
+    Variable oldVariable = variable;
+    variable = newVariable;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.OBJECT_FACT__PARAMETER, oldParameter, newParameter);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setParameter(Parameter newParameter)
-  {
-    if (newParameter != parameter)
-    {
-      NotificationChain msgs = null;
-      if (parameter != null)
-        msgs = ((InternalEObject)parameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.OBJECT_FACT__PARAMETER, null, msgs);
-      if (newParameter != null)
-        msgs = ((InternalEObject)newParameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.OBJECT_FACT__PARAMETER, null, msgs);
-      msgs = basicSetParameter(newParameter, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.OBJECT_FACT__PARAMETER, newParameter, newParameter));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case RulesPackage.OBJECT_FACT__PARAMETER:
-        return basicSetParameter(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.OBJECT_FACT__VARIABLE, oldVariable, variable));
   }
 
   /**
@@ -135,8 +114,9 @@ public class ObjectFactImpl extends AssetImpl implements ObjectFact
   {
     switch (featureID)
     {
-      case RulesPackage.OBJECT_FACT__PARAMETER:
-        return getParameter();
+      case RulesPackage.OBJECT_FACT__VARIABLE:
+        if (resolve) return getVariable();
+        return basicGetVariable();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -151,8 +131,8 @@ public class ObjectFactImpl extends AssetImpl implements ObjectFact
   {
     switch (featureID)
     {
-      case RulesPackage.OBJECT_FACT__PARAMETER:
-        setParameter((Parameter)newValue);
+      case RulesPackage.OBJECT_FACT__VARIABLE:
+        setVariable((Variable)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -168,8 +148,8 @@ public class ObjectFactImpl extends AssetImpl implements ObjectFact
   {
     switch (featureID)
     {
-      case RulesPackage.OBJECT_FACT__PARAMETER:
-        setParameter((Parameter)null);
+      case RulesPackage.OBJECT_FACT__VARIABLE:
+        setVariable((Variable)null);
         return;
     }
     super.eUnset(featureID);
@@ -185,8 +165,8 @@ public class ObjectFactImpl extends AssetImpl implements ObjectFact
   {
     switch (featureID)
     {
-      case RulesPackage.OBJECT_FACT__PARAMETER:
-        return parameter != null;
+      case RulesPackage.OBJECT_FACT__VARIABLE:
+        return variable != null;
     }
     return super.eIsSet(featureID);
   }

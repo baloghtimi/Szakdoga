@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<freshmanCamp:Camp xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:freshmanCamp="http://www.example.org/freshmanCamp" xmi:id="_INFzIP3uEeaEtN5JQjYL3g">
+  <colors xmi:id="_I8jhMP3uEeaEtN5JQjYL3g"/>
+  <colors xmi:id="_JhjEoP3uEeaEtN5JQjYL3g" type="RedColor"/>
+  <colors xmi:id="_J4I_sP3uEeaEtN5JQjYL3g" type="WhiteColor"/>
+  <colors xmi:id="_KOGooP3uEeaEtN5JQjYL3g" type="YellowColor"/>
+  <colors xmi:id="_KjJrkP3uEeaEtN5JQjYL3g" type="BlueColor" colorsenior="_ODjSYP39EeaEtN5JQjYL3g">
+    <cards xmi:id="_QwzgoP3uEeaEtN5JQjYL3g" cardsenior="_W6A6kP3uEeaEtN5JQjYL3g">
+      <rooms xmi:id="_Ld1HMASpEeer8up7dxQRIw" name="pepe" roomsenior="_vlypUASoEeer8up7dxQRIw"/>
+      <rooms xmi:id="_L7M_sASpEeer8up7dxQRIw" name="nova" roomsenior="___98wASoEeer8up7dxQRIw"/>
+      <rooms xmi:id="_MZFOgASpEeer8up7dxQRIw" name="leslie" roomsenior="_CvEAQASpEeer8up7dxQRIw"/>
+    </cards>
+    <cards xmi:id="_RI6eoP3uEeaEtN5JQjYL3g" type="GreenCard" cardsenior="_aliKEP3uEeaEtN5JQjYL3g"/>
+    <cards xmi:id="_RdqmoP3uEeaEtN5JQjYL3g" type="OrangeCard" cardsenior="_ZIJmEP3uEeaEtN5JQjYL3g"/>
+    <cards xmi:id="_RxC1oP3uEeaEtN5JQjYL3g" type="YellowCard" cardsenior="_b-uKkP3uEeaEtN5JQjYL3g"/>
+  </colors>
+  <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_W6A6kP3uEeaEtN5JQjYL3g" name="Karesz" color="BlueColor" school="BME-VIK" year="2014" inferiors="_vlypUASoEeer8up7dxQRIw ___98wASoEeer8up7dxQRIw _CvEAQASpEeer8up7dxQRIw" superior="_ODjSYP39EeaEtN5JQjYL3g"/>
+  <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_ZIJmEP3uEeaEtN5JQjYL3g" name="Timi" color="BlueColor" school="BME-VIK" year="2014" card="OrangeCard" superior="_ODjSYP39EeaEtN5JQjYL3g"/>
+  <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_aliKEP3uEeaEtN5JQjYL3g" name="Luca" color="BlueColor" school="Corvinus" year="2016" card="GreenCard" superior="_ODjSYP39EeaEtN5JQjYL3g"/>
+  <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_b-uKkP3uEeaEtN5JQjYL3g" name="Kitty" school="ELTE-PPK" year="2013" card="YellowCard" superior="_ODjSYP39EeaEtN5JQjYL3g"/>
+  <participants xsi:type="freshmanCamp:ColorSenior" xmi:id="_ODjSYP39EeaEtN5JQjYL3g" name="Nur" color="BlueColor" school="BME-VIK" year="2012" inferiors="_W6A6kP3uEeaEtN5JQjYL3g _b-uKkP3uEeaEtN5JQjYL3g _aliKEP3uEeaEtN5JQjYL3g _ZIJmEP3uEeaEtN5JQjYL3g"/>
+  <participants xsi:type="freshmanCamp:ColorSenior" xmi:id="_zHWgQP8xEeaJAfJk0yZzhw" name="Eva" inferiors="_4r3RsP8xEeaJAfJk0yZzhw _8UtAoP8xEeaJAfJk0yZzhw"/>
+  <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_4r3RsP8xEeaJAfJk0yZzhw" name="Boora" superior="_zHWgQP8xEeaJAfJk0yZzhw"/>
+  <participants xsi:type="freshmanCamp:CardSenior" xmi:id="_8UtAoP8xEeaJAfJk0yZzhw" name="Keve" superior="_zHWgQP8xEeaJAfJk0yZzhw"/>
+  <participants xsi:type="freshmanCamp:RoomSenior" xmi:id="_vlypUASoEeer8up7dxQRIw" name="Pepe" color="BlueColor" school="" superior="_W6A6kP3uEeaEtN5JQjYL3g"/>
+  <participants xsi:type="freshmanCamp:RoomSenior" xmi:id="___98wASoEeer8up7dxQRIw" name="Nova" color="BlueColor" superior="_W6A6kP3uEeaEtN5JQjYL3g"/>
+  <participants xsi:type="freshmanCamp:RoomSenior" xmi:id="_CvEAQASpEeer8up7dxQRIw" name="Leslie" color="BlueColor" superior="_W6A6kP3uEeaEtN5JQjYL3g"/>
+</freshmanCamp:Camp>

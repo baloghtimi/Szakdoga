@@ -37,6 +37,8 @@ public class RulesParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getRoleAccess().getAlternatives(), "rule__Role__Alternatives");
 					put(grammarAccess.getAssetAccess().getAlternatives(), "rule__Asset__Alternatives");
+					put(grammarAccess.getBindAccess().getAlternatives(), "rule__Bind__Alternatives");
+					put(grammarAccess.getValueTypeAccess().getAlternatives(), "rule__ValueType__Alternatives");
 					put(grammarAccess.getAccessibilityLevelAccess().getAlternatives(), "rule__AccessibilityLevel__Alternatives");
 					put(grammarAccess.getOperationTypeAccess().getAlternatives(), "rule__OperationType__Alternatives");
 					put(grammarAccess.getResolutionTypeAccess().getAlternatives(), "rule__ResolutionType__Alternatives");
@@ -50,7 +52,10 @@ public class RulesParser extends AbstractContentAssistParser {
 					put(grammarAccess.getGroupAccess().getGroup_4(), "rule__Group__Group_4__0");
 					put(grammarAccess.getObjectFactAccess().getGroup(), "rule__ObjectFact__Group__0");
 					put(grammarAccess.getReferenceFactAccess().getGroup(), "rule__ReferenceFact__Group__0");
+					put(grammarAccess.getAttributeFactAccess().getGroup(), "rule__AttributeFact__Group__0");
 					put(grammarAccess.getBindingAccess().getGroup(), "rule__Binding__Group__0");
+					put(grammarAccess.getObjectBindAccess().getGroup(), "rule__ObjectBind__Group__0");
+					put(grammarAccess.getValueBindAccess().getGroup(), "rule__ValueBind__Group__0");
 					put(grammarAccess.getModelAccess().getRolesAssignment_0(), "rule__Model__RolesAssignment_0");
 					put(grammarAccess.getModelAccess().getPolicyAssignment_1(), "rule__Model__PolicyAssignment_1");
 					put(grammarAccess.getPolicyAccess().getNameAssignment_1(), "rule__Policy__NameAssignment_1");
@@ -63,22 +68,23 @@ public class RulesParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRuleAccess().getOperationAssignment_3(), "rule__Rule__OperationAssignment_3");
 					put(grammarAccess.getRuleAccess().getRolesAssignment_5(), "rule__Rule__RolesAssignment_5");
 					put(grammarAccess.getRuleAccess().getRolesAssignment_6_1(), "rule__Rule__RolesAssignment_6_1");
-					put(grammarAccess.getRuleAccess().getAssetAssignment_9(), "rule__Rule__AssetAssignment_9");
-					put(grammarAccess.getRuleAccess().getQueryAssignment_12(), "rule__Rule__QueryAssignment_12");
+					put(grammarAccess.getRuleAccess().getPatternAssignment_10(), "rule__Rule__PatternAssignment_10");
+					put(grammarAccess.getRuleAccess().getAssetAssignment_12(), "rule__Rule__AssetAssignment_12");
 					put(grammarAccess.getRuleAccess().getBindingsAssignment_13(), "rule__Rule__BindingsAssignment_13");
 					put(grammarAccess.getRuleAccess().getPriorityAssignment_15_1(), "rule__Rule__PriorityAssignment_15_1");
 					put(grammarAccess.getUserAccess().getNameAssignment_1(), "rule__User__NameAssignment_1");
 					put(grammarAccess.getGroupAccess().getNameAssignment_1(), "rule__Group__NameAssignment_1");
 					put(grammarAccess.getGroupAccess().getUsersAssignment_3(), "rule__Group__UsersAssignment_3");
 					put(grammarAccess.getGroupAccess().getUsersAssignment_4_1(), "rule__Group__UsersAssignment_4_1");
-					put(grammarAccess.getObjectFactAccess().getParameterAssignment_1(), "rule__ObjectFact__ParameterAssignment_1");
-					put(grammarAccess.getReferenceFactAccess().getSourceParamAssignment_1(), "rule__ReferenceFact__SourceParamAssignment_1");
-					put(grammarAccess.getReferenceFactAccess().getTargetParamAssignment_4(), "rule__ReferenceFact__TargetParamAssignment_4");
-					put(grammarAccess.getQueryAccess().getPatternAssignment(), "rule__Query__PatternAssignment");
-					put(grammarAccess.getBindingAccess().getParameterAssignment_1(), "rule__Binding__ParameterAssignment_1");
+					put(grammarAccess.getObjectFactAccess().getVariableAssignment_1(), "rule__ObjectFact__VariableAssignment_1");
+					put(grammarAccess.getReferenceFactAccess().getSourceVarAssignment_1(), "rule__ReferenceFact__SourceVarAssignment_1");
+					put(grammarAccess.getReferenceFactAccess().getTargetVarAssignment_3(), "rule__ReferenceFact__TargetVarAssignment_3");
+					put(grammarAccess.getReferenceFactAccess().getReferenceAssignment_5(), "rule__ReferenceFact__ReferenceAssignment_5");
+					put(grammarAccess.getAttributeFactAccess().getVariableAssignment_1(), "rule__AttributeFact__VariableAssignment_1");
+					put(grammarAccess.getBindingAccess().getVariableAssignment_1(), "rule__Binding__VariableAssignment_1");
 					put(grammarAccess.getBindingAccess().getBindAssignment_4(), "rule__Binding__BindAssignment_4");
-					put(grammarAccess.getParameterAccess().getVariableAssignment(), "rule__Parameter__VariableAssignment");
-					put(grammarAccess.getObjectBindAccess().getObjectAssignment(), "rule__ObjectBind__ObjectAssignment");
+					put(grammarAccess.getObjectBindAccess().getObjectAssignment_1(), "rule__ObjectBind__ObjectAssignment_1");
+					put(grammarAccess.getValueBindAccess().getValueAssignment_1(), "rule__ValueBind__ValueAssignment_1");
 				}
 			};
 		}

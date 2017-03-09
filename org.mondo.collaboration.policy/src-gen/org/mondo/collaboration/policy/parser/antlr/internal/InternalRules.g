@@ -375,16 +375,37 @@ ruleRule returns [EObject current=null]
 		{
 			newLeafNode(otherlv_8, grammarAccess.getRuleAccess().getLeftCurlyBracketKeyword_7());
 		}
-		otherlv_9='select'
+		otherlv_9='from'
 		{
-			newLeafNode(otherlv_9, grammarAccess.getRuleAccess().getSelectKeyword_8());
+			newLeafNode(otherlv_9, grammarAccess.getRuleAccess().getFromKeyword_8());
+		}
+		otherlv_10='query'
+		{
+			newLeafNode(otherlv_10, grammarAccess.getRuleAccess().getQueryKeyword_9());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getRuleAccess().getAssetAssetParserRuleCall_9_0());
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRuleRule());
+					}
 				}
-				lv_asset_10_0=ruleAsset
+				otherlv_11=RULE_STRING
+				{
+					newLeafNode(otherlv_11, grammarAccess.getRuleAccess().getPatternPatternCrossReference_10_0());
+				}
+			)
+		)
+		otherlv_12='select'
+		{
+			newLeafNode(otherlv_12, grammarAccess.getRuleAccess().getSelectKeyword_11());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getRuleAccess().getAssetAssetParserRuleCall_12_0());
+				}
+				lv_asset_13_0=ruleAsset
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getRuleRule());
@@ -392,35 +413,8 @@ ruleRule returns [EObject current=null]
 					set(
 						$current,
 						"asset",
-						lv_asset_10_0,
+						lv_asset_13_0,
 						"org.mondo.collaboration.policy.Rules.Asset");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_11='from'
-		{
-			newLeafNode(otherlv_11, grammarAccess.getRuleAccess().getFromKeyword_10());
-		}
-		otherlv_12='query'
-		{
-			newLeafNode(otherlv_12, grammarAccess.getRuleAccess().getQueryKeyword_11());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getRuleAccess().getQueryQueryParserRuleCall_12_0());
-				}
-				lv_query_13_0=ruleQuery
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getRuleRule());
-					}
-					set(
-						$current,
-						"query",
-						lv_query_13_0,
-						"org.mondo.collaboration.policy.Rules.Query");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -670,6 +664,15 @@ ruleAsset returns [EObject current=null]
 			$current = $this_ReferenceFact_1.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getAssetAccess().getAttributeFactParserRuleCall_2());
+		}
+		this_AttributeFact_2=ruleAttributeFact
+		{
+			$current = $this_AttributeFact_2.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -696,19 +699,13 @@ ruleObjectFact returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getObjectFactAccess().getParameterParameterParserRuleCall_1_0());
-				}
-				lv_parameter_1_0=ruleParameter
-				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getObjectFactRule());
+						$current = createModelElement(grammarAccess.getObjectFactRule());
 					}
-					set(
-						$current,
-						"parameter",
-						lv_parameter_1_0,
-						"org.mondo.collaboration.policy.Rules.Parameter");
-					afterParserOrEnumRuleCall();
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getObjectFactAccess().getVariableVariableCrossReference_1_0());
 				}
 			)
 		)
@@ -742,19 +739,13 @@ ruleReferenceFact returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getReferenceFactAccess().getSourceParamParameterParserRuleCall_1_0());
-				}
-				lv_sourceParam_1_0=ruleParameter
-				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getReferenceFactRule());
+						$current = createModelElement(grammarAccess.getReferenceFactRule());
 					}
-					set(
-						$current,
-						"sourceParam",
-						lv_sourceParam_1_0,
-						"org.mondo.collaboration.policy.Rules.Parameter");
-					afterParserOrEnumRuleCall();
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getReferenceFactAccess().getSourceVarVariableCrossReference_1_0());
 				}
 			)
 		)
@@ -762,45 +753,52 @@ ruleReferenceFact returns [EObject current=null]
 		{
 			newLeafNode(otherlv_2, grammarAccess.getReferenceFactAccess().getHyphenMinusGreaterThanSignKeyword_2());
 		}
-		otherlv_3='->'
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getReferenceFactRule());
+					}
+				}
+				otherlv_3=RULE_ID
+				{
+					newLeafNode(otherlv_3, grammarAccess.getReferenceFactAccess().getTargetVarVariableCrossReference_3_0());
+				}
+			)
+		)
+		otherlv_4=':'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getReferenceFactAccess().getHyphenMinusGreaterThanSignKeyword_3());
+			newLeafNode(otherlv_4, grammarAccess.getReferenceFactAccess().getColonKeyword_4());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getReferenceFactAccess().getTargetParamParameterParserRuleCall_4_0());
-				}
-				lv_targetParam_4_0=ruleParameter
-				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getReferenceFactRule());
+						$current = createModelElement(grammarAccess.getReferenceFactRule());
 					}
-					set(
-						$current,
-						"targetParam",
-						lv_targetParam_4_0,
-						"org.mondo.collaboration.policy.Rules.Parameter");
-					afterParserOrEnumRuleCall();
+				}
+				otherlv_5=RULE_ID
+				{
+					newLeafNode(otherlv_5, grammarAccess.getReferenceFactAccess().getReferenceEReferenceCrossReference_5_0());
 				}
 			)
 		)
-		otherlv_5=')'
+		otherlv_6=')'
 		{
-			newLeafNode(otherlv_5, grammarAccess.getReferenceFactAccess().getRightParenthesisKeyword_5());
+			newLeafNode(otherlv_6, grammarAccess.getReferenceFactAccess().getRightParenthesisKeyword_6());
 		}
 	)
 ;
 
-// Entry rule entryRuleQuery
-entryRuleQuery returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getQueryRule()); }
-	iv_ruleQuery=ruleQuery
-	{ $current=$iv_ruleQuery.current; }
+// Entry rule entryRuleAttributeFact
+entryRuleAttributeFact returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAttributeFactRule()); }
+	iv_ruleAttributeFact=ruleAttributeFact
+	{ $current=$iv_ruleAttributeFact.current; }
 	EOF;
 
-// Rule Query
-ruleQuery returns [EObject current=null]
+// Rule AttributeFact
+ruleAttributeFact returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -808,17 +806,27 @@ ruleQuery returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='attr('
+		{
+			newLeafNode(otherlv_0, grammarAccess.getAttributeFactAccess().getAttrKeyword_0());
+		}
 		(
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getQueryRule());
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAttributeFactRule());
+					}
 				}
-			}
-			otherlv_0=RULE_STRING
-			{
-				newLeafNode(otherlv_0, grammarAccess.getQueryAccess().getPatternPatternCrossReference_0());
-			}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getAttributeFactAccess().getVariableVariableCrossReference_1_0());
+				}
+			)
 		)
+		otherlv_2=')'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getAttributeFactAccess().getRightParenthesisKeyword_2());
+		}
 	)
 ;
 
@@ -845,19 +853,13 @@ ruleBinding returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getBindingAccess().getParameterParameterParserRuleCall_1_0());
-				}
-				lv_parameter_1_0=ruleParameter
-				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getBindingRule());
+						$current = createModelElement(grammarAccess.getBindingRule());
 					}
-					set(
-						$current,
-						"parameter",
-						lv_parameter_1_0,
-						"org.mondo.collaboration.policy.Rules.Parameter");
-					afterParserOrEnumRuleCall();
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getBindingAccess().getVariableVariableCrossReference_1_0());
 				}
 			)
 		)
@@ -891,36 +893,6 @@ ruleBinding returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleParameter
-entryRuleParameter returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getParameterRule()); }
-	iv_ruleParameter=ruleParameter
-	{ $current=$iv_ruleParameter.current; }
-	EOF;
-
-// Rule Parameter
-ruleParameter returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getParameterRule());
-				}
-			}
-			otherlv_0=RULE_ID
-			{
-				newLeafNode(otherlv_0, grammarAccess.getParameterAccess().getVariableVariableCrossReference_0());
-			}
-		)
-	)
-;
-
 // Entry rule entryRuleBind
 entryRuleBind returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getBindRule()); }
@@ -936,14 +908,25 @@ ruleBind returns [EObject current=null]
 @after {
 	leaveRule();
 }:
-	{
-		newCompositeNode(grammarAccess.getBindAccess().getObjectBindParserRuleCall());
-	}
-	this_ObjectBind_0=ruleObjectBind
-	{
-		$current = $this_ObjectBind_0.current;
-		afterParserOrEnumRuleCall();
-	}
+	(
+		{
+			newCompositeNode(grammarAccess.getBindAccess().getObjectBindParserRuleCall_0());
+		}
+		this_ObjectBind_0=ruleObjectBind
+		{
+			$current = $this_ObjectBind_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getBindAccess().getValueBindParserRuleCall_1());
+		}
+		this_ValueBind_1=ruleValueBind
+		{
+			$current = $this_ValueBind_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
 ;
 
 // Entry rule entryRuleObjectBind
@@ -962,15 +945,90 @@ ruleObjectBind returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='object'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getObjectBindAccess().getObjectKeyword_0());
+		}
 		(
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getObjectBindRule());
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getObjectBindRule());
+					}
 				}
-			}
-			otherlv_0=RULE_ID
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getObjectBindAccess().getObjectEObjectCrossReference_1_0());
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleValueBind
+entryRuleValueBind returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getValueBindRule()); }
+	iv_ruleValueBind=ruleValueBind
+	{ $current=$iv_ruleValueBind.current; }
+	EOF;
+
+// Rule ValueBind
+ruleValueBind returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='value'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getValueBindAccess().getValueKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getValueBindAccess().getValueValueTypeEnumRuleCall_1_0());
+				}
+				lv_value_1_0=ruleValueType
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getValueBindRule());
+					}
+					set(
+						$current,
+						"value",
+						lv_value_1_0,
+						"org.mondo.collaboration.policy.Rules.ValueType");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Rule ValueType
+ruleValueType returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='STRING'
 			{
-				newLeafNode(otherlv_0, grammarAccess.getObjectBindAccess().getObjectEObjectCrossReference_0());
+				$current = grammarAccess.getValueTypeAccess().getSTRINGEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getValueTypeAccess().getSTRINGEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='INT'
+			{
+				$current = grammarAccess.getValueTypeAccess().getINTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getValueTypeAccess().getINTEnumLiteralDeclaration_1());
 			}
 		)
 	)

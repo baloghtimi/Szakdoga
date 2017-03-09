@@ -9,27 +9,26 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
 
-import org.mondo.collaboration.policy.rules.Parameter;
+import org.mondo.collaboration.policy.rules.AttributeFact;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Parameter</b></em>'.
+ * An implementation of the model object '<em><b>Attribute Fact</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ParameterImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.AttributeFactImpl#getVariable <em>Variable</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ParameterImpl extends MinimalEObjectImpl.Container implements Parameter
+public class AttributeFactImpl extends AssetImpl implements AttributeFact
 {
   /**
    * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
@@ -46,7 +45,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ParameterImpl()
+  protected AttributeFactImpl()
   {
     super();
   }
@@ -59,7 +58,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
   @Override
   protected EClass eStaticClass()
   {
-    return RulesPackage.Literals.PARAMETER;
+    return RulesPackage.Literals.ATTRIBUTE_FACT;
   }
 
   /**
@@ -76,7 +75,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
       if (variable != oldVariable)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.PARAMETER__VARIABLE, oldVariable, variable));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.ATTRIBUTE_FACT__VARIABLE, oldVariable, variable));
       }
     }
     return variable;
@@ -102,7 +101,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
     Variable oldVariable = variable;
     variable = newVariable;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.PARAMETER__VARIABLE, oldVariable, variable));
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.ATTRIBUTE_FACT__VARIABLE, oldVariable, variable));
   }
 
   /**
@@ -115,7 +114,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
   {
     switch (featureID)
     {
-      case RulesPackage.PARAMETER__VARIABLE:
+      case RulesPackage.ATTRIBUTE_FACT__VARIABLE:
         if (resolve) return getVariable();
         return basicGetVariable();
     }
@@ -132,7 +131,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
   {
     switch (featureID)
     {
-      case RulesPackage.PARAMETER__VARIABLE:
+      case RulesPackage.ATTRIBUTE_FACT__VARIABLE:
         setVariable((Variable)newValue);
         return;
     }
@@ -149,7 +148,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
   {
     switch (featureID)
     {
-      case RulesPackage.PARAMETER__VARIABLE:
+      case RulesPackage.ATTRIBUTE_FACT__VARIABLE:
         setVariable((Variable)null);
         return;
     }
@@ -166,10 +165,10 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
   {
     switch (featureID)
     {
-      case RulesPackage.PARAMETER__VARIABLE:
+      case RulesPackage.ATTRIBUTE_FACT__VARIABLE:
         return variable != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ParameterImpl
+} //AttributeFactImpl

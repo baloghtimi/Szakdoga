@@ -5,6 +5,8 @@ package org.mondo.collaboration.policy.rules;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Binding</b></em>'.
@@ -14,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.Binding#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.Binding#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Binding#getBind <em>Bind</em>}</li>
  * </ul>
  *
@@ -25,30 +27,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface Binding extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Parameter</b></em>' containment reference.
+   * Returns the value of the '<em><b>Variable</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Parameter</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Variable</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Parameter</em>' containment reference.
-   * @see #setParameter(Parameter)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getBinding_Parameter()
-   * @model containment="true"
+   * @return the value of the '<em>Variable</em>' reference.
+   * @see #setVariable(Variable)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getBinding_Variable()
+   * @model
    * @generated
    */
-  Parameter getParameter();
+  Variable getVariable();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Binding#getParameter <em>Parameter</em>}' containment reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Binding#getVariable <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Parameter</em>' containment reference.
-   * @see #getParameter()
+   * @param value the new value of the '<em>Variable</em>' reference.
+   * @see #getVariable()
    * @generated
    */
-  void setParameter(Parameter value);
+  void setVariable(Variable value);
 
   /**
    * Returns the value of the '<em><b>Bind</b></em>' containment reference.

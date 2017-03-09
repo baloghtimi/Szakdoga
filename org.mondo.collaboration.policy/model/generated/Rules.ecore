@@ -22,9 +22,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="#//OperationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" unique="false" upperBound="-1"
         eType="#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Pattern"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="asset" eType="#//Asset"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="query" eType="#//Query"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
         eType="#//Binding" containment="true"/>
@@ -40,29 +39,30 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Asset"/>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectFact" eSuperTypes="#//Asset">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//Parameter"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceFact" eSuperTypes="#//Asset">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceParam" eType="#//Parameter"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetParam" eType="#//Parameter"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceVar" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetVar" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Query">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Pattern"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeFact" eSuperTypes="#//Asset">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Binding">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//Parameter"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bind" eType="#//Bind" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bind" eType="#//Bind" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bind"/>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectBind" eSuperTypes="#//Bind">
     <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueBind" eSuperTypes="#//Bind">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//ValueType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ValueType">
+    <eLiterals name="STRING" literal="STRING"/>
+    <eLiterals name="INT" value="1" literal="INT"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AccessibilityLevel">
     <eLiterals name="ALLOW" literal="allow"/>

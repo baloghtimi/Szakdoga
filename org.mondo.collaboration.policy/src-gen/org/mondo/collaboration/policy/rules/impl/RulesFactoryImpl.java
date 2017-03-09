@@ -75,11 +75,11 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
       case RulesPackage.ASSET: return createAsset();
       case RulesPackage.OBJECT_FACT: return createObjectFact();
       case RulesPackage.REFERENCE_FACT: return createReferenceFact();
-      case RulesPackage.QUERY: return createQuery();
+      case RulesPackage.ATTRIBUTE_FACT: return createAttributeFact();
       case RulesPackage.BINDING: return createBinding();
-      case RulesPackage.PARAMETER: return createParameter();
       case RulesPackage.BIND: return createBind();
       case RulesPackage.OBJECT_BIND: return createObjectBind();
+      case RulesPackage.VALUE_BIND: return createValueBind();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -95,6 +95,8 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case RulesPackage.VALUE_TYPE:
+        return createValueTypeFromString(eDataType, initialValue);
       case RulesPackage.ACCESSIBILITY_LEVEL:
         return createAccessibilityLevelFromString(eDataType, initialValue);
       case RulesPackage.OPERATION_TYPE:
@@ -116,6 +118,8 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case RulesPackage.VALUE_TYPE:
+        return convertValueTypeToString(eDataType, instanceValue);
       case RulesPackage.ACCESSIBILITY_LEVEL:
         return convertAccessibilityLevelToString(eDataType, instanceValue);
       case RulesPackage.OPERATION_TYPE:
@@ -231,10 +235,10 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Query createQuery()
+  public AttributeFact createAttributeFact()
   {
-    QueryImpl query = new QueryImpl();
-    return query;
+    AttributeFactImpl attributeFact = new AttributeFactImpl();
+    return attributeFact;
   }
 
   /**
@@ -246,17 +250,6 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
   {
     BindingImpl binding = new BindingImpl();
     return binding;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Parameter createParameter()
-  {
-    ParameterImpl parameter = new ParameterImpl();
-    return parameter;
   }
 
   /**
@@ -279,6 +272,39 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
   {
     ObjectBindImpl objectBind = new ObjectBindImpl();
     return objectBind;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ValueBind createValueBind()
+  {
+    ValueBindImpl valueBind = new ValueBindImpl();
+    return valueBind;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ValueType createValueTypeFromString(EDataType eDataType, String initialValue)
+  {
+    ValueType result = ValueType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertValueTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

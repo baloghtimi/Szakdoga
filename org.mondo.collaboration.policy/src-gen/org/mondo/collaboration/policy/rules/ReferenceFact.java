@@ -3,6 +3,9 @@
  */
 package org.mondo.collaboration.policy.rules;
 
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,8 +16,9 @@ package org.mondo.collaboration.policy.rules;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSourceParam <em>Source Param</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTargetParam <em>Target Param</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSourceVar <em>Source Var</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTargetVar <em>Target Var</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.ReferenceFact#getReference <em>Reference</em>}</li>
  * </ul>
  *
  * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact()
@@ -24,55 +28,81 @@ package org.mondo.collaboration.policy.rules;
 public interface ReferenceFact extends Asset
 {
   /**
-   * Returns the value of the '<em><b>Source Param</b></em>' containment reference.
+   * Returns the value of the '<em><b>Source Var</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Source Param</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Source Var</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Source Param</em>' containment reference.
-   * @see #setSourceParam(Parameter)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_SourceParam()
-   * @model containment="true"
+   * @return the value of the '<em>Source Var</em>' reference.
+   * @see #setSourceVar(Variable)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_SourceVar()
+   * @model
    * @generated
    */
-  Parameter getSourceParam();
+  Variable getSourceVar();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSourceParam <em>Source Param</em>}' containment reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getSourceVar <em>Source Var</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Source Param</em>' containment reference.
-   * @see #getSourceParam()
+   * @param value the new value of the '<em>Source Var</em>' reference.
+   * @see #getSourceVar()
    * @generated
    */
-  void setSourceParam(Parameter value);
+  void setSourceVar(Variable value);
 
   /**
-   * Returns the value of the '<em><b>Target Param</b></em>' containment reference.
+   * Returns the value of the '<em><b>Target Var</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Target Param</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Target Var</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Target Param</em>' containment reference.
-   * @see #setTargetParam(Parameter)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_TargetParam()
-   * @model containment="true"
+   * @return the value of the '<em>Target Var</em>' reference.
+   * @see #setTargetVar(Variable)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_TargetVar()
+   * @model
    * @generated
    */
-  Parameter getTargetParam();
+  Variable getTargetVar();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTargetParam <em>Target Param</em>}' containment reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getTargetVar <em>Target Var</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Target Param</em>' containment reference.
-   * @see #getTargetParam()
+   * @param value the new value of the '<em>Target Var</em>' reference.
+   * @see #getTargetVar()
    * @generated
    */
-  void setTargetParam(Parameter value);
+  void setTargetVar(Variable value);
+
+  /**
+   * Returns the value of the '<em><b>Reference</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Reference</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Reference</em>' reference.
+   * @see #setReference(EReference)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getReferenceFact_Reference()
+   * @model
+   * @generated
+   */
+  EReference getReference();
+
+  /**
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ReferenceFact#getReference <em>Reference</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Reference</em>' reference.
+   * @see #getReference()
+   * @generated
+   */
+  void setReference(EReference value);
 
 } // ReferenceFact

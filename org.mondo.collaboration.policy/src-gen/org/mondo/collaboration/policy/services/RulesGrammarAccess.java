@@ -156,13 +156,14 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cRolesRoleCrossReference_6_1_0 = (CrossReference)cRolesAssignment_6_1.eContents().get(0);
 		private final RuleCall cRolesRoleIDTerminalRuleCall_6_1_0_1 = (RuleCall)cRolesRoleCrossReference_6_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Keyword cSelectKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cAssetAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cAssetAssetParserRuleCall_9_0 = (RuleCall)cAssetAssignment_9.eContents().get(0);
-		private final Keyword cFromKeyword_10 = (Keyword)cGroup.eContents().get(10);
-		private final Keyword cQueryKeyword_11 = (Keyword)cGroup.eContents().get(11);
-		private final Assignment cQueryAssignment_12 = (Assignment)cGroup.eContents().get(12);
-		private final RuleCall cQueryQueryParserRuleCall_12_0 = (RuleCall)cQueryAssignment_12.eContents().get(0);
+		private final Keyword cFromKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Keyword cQueryKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cPatternAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final CrossReference cPatternPatternCrossReference_10_0 = (CrossReference)cPatternAssignment_10.eContents().get(0);
+		private final RuleCall cPatternPatternSTRINGTerminalRuleCall_10_0_1 = (RuleCall)cPatternPatternCrossReference_10_0.eContents().get(1);
+		private final Keyword cSelectKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cAssetAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cAssetAssetParserRuleCall_12_0 = (RuleCall)cAssetAssignment_12.eContents().get(0);
 		private final Assignment cBindingsAssignment_13 = (Assignment)cGroup.eContents().get(13);
 		private final RuleCall cBindingsBindingParserRuleCall_13_0 = (RuleCall)cBindingsAssignment_13.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_14 = (Keyword)cGroup.eContents().get(14);
@@ -174,14 +175,14 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Rule:
 		//	'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{'
+		//	'from' 'query' pattern=[iql::Pattern|STRING]
 		//	'select' asset=Asset
-		//	'from' 'query' query=Query
 		//	bindings+=Binding*
 		//	'}' ('with' priority=INT 'priority')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{' 'select'
-		//asset=Asset 'from' 'query' query=Query bindings+=Binding* '}' ('with' priority=INT 'priority')?
+		//'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{' 'from'
+		//'query' pattern=[iql::Pattern|STRING] 'select' asset=Asset bindings+=Binding* '}' ('with' priority=INT 'priority')?
 		public Group getGroup() { return cGroup; }
 		
 		//'rule'
@@ -235,26 +236,29 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
 		
-		//'select'
-		public Keyword getSelectKeyword_8() { return cSelectKeyword_8; }
-		
-		//asset=Asset
-		public Assignment getAssetAssignment_9() { return cAssetAssignment_9; }
-		
-		//Asset
-		public RuleCall getAssetAssetParserRuleCall_9_0() { return cAssetAssetParserRuleCall_9_0; }
-		
 		//'from'
-		public Keyword getFromKeyword_10() { return cFromKeyword_10; }
+		public Keyword getFromKeyword_8() { return cFromKeyword_8; }
 		
 		//'query'
-		public Keyword getQueryKeyword_11() { return cQueryKeyword_11; }
+		public Keyword getQueryKeyword_9() { return cQueryKeyword_9; }
 		
-		//query=Query
-		public Assignment getQueryAssignment_12() { return cQueryAssignment_12; }
+		//pattern=[iql::Pattern|STRING]
+		public Assignment getPatternAssignment_10() { return cPatternAssignment_10; }
 		
-		//Query
-		public RuleCall getQueryQueryParserRuleCall_12_0() { return cQueryQueryParserRuleCall_12_0; }
+		//[iql::Pattern|STRING]
+		public CrossReference getPatternPatternCrossReference_10_0() { return cPatternPatternCrossReference_10_0; }
+		
+		//STRING
+		public RuleCall getPatternPatternSTRINGTerminalRuleCall_10_0_1() { return cPatternPatternSTRINGTerminalRuleCall_10_0_1; }
+		
+		//'select'
+		public Keyword getSelectKeyword_11() { return cSelectKeyword_11; }
+		
+		//asset=Asset
+		public Assignment getAssetAssignment_12() { return cAssetAssignment_12; }
+		
+		//Asset
+		public RuleCall getAssetAssetParserRuleCall_12_0() { return cAssetAssetParserRuleCall_12_0; }
 		
 		//bindings+=Binding*
 		public Assignment getBindingsAssignment_13() { return cBindingsAssignment_13; }
@@ -390,12 +394,13 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cObjectFactParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cReferenceFactParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cAttributeFactParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Asset:
-		//	ObjectFact | ReferenceFact;
+		//	ObjectFact | ReferenceFact | AttributeFact;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ObjectFact | ReferenceFact
+		//ObjectFact | ReferenceFact | AttributeFact
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ObjectFact
@@ -403,30 +408,37 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ReferenceFact
 		public RuleCall getReferenceFactParserRuleCall_1() { return cReferenceFactParserRuleCall_1; }
+		
+		//AttributeFact
+		public RuleCall getAttributeFactParserRuleCall_2() { return cAttributeFactParserRuleCall_2; }
 	}
 	public class ObjectFactElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ObjectFact");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cObjKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cParameterAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cParameterParameterParserRuleCall_1_0 = (RuleCall)cParameterAssignment_1.eContents().get(0);
+		private final Assignment cVariableAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cVariableVariableCrossReference_1_0 = (CrossReference)cVariableAssignment_1.eContents().get(0);
+		private final RuleCall cVariableVariableIDTerminalRuleCall_1_0_1 = (RuleCall)cVariableVariableCrossReference_1_0.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ObjectFact:
-		//	'obj(' parameter=Parameter ')';
+		//	'obj(' variable=[iql::Variable] ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'obj(' parameter=Parameter ')'
+		//'obj(' variable=[iql::Variable] ')'
 		public Group getGroup() { return cGroup; }
 		
 		//'obj('
 		public Keyword getObjKeyword_0() { return cObjKeyword_0; }
 		
-		//parameter=Parameter
-		public Assignment getParameterAssignment_1() { return cParameterAssignment_1; }
+		//variable=[iql::Variable]
+		public Assignment getVariableAssignment_1() { return cVariableAssignment_1; }
 		
-		//Parameter
-		public RuleCall getParameterParameterParserRuleCall_1_0() { return cParameterParameterParserRuleCall_1_0; }
+		//[iql::Variable]
+		public CrossReference getVariableVariableCrossReference_1_0() { return cVariableVariableCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getVariableVariableIDTerminalRuleCall_1_0_1() { return cVariableVariableIDTerminalRuleCall_1_0_1; }
 		
 		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
@@ -435,90 +447,126 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ReferenceFact");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRefKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSourceParamAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSourceParamParameterParserRuleCall_1_0 = (RuleCall)cSourceParamAssignment_1.eContents().get(0);
+		private final Assignment cSourceVarAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cSourceVarVariableCrossReference_1_0 = (CrossReference)cSourceVarAssignment_1.eContents().get(0);
+		private final RuleCall cSourceVarVariableIDTerminalRuleCall_1_0_1 = (RuleCall)cSourceVarVariableCrossReference_1_0.eContents().get(1);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cHyphenMinusGreaterThanSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cTargetParamAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cTargetParamParameterParserRuleCall_4_0 = (RuleCall)cTargetParamAssignment_4.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cTargetVarAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cTargetVarVariableCrossReference_3_0 = (CrossReference)cTargetVarAssignment_3.eContents().get(0);
+		private final RuleCall cTargetVarVariableIDTerminalRuleCall_3_0_1 = (RuleCall)cTargetVarVariableCrossReference_3_0.eContents().get(1);
+		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cReferenceAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cReferenceEReferenceCrossReference_5_0 = (CrossReference)cReferenceAssignment_5.eContents().get(0);
+		private final RuleCall cReferenceEReferenceIDTerminalRuleCall_5_0_1 = (RuleCall)cReferenceEReferenceCrossReference_5_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//ReferenceFact:
-		//	'ref(' sourceParam=Parameter '->' '->' targetParam=Parameter ')';
+		//	'ref(' sourceVar=[iql::Variable] '->' targetVar=[iql::Variable] ':' reference=[ecore::EReference] ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ref(' sourceParam=Parameter '->' '->' targetParam=Parameter ')'
+		//'ref(' sourceVar=[iql::Variable] '->' targetVar=[iql::Variable] ':' reference=[ecore::EReference] ')'
 		public Group getGroup() { return cGroup; }
 		
 		//'ref('
 		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
 		
-		//sourceParam=Parameter
-		public Assignment getSourceParamAssignment_1() { return cSourceParamAssignment_1; }
+		//sourceVar=[iql::Variable]
+		public Assignment getSourceVarAssignment_1() { return cSourceVarAssignment_1; }
 		
-		//Parameter
-		public RuleCall getSourceParamParameterParserRuleCall_1_0() { return cSourceParamParameterParserRuleCall_1_0; }
+		//[iql::Variable]
+		public CrossReference getSourceVarVariableCrossReference_1_0() { return cSourceVarVariableCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getSourceVarVariableIDTerminalRuleCall_1_0_1() { return cSourceVarVariableIDTerminalRuleCall_1_0_1; }
 		
 		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 		
-		//'->'
-		public Keyword getHyphenMinusGreaterThanSignKeyword_3() { return cHyphenMinusGreaterThanSignKeyword_3; }
+		//targetVar=[iql::Variable]
+		public Assignment getTargetVarAssignment_3() { return cTargetVarAssignment_3; }
 		
-		//targetParam=Parameter
-		public Assignment getTargetParamAssignment_4() { return cTargetParamAssignment_4; }
+		//[iql::Variable]
+		public CrossReference getTargetVarVariableCrossReference_3_0() { return cTargetVarVariableCrossReference_3_0; }
 		
-		//Parameter
-		public RuleCall getTargetParamParameterParserRuleCall_4_0() { return cTargetParamParameterParserRuleCall_4_0; }
+		//ID
+		public RuleCall getTargetVarVariableIDTerminalRuleCall_3_0_1() { return cTargetVarVariableIDTerminalRuleCall_3_0_1; }
+		
+		//':'
+		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
+		
+		//reference=[ecore::EReference]
+		public Assignment getReferenceAssignment_5() { return cReferenceAssignment_5; }
+		
+		//[ecore::EReference]
+		public CrossReference getReferenceEReferenceCrossReference_5_0() { return cReferenceEReferenceCrossReference_5_0; }
+		
+		//ID
+		public RuleCall getReferenceEReferenceIDTerminalRuleCall_5_0_1() { return cReferenceEReferenceIDTerminalRuleCall_5_0_1; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
 	}
-	public class QueryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Query");
-		private final Assignment cPatternAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cPatternPatternCrossReference_0 = (CrossReference)cPatternAssignment.eContents().get(0);
-		private final RuleCall cPatternPatternSTRINGTerminalRuleCall_0_1 = (RuleCall)cPatternPatternCrossReference_0.eContents().get(1);
+	public class AttributeFactElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.AttributeFact");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAttrKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVariableAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cVariableVariableCrossReference_1_0 = (CrossReference)cVariableAssignment_1.eContents().get(0);
+		private final RuleCall cVariableVariableIDTerminalRuleCall_1_0_1 = (RuleCall)cVariableVariableCrossReference_1_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Query:
-		//	pattern=[iql::Pattern|STRING];
+		//AttributeFact:
+		//	'attr(' variable=[iql::Variable] ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//pattern=[iql::Pattern|STRING]
-		public Assignment getPatternAssignment() { return cPatternAssignment; }
+		//'attr(' variable=[iql::Variable] ')'
+		public Group getGroup() { return cGroup; }
 		
-		//[iql::Pattern|STRING]
-		public CrossReference getPatternPatternCrossReference_0() { return cPatternPatternCrossReference_0; }
+		//'attr('
+		public Keyword getAttrKeyword_0() { return cAttrKeyword_0; }
 		
-		//STRING
-		public RuleCall getPatternPatternSTRINGTerminalRuleCall_0_1() { return cPatternPatternSTRINGTerminalRuleCall_0_1; }
+		//variable=[iql::Variable]
+		public Assignment getVariableAssignment_1() { return cVariableAssignment_1; }
+		
+		//[iql::Variable]
+		public CrossReference getVariableVariableCrossReference_1_0() { return cVariableVariableCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getVariableVariableIDTerminalRuleCall_1_0_1() { return cVariableVariableIDTerminalRuleCall_1_0_1; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 	public class BindingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Binding");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWhereKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cParameterAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cParameterParameterParserRuleCall_1_0 = (RuleCall)cParameterAssignment_1.eContents().get(0);
+		private final Assignment cVariableAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cVariableVariableCrossReference_1_0 = (CrossReference)cVariableAssignment_1.eContents().get(0);
+		private final RuleCall cVariableVariableIDTerminalRuleCall_1_0_1 = (RuleCall)cVariableVariableCrossReference_1_0.eContents().get(1);
 		private final Keyword cBoundKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cToKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cBindAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cBindBindParserRuleCall_4_0 = (RuleCall)cBindAssignment_4.eContents().get(0);
 		
 		//Binding:
-		//	'where' parameter=Parameter 'bound' 'to' bind=Bind;
+		//	'where' variable=[iql::Variable] 'bound' 'to' bind=Bind;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'where' parameter=Parameter 'bound' 'to' bind=Bind
+		//'where' variable=[iql::Variable] 'bound' 'to' bind=Bind
 		public Group getGroup() { return cGroup; }
 		
 		//'where'
 		public Keyword getWhereKeyword_0() { return cWhereKeyword_0; }
 		
-		//parameter=Parameter
-		public Assignment getParameterAssignment_1() { return cParameterAssignment_1; }
+		//variable=[iql::Variable]
+		public Assignment getVariableAssignment_1() { return cVariableAssignment_1; }
 		
-		//Parameter
-		public RuleCall getParameterParameterParserRuleCall_1_0() { return cParameterParameterParserRuleCall_1_0; }
+		//[iql::Variable]
+		public CrossReference getVariableVariableCrossReference_1_0() { return cVariableVariableCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getVariableVariableIDTerminalRuleCall_1_0_1() { return cVariableVariableIDTerminalRuleCall_1_0_1; }
 		
 		//'bound'
 		public Keyword getBoundKeyword_2() { return cBoundKeyword_2; }
@@ -532,57 +580,104 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		//Bind
 		public RuleCall getBindBindParserRuleCall_4_0() { return cBindBindParserRuleCall_4_0; }
 	}
-	public class ParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Parameter");
-		private final Assignment cVariableAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cVariableVariableCrossReference_0 = (CrossReference)cVariableAssignment.eContents().get(0);
-		private final RuleCall cVariableVariableIDTerminalRuleCall_0_1 = (RuleCall)cVariableVariableCrossReference_0.eContents().get(1);
-		
-		//Parameter:
-		//	variable=[iql::Variable];
-		@Override public ParserRule getRule() { return rule; }
-		
-		//variable=[iql::Variable]
-		public Assignment getVariableAssignment() { return cVariableAssignment; }
-		
-		//[iql::Variable]
-		public CrossReference getVariableVariableCrossReference_0() { return cVariableVariableCrossReference_0; }
-		
-		//ID
-		public RuleCall getVariableVariableIDTerminalRuleCall_0_1() { return cVariableVariableIDTerminalRuleCall_0_1; }
-	}
 	public class BindElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.Bind");
-		private final RuleCall cObjectBindParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cObjectBindParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cValueBindParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Bind:
-		//	ObjectBind;
+		//	ObjectBind | ValueBind;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//ObjectBind | ValueBind
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
 		//ObjectBind
-		public RuleCall getObjectBindParserRuleCall() { return cObjectBindParserRuleCall; }
+		public RuleCall getObjectBindParserRuleCall_0() { return cObjectBindParserRuleCall_0; }
+		
+		//ValueBind
+		public RuleCall getValueBindParserRuleCall_1() { return cValueBindParserRuleCall_1; }
 	}
 	public class ObjectBindElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ObjectBind");
-		private final Assignment cObjectAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cObjectEObjectCrossReference_0 = (CrossReference)cObjectAssignment.eContents().get(0);
-		private final RuleCall cObjectEObjectIDTerminalRuleCall_0_1 = (RuleCall)cObjectEObjectCrossReference_0.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cObjectKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cObjectAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cObjectEObjectCrossReference_1_0 = (CrossReference)cObjectAssignment_1.eContents().get(0);
+		private final RuleCall cObjectEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cObjectEObjectCrossReference_1_0.eContents().get(1);
 		
 		////| ClassBind;
 		//ObjectBind:
-		//	object=[ecore::EObject];
+		//	'object' object=[ecore::EObject];
 		@Override public ParserRule getRule() { return rule; }
 		
+		//'object' object=[ecore::EObject]
+		public Group getGroup() { return cGroup; }
+		
+		//'object'
+		public Keyword getObjectKeyword_0() { return cObjectKeyword_0; }
+		
 		//object=[ecore::EObject]
-		public Assignment getObjectAssignment() { return cObjectAssignment; }
+		public Assignment getObjectAssignment_1() { return cObjectAssignment_1; }
 		
 		//[ecore::EObject]
-		public CrossReference getObjectEObjectCrossReference_0() { return cObjectEObjectCrossReference_0; }
+		public CrossReference getObjectEObjectCrossReference_1_0() { return cObjectEObjectCrossReference_1_0; }
 		
 		//ID
-		public RuleCall getObjectEObjectIDTerminalRuleCall_0_1() { return cObjectEObjectIDTerminalRuleCall_0_1; }
+		public RuleCall getObjectEObjectIDTerminalRuleCall_1_0_1() { return cObjectEObjectIDTerminalRuleCall_1_0_1; }
+	}
+	public class ValueBindElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ValueBind");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cValueKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueValueTypeEnumRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		
+		//ValueBind:
+		//	'value' value=ValueType;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'value' value=ValueType
+		public Group getGroup() { return cGroup; }
+		
+		//'value'
+		public Keyword getValueKeyword_0() { return cValueKeyword_0; }
+		
+		//value=ValueType
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		
+		//ValueType
+		public RuleCall getValueValueTypeEnumRuleCall_1_0() { return cValueValueTypeEnumRuleCall_1_0; }
 	}
 	
+	public class ValueTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.ValueType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cSTRINGEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cSTRINGSTRINGKeyword_0_0 = (Keyword)cSTRINGEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cINTEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cINTINTKeyword_1_0 = (Keyword)cINTEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum ValueType:
+		//	STRING | INT;
+		public EnumRule getRule() { return rule; }
+		
+		//STRING | INT
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//STRING
+		public EnumLiteralDeclaration getSTRINGEnumLiteralDeclaration_0() { return cSTRINGEnumLiteralDeclaration_0; }
+		
+		//"STRING"
+		public Keyword getSTRINGSTRINGKeyword_0_0() { return cSTRINGSTRINGKeyword_0_0; }
+		
+		//INT
+		public EnumLiteralDeclaration getINTEnumLiteralDeclaration_1() { return cINTEnumLiteralDeclaration_1; }
+		
+		//"INT"
+		public Keyword getINTINTKeyword_1_0() { return cINTINTKeyword_1_0; }
+	}
 	public class AccessibilityLevelElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.mondo.collaboration.policy.Rules.AccessibilityLevel");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -682,11 +777,12 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	private final AssetElements pAsset;
 	private final ObjectFactElements pObjectFact;
 	private final ReferenceFactElements pReferenceFact;
-	private final QueryElements pQuery;
+	private final AttributeFactElements pAttributeFact;
 	private final BindingElements pBinding;
-	private final ParameterElements pParameter;
 	private final BindElements pBind;
 	private final ObjectBindElements pObjectBind;
+	private final ValueBindElements pValueBind;
+	private final ValueTypeElements eValueType;
 	private final AccessibilityLevelElements eAccessibilityLevel;
 	private final OperationTypeElements eOperationType;
 	private final ResolutionTypeElements eResolutionType;
@@ -709,11 +805,12 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAsset = new AssetElements();
 		this.pObjectFact = new ObjectFactElements();
 		this.pReferenceFact = new ReferenceFactElements();
-		this.pQuery = new QueryElements();
+		this.pAttributeFact = new AttributeFactElements();
 		this.pBinding = new BindingElements();
-		this.pParameter = new ParameterElements();
 		this.pBind = new BindElements();
 		this.pObjectBind = new ObjectBindElements();
+		this.pValueBind = new ValueBindElements();
+		this.eValueType = new ValueTypeElements();
 		this.eAccessibilityLevel = new AccessibilityLevelElements();
 		this.eOperationType = new OperationTypeElements();
 		this.eResolutionType = new ResolutionTypeElements();
@@ -771,8 +868,8 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Rule:
 	//	'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{'
+	//	'from' 'query' pattern=[iql::Pattern|STRING]
 	//	'select' asset=Asset
-	//	'from' 'query' query=Query
 	//	bindings+=Binding*
 	//	'}' ('with' priority=INT 'priority')?;
 	public RuleElements getRuleAccess() {
@@ -814,7 +911,7 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Asset:
-	//	ObjectFact | ReferenceFact;
+	//	ObjectFact | ReferenceFact | AttributeFact;
 	public AssetElements getAssetAccess() {
 		return pAsset;
 	}
@@ -824,7 +921,7 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ObjectFact:
-	//	'obj(' parameter=Parameter ')';
+	//	'obj(' variable=[iql::Variable] ')';
 	public ObjectFactElements getObjectFactAccess() {
 		return pObjectFact;
 	}
@@ -834,7 +931,7 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ReferenceFact:
-	//	'ref(' sourceParam=Parameter '->' '->' targetParam=Parameter ')';
+	//	'ref(' sourceVar=[iql::Variable] '->' targetVar=[iql::Variable] ':' reference=[ecore::EReference] ')';
 	public ReferenceFactElements getReferenceFactAccess() {
 		return pReferenceFact;
 	}
@@ -843,18 +940,18 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		return getReferenceFactAccess().getRule();
 	}
 	
-	//Query:
-	//	pattern=[iql::Pattern|STRING];
-	public QueryElements getQueryAccess() {
-		return pQuery;
+	//AttributeFact:
+	//	'attr(' variable=[iql::Variable] ')';
+	public AttributeFactElements getAttributeFactAccess() {
+		return pAttributeFact;
 	}
 	
-	public ParserRule getQueryRule() {
-		return getQueryAccess().getRule();
+	public ParserRule getAttributeFactRule() {
+		return getAttributeFactAccess().getRule();
 	}
 	
 	//Binding:
-	//	'where' parameter=Parameter 'bound' 'to' bind=Bind;
+	//	'where' variable=[iql::Variable] 'bound' 'to' bind=Bind;
 	public BindingElements getBindingAccess() {
 		return pBinding;
 	}
@@ -863,18 +960,8 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 		return getBindingAccess().getRule();
 	}
 	
-	//Parameter:
-	//	variable=[iql::Variable];
-	public ParameterElements getParameterAccess() {
-		return pParameter;
-	}
-	
-	public ParserRule getParameterRule() {
-		return getParameterAccess().getRule();
-	}
-	
 	//Bind:
-	//	ObjectBind;
+	//	ObjectBind | ValueBind;
 	public BindElements getBindAccess() {
 		return pBind;
 	}
@@ -885,13 +972,33 @@ public class RulesGrammarAccess extends AbstractGrammarElementFinder {
 	
 	////| ClassBind;
 	//ObjectBind:
-	//	object=[ecore::EObject];
+	//	'object' object=[ecore::EObject];
 	public ObjectBindElements getObjectBindAccess() {
 		return pObjectBind;
 	}
 	
 	public ParserRule getObjectBindRule() {
 		return getObjectBindAccess().getRule();
+	}
+	
+	//ValueBind:
+	//	'value' value=ValueType;
+	public ValueBindElements getValueBindAccess() {
+		return pValueBind;
+	}
+	
+	public ParserRule getValueBindRule() {
+		return getValueBindAccess().getRule();
+	}
+	
+	//enum ValueType:
+	//	STRING | INT;
+	public ValueTypeElements getValueTypeAccess() {
+		return eValueType;
+	}
+	
+	public EnumRule getValueTypeRule() {
+		return getValueTypeAccess().getRule();
 	}
 	
 	//enum AccessibilityLevel:

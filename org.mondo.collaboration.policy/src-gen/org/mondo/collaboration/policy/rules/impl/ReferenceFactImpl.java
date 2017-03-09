@@ -4,14 +4,15 @@
 package org.mondo.collaboration.policy.rules.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.mondo.collaboration.policy.rules.Parameter;
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
+
 import org.mondo.collaboration.policy.rules.ReferenceFact;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
@@ -23,8 +24,9 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getSourceParam <em>Source Param</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getTargetParam <em>Target Param</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getSourceVar <em>Source Var</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getTargetVar <em>Target Var</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl#getReference <em>Reference</em>}</li>
  * </ul>
  *
  * @generated
@@ -32,24 +34,34 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
 public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
 {
   /**
-   * The cached value of the '{@link #getSourceParam() <em>Source Param</em>}' containment reference.
+   * The cached value of the '{@link #getSourceVar() <em>Source Var</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSourceParam()
+   * @see #getSourceVar()
    * @generated
    * @ordered
    */
-  protected Parameter sourceParam;
+  protected Variable sourceVar;
 
   /**
-   * The cached value of the '{@link #getTargetParam() <em>Target Param</em>}' containment reference.
+   * The cached value of the '{@link #getTargetVar() <em>Target Var</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTargetParam()
+   * @see #getTargetVar()
    * @generated
    * @ordered
    */
-  protected Parameter targetParam;
+  protected Variable targetVar;
+
+  /**
+   * The cached value of the '{@link #getReference() <em>Reference</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getReference()
+   * @generated
+   * @ordered
+   */
+  protected EReference reference;
 
   /**
    * <!-- begin-user-doc -->
@@ -77,9 +89,19 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter getSourceParam()
+  public Variable getSourceVar()
   {
-    return sourceParam;
+    if (sourceVar != null && sourceVar.eIsProxy())
+    {
+      InternalEObject oldSourceVar = (InternalEObject)sourceVar;
+      sourceVar = (Variable)eResolveProxy(oldSourceVar);
+      if (sourceVar != oldSourceVar)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.REFERENCE_FACT__SOURCE_VAR, oldSourceVar, sourceVar));
+      }
+    }
+    return sourceVar;
   }
 
   /**
@@ -87,16 +109,42 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetSourceParam(Parameter newSourceParam, NotificationChain msgs)
+  public Variable basicGetSourceVar()
   {
-    Parameter oldSourceParam = sourceParam;
-    sourceParam = newSourceParam;
+    return sourceVar;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSourceVar(Variable newSourceVar)
+  {
+    Variable oldSourceVar = sourceVar;
+    sourceVar = newSourceVar;
     if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__SOURCE_VAR, oldSourceVar, sourceVar));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Variable getTargetVar()
+  {
+    if (targetVar != null && targetVar.eIsProxy())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__SOURCE_PARAM, oldSourceParam, newSourceParam);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      InternalEObject oldTargetVar = (InternalEObject)targetVar;
+      targetVar = (Variable)eResolveProxy(oldTargetVar);
+      if (targetVar != oldTargetVar)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.REFERENCE_FACT__TARGET_VAR, oldTargetVar, targetVar));
+      }
     }
-    return msgs;
+    return targetVar;
   }
 
   /**
@@ -104,20 +152,9 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSourceParam(Parameter newSourceParam)
+  public Variable basicGetTargetVar()
   {
-    if (newSourceParam != sourceParam)
-    {
-      NotificationChain msgs = null;
-      if (sourceParam != null)
-        msgs = ((InternalEObject)sourceParam).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.REFERENCE_FACT__SOURCE_PARAM, null, msgs);
-      if (newSourceParam != null)
-        msgs = ((InternalEObject)newSourceParam).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.REFERENCE_FACT__SOURCE_PARAM, null, msgs);
-      msgs = basicSetSourceParam(newSourceParam, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__SOURCE_PARAM, newSourceParam, newSourceParam));
+    return targetVar;
   }
 
   /**
@@ -125,26 +162,12 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter getTargetParam()
+  public void setTargetVar(Variable newTargetVar)
   {
-    return targetParam;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTargetParam(Parameter newTargetParam, NotificationChain msgs)
-  {
-    Parameter oldTargetParam = targetParam;
-    targetParam = newTargetParam;
+    Variable oldTargetVar = targetVar;
+    targetVar = newTargetVar;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__TARGET_PARAM, oldTargetParam, newTargetParam);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__TARGET_VAR, oldTargetVar, targetVar));
   }
 
   /**
@@ -152,20 +175,19 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTargetParam(Parameter newTargetParam)
+  public EReference getReference()
   {
-    if (newTargetParam != targetParam)
+    if (reference != null && reference.eIsProxy())
     {
-      NotificationChain msgs = null;
-      if (targetParam != null)
-        msgs = ((InternalEObject)targetParam).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.REFERENCE_FACT__TARGET_PARAM, null, msgs);
-      if (newTargetParam != null)
-        msgs = ((InternalEObject)newTargetParam).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.REFERENCE_FACT__TARGET_PARAM, null, msgs);
-      msgs = basicSetTargetParam(newTargetParam, msgs);
-      if (msgs != null) msgs.dispatch();
+      InternalEObject oldReference = (InternalEObject)reference;
+      reference = (EReference)eResolveProxy(oldReference);
+      if (reference != oldReference)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RulesPackage.REFERENCE_FACT__REFERENCE, oldReference, reference));
+      }
     }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__TARGET_PARAM, newTargetParam, newTargetParam));
+    return reference;
   }
 
   /**
@@ -173,17 +195,22 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public EReference basicGetReference()
   {
-    switch (featureID)
-    {
-      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
-        return basicSetSourceParam(null, msgs);
-      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
-        return basicSetTargetParam(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    return reference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setReference(EReference newReference)
+  {
+    EReference oldReference = reference;
+    reference = newReference;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.REFERENCE_FACT__REFERENCE, oldReference, reference));
   }
 
   /**
@@ -196,10 +223,15 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
   {
     switch (featureID)
     {
-      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
-        return getSourceParam();
-      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
-        return getTargetParam();
+      case RulesPackage.REFERENCE_FACT__SOURCE_VAR:
+        if (resolve) return getSourceVar();
+        return basicGetSourceVar();
+      case RulesPackage.REFERENCE_FACT__TARGET_VAR:
+        if (resolve) return getTargetVar();
+        return basicGetTargetVar();
+      case RulesPackage.REFERENCE_FACT__REFERENCE:
+        if (resolve) return getReference();
+        return basicGetReference();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -214,11 +246,14 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
   {
     switch (featureID)
     {
-      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
-        setSourceParam((Parameter)newValue);
+      case RulesPackage.REFERENCE_FACT__SOURCE_VAR:
+        setSourceVar((Variable)newValue);
         return;
-      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
-        setTargetParam((Parameter)newValue);
+      case RulesPackage.REFERENCE_FACT__TARGET_VAR:
+        setTargetVar((Variable)newValue);
+        return;
+      case RulesPackage.REFERENCE_FACT__REFERENCE:
+        setReference((EReference)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -234,11 +269,14 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
   {
     switch (featureID)
     {
-      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
-        setSourceParam((Parameter)null);
+      case RulesPackage.REFERENCE_FACT__SOURCE_VAR:
+        setSourceVar((Variable)null);
         return;
-      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
-        setTargetParam((Parameter)null);
+      case RulesPackage.REFERENCE_FACT__TARGET_VAR:
+        setTargetVar((Variable)null);
+        return;
+      case RulesPackage.REFERENCE_FACT__REFERENCE:
+        setReference((EReference)null);
         return;
     }
     super.eUnset(featureID);
@@ -254,10 +292,12 @@ public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
   {
     switch (featureID)
     {
-      case RulesPackage.REFERENCE_FACT__SOURCE_PARAM:
-        return sourceParam != null;
-      case RulesPackage.REFERENCE_FACT__TARGET_PARAM:
-        return targetParam != null;
+      case RulesPackage.REFERENCE_FACT__SOURCE_VAR:
+        return sourceVar != null;
+      case RulesPackage.REFERENCE_FACT__TARGET_VAR:
+        return targetVar != null;
+      case RulesPackage.REFERENCE_FACT__REFERENCE:
+        return reference != null;
     }
     return super.eIsSet(featureID);
   }

@@ -121,19 +121,14 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
         return createReferenceFactAdapter();
       }
       @Override
-      public Adapter caseQuery(Query object)
+      public Adapter caseAttributeFact(AttributeFact object)
       {
-        return createQueryAdapter();
+        return createAttributeFactAdapter();
       }
       @Override
       public Adapter caseBinding(Binding object)
       {
         return createBindingAdapter();
-      }
-      @Override
-      public Adapter caseParameter(Parameter object)
-      {
-        return createParameterAdapter();
       }
       @Override
       public Adapter caseBind(Bind object)
@@ -144,6 +139,11 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
       public Adapter caseObjectBind(ObjectBind object)
       {
         return createObjectBindAdapter();
+      }
+      @Override
+      public Adapter caseValueBind(ValueBind object)
+      {
+        return createValueBindAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -303,16 +303,16 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.mondo.collaboration.policy.rules.Query <em>Query</em>}'.
+   * Creates a new adapter for an object of class '{@link org.mondo.collaboration.policy.rules.AttributeFact <em>Attribute Fact</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.mondo.collaboration.policy.rules.Query
+   * @see org.mondo.collaboration.policy.rules.AttributeFact
    * @generated
    */
-  public Adapter createQueryAdapter()
+  public Adapter createAttributeFactAdapter()
   {
     return null;
   }
@@ -328,21 +328,6 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBindingAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.mondo.collaboration.policy.rules.Parameter <em>Parameter</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.mondo.collaboration.policy.rules.Parameter
-   * @generated
-   */
-  public Adapter createParameterAdapter()
   {
     return null;
   }
@@ -373,6 +358,21 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createObjectBindAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.mondo.collaboration.policy.rules.ValueBind <em>Value Bind</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.mondo.collaboration.policy.rules.ValueBind
+   * @generated
+   */
+  public Adapter createValueBindAdapter()
   {
     return null;
   }

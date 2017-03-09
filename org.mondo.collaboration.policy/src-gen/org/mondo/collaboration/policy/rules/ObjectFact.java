@@ -3,6 +3,7 @@
  */
 package org.mondo.collaboration.policy.rules;
 
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,7 +14,7 @@ package org.mondo.collaboration.policy.rules;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.ObjectFact#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.ObjectFact#getVariable <em>Variable</em>}</li>
  * </ul>
  *
  * @see org.mondo.collaboration.policy.rules.RulesPackage#getObjectFact()
@@ -23,29 +24,29 @@ package org.mondo.collaboration.policy.rules;
 public interface ObjectFact extends Asset
 {
   /**
-   * Returns the value of the '<em><b>Parameter</b></em>' containment reference.
+   * Returns the value of the '<em><b>Variable</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Parameter</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Variable</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Parameter</em>' containment reference.
-   * @see #setParameter(Parameter)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getObjectFact_Parameter()
-   * @model containment="true"
+   * @return the value of the '<em>Variable</em>' reference.
+   * @see #setVariable(Variable)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getObjectFact_Variable()
+   * @model
    * @generated
    */
-  Parameter getParameter();
+  Variable getVariable();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ObjectFact#getParameter <em>Parameter</em>}' containment reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.ObjectFact#getVariable <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Parameter</em>' containment reference.
-   * @see #getParameter()
+   * @param value the new value of the '<em>Variable</em>' reference.
+   * @see #getVariable()
    * @generated
    */
-  void setParameter(Parameter value);
+  void setVariable(Variable value);
 
 } // ObjectFact

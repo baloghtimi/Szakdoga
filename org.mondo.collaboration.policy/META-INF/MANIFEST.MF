@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime,
  org.eclipse.xtext.util,
  org.eclipse.xtend.lib,
- org.eclipse.emf.common
+ org.eclipse.emf.common,
+ org.eclipse.core.databinding.property;bundle-version="1.6.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.mondo.collaboration.policy.rules,
  org.mondo.collaboration.policy.rules.impl,
@@ -26,5 +27,6 @@ Export-Package: org.mondo.collaboration.policy.rules,
  org.mondo.collaboration.policy.parser.antlr,
  org.mondo.collaboration.policy.serializer,
  org.mondo.collaboration.policy.scoping,
- org.mondo.collaboration.policy.services
+ org.mondo.collaboration.policy.services,
+ org.mondo.collaboration.policy.formatting2
 Import-Package: org.apache.log4j

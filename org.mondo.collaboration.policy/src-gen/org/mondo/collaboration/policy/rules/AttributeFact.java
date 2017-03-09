@@ -3,27 +3,25 @@
  */
 package org.mondo.collaboration.policy.rules;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Parameter</b></em>'.
+ * A representation of the model object '<em><b>Attribute Fact</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.Parameter#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.AttributeFact#getVariable <em>Variable</em>}</li>
  * </ul>
  *
- * @see org.mondo.collaboration.policy.rules.RulesPackage#getParameter()
+ * @see org.mondo.collaboration.policy.rules.RulesPackage#getAttributeFact()
  * @model
  * @generated
  */
-public interface Parameter extends EObject
+public interface AttributeFact extends Asset
 {
   /**
    * Returns the value of the '<em><b>Variable</b></em>' reference.
@@ -35,14 +33,14 @@ public interface Parameter extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Variable</em>' reference.
    * @see #setVariable(Variable)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getParameter_Variable()
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getAttributeFact_Variable()
    * @model
    * @generated
    */
   Variable getVariable();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Parameter#getVariable <em>Variable</em>}' reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.AttributeFact#getVariable <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Variable</em>' reference.
@@ -51,4 +49,4 @@ public interface Parameter extends EObject
    */
   void setVariable(Variable value);
 
-} // Parameter
+} // AttributeFact

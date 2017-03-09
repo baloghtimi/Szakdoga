@@ -7,6 +7,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Rule</b></em>'.
@@ -20,8 +22,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getAccess <em>Access</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getRoles <em>Roles</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getPattern <em>Pattern</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getAsset <em>Asset</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getQuery <em>Query</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getBindings <em>Bindings</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getPriority <em>Priority</em>}</li>
  * </ul>
@@ -133,6 +135,32 @@ public interface Rule extends EObject
   EList<Role> getRoles();
 
   /**
+   * Returns the value of the '<em><b>Pattern</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Pattern</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Pattern</em>' reference.
+   * @see #setPattern(Pattern)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Pattern()
+   * @model
+   * @generated
+   */
+  Pattern getPattern();
+
+  /**
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getPattern <em>Pattern</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Pattern</em>' reference.
+   * @see #getPattern()
+   * @generated
+   */
+  void setPattern(Pattern value);
+
+  /**
    * Returns the value of the '<em><b>Asset</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -157,32 +185,6 @@ public interface Rule extends EObject
    * @generated
    */
   void setAsset(Asset value);
-
-  /**
-   * Returns the value of the '<em><b>Query</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Query</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Query</em>' containment reference.
-   * @see #setQuery(Query)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Query()
-   * @model containment="true"
-   * @generated
-   */
-  Query getQuery();
-
-  /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getQuery <em>Query</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Query</em>' containment reference.
-   * @see #getQuery()
-   * @generated
-   */
-  void setQuery(Query value);
 
   /**
    * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.

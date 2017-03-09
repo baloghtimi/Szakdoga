@@ -1,0 +1,15 @@
+user Karesz
+user Kitty
+user Luca
+user Timi
+user Nur
+
+group BlueSeniors { Karesz , Kitty , Luca , Timi , Nur }
+
+policy Camp deny RW by default {
+	rule cardsOfColorBlue allow RW to Nur {
+		from query "cardSeniorsOfColorSenior"
+		select ref(cardSenior -> colorSenior : )
+		where colorSenior bound to object
+	} with 1 priority
+} with restrictive resolution
