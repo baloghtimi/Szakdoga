@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
@@ -63,8 +64,10 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
 	
 	private IScope getScopeReferenceFact_Reference(EObject context, EReference reference){
 	    ReferenceFact ref = (ReferenceFact) context;
-	    ArrayList<EObject> references = Lists.newArrayList();
-	    return Scopes.scopeFor(references);
+	    EClass typeClass = ref.getSourceVar().getType().eClass();
+	    EStructuralFeature classnameFeature = typeClass.getEStructuralFeature("classname");
+	    EClass contextClass = (EClass) ref.getSourceVar().getType().eGet(classnameFeature);
+	    return Scopes.scopeFor(contextClass.getEAllReferences()); // Attribútumnál majd a getEAllAttributes()-t kell meghívni
 	}
 	
 	private IScope getScopeObjectBind_Object(EObject context, EReference reference){
