@@ -7,11 +7,15 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.PatternModel;
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.Type;
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.xtype.impl.XImportSectionImpl;
 import org.mondo.collaboration.policy.rules.*;
 
 import com.google.common.collect.Lists;
@@ -63,6 +67,11 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
 	
 	private IScope getScopeReferenceFact_Reference(EObject context, EReference reference){
 	    ReferenceFact ref = (ReferenceFact) context;
+	    Type classType = ref.getSourceVar().getType();
+	    EStructuralFeature classNameFeature = classType.eClass().getEStructuralFeature("classname");
+	    EClass parameterClass = (EClass) classType.eGet(classNameFeature);
+	    String className = parameterClass.getName();
+	    
 	    ArrayList<EObject> references = Lists.newArrayList();
 	    return Scopes.scopeFor(references);
 	}
@@ -82,6 +91,12 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
 		Resource contextResource = context.eResource();
 		String newURI = contextResource.getURI().toString().replace(".rules", extension);
 	    Resource otherResource = contextResource.getResourceSet().getResource(URI.createURI(newURI), true);
+	    PatternModel patternModel = (PatternModel) otherResource.getContents().get(0);
+	    EStructuralFeature a = patternModel.eClass().getEStructuralFeature("importPackages");
+	    XImportSectionImpl b = (XImportSectionImpl) patternModel.eGet(a);
+	    String packageURI = b.getImportDeclarations().get(0).getImportedNamespace();
+	    contextResource.getResourceSet().getResource(URI.createURI(packageURI), true);
+	    
 	    return otherResource.getAllContents();
 	}
 }	
