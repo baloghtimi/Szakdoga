@@ -67,13 +67,10 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
 	
 	private IScope getScopeReferenceFact_Reference(EObject context, EReference reference){
 	    ReferenceFact ref = (ReferenceFact) context;
-	    Type classType = ref.getSourceVar().getType();
-	    EStructuralFeature classNameFeature = classType.eClass().getEStructuralFeature("classname");
-	    EClass parameterClass = (EClass) classType.eGet(classNameFeature);
-	    String className = parameterClass.getName();
-	    
-	    ArrayList<EObject> references = Lists.newArrayList();
-	    return Scopes.scopeFor(references);
+	    EClass typeClass = ref.getSourceVar().getType().eClass();
+	    EStructuralFeature classnameFeature = typeClass.getEStructuralFeature("classname");
+	    EClass contextClass = (EClass) ref.getSourceVar().getType().eGet(classnameFeature);
+	    return Scopes.scopeFor(contextClass.getEAllReferences()); // Attribútumnál majd a getEAllAttributes()-t kell meghívni
 	}
 	
 	private IScope getScopeObjectBind_Object(EObject context, EReference reference){
