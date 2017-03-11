@@ -1,21 +1,21 @@
 package org.mondo.collaboration.policy.scoping;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.viatra.query.patternlanguage.emf.eMFPatternLanguage.ClassType;
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.PatternModel;
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.Type;
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.xtype.impl.XImportSectionImpl;
 import org.mondo.collaboration.policy.rules.*;
 
 import com.google.common.collect.Lists;
@@ -30,15 +30,19 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
     	if((reference == RulesPackage.eINSTANCE.getBinding_Variable() && context instanceof Binding) ||
     	   (reference == RulesPackage.eINSTANCE.getObjectFact_Variable() && context instanceof ObjectFact) ||
     	   (reference == RulesPackage.eINSTANCE.getReferenceFact_SourceVar() && context instanceof ReferenceFact) ||
-    	   (reference == RulesPackage.eINSTANCE.getReferenceFact_TargetVar() && context instanceof ReferenceFact)){
+    	   (reference == RulesPackage.eINSTANCE.getReferenceFact_TargetVar() && context instanceof ReferenceFact) ||
+    	   (reference == RulesPackage.eINSTANCE.getAttributeFact_Variable() && context instanceof AttributeFact)){
     		return getScopeVariable(context, reference);
     	}
     	if(reference == RulesPackage.eINSTANCE.getReferenceFact_Reference() && context instanceof ReferenceFact){
     		return getScopeReferenceFact_Reference(context, reference);
     	}
-    	if(reference == RulesPackage.eINSTANCE.getObjectBind_Object() && context instanceof ObjectBind){
-    		return getScopeObjectBind_Object(context, reference);
+    	if(reference == RulesPackage.eINSTANCE.getAttributeFact_Attribute() && context instanceof AttributeFact){
+    		return getScopeAttributeFact_Attribute(context, reference);
     	}
+    	/*if(reference == RulesPackage.eINSTANCE.getObjectBind_Object() && context instanceof ObjectBind){
+    		return getScopeObjectBind_Object(context, reference);
+    	}*/
     	return super.getScope(context, reference);
     }
 
@@ -66,34 +70,63 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
 	}
 	
 	private IScope getScopeReferenceFact_Reference(EObject context, EReference reference){
-	    ReferenceFact ref = (ReferenceFact) context;
-	    EClass typeClass = ref.getSourceVar().getType().eClass();
-	    EStructuralFeature classnameFeature = typeClass.getEStructuralFeature("classname");
-	    EClass contextClass = (EClass) ref.getSourceVar().getType().eGet(classnameFeature);
-	    return Scopes.scopeFor(contextClass.getEAllReferences()); // Attribútumnál majd a getEAllAttributes()-t kell meghívni
+	    ReferenceFact refFact = (ReferenceFact) context;
+	    ClassType sourceClassType = (ClassType) refFact.getSourceVar().getType();
+	    ClassType targetClassType = (ClassType) refFact.getTargetVar().getType();
+	    EClass sourceParamClass = (EClass) sourceClassType.getClassname();
+	    EClassifier targetParamClassifier = targetClassType.getClassname();
+	    ArrayList<EReference> refs = Lists.newArrayList();;
+	    Iterator<EReference> iter = sourceParamClass.getEAllReferences().iterator();
+	    while(iter.hasNext()){
+	    	EReference ref = iter.next();
+	    	if(ref.getEType() == targetParamClassifier){
+	    		refs.add(ref);
+	    	}
+	    }
+	    return Scopes.scopeFor(refs);
 	}
 	
-	private IScope getScopeObjectBind_Object(EObject context, EReference reference){
-	    TreeIterator<EObject> iterator = getResourceContent(context, ".freshmancamp");
-	    Binding binding = (Binding) context.eContainer();
+	private IScope getScopeAttributeFact_Attribute(EObject context, EReference reference){
+		AttributeFact attrFact = (AttributeFact) context;
+	    ClassType varClassType = (ClassType) attrFact.getVariable().getType();
+	    EClass varClass = (EClass) varClassType.getClassname();
+	    return Scopes.scopeFor(varClass.getEAllAttributes());
+	}
+	
+	/*private IScope getScopeObjectBind_Object(EObject context, EReference reference){
+		EObject container = context.eContainer();
+		while(!(container instanceof Model)){
+			container = context.eContainer();
+		}
+		Model model = (Model) container;
+		
+		String importURI = model.getMetaModel().getImportURI();
+		String extension = importURI.substring(importURI.lastIndexOf('.'));
+		
+	    TreeIterator<EObject> iterator = getResourceContent(context, extension);
+	    
+	    while(!(container instanceof Binding)){
+			container = context.eContainer();
+		}
+	    Binding binding = (Binding) container;
+	    
+	    ClassType varClassType = (ClassType) binding.getVariable().getType();
+	    EClass varClass = (EClass) varClassType.getClassname();
+	    
 	    ArrayList<EObject> objects = Lists.newArrayList();
 	    while(iterator.hasNext()){
 	    	EObject eObject = iterator.next();
-	    		objects.add(eObject);
+	    	if(eObject.eClass() == varClass){
+	    	    objects.add(eObject);
+	    	}
 	    }
 	    return Scopes.scopeFor(objects);
-	}
+	}*/
 	
 	private TreeIterator<EObject> getResourceContent(EObject context, String extension){
 		Resource contextResource = context.eResource();
 		String newURI = contextResource.getURI().toString().replace(".rules", extension);
 	    Resource otherResource = contextResource.getResourceSet().getResource(URI.createURI(newURI), true);
-	    PatternModel patternModel = (PatternModel) otherResource.getContents().get(0);
-	    EStructuralFeature a = patternModel.eClass().getEStructuralFeature("importPackages");
-	    XImportSectionImpl b = (XImportSectionImpl) patternModel.eGet(a);
-	    String packageURI = b.getImportDeclarations().get(0).getImportedNamespace();
-	    contextResource.getResourceSet().getResource(URI.createURI(packageURI), true);
-	    
 	    return otherResource.getAllContents();
 	}
 }	

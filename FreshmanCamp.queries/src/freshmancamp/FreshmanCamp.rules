@@ -1,3 +1,5 @@
+import 'FrashmanCamp.freshmancamp'
+
 user Karesz
 user Kitty
 user Luca
@@ -9,7 +11,7 @@ group BlueSeniors { Karesz , Kitty , Luca , Timi , Nur }
 policy Camp deny RW by default {
 	rule cardsOfColorBlue allow RW to Nur {
 		from query "cardSeniorsOfColorSenior"
-		select ref(cardSenior -> colorSenior : )
-		where colorSenior bound to object
+		select attr(cardSenior: color)
+		where colorSenior bound to object Nur
 	} with 1 priority
 } with restrictive resolution
