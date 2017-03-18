@@ -1,25 +1,153 @@
 package org.mondo.collaboration.policy.formatting2;
 
-import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
-import org.eclipse.xtext.formatting.impl.FormattingConfig;
-import org.mondo.collaboration.policy.services.RulesGrammarAccess;
+import java.util.Iterator;
+import java.util.List;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.formatting2.AbstractFormatter2;
+import org.eclipse.xtext.formatting2.FormatterRequest;
+import org.eclipse.xtext.formatting2.IFormattableDocument;
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.AbstractHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeHiddenRegion;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.eclipse.xtext.xbase.formatting2.BlankLineKey;
+import org.eclipse.xtext.xbase.formatting2.IndentOnceAutowrapFormatter;
+import org.eclipse.xtext.xbase.formatting2.NewLineKey;
+import org.eclipse.xtext.xbase.formatting2.NewLineOrPreserveKey;
+import org.eclipse.xtext.xbase.formatting2.WhitespaceKey;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.mondo.collaboration.policy.rules.*;
 
-public class RulesFormatter extends AbstractDeclarativeFormatter {
+import com.google.common.collect.Lists;
+
+public class RulesFormatter extends AbstractFormatter2 {
+	
+	ITextRegionAccess access;
+	ISemanticRegion reg;
+	List<ISemanticRegion> regs = Lists.newArrayList();
 	
 	@Override
-    protected void configureFormatting(FormattingConfig c){
-		RulesGrammarAccess g = (RulesGrammarAccess) getGrammarAccess();
-		
-		c.setLinewrap().before(g.getRuleAccess().getRuleKeyword_0());
-		
-		c.setLinewrap(1).after(g.getRuleAccess().getLeftCurlyBracketKeyword_7());
-		
-		//c.setLinewrap(1).after(g.getRuleAccess().getQueryAssignment_10());
-		
-		//c.setLinewrap(1).after(g.getRuleAccess().getAssetAssignment_12());
-		
-		//c.setLinewrap(1).after(g.getRuleAccess().getBindingsAssignment_13());
-		
-		c.setLinewrap(1).after(g.getRuleAccess().getPriorityKeyword_15_2());
+	protected void initalize(FormatterRequest request) {
+		super.initalize(request);
+		access = getTextRegionAccess();
+	}
+	
+	public void format(Object obj, IFormattableDocument doc){
+		LazyLinkingResource res = (LazyLinkingResource) obj;
+		TreeIterator<EObject> iter = res.getAllContents();
+		EObject prev = iter.next();
+		while(iter.hasNext()){
+			EObject eObj = iter.next();
+			
+			//MetaModel
+			if(eObj instanceof MetaModel){
+				reg = access.regionForEObject(eObj).getRegionFor().keyword("import");
+				doc.append(reg, new WhitespaceKey("", true));
+				
+				reg = access.regionForEObject(eObj).getRegionFor().feature(RulesPackage.Literals.META_MODEL__IMPORT_URI);
+				doc.append(reg, new BlankLineKey("", 1));
+			}
+			
+			//User
+			if(eObj instanceof User){
+				reg = access.regionForEObject(eObj).getRegionFor().keyword("user");
+				doc.prepend(reg, new NewLineKey("", true));
+			}
+			
+			//Group
+			if(eObj instanceof Group){
+				reg = access.regionForEObject(eObj).getRegionFor().keyword("group");
+				if(!(prev instanceof Group)){
+					doc.prepend(reg, new BlankLineKey("", 1));
+				} else {
+				    doc.prepend(reg, new NewLineKey("", true));
+				}
+				
+				reg = access.regionForEObject(eObj).getRegionFor().keyword("{");
+				doc.prepend(reg, new WhitespaceKey("", true));
+				doc.append(reg, new WhitespaceKey("", false));
+				
+				regs = access.regionForEObject(eObj).getRegionFor().keywords(",");
+				Iterator<ISemanticRegion> i = regs.iterator();
+				while(i.hasNext()){
+					reg = i.next();
+					doc.prepend(reg, new WhitespaceKey("", false));
+					doc.append(reg, new WhitespaceKey("", true));
+				}
+				
+				reg = access.regionForEObject(eObj).getRegionFor().keyword("}");
+				doc.prepend(reg, new WhitespaceKey("", false));
+			}
+			
+			//Policy
+		    if(eObj instanceof Policy){
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("policy");
+		        doc.prepend(reg, new BlankLineKey("", 1));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("{");
+		        doc.prepend(reg, new WhitespaceKey("", true));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("}");
+		        doc.prepend(reg, new BlankLineKey("", 1));
+		        doc.append(reg, new WhitespaceKey("", true));
+		    }
+		    
+		    //Rule
+		    if(eObj instanceof Rule){
+		        //ISemanticRegion first = access.regionForEObject(eObj).getRegionFor().keyword("rule");
+		        //ISemanticRegion second = access.regionForEObject(eObj).getRegionFor().keyword("priority");
+		        //doc.interior(first.getPreviousSemanticRegion(), second.getNextSemanticRegion(), new IndentOnceAutowrapFormatter(first.getNextHiddenRegion()));
+		    	
+		    	reg = access.regionForEObject(eObj).getRegionFor().keyword("rule");
+		        doc.prepend(reg, new BlankLineKey("", 1));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("{");
+		        doc.prepend(reg, new WhitespaceKey("", true));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("from");
+		        doc.prepend(reg, new NewLineKey("", true));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("query");
+				doc.append(reg, new WhitespaceKey("", true));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("select");
+		        doc.prepend(reg, new NewLineKey("", true));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("where");
+		        doc.append(reg, new NewLineKey("", true));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("}");
+		        doc.prepend(reg, new NewLineKey("", true));
+		        doc.append(reg, new WhitespaceKey("", true));
+		    }
+		    
+		    //Asset
+		    if(eObj instanceof Asset){
+		    	reg = access.regionForEObject(eObj).getRegionFor().keyword("(");
+		        doc.surround(reg, new WhitespaceKey("", false));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword(")");
+		        doc.prepend(reg, new WhitespaceKey("", false));
+		        
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword("->");
+		        doc.surround(reg, new WhitespaceKey("", true));
+		     
+		        reg = access.regionForEObject(eObj).getRegionFor().keyword(":");
+		        doc.prepend(reg, new WhitespaceKey("", false));
+			    doc.append(reg, new WhitespaceKey("", true));
+		    }
+		    
+		    //Binding
+		    if(eObj instanceof Binding){
+		    	reg = access.regionForEObject(eObj).getRegionFor().keyword("where");
+		    	doc.prepend(reg, new NewLineKey("", true));
+		    }
+			
+		    prev = eObj;
+		}
 	}
 }

@@ -1,17 +1,1 @@
-import 'FrashmanCamp.freshmancamp'
-
-user Karesz
-user Kitty
-user Luca
-user Timi
-user Nur
-
-group BlueSeniors { Karesz , Kitty , Luca , Timi , Nur }
-
-policy Camp deny RW by default {
-	rule cardsOfColorBlue allow RW to Nur {
-		from query "cardSeniorsOfColorSenior"
-		select attr(cardSenior: color)
-		where colorSenior bound to object Nur
-	} with 1 priority
-} with restrictive resolution
+import'FrashmanCamp.freshmancamp' user Karesz user Kitty user Luca user Timi user Nur group BlueSeniors{ Karesz ,Kitty ,Luca ,Timi ,Nur }policy Camp deny RW by default{rule cardsOfColorBlue allow RW to Nur{from query"cardSeniorsOfColorSenior"select attr ( cardSenior:color ) where colorSenior bound to object Eva }with 1 priority }with restrictive resolution

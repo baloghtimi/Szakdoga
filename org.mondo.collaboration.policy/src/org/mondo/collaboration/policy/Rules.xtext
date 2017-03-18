@@ -6,7 +6,7 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/viatra/query/patternlanguage/PatternLanguage" as iql
 
 Model:
-	metaModel=MetaModel
+	(metaModel=MetaModel)?
 	roles+=Role*
 	policy=Policy;
 	
@@ -39,13 +39,13 @@ Asset:
 	ObjectFact | ReferenceFact | AttributeFact;
 	
 ObjectFact:
-	'obj(' variable=[iql::Variable] ')';
+	'obj' '(' variable=[iql::Variable] ')';
 	
 ReferenceFact:
-	'ref(' sourceVar=[iql::Variable] '->' targetVar=[iql::Variable] ':' reference=[ecore::EReference] ')';
+	'ref' '(' sourceVar=[iql::Variable] '->' targetVar=[iql::Variable] ':' reference=[ecore::EReference] ')';
 	
 AttributeFact:
-	'attr(' variable=[iql::Variable] ':' attribute=[ecore::EAttribute] ')';
+	'attr' '(' variable=[iql::Variable] ':' attribute=[ecore::EAttribute] ')';
 	
 Binding:
 	'where' variable=[iql::Variable] 'bound' 'to' bind=Bind;
