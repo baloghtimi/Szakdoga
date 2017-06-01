@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated freshmanCamp -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="FreshmanCamp.freshmanCamp.presentation.FreshmanCampModelWizardID"
+            name="%_UI_FreshmanCampModelWizard_label"
+            class="FreshmanCamp.freshmanCamp.presentation.FreshmanCampModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/FreshmanCampModelFile.gif">
+         <description>%_UI_FreshmanCampModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated freshmanCamp -->
+      <editor
+            id="FreshmanCamp.freshmanCamp.presentation.FreshmanCampEditorID"
+            name="%_UI_FreshmanCampEditor_label"
+            icon="icons/full/obj16/FreshmanCampModelFile.gif"
+            extensions="freshmancamp"
+            class="FreshmanCamp.freshmanCamp.presentation.FreshmanCampEditor"
+            contributorClass="FreshmanCamp.freshmanCamp.presentation.FreshmanCampActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

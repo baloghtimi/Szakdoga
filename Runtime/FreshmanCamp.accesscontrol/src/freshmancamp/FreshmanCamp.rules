@@ -1,0 +1,25 @@
+//import'FrashmanCamp.freshmancamp'
+
+user Zsolti
+
+policy camp deny RW by default {
+	
+	rule blueCardSeniors allow RW to Zsolti {
+		from query "cardSeniors"
+		select obj(cardSenior)
+		where colorType is bound to "BlueColor"
+	} with 1 priority
+	
+} with restrictive resolution
+
+/*user Zsolti
+
+policy camp deny RW by default {
+	
+	rule blueRoomSeniors allow RW to Zsolti {
+		from query "roomSeniors"
+		select obj(roomSenior)
+		where colorType is bound to "BlueColor"
+	} with 1 priority
+	
+} with restrictive resolution*/

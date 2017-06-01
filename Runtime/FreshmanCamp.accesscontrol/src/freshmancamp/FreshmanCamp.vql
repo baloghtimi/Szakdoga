@@ -1,0 +1,23 @@
+package freshmancamp
+
+import "platform:/resource/FreshmanCamp/model/freshmanCamp.ecore"
+
+pattern colors(color : Color) = {
+	Color(color);
+}
+
+pattern cardSeniors(cardSenior : CardSenior, colorType : ColorType) = {
+	CardSenior.color(cardSenior, colorType);
+}
+
+pattern cardSeniorsOfColorSenior(cardSenior : CardSenior, colorSenior : ColorSenior) = {
+	ColorSenior.inferiors(colorSenior, cardSenior);
+}
+
+pattern cardSeniorsStartedIn2014(cardSenior : CardSenior) = {
+	CardSenior.year(cardSenior, 2014);
+}
+
+pattern roomSeniors(roomSenior : RoomSenior, colorType : ColorType) = {
+	RoomSenior.color(roomSenior, colorType);
+}
