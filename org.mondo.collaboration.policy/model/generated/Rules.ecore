@@ -8,6 +8,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="policy" eType="#//Policy"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Role">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="User" eSuperTypes="#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//Role">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="users" unique="false" upperBound="-1"
+        eType="#//User"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Policy">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" eType="#//AccessibilityLevel"/>
@@ -18,8 +26,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" eType="#//AccessibilityLevel"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="#//OperationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//RuleConstraint"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" unique="false" upperBound="-1"
         eType="#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Pattern"/>
@@ -29,13 +37,9 @@
         eType="#//Binding" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Role">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="User" eSuperTypes="#//Role"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//Role">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="users" unique="false" upperBound="-1"
-        eType="#//User"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RuleConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" eType="#//AccessibilityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="#//OperationType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Asset"/>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectFact" eSuperTypes="#//Asset">
@@ -48,21 +52,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeFact" eSuperTypes="#//Asset">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Binding">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Variable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bind" eType="#//Bind" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Bind"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ObjectBind" eSuperTypes="#//Bind">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ValueBind" eSuperTypes="#//Bind">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//ValueType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ValueType">
-    <eLiterals name="STRING" literal="STRING"/>
-    <eLiterals name="INT" value="1" literal="INT"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bind" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AccessibilityLevel">
     <eLiterals name="ALLOW" literal="allow"/>

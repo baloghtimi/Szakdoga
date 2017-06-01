@@ -6,12 +6,12 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/viatra/query/patternlanguage/PatternLanguage" as iql
 
 Model:
-	(metaModel=MetaModel)?
+	//(instanceModel=InstanceModel)?
 	roles+=Role*
 	policy=Policy;
 	
-MetaModel:
-	'import' importURI=STRING;
+/*InstanceModel:
+	'import' importURI=STRING;*/
 	
 Role:
 	User | Group;
@@ -29,11 +29,15 @@ Policy:
 	'}' 'with' resolution=ResolutionType 'resolution';
 	
 Rule:
-	'rule' name=ID access=AccessibilityLevel operation=OperationType 'to' roles+=[Role] (',' roles+=[Role])* '{'
+	'rule' name=ID constraint=RuleConstraint 'to' roles+=[Role] (',' roles+=[Role])* '{'
 	'from' 'query' pattern=[iql::Pattern|STRING]
 	'select' asset=Asset
 	bindings+=Binding*
 	'}' ('with' priority=INT 'priority')?;
+
+RuleConstraint:
+	access=AccessibilityLevel operation=OperationType | {RuleConstraint} 'obfuscate'
+;
 	
 Asset:
 	ObjectFact | ReferenceFact | AttributeFact;
@@ -48,21 +52,9 @@ AttributeFact:
 	'attr' '(' variable=[iql::Variable] ':' attribute=[ecore::EAttribute] ')';
 	
 Binding:
-	'where' variable=[iql::Variable] 'bound' 'to' bind=Bind;
+	'where' variable=[iql::Variable] 'is' 'bound' 'to' bind=Bind;
 	
 Bind:
-	ObjectBind | ValueBind; //| ClassBind;
-
-ObjectBind:
-	'object' object=[ecore::EObject];
-	
-ValueBind:
-	'value' value=ValueType;
-	
-/*ClassBind:
-	class=[ecore::EClass];*/
-
-enum ValueType:
 	STRING | INT;
 	
 enum AccessibilityLevel:
@@ -73,3 +65,18 @@ enum OperationType:
 	
 enum ResolutionType:
 	RESTRICTIVE='restrictive' | PERMISSIVE='permissive';
+	
+/*Bind:
+	ObjectBind | EnumBind | ValueBind;
+
+ObjectBind:
+	'object' object=[ecore::EObject];
+	
+EnumBind:
+	'enum' enumliteral=[ecore::EEnumLiteral];
+	
+ValueBind:
+	'value' value=ValueType;
+
+enum ValueType:
+	STRING | INT;*/

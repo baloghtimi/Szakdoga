@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 import org.mondo.collaboration.policy.rules.Model
 
 @RunWith(XtextRunner)
-@InjectWith(RulesInjectorProvider)
+//@InjectWith(RulesInjectorProvider)
 class RulesParsingTest{
 
 	@Inject

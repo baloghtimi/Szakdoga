@@ -7,19 +7,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
-import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.formatting2.regionaccess.internal.AbstractHiddenRegion;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeHiddenRegion;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.xbase.formatting2.BlankLineKey;
-import org.eclipse.xtext.xbase.formatting2.IndentOnceAutowrapFormatter;
 import org.eclipse.xtext.xbase.formatting2.NewLineKey;
-import org.eclipse.xtext.xbase.formatting2.NewLineOrPreserveKey;
 import org.eclipse.xtext.xbase.formatting2.WhitespaceKey;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.mondo.collaboration.policy.rules.*;
 
 import com.google.common.collect.Lists;
@@ -32,7 +25,6 @@ public class RulesFormatter extends AbstractFormatter2 {
 	
 	@Override
 	protected void initalize(FormatterRequest request) {
-		super.initalize(request);
 		access = getTextRegionAccess();
 	}
 	
@@ -44,13 +36,13 @@ public class RulesFormatter extends AbstractFormatter2 {
 			EObject eObj = iter.next();
 			
 			//MetaModel
-			if(eObj instanceof MetaModel){
+			/*if(eObj instanceof InstanceModel){
 				reg = access.regionForEObject(eObj).getRegionFor().keyword("import");
 				doc.append(reg, new WhitespaceKey("", true));
 				
-				reg = access.regionForEObject(eObj).getRegionFor().feature(RulesPackage.Literals.META_MODEL__IMPORT_URI);
+				reg = access.regionForEObject(eObj).getRegionFor().feature(RulesPackage.Literals.INSTANCE_MODEL__IMPORT_URI);
 				doc.append(reg, new BlankLineKey("", 1));
-			}
+			}*/
 			
 			//User
 			if(eObj instanceof User){
@@ -100,7 +92,7 @@ public class RulesFormatter extends AbstractFormatter2 {
 		    if(eObj instanceof Rule){
 		        //ISemanticRegion first = access.regionForEObject(eObj).getRegionFor().keyword("rule");
 		        //ISemanticRegion second = access.regionForEObject(eObj).getRegionFor().keyword("priority");
-		        //doc.interior(first.getPreviousSemanticRegion(), second.getNextSemanticRegion(), new IndentOnceAutowrapFormatter(first.getNextHiddenRegion()));
+		        //doc.interior(first.getPreviousSemanticRegion(), second.getNextSemanticRegion(), );
 		    	
 		    	reg = access.regionForEObject(eObj).getRegionFor().keyword("rule");
 		        doc.prepend(reg, new BlankLineKey("", 1));

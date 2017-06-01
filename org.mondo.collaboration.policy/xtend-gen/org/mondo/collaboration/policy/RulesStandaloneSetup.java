@@ -11,7 +11,6 @@ import org.mondo.collaboration.policy.RulesStandaloneSetupGenerated;
 @SuppressWarnings("all")
 public class RulesStandaloneSetup extends RulesStandaloneSetupGenerated {
   public static void doSetup() {
-    RulesStandaloneSetup _rulesStandaloneSetup = new RulesStandaloneSetup();
-    _rulesStandaloneSetup.createInjectorAndDoEMFRegistration();
+    new RulesStandaloneSetup().createInjectorAndDoEMFRegistration();
   }
 }

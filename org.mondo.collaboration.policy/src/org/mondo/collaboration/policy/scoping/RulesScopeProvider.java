@@ -2,12 +2,13 @@ package org.mondo.collaboration.policy.scoping;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -42,9 +43,19 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
     	}
     	/*if(reference == RulesPackage.eINSTANCE.getObjectBind_Object() && context instanceof ObjectBind){
     		return getScopeObjectBind_Object(context, reference);
+    	}
+    	if(reference == RulesPackage.eINSTANCE.getEnumBind_Enumliteral() && context instanceof EnumBind){
+    		return getScopeEnumBind_Enumliteral(context, reference);
     	}*/
     	return super.getScope(context, reference);
     }
+    
+    private TreeIterator<EObject> getResourceContent(EObject context, String extension){
+		Resource contextResource = context.eResource();
+		String newURI = contextResource.getURI().toString().replace(".rules", extension);
+	    Resource otherResource = contextResource.getResourceSet().getResource(URI.createURI(newURI), true);
+	    return otherResource.getAllContents();
+	}
 
 	private IScope getScopeRule_Pattern(EObject context, EReference reference){
 	    TreeIterator<EObject> iterator = getResourceContent(context, ".vql");
@@ -60,11 +71,7 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
 	}
 	
 	private IScope getScopeVariable(EObject context, EReference reference){
-		EObject container = context.eContainer();
-		while(!(container instanceof Rule)){
-			container = context.eContainer();
-		}
-		Rule rule = (Rule) container;
+		Rule rule = (Rule) context.eContainer();
 		EList<Variable> variables = rule.getPattern().getParameters();
 		return Scopes.scopeFor(variables);
 	}
@@ -96,37 +103,41 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
 	/*private IScope getScopeObjectBind_Object(EObject context, EReference reference){
 		EObject container = context.eContainer();
 		while(!(container instanceof Model)){
-			container = context.eContainer();
+			container = container.eContainer();
 		}
 		Model model = (Model) container;
-		
-		String importURI = model.getMetaModel().getImportURI();
+		String importURI = model.getInstanceModel().getImportURI();
 		String extension = importURI.substring(importURI.lastIndexOf('.'));
 		
 	    TreeIterator<EObject> iterator = getResourceContent(context, extension);
 	    
-	    while(!(container instanceof Binding)){
-			container = context.eContainer();
-		}
-	    Binding binding = (Binding) container;
-	    
+	    Binding binding = (Binding) context.eContainer();
 	    ClassType varClassType = (ClassType) binding.getVariable().getType();
 	    EClass varClass = (EClass) varClassType.getClassname();
+	    String varClassName = varClass.getName();
 	    
 	    ArrayList<EObject> objects = Lists.newArrayList();
 	    while(iterator.hasNext()){
 	    	EObject eObject = iterator.next();
-	    	if(eObject.eClass() == varClass){
+	    	String eObjectClassName = eObject.eClass().getName();
+	    	if(eObjectClassName.equals(varClassName)){
 	    	    objects.add(eObject);
 	    	}
 	    }
 	    return Scopes.scopeFor(objects);
-	}*/
-	
-	private TreeIterator<EObject> getResourceContent(EObject context, String extension){
-		Resource contextResource = context.eResource();
-		String newURI = contextResource.getURI().toString().replace(".rules", extension);
-	    Resource otherResource = contextResource.getResourceSet().getResource(URI.createURI(newURI), true);
-	    return otherResource.getAllContents();
 	}
+	
+	private IScope getScopeEnumBind_Enumliteral(EObject context, EReference reference){
+	    Binding binding = (Binding) context.eContainer();
+	    ClassType varClassType = (ClassType) binding.getVariable().getType();
+	    EClassifier varClassifier = varClassType.getClassname();
+	    
+	    if(varClassifier instanceof EEnum){
+	    	EEnum enumeration = (EEnum) varClassifier;
+	    	EList<EEnumLiteral> eLiterals = enumeration.getELiterals();
+	    	return Scopes.scopeFor(eLiterals);
+	    } else {
+	    	return null;
+	    }
+	}*/
 }	

@@ -40,7 +40,7 @@ Workflow {
 				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 			}
 			formatter = {
-                generateStub = false
+                generateStub = true
             }
 		}
 	}
