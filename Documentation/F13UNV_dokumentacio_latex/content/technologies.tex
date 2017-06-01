@@ -1,0 +1,19 @@
+%----------------------------------------------------------------------------
+\chapter{Megismert technológiák}
+
+A következők közül az Eclipse Modeling Framework és Xtext már nem volt számomra teljesen ismeretlen, a témalaboratórium keretei közt foglalkoztam velük.
+
+%----------------------------------------------------------------------------
+\section{Eclipse Modeling Framework (EMF)}
+%----------------------------------------------------------------------------
+Az EMF egy Eclipse pluginekből álló modellező és kódgeneráló keretrendszer. Megkülönbözteti a metamodellt (Ecore modell) a tényleges modelltől, előbbi a modell struktúráját írja le, utóbbi pedig a metamodell konkrét példánya. Az Ecore modell gyakorlatilag osztályokat (EClass), valamint azok attribútumait (EAttribute) és a közöttük lévő referenciákat (EReference) tartalmazza. Az eszköz segítségével Java kódot is generálhatunk a modellünkhöz.
+
+%----------------------------------------------------------------------------
+\section{Xtext}
+%----------------------------------------------------------------------------
+A modellek leírásához modellezési nyelveket használunk. Ezeknek részei az absztrakt szintaxis és a konkrét szintaxisok. Előbbi azt határozza meg, hogy a nyelvnek milyen típusú elemei vannak és ezek milyen kapcsolatban állnak egymással, vagyis ez maga a metamodell. Ehhez több konkrét szintaxis is megadható, ezek olyan szöveges vagy grafikus megjelenítést biztosítanak a modellhez, amiktől olvashatóvá és szerkeszthetővé válik a modell leírása. Az Xtext keretrendszer segítségével szöveges konkrét szintaxis készíthető.
+
+%----------------------------------------------------------------------------
+\section{VIATRA Query}
+%----------------------------------------------------------------------------
+A VIATRA Query egy deklaratív lekérdezési nyelvvel rendelkező modelltranszformációs eszköz. A nyelv segítségével a lekérdezéshez gráfmintákat fogalmazhatunk meg a metamodell osztályaival, attribútumaival, referenciáival, a rendszer pedig azokat a modell elemeket adja vissza, amelyek illeszkednek a megadott mintára.
