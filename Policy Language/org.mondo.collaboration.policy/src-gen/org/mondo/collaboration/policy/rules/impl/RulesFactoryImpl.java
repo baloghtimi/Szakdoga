@@ -72,12 +72,12 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
       case RulesPackage.GROUP: return createGroup();
       case RulesPackage.POLICY: return createPolicy();
       case RulesPackage.RULE: return createRule();
-      case RulesPackage.RULE_CONSTRAINT: return createRuleConstraint();
-      case RulesPackage.ASSET: return createAsset();
+      case RulesPackage.MODEL_FACT: return createModelFact();
       case RulesPackage.OBJECT_FACT: return createObjectFact();
       case RulesPackage.REFERENCE_FACT: return createReferenceFact();
       case RulesPackage.ATTRIBUTE_FACT: return createAttributeFact();
       case RulesPackage.BINDING: return createBinding();
+      case RulesPackage.BIND: return createBind();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -196,21 +196,10 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleConstraint createRuleConstraint()
+  public ModelFact createModelFact()
   {
-    RuleConstraintImpl ruleConstraint = new RuleConstraintImpl();
-    return ruleConstraint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Asset createAsset()
-  {
-    AssetImpl asset = new AssetImpl();
-    return asset;
+    ModelFactImpl modelFact = new ModelFactImpl();
+    return modelFact;
   }
 
   /**
@@ -255,6 +244,17 @@ public class RulesFactoryImpl extends EFactoryImpl implements RulesFactory
   {
     BindingImpl binding = new BindingImpl();
     return binding;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bind createBind()
+  {
+    BindImpl bind = new BindImpl();
+    return bind;
   }
 
   /**

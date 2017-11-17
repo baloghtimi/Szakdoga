@@ -14,11 +14,12 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.PatternLanguagePackage;
 
 import org.mondo.collaboration.policy.rules.AccessibilityLevel;
-import org.mondo.collaboration.policy.rules.Asset;
 import org.mondo.collaboration.policy.rules.AttributeFact;
+import org.mondo.collaboration.policy.rules.Bind;
 import org.mondo.collaboration.policy.rules.Binding;
 import org.mondo.collaboration.policy.rules.Group;
 import org.mondo.collaboration.policy.rules.Model;
+import org.mondo.collaboration.policy.rules.ModelFact;
 import org.mondo.collaboration.policy.rules.ObjectFact;
 import org.mondo.collaboration.policy.rules.OperationType;
 import org.mondo.collaboration.policy.rules.Policy;
@@ -26,7 +27,6 @@ import org.mondo.collaboration.policy.rules.ReferenceFact;
 import org.mondo.collaboration.policy.rules.ResolutionType;
 import org.mondo.collaboration.policy.rules.Role;
 import org.mondo.collaboration.policy.rules.Rule;
-import org.mondo.collaboration.policy.rules.RuleConstraint;
 import org.mondo.collaboration.policy.rules.RulesFactory;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 import org.mondo.collaboration.policy.rules.User;
@@ -86,14 +86,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass ruleConstraintEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass assetEClass = null;
+  private EClass modelFactEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -122,6 +115,13 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    * @generated
    */
   private EClass bindingEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass bindEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -285,7 +285,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGroup_Users()
+  public EReference getGroup_Roles()
   {
     return (EReference)groupEClass.getEStructuralFeatures().get(0);
   }
@@ -375,9 +375,19 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRule_Constraint()
+  public EAttribute getRule_Access()
   {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRule_Operation()
+  {
+    return (EAttribute)ruleEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -387,7 +397,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    */
   public EReference getRule_Roles()
   {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(2);
+    return (EReference)ruleEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -397,7 +407,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    */
   public EReference getRule_Pattern()
   {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(3);
+    return (EReference)ruleEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -407,7 +417,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    */
   public EReference getRule_Asset()
   {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(4);
+    return (EReference)ruleEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -417,7 +427,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    */
   public EReference getRule_Bindings()
   {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(5);
+    return (EReference)ruleEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -427,7 +437,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    */
   public EAttribute getRule_Priority()
   {
-    return (EAttribute)ruleEClass.getEStructuralFeatures().get(6);
+    return (EAttribute)ruleEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -435,39 +445,9 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRuleConstraint()
+  public EClass getModelFact()
   {
-    return ruleConstraintEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getRuleConstraint_Access()
-  {
-    return (EAttribute)ruleConstraintEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getRuleConstraint_Operation()
-  {
-    return (EAttribute)ruleConstraintEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getAsset()
-  {
-    return assetEClass;
+    return modelFactEClass;
   }
 
   /**
@@ -585,9 +565,39 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBinding_Bind()
+  public EReference getBinding_Bind()
   {
-    return (EAttribute)bindingEClass.getEStructuralFeatures().get(1);
+    return (EReference)bindingEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBind()
+  {
+    return bindEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBind_ValueString()
+  {
+    return (EAttribute)bindEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBind_ValueInteger()
+  {
+    return (EAttribute)bindEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -660,7 +670,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
     userEClass = createEClass(USER);
 
     groupEClass = createEClass(GROUP);
-    createEReference(groupEClass, GROUP__USERS);
+    createEReference(groupEClass, GROUP__ROLES);
 
     policyEClass = createEClass(POLICY);
     createEAttribute(policyEClass, POLICY__NAME);
@@ -671,18 +681,15 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
 
     ruleEClass = createEClass(RULE);
     createEAttribute(ruleEClass, RULE__NAME);
-    createEReference(ruleEClass, RULE__CONSTRAINT);
+    createEAttribute(ruleEClass, RULE__ACCESS);
+    createEAttribute(ruleEClass, RULE__OPERATION);
     createEReference(ruleEClass, RULE__ROLES);
     createEReference(ruleEClass, RULE__PATTERN);
     createEReference(ruleEClass, RULE__ASSET);
     createEReference(ruleEClass, RULE__BINDINGS);
     createEAttribute(ruleEClass, RULE__PRIORITY);
 
-    ruleConstraintEClass = createEClass(RULE_CONSTRAINT);
-    createEAttribute(ruleConstraintEClass, RULE_CONSTRAINT__ACCESS);
-    createEAttribute(ruleConstraintEClass, RULE_CONSTRAINT__OPERATION);
-
-    assetEClass = createEClass(ASSET);
+    modelFactEClass = createEClass(MODEL_FACT);
 
     objectFactEClass = createEClass(OBJECT_FACT);
     createEReference(objectFactEClass, OBJECT_FACT__VARIABLE);
@@ -698,7 +705,11 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
 
     bindingEClass = createEClass(BINDING);
     createEReference(bindingEClass, BINDING__VARIABLE);
-    createEAttribute(bindingEClass, BINDING__BIND);
+    createEReference(bindingEClass, BINDING__BIND);
+
+    bindEClass = createEClass(BIND);
+    createEAttribute(bindEClass, BIND__VALUE_STRING);
+    createEAttribute(bindEClass, BIND__VALUE_INTEGER);
 
     // Create enums
     accessibilityLevelEEnum = createEEnum(ACCESSIBILITY_LEVEL);
@@ -740,9 +751,9 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
     // Add supertypes to classes
     userEClass.getESuperTypes().add(this.getRole());
     groupEClass.getESuperTypes().add(this.getRole());
-    objectFactEClass.getESuperTypes().add(this.getAsset());
-    referenceFactEClass.getESuperTypes().add(this.getAsset());
-    attributeFactEClass.getESuperTypes().add(this.getAsset());
+    objectFactEClass.getESuperTypes().add(this.getModelFact());
+    referenceFactEClass.getESuperTypes().add(this.getModelFact());
+    attributeFactEClass.getESuperTypes().add(this.getModelFact());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -755,7 +766,7 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
     initEClass(userEClass, User.class, "User", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGroup_Users(), this.getUser(), null, "users", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGroup_Roles(), this.getRole(), null, "roles", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(policyEClass, Policy.class, "Policy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPolicy_Name(), ecorePackage.getEString(), "name", null, 0, 1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -766,18 +777,15 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
 
     initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRule_Constraint(), this.getRuleConstraint(), null, "constraint", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRule_Access(), this.getAccessibilityLevel(), "access", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRule_Operation(), this.getOperationType(), "operation", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRule_Roles(), this.getRole(), null, "roles", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRule_Pattern(), thePatternLanguagePackage.getPattern(), null, "pattern", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRule_Asset(), this.getAsset(), null, "asset", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRule_Asset(), this.getModelFact(), null, "asset", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRule_Bindings(), this.getBinding(), null, "bindings", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRule_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(ruleConstraintEClass, RuleConstraint.class, "RuleConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getRuleConstraint_Access(), this.getAccessibilityLevel(), "access", null, 0, 1, RuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getRuleConstraint_Operation(), this.getOperationType(), "operation", null, 0, 1, RuleConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(assetEClass, Asset.class, "Asset", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(modelFactEClass, ModelFact.class, "ModelFact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(objectFactEClass, ObjectFact.class, "ObjectFact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getObjectFact_Variable(), thePatternLanguagePackage.getVariable(), null, "variable", null, 0, 1, ObjectFact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -793,14 +801,20 @@ public class RulesPackageImpl extends EPackageImpl implements RulesPackage
 
     initEClass(bindingEClass, Binding.class, "Binding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getBinding_Variable(), thePatternLanguagePackage.getVariable(), null, "variable", null, 0, 1, Binding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getBinding_Bind(), ecorePackage.getEString(), "bind", null, 0, 1, Binding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBinding_Bind(), this.getBind(), null, "bind", null, 0, 1, Binding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(bindEClass, Bind.class, "Bind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBind_ValueString(), ecorePackage.getEString(), "valueString", null, 0, 1, Bind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBind_ValueInteger(), ecorePackage.getEInt(), "valueInteger", null, 0, 1, Bind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(accessibilityLevelEEnum, AccessibilityLevel.class, "AccessibilityLevel");
     addEEnumLiteral(accessibilityLevelEEnum, AccessibilityLevel.ALLOW);
     addEEnumLiteral(accessibilityLevelEEnum, AccessibilityLevel.DENY);
+    addEEnumLiteral(accessibilityLevelEEnum, AccessibilityLevel.OBFUSCATE);
 
     initEEnum(operationTypeEEnum, OperationType.class, "OperationType");
+    addEEnumLiteral(operationTypeEEnum, OperationType.UNSET);
     addEEnumLiteral(operationTypeEEnum, OperationType.READ);
     addEEnumLiteral(operationTypeEEnum, OperationType.WRITE);
     addEEnumLiteral(operationTypeEEnum, OperationType.READWRITE);

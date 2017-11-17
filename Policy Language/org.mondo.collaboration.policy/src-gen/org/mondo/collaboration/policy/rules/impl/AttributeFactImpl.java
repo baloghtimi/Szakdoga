@@ -30,7 +30,7 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  *
  * @generated
  */
-public class AttributeFactImpl extends AssetImpl implements AttributeFact
+public class AttributeFactImpl extends ModelFactImpl implements AttributeFact
 {
   /**
    * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.

@@ -4,6 +4,7 @@
 package org.mondo.collaboration.policy.rules.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -13,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
 
+import org.mondo.collaboration.policy.rules.Bind;
 import org.mondo.collaboration.policy.rules.Binding;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
@@ -43,24 +45,14 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
   protected Variable variable;
 
   /**
-   * The default value of the '{@link #getBind() <em>Bind</em>}' attribute.
+   * The cached value of the '{@link #getBind() <em>Bind</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBind()
    * @generated
    * @ordered
    */
-  protected static final String BIND_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getBind() <em>Bind</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBind()
-   * @generated
-   * @ordered
-   */
-  protected String bind = BIND_EDEFAULT;
+  protected Bind bind;
 
   /**
    * <!-- begin-user-doc -->
@@ -131,7 +123,7 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getBind()
+  public Bind getBind()
   {
     return bind;
   }
@@ -141,12 +133,53 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBind(String newBind)
+  public NotificationChain basicSetBind(Bind newBind, NotificationChain msgs)
   {
-    String oldBind = bind;
+    Bind oldBind = bind;
     bind = newBind;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.BINDING__BIND, oldBind, bind));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.BINDING__BIND, oldBind, newBind);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBind(Bind newBind)
+  {
+    if (newBind != bind)
+    {
+      NotificationChain msgs = null;
+      if (bind != null)
+        msgs = ((InternalEObject)bind).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.BINDING__BIND, null, msgs);
+      if (newBind != null)
+        msgs = ((InternalEObject)newBind).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.BINDING__BIND, null, msgs);
+      msgs = basicSetBind(newBind, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.BINDING__BIND, newBind, newBind));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RulesPackage.BINDING__BIND:
+        return basicSetBind(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -182,7 +215,7 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
         setVariable((Variable)newValue);
         return;
       case RulesPackage.BINDING__BIND:
-        setBind((String)newValue);
+        setBind((Bind)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -202,7 +235,7 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
         setVariable((Variable)null);
         return;
       case RulesPackage.BINDING__BIND:
-        setBind(BIND_EDEFAULT);
+        setBind((Bind)null);
         return;
     }
     super.eUnset(featureID);
@@ -221,26 +254,9 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
       case RulesPackage.BINDING__VARIABLE:
         return variable != null;
       case RulesPackage.BINDING__BIND:
-        return BIND_EDEFAULT == null ? bind != null : !BIND_EDEFAULT.equals(bind);
+        return bind != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (bind: ");
-    result.append(bind);
-    result.append(')');
-    return result.toString();
   }
 
 } //BindingImpl

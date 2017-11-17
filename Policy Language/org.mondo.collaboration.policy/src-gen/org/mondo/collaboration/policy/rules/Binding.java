@@ -53,29 +53,29 @@ public interface Binding extends EObject
   void setVariable(Variable value);
 
   /**
-   * Returns the value of the '<em><b>Bind</b></em>' attribute.
+   * Returns the value of the '<em><b>Bind</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Bind</em>' attribute isn't clear,
+   * If the meaning of the '<em>Bind</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Bind</em>' attribute.
-   * @see #setBind(String)
+   * @return the value of the '<em>Bind</em>' containment reference.
+   * @see #setBind(Bind)
    * @see org.mondo.collaboration.policy.rules.RulesPackage#getBinding_Bind()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getBind();
+  Bind getBind();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Binding#getBind <em>Bind</em>}' attribute.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Binding#getBind <em>Bind</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Bind</em>' attribute.
+   * @param value the new value of the '<em>Bind</em>' containment reference.
    * @see #getBind()
    * @generated
    */
-  void setBind(String value);
+  void setBind(Bind value);
 
 } // Binding

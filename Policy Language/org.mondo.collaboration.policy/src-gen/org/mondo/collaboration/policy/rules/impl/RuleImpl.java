@@ -22,11 +22,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
 
-import org.mondo.collaboration.policy.rules.Asset;
+import org.mondo.collaboration.policy.rules.AccessibilityLevel;
 import org.mondo.collaboration.policy.rules.Binding;
+import org.mondo.collaboration.policy.rules.ModelFact;
+import org.mondo.collaboration.policy.rules.OperationType;
 import org.mondo.collaboration.policy.rules.Role;
 import org.mondo.collaboration.policy.rules.Rule;
-import org.mondo.collaboration.policy.rules.RuleConstraint;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
 /**
@@ -38,7 +39,8 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  * </p>
  * <ul>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getConstraint <em>Constraint</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getAccess <em>Access</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getPattern <em>Pattern</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.impl.RuleImpl#getAsset <em>Asset</em>}</li>
@@ -71,14 +73,44 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference.
+   * The default value of the '{@link #getAccess() <em>Access</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getConstraint()
+   * @see #getAccess()
    * @generated
    * @ordered
    */
-  protected RuleConstraint constraint;
+  protected static final AccessibilityLevel ACCESS_EDEFAULT = AccessibilityLevel.ALLOW;
+
+  /**
+   * The cached value of the '{@link #getAccess() <em>Access</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAccess()
+   * @generated
+   * @ordered
+   */
+  protected AccessibilityLevel access = ACCESS_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getOperation() <em>Operation</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperation()
+   * @generated
+   * @ordered
+   */
+  protected static final OperationType OPERATION_EDEFAULT = OperationType.UNSET;
+
+  /**
+   * The cached value of the '{@link #getOperation() <em>Operation</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperation()
+   * @generated
+   * @ordered
+   */
+  protected OperationType operation = OPERATION_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getRoles() <em>Roles</em>}' reference list.
@@ -108,7 +140,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * @generated
    * @ordered
    */
-  protected Asset asset;
+  protected ModelFact asset;
 
   /**
    * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
@@ -189,9 +221,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleConstraint getConstraint()
+  public AccessibilityLevel getAccess()
   {
-    return constraint;
+    return access;
   }
 
   /**
@@ -199,16 +231,12 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetConstraint(RuleConstraint newConstraint, NotificationChain msgs)
+  public void setAccess(AccessibilityLevel newAccess)
   {
-    RuleConstraint oldConstraint = constraint;
-    constraint = newConstraint;
+    AccessibilityLevel oldAccess = access;
+    access = newAccess == null ? ACCESS_EDEFAULT : newAccess;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__CONSTRAINT, oldConstraint, newConstraint);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__ACCESS, oldAccess, access));
   }
 
   /**
@@ -216,20 +244,22 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConstraint(RuleConstraint newConstraint)
+  public OperationType getOperation()
   {
-    if (newConstraint != constraint)
-    {
-      NotificationChain msgs = null;
-      if (constraint != null)
-        msgs = ((InternalEObject)constraint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RulesPackage.RULE__CONSTRAINT, null, msgs);
-      if (newConstraint != null)
-        msgs = ((InternalEObject)newConstraint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RulesPackage.RULE__CONSTRAINT, null, msgs);
-      msgs = basicSetConstraint(newConstraint, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__CONSTRAINT, newConstraint, newConstraint));
+    return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperation(OperationType newOperation)
+  {
+    OperationType oldOperation = operation;
+    operation = newOperation == null ? OPERATION_EDEFAULT : newOperation;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RulesPackage.RULE__OPERATION, oldOperation, operation));
   }
 
   /**
@@ -294,7 +324,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public Asset getAsset()
+  public ModelFact getAsset()
   {
     return asset;
   }
@@ -304,9 +334,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAsset(Asset newAsset, NotificationChain msgs)
+  public NotificationChain basicSetAsset(ModelFact newAsset, NotificationChain msgs)
   {
-    Asset oldAsset = asset;
+    ModelFact oldAsset = asset;
     asset = newAsset;
     if (eNotificationRequired())
     {
@@ -321,7 +351,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAsset(Asset newAsset)
+  public void setAsset(ModelFact newAsset)
   {
     if (newAsset != asset)
     {
@@ -384,8 +414,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case RulesPackage.RULE__CONSTRAINT:
-        return basicSetConstraint(null, msgs);
       case RulesPackage.RULE__ASSET:
         return basicSetAsset(null, msgs);
       case RulesPackage.RULE__BINDINGS:
@@ -406,8 +434,10 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     {
       case RulesPackage.RULE__NAME:
         return getName();
-      case RulesPackage.RULE__CONSTRAINT:
-        return getConstraint();
+      case RulesPackage.RULE__ACCESS:
+        return getAccess();
+      case RulesPackage.RULE__OPERATION:
+        return getOperation();
       case RulesPackage.RULE__ROLES:
         return getRoles();
       case RulesPackage.RULE__PATTERN:
@@ -437,8 +467,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
       case RulesPackage.RULE__NAME:
         setName((String)newValue);
         return;
-      case RulesPackage.RULE__CONSTRAINT:
-        setConstraint((RuleConstraint)newValue);
+      case RulesPackage.RULE__ACCESS:
+        setAccess((AccessibilityLevel)newValue);
+        return;
+      case RulesPackage.RULE__OPERATION:
+        setOperation((OperationType)newValue);
         return;
       case RulesPackage.RULE__ROLES:
         getRoles().clear();
@@ -448,7 +481,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
         setPattern((Pattern)newValue);
         return;
       case RulesPackage.RULE__ASSET:
-        setAsset((Asset)newValue);
+        setAsset((ModelFact)newValue);
         return;
       case RulesPackage.RULE__BINDINGS:
         getBindings().clear();
@@ -474,8 +507,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
       case RulesPackage.RULE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RulesPackage.RULE__CONSTRAINT:
-        setConstraint((RuleConstraint)null);
+      case RulesPackage.RULE__ACCESS:
+        setAccess(ACCESS_EDEFAULT);
+        return;
+      case RulesPackage.RULE__OPERATION:
+        setOperation(OPERATION_EDEFAULT);
         return;
       case RulesPackage.RULE__ROLES:
         getRoles().clear();
@@ -484,7 +520,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
         setPattern((Pattern)null);
         return;
       case RulesPackage.RULE__ASSET:
-        setAsset((Asset)null);
+        setAsset((ModelFact)null);
         return;
       case RulesPackage.RULE__BINDINGS:
         getBindings().clear();
@@ -508,8 +544,10 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     {
       case RulesPackage.RULE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RulesPackage.RULE__CONSTRAINT:
-        return constraint != null;
+      case RulesPackage.RULE__ACCESS:
+        return access != ACCESS_EDEFAULT;
+      case RulesPackage.RULE__OPERATION:
+        return operation != OPERATION_EDEFAULT;
       case RulesPackage.RULE__ROLES:
         return roles != null && !roles.isEmpty();
       case RulesPackage.RULE__PATTERN:
@@ -537,6 +575,10 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", access: ");
+    result.append(access);
+    result.append(", operation: ");
+    result.append(operation);
     result.append(", priority: ");
     result.append(priority);
     result.append(')');

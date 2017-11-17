@@ -118,7 +118,7 @@ public class RulesFormatter extends AbstractFormatter2 {
 		    }
 		    
 		    //Asset
-		    if(eObj instanceof Asset){
+		    if(eObj instanceof ModelFact){
 		    	reg = access.regionForEObject(eObj).getRegionFor().keyword("(");
 		        doc.surround(reg, new WhitespaceKey("", false));
 		        

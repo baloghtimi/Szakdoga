@@ -1,0 +1,36 @@
+\select@language {magyar} \contentsline {chapter}{Kivonat}{4}{chapter*.2}
+\select@language {magyar} \contentsline {chapter}{Abstract}{5}{chapter*.3}
+\select@language {magyar} \contentsline {chapter}{Bevezet\H o}{6}{chapter*.4}
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Kapcsol\'od\'o technol\'ogi\'ak}{7}{chapter.1}
+\select@language {magyar} \contentsline {section}{\numberline {1.1}Eclipse Plug-in Development}{7}{section.1.1}
+\select@language {magyar} \contentsline {section}{\numberline {1.2}Eclipse Modeling Framework, Ecore}{7}{section.1.2}
+\select@language {magyar} \contentsline {section}{\numberline {1.3}Absztrakt \'es konkr\'et szintaxis, Xtext}{7}{section.1.3}
+\select@language {magyar} \contentsline {section}{\numberline {1.4}VIATRA Query}{7}{section.1.4}
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Motiv\'aci\'os p\'elda}{8}{chapter.2}
+\select@language {magyar} \contentsline {section}{\numberline {2.1}MONDO projekt, kollabor\'aci\'os keretrendszer}{8}{section.2.1}
+\select@language {magyar} \contentsline {section}{\numberline {2.2}Keretrendszer hozz\'af\'er\'es-szab\'alyoz\'asa}{8}{section.2.2}
+\select@language {magyar} \contentsline {section}{\numberline {2.3}Sz\'elturbina EMF modell}{8}{section.2.3}
+\select@language {magyar} \contentsline {chapter}{\numberline {3}Szab\'aly alap\'u hozz\'af\'er\'es-szab\'alyoz\'as}{9}{chapter.3}
+\select@language {magyar} \contentsline {section}{\numberline {3.1}Asset}{9}{section.3.1}
+\select@language {magyar} \contentsline {section}{\numberline {3.2}Szab\'aly}{9}{section.3.2}
+\select@language {magyar} \contentsline {section}{\numberline {3.3}Judgement}{9}{section.3.3}
+\select@language {magyar} \contentsline {section}{\numberline {3.4}Olvas\'asi \'es \IeC {\'\i }r\'asi f\"ugg?s\'egek}{9}{section.3.4}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}Sz\u A\'sveges szintaxis}{10}{chapter.4}
+\select@language {magyar} \contentsline {section}{\numberline {4.1}C\u A\-mk\u A\v Sk \u A\v Ss hivatkoz\u A\k Asok}{10}{section.4.1}
+\select@language {magyar} \contentsline {section}{\numberline {4.2}Felsorol\u A\k Asok \u A\v Ss list\u A\k Ak}{10}{section.4.2}
+\select@language {magyar} \contentsline {section}{\numberline {4.3}K\u A\v Spletek}{10}{section.4.3}
+\select@language {magyar} \contentsline {section}{\numberline {4.4}Irodalmi hivatkoz\u A\k Asok}{10}{section.4.4}
+\select@language {magyar} \contentsline {section}{\numberline {4.5}S}{10}{section.4.5}
+\select@language {magyar} \contentsline {section}{\numberline {4.6}Alapadatok megad\u A\k Asa}{10}{section.4.6}
+\select@language {magyar} \contentsline {chapter}{\numberline {5}Algoritmus}{11}{chapter.5}
+\select@language {magyar} \contentsline {section}{\numberline {5.1}C\u A\-mk\u A\v Sk \u A\v Ss hivatkoz\u A\k Asok}{11}{section.5.1}
+\select@language {magyar} \contentsline {section}{\numberline {5.2}Felsorol\u A\k Asok \u A\v Ss list\u A\k Ak}{11}{section.5.2}
+\select@language {magyar} \contentsline {section}{\numberline {5.3}K\u A\v Spletek}{11}{section.5.3}
+\select@language {magyar} \contentsline {section}{\numberline {5.4}Irodalmi hivatkoz\u A\k Asok}{11}{section.5.4}
+\select@language {magyar} \contentsline {section}{\numberline {5.5}A dolgozat szerkezete \u A\v Ss a forr\u A\k Asf\u A\k Ajlok}{11}{section.5.5}
+\select@language {magyar} \contentsline {section}{\numberline {5.6}Alapadatok megad\u A\k Asa}{11}{section.5.6}
+\select@language {magyar} \contentsline {chapter}{\numberline {6}Ki\u A\v Srt\u A\v Skel\u A\v Ss}{12}{chapter.6}
+\select@language {magyar} \contentsline {section}{\numberline {6.1}Sz\u A\k Am\u A\-tott judgementek helyess\u A\v Sge}{12}{section.6.1}
+\select@language {magyar} \contentsline {section}{\numberline {6.2}Teljes\u A\-tm\u A\v Sny}{12}{section.6.2}
+\select@language {magyar} \contentsline {chapter}{Osszefoglalas}{13}{chapter*.5}
+\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{14}{chapter*.6}

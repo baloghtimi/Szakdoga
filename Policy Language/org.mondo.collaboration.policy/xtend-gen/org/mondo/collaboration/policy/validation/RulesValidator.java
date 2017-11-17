@@ -3,6 +3,18 @@
  */
 package org.mondo.collaboration.policy.validation;
 
+import com.google.common.base.Objects;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.mondo.collaboration.policy.rules.AccessibilityLevel;
+import org.mondo.collaboration.policy.rules.ModelFact;
+import org.mondo.collaboration.policy.rules.OperationType;
+import org.mondo.collaboration.policy.rules.ReferenceFact;
+import org.mondo.collaboration.policy.rules.Rule;
 import org.mondo.collaboration.policy.validation.AbstractRulesValidator;
 
 /**
@@ -12,4 +24,84 @@ import org.mondo.collaboration.policy.validation.AbstractRulesValidator;
  */
 @SuppressWarnings("all")
 public class RulesValidator extends AbstractRulesValidator {
+  public final static String INVALID_NAME = "invalidName";
+  
+  @Check
+  public void checkOperationTypeAfterObfuscate(final Rule rule) {
+    EClass _eClass = rule.eClass();
+    EList<EStructuralFeature> _eAllStructuralFeatures = _eClass.getEAllStructuralFeatures();
+    final Function1<EStructuralFeature, Boolean> _function = (EStructuralFeature x) -> {
+      String _name = x.getName();
+      return Boolean.valueOf(_name.equals("operation"));
+    };
+    final EStructuralFeature operation = IterableExtensions.<EStructuralFeature>findFirst(_eAllStructuralFeatures, _function);
+    boolean _and = false;
+    AccessibilityLevel _access = rule.getAccess();
+    boolean _equals = Objects.equal(_access, AccessibilityLevel.OBFUSCATE);
+    if (!_equals) {
+      _and = false;
+    } else {
+      OperationType _operation = rule.getOperation();
+      boolean _notEquals = (!Objects.equal(_operation, OperationType.UNSET));
+      _and = _notEquals;
+    }
+    if (_and) {
+      this.error("Operation type cannot be defined for obfuscation", rule, operation);
+    }
+  }
+  
+  @Check
+  public void checkMissingOperationTypeAfterAllowDeny(final Rule rule) {
+    EClass _eClass = rule.eClass();
+    EList<EStructuralFeature> _eAllStructuralFeatures = _eClass.getEAllStructuralFeatures();
+    final Function1<EStructuralFeature, Boolean> _function = (EStructuralFeature x) -> {
+      String _name = x.getName();
+      return Boolean.valueOf(_name.equals("access"));
+    };
+    final EStructuralFeature access = IterableExtensions.<EStructuralFeature>findFirst(_eAllStructuralFeatures, _function);
+    boolean _and = false;
+    boolean _or = false;
+    AccessibilityLevel _access = rule.getAccess();
+    boolean _equals = Objects.equal(_access, AccessibilityLevel.ALLOW);
+    if (_equals) {
+      _or = true;
+    } else {
+      AccessibilityLevel _access_1 = rule.getAccess();
+      boolean _equals_1 = Objects.equal(_access_1, AccessibilityLevel.DENY);
+      _or = _equals_1;
+    }
+    if (!_or) {
+      _and = false;
+    } else {
+      OperationType _operation = rule.getOperation();
+      boolean _equals_2 = Objects.equal(_operation, OperationType.UNSET);
+      _and = _equals_2;
+    }
+    if (_and) {
+      this.error("Missing operation type for accessibility level", rule, access);
+    }
+  }
+  
+  @Check
+  public void checkObfuscateReference(final Rule rule) {
+    EClass _eClass = rule.eClass();
+    EList<EStructuralFeature> _eAllStructuralFeatures = _eClass.getEAllStructuralFeatures();
+    final Function1<EStructuralFeature, Boolean> _function = (EStructuralFeature x) -> {
+      String _name = x.getName();
+      return Boolean.valueOf(_name.equals("asset"));
+    };
+    final EStructuralFeature asset = IterableExtensions.<EStructuralFeature>findFirst(_eAllStructuralFeatures, _function);
+    boolean _and = false;
+    AccessibilityLevel _access = rule.getAccess();
+    boolean _equals = Objects.equal(_access, AccessibilityLevel.OBFUSCATE);
+    if (!_equals) {
+      _and = false;
+    } else {
+      ModelFact _asset = rule.getAsset();
+      _and = (_asset instanceof ReferenceFact);
+    }
+    if (_and) {
+      this.error("Reference asset cannot be obfuscated", rule, asset);
+    }
+  }
 }

@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.mondo.collaboration.policy.rules.Group;
+import org.mondo.collaboration.policy.rules.Role;
 import org.mondo.collaboration.policy.rules.RulesPackage;
-import org.mondo.collaboration.policy.rules.User;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +23,7 @@ import org.mondo.collaboration.policy.rules.User;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.mondo.collaboration.policy.rules.impl.GroupImpl#getUsers <em>Users</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.impl.GroupImpl#getRoles <em>Roles</em>}</li>
  * </ul>
  *
  * @generated
@@ -31,14 +31,14 @@ import org.mondo.collaboration.policy.rules.User;
 public class GroupImpl extends RoleImpl implements Group
 {
   /**
-   * The cached value of the '{@link #getUsers() <em>Users</em>}' reference list.
+   * The cached value of the '{@link #getRoles() <em>Roles</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getUsers()
+   * @see #getRoles()
    * @generated
    * @ordered
    */
-  protected EList<User> users;
+  protected EList<Role> roles;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,13 +66,13 @@ public class GroupImpl extends RoleImpl implements Group
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<User> getUsers()
+  public EList<Role> getRoles()
   {
-    if (users == null)
+    if (roles == null)
     {
-      users = new EObjectResolvingEList<User>(User.class, this, RulesPackage.GROUP__USERS);
+      roles = new EObjectResolvingEList<Role>(Role.class, this, RulesPackage.GROUP__ROLES);
     }
-    return users;
+    return roles;
   }
 
   /**
@@ -85,8 +85,8 @@ public class GroupImpl extends RoleImpl implements Group
   {
     switch (featureID)
     {
-      case RulesPackage.GROUP__USERS:
-        return getUsers();
+      case RulesPackage.GROUP__ROLES:
+        return getRoles();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -102,9 +102,9 @@ public class GroupImpl extends RoleImpl implements Group
   {
     switch (featureID)
     {
-      case RulesPackage.GROUP__USERS:
-        getUsers().clear();
-        getUsers().addAll((Collection<? extends User>)newValue);
+      case RulesPackage.GROUP__ROLES:
+        getRoles().clear();
+        getRoles().addAll((Collection<? extends Role>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -120,8 +120,8 @@ public class GroupImpl extends RoleImpl implements Group
   {
     switch (featureID)
     {
-      case RulesPackage.GROUP__USERS:
-        getUsers().clear();
+      case RulesPackage.GROUP__ROLES:
+        getRoles().clear();
         return;
     }
     super.eUnset(featureID);
@@ -137,8 +137,8 @@ public class GroupImpl extends RoleImpl implements Group
   {
     switch (featureID)
     {
-      case RulesPackage.GROUP__USERS:
-        return users != null && !users.isEmpty();
+      case RulesPackage.GROUP__ROLES:
+        return roles != null && !roles.isEmpty();
     }
     return super.eIsSet(featureID);
   }

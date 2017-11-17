@@ -117,17 +117,10 @@ public class RulesSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RulesPackage.RULE_CONSTRAINT:
+      case RulesPackage.MODEL_FACT:
       {
-        RuleConstraint ruleConstraint = (RuleConstraint)theEObject;
-        T result = caseRuleConstraint(ruleConstraint);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RulesPackage.ASSET:
-      {
-        Asset asset = (Asset)theEObject;
-        T result = caseAsset(asset);
+        ModelFact modelFact = (ModelFact)theEObject;
+        T result = caseModelFact(modelFact);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -135,7 +128,7 @@ public class RulesSwitch<T> extends Switch<T>
       {
         ObjectFact objectFact = (ObjectFact)theEObject;
         T result = caseObjectFact(objectFact);
-        if (result == null) result = caseAsset(objectFact);
+        if (result == null) result = caseModelFact(objectFact);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -143,7 +136,7 @@ public class RulesSwitch<T> extends Switch<T>
       {
         ReferenceFact referenceFact = (ReferenceFact)theEObject;
         T result = caseReferenceFact(referenceFact);
-        if (result == null) result = caseAsset(referenceFact);
+        if (result == null) result = caseModelFact(referenceFact);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -151,7 +144,7 @@ public class RulesSwitch<T> extends Switch<T>
       {
         AttributeFact attributeFact = (AttributeFact)theEObject;
         T result = caseAttributeFact(attributeFact);
-        if (result == null) result = caseAsset(attributeFact);
+        if (result == null) result = caseModelFact(attributeFact);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -159,6 +152,13 @@ public class RulesSwitch<T> extends Switch<T>
       {
         Binding binding = (Binding)theEObject;
         T result = caseBinding(binding);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RulesPackage.BIND:
+      {
+        Bind bind = (Bind)theEObject;
+        T result = caseBind(bind);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -263,33 +263,17 @@ public class RulesSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Rule Constraint</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Model Fact</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Rule Constraint</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Model Fact</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseRuleConstraint(RuleConstraint object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Asset</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Asset</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAsset(Asset object)
+  public T caseModelFact(ModelFact object)
   {
     return null;
   }
@@ -354,6 +338,22 @@ public class RulesSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseBinding(Binding object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bind</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bind</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBind(Bind object)
   {
     return null;
   }

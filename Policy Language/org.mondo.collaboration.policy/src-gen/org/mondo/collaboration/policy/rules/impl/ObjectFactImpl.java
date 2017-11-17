@@ -28,7 +28,7 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  *
  * @generated
  */
-public class ObjectFactImpl extends AssetImpl implements ObjectFact
+public class ObjectFactImpl extends ModelFactImpl implements ObjectFact
 {
   /**
    * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.

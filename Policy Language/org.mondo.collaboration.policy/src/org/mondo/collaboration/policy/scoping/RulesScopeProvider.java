@@ -2,12 +2,13 @@ package org.mondo.collaboration.policy.scoping;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -17,7 +18,13 @@ import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.mondo.collaboration.policy.rules.*;
+import org.mondo.collaboration.policy.rules.AttributeFact;
+import org.mondo.collaboration.policy.rules.Binding;
+import org.mondo.collaboration.policy.rules.ObjectFact;
+import org.mondo.collaboration.policy.rules.OperationType;
+import org.mondo.collaboration.policy.rules.ReferenceFact;
+import org.mondo.collaboration.policy.rules.Rule;
+import org.mondo.collaboration.policy.rules.RulesPackage;
 
 import com.google.common.collect.Lists;
 
@@ -25,6 +32,15 @@ public class RulesScopeProvider extends AbstractRulesScopeProvider {
 	
     @Override
     public IScope getScope(EObject context, EReference reference) {
+    	if(reference == RulesPackage.eINSTANCE.getRule_Operation()){
+    		if(context instanceof Rule) {
+				List<EObject> literals = Lists.newArrayList();
+				for(EEnumLiteral literal : RulesPackage.eINSTANCE.getOperationType().getELiterals()) {
+					if(!literal.getLiteral().equals(OperationType.UNSET)) literals.add(literal);
+				}
+				return Scopes.scopeFor(literals);
+			}
+    	}
     	if(reference == RulesPackage.eINSTANCE.getRule_Pattern() && context instanceof Rule){
     		return getScopeRule_Pattern(context, reference);
     	}

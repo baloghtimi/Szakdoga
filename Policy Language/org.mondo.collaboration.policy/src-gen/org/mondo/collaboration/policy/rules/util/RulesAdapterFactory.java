@@ -106,14 +106,9 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
         return createRuleAdapter();
       }
       @Override
-      public Adapter caseRuleConstraint(RuleConstraint object)
+      public Adapter caseModelFact(ModelFact object)
       {
-        return createRuleConstraintAdapter();
-      }
-      @Override
-      public Adapter caseAsset(Asset object)
-      {
-        return createAssetAdapter();
+        return createModelFactAdapter();
       }
       @Override
       public Adapter caseObjectFact(ObjectFact object)
@@ -134,6 +129,11 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBinding(Binding object)
       {
         return createBindingAdapter();
+      }
+      @Override
+      public Adapter caseBind(Bind object)
+      {
+        return createBindAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -248,31 +248,16 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.mondo.collaboration.policy.rules.RuleConstraint <em>Rule Constraint</em>}'.
+   * Creates a new adapter for an object of class '{@link org.mondo.collaboration.policy.rules.ModelFact <em>Model Fact</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.mondo.collaboration.policy.rules.RuleConstraint
+   * @see org.mondo.collaboration.policy.rules.ModelFact
    * @generated
    */
-  public Adapter createRuleConstraintAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.mondo.collaboration.policy.rules.Asset <em>Asset</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.mondo.collaboration.policy.rules.Asset
-   * @generated
-   */
-  public Adapter createAssetAdapter()
+  public Adapter createModelFactAdapter()
   {
     return null;
   }
@@ -333,6 +318,21 @@ public class RulesAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBindingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.mondo.collaboration.policy.rules.Bind <em>Bind</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.mondo.collaboration.policy.rules.Bind
+   * @generated
+   */
+  public Adapter createBindAdapter()
   {
     return null;
   }

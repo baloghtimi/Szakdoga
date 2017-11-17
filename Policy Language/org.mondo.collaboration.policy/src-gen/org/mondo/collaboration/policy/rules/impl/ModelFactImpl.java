@@ -7,24 +7,24 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.mondo.collaboration.policy.rules.Asset;
+import org.mondo.collaboration.policy.rules.ModelFact;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Asset</b></em>'.
+ * An implementation of the model object '<em><b>Model Fact</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class AssetImpl extends MinimalEObjectImpl.Container implements Asset
+public class ModelFactImpl extends MinimalEObjectImpl.Container implements ModelFact
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AssetImpl()
+  protected ModelFactImpl()
   {
     super();
   }
@@ -37,7 +37,7 @@ public class AssetImpl extends MinimalEObjectImpl.Container implements Asset
   @Override
   protected EClass eStaticClass()
   {
-    return RulesPackage.Literals.ASSET;
+    return RulesPackage.Literals.MODEL_FACT;
   }
 
-} //AssetImpl
+} //ModelFactImpl

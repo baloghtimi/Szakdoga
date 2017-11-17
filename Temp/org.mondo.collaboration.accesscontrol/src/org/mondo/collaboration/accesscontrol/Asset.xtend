@@ -45,7 +45,14 @@ abstract class Asset {
 		}
 		override WriteOut(){
 			println(object.toString);
-		}	
+		}
+		override equals(Object o){
+			if(o instanceof ObjectAsset){
+				val other = o as ObjectAsset;
+		        if (object.equals(other.object)) return true;
+			}
+			return false;
+		}
 	}
     
     @Data public static class ReferenceAsset extends Asset {
@@ -85,6 +92,13 @@ abstract class Asset {
 		override WriteOut(){
 			println(source.toString + " -> " + target.toString + ": " + reference.name);
 		}
+		override equals(Object o){
+			if(o instanceof ReferenceAsset){
+				val other = o as ReferenceAsset;
+		        if (source.equals(other.source) && reference.equals(other.reference) && target.equals(other.target)) return true;
+			}
+		    return false;
+		}
     }
     @Data public static class AttributeAsset extends Asset {
 		EObject source
@@ -108,6 +122,13 @@ abstract class Asset {
 		}
 		override WriteOut(){
 			println(source.toString + ": " + attribute.name);
+		}
+		override equals(Object o){
+			if(o instanceof AttributeAsset){
+				val other = o as AttributeAsset;
+		        if (source.equals(other.source) && attribute.equals(other.attribute)) return true;
+			}
+		    return false;
 		}	
     }
     

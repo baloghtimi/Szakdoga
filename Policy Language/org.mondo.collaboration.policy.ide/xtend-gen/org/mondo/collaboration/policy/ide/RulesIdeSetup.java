@@ -5,6 +5,7 @@ package org.mondo.collaboration.policy.ide;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import org.eclipse.xtext.util.Modules2;
 import org.mondo.collaboration.policy.RulesRuntimeModule;
 import org.mondo.collaboration.policy.RulesStandaloneSetup;
@@ -19,6 +20,7 @@ public class RulesIdeSetup extends RulesStandaloneSetup {
   public Injector createInjector() {
     RulesRuntimeModule _rulesRuntimeModule = new RulesRuntimeModule();
     RulesIdeModule _rulesIdeModule = new RulesIdeModule();
-    return Guice.createInjector(Modules2.mixin(_rulesRuntimeModule, _rulesIdeModule));
+    Module _mixin = Modules2.mixin(_rulesRuntimeModule, _rulesIdeModule);
+    return Guice.createInjector(_mixin);
   }
 }

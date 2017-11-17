@@ -19,7 +19,8 @@ import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
  * </p>
  * <ul>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getName <em>Name</em>}</li>
- *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getConstraint <em>Constraint</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getAccess <em>Access</em>}</li>
+ *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getPattern <em>Pattern</em>}</li>
  *   <li>{@link org.mondo.collaboration.policy.rules.Rule#getAsset <em>Asset</em>}</li>
@@ -60,30 +61,62 @@ public interface Rule extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Constraint</b></em>' containment reference.
+   * Returns the value of the '<em><b>Access</b></em>' attribute.
+   * The literals are from the enumeration {@link org.mondo.collaboration.policy.rules.AccessibilityLevel}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Constraint</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Access</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Constraint</em>' containment reference.
-   * @see #setConstraint(RuleConstraint)
-   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Constraint()
-   * @model containment="true"
+   * @return the value of the '<em>Access</em>' attribute.
+   * @see org.mondo.collaboration.policy.rules.AccessibilityLevel
+   * @see #setAccess(AccessibilityLevel)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Access()
+   * @model
    * @generated
    */
-  RuleConstraint getConstraint();
+  AccessibilityLevel getAccess();
 
   /**
-   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getConstraint <em>Constraint</em>}' containment reference.
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getAccess <em>Access</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Constraint</em>' containment reference.
-   * @see #getConstraint()
+   * @param value the new value of the '<em>Access</em>' attribute.
+   * @see org.mondo.collaboration.policy.rules.AccessibilityLevel
+   * @see #getAccess()
    * @generated
    */
-  void setConstraint(RuleConstraint value);
+  void setAccess(AccessibilityLevel value);
+
+  /**
+   * Returns the value of the '<em><b>Operation</b></em>' attribute.
+   * The literals are from the enumeration {@link org.mondo.collaboration.policy.rules.OperationType}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Operation</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Operation</em>' attribute.
+   * @see org.mondo.collaboration.policy.rules.OperationType
+   * @see #setOperation(OperationType)
+   * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Operation()
+   * @model
+   * @generated
+   */
+  OperationType getOperation();
+
+  /**
+   * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getOperation <em>Operation</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Operation</em>' attribute.
+   * @see org.mondo.collaboration.policy.rules.OperationType
+   * @see #getOperation()
+   * @generated
+   */
+  void setOperation(OperationType value);
 
   /**
    * Returns the value of the '<em><b>Roles</b></em>' reference list.
@@ -136,12 +169,12 @@ public interface Rule extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Asset</em>' containment reference.
-   * @see #setAsset(Asset)
+   * @see #setAsset(ModelFact)
    * @see org.mondo.collaboration.policy.rules.RulesPackage#getRule_Asset()
    * @model containment="true"
    * @generated
    */
-  Asset getAsset();
+  ModelFact getAsset();
 
   /**
    * Sets the value of the '{@link org.mondo.collaboration.policy.rules.Rule#getAsset <em>Asset</em>}' containment reference.
@@ -151,7 +184,7 @@ public interface Rule extends EObject
    * @see #getAsset()
    * @generated
    */
-  void setAsset(Asset value);
+  void setAsset(ModelFact value);
 
   /**
    * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.

@@ -14,6 +14,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -62,7 +63,20 @@ public abstract class Asset {
     
     @Override
     public void WriteOut() {
-      InputOutput.<String>println(this.object.toString());
+      String _string = this.object.toString();
+      InputOutput.<String>println(_string);
+    }
+    
+    @Override
+    public boolean equals(final Object o) {
+      if ((o instanceof Asset.ObjectAsset)) {
+        final Asset.ObjectAsset other = ((Asset.ObjectAsset) o);
+        boolean _equals = this.object.equals(other.object);
+        if (_equals) {
+          return true;
+        }
+      }
+      return false;
     }
     
     public ObjectAsset(final EObject object) {
@@ -77,24 +91,6 @@ public abstract class Asset {
       int result = 1;
       result = prime * result + ((this.object== null) ? 0 : this.object.hashCode());
       return result;
-    }
-    
-    @Override
-    @Pure
-    public boolean equals(final Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      Asset.ObjectAsset other = (Asset.ObjectAsset) obj;
-      if (this.object == null) {
-        if (other.object != null)
-          return false;
-      } else if (!this.object.equals(other.object))
-        return false;
-      return true;
     }
     
     @Override
@@ -168,23 +164,31 @@ public abstract class Asset {
           final EObject src = ((EObject) _get);
           Object _get_1 = it.get(targetPos);
           final EObject trg = ((EObject) _get_1);
-          final EStructuralFeature feature = src.eClass().getEStructuralFeature(referenceName);
-          if ((Objects.equal(feature, null) || (!(feature instanceof EReference)))) {
+          EClass _eClass = src.eClass();
+          final EStructuralFeature feature = _eClass.getEStructuralFeature(referenceName);
+          boolean _or = false;
+          boolean _equals = Objects.equal(feature, null);
+          if (_equals) {
+            _or = true;
+          } else {
+            _or = (!(feature instanceof EReference));
+          }
+          if (_or) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Security Policy parsing error: No EReference of name ");
-            _builder.append(referenceName);
+            _builder.append(referenceName, "");
             _builder.append(" found in EClass ");
-            EClass _eClass = src.eClass();
-            _builder.append(_eClass);
+            EClass _eClass_1 = src.eClass();
+            _builder.append(_eClass_1, "");
             _builder.append(" of object ");
-            _builder.append(src);
+            _builder.append(src, "");
             throw new IllegalArgumentException(_builder.toString());
           }
           final EReference reference = ((EReference) feature);
           final EReference opposite = reference.getEOpposite();
           Set<Asset> _xifexpression = null;
-          boolean _equals = Objects.equal(opposite, null);
-          if (_equals) {
+          boolean _equals_1 = Objects.equal(opposite, null);
+          if (_equals_1) {
             Asset.ReferenceAsset _referenceAsset = new Asset.ReferenceAsset(src, reference, trg);
             _xifexpression = Collections.<Asset>unmodifiableSet(CollectionLiterals.<Asset>newHashSet(_referenceAsset));
           } else {
@@ -211,6 +215,32 @@ public abstract class Asset {
       InputOutput.<String>println(_plus_3);
     }
     
+    @Override
+    public boolean equals(final Object o) {
+      if ((o instanceof Asset.ReferenceAsset)) {
+        final Asset.ReferenceAsset other = ((Asset.ReferenceAsset) o);
+        boolean _and = false;
+        boolean _and_1 = false;
+        boolean _equals = this.source.equals(other.source);
+        if (!_equals) {
+          _and_1 = false;
+        } else {
+          boolean _equals_1 = this.reference.equals(other.reference);
+          _and_1 = _equals_1;
+        }
+        if (!_and_1) {
+          _and = false;
+        } else {
+          boolean _equals_2 = this.target.equals(other.target);
+          _and = _equals_2;
+        }
+        if (_and) {
+          return true;
+        }
+      }
+      return false;
+    }
+    
     public ReferenceAsset(final EObject source, final EReference reference, final EObject target) {
       super();
       this.source = source;
@@ -227,34 +257,6 @@ public abstract class Asset {
       result = prime * result + ((this.reference== null) ? 0 : this.reference.hashCode());
       result = prime * result + ((this.target== null) ? 0 : this.target.hashCode());
       return result;
-    }
-    
-    @Override
-    @Pure
-    public boolean equals(final Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      Asset.ReferenceAsset other = (Asset.ReferenceAsset) obj;
-      if (this.source == null) {
-        if (other.source != null)
-          return false;
-      } else if (!this.source.equals(other.source))
-        return false;
-      if (this.reference == null) {
-        if (other.reference != null)
-          return false;
-      } else if (!this.reference.equals(other.reference))
-        return false;
-      if (this.target == null) {
-        if (other.target != null)
-          return false;
-      } else if (!this.target.equals(other.target))
-        return false;
-      return true;
     }
     
     @Override
@@ -308,16 +310,24 @@ public abstract class Asset {
         {
           Object _get = it.get(sourcePos);
           final EObject src = ((EObject) _get);
-          final EStructuralFeature feature = src.eClass().getEStructuralFeature(attributeName);
-          if ((Objects.equal(feature, null) || (!(feature instanceof EAttribute)))) {
+          EClass _eClass = src.eClass();
+          final EStructuralFeature feature = _eClass.getEStructuralFeature(attributeName);
+          boolean _or = false;
+          boolean _equals = Objects.equal(feature, null);
+          if (_equals) {
+            _or = true;
+          } else {
+            _or = (!(feature instanceof EAttribute));
+          }
+          if (_or) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Security Policy parsing error: No EAttribute of name ");
-            _builder.append(attributeName);
+            _builder.append(attributeName, "");
             _builder.append(" found in EClass ");
-            EClass _eClass = src.eClass();
-            _builder.append(_eClass);
+            EClass _eClass_1 = src.eClass();
+            _builder.append(_eClass_1, "");
             _builder.append(" of object ");
-            _builder.append(src);
+            _builder.append(src, "");
             throw new IllegalArgumentException(_builder.toString());
           }
           final EAttribute attribute = ((EAttribute) feature);
@@ -338,6 +348,25 @@ public abstract class Asset {
       InputOutput.<String>println(_plus_1);
     }
     
+    @Override
+    public boolean equals(final Object o) {
+      if ((o instanceof Asset.AttributeAsset)) {
+        final Asset.AttributeAsset other = ((Asset.AttributeAsset) o);
+        boolean _and = false;
+        boolean _equals = this.source.equals(other.source);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _equals_1 = this.attribute.equals(other.attribute);
+          _and = _equals_1;
+        }
+        if (_and) {
+          return true;
+        }
+      }
+      return false;
+    }
+    
     public AttributeAsset(final EObject source, final EAttribute attribute) {
       super();
       this.source = source;
@@ -352,29 +381,6 @@ public abstract class Asset {
       result = prime * result + ((this.source== null) ? 0 : this.source.hashCode());
       result = prime * result + ((this.attribute== null) ? 0 : this.attribute.hashCode());
       return result;
-    }
-    
-    @Override
-    @Pure
-    public boolean equals(final Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      Asset.AttributeAsset other = (Asset.AttributeAsset) obj;
-      if (this.source == null) {
-        if (other.source != null)
-          return false;
-      } else if (!this.source.equals(other.source))
-        return false;
-      if (this.attribute == null) {
-        if (other.attribute != null)
-          return false;
-      } else if (!this.attribute.equals(other.attribute))
-        return false;
-      return true;
     }
     
     @Override
@@ -405,31 +411,35 @@ public abstract class Asset {
   public abstract void WriteOut();
   
   public static Iterable<Class<? extends Asset>> getKinds() {
+    Class<?>[] _classes = Asset.class.getClasses();
     final Function1<Class<?>, Boolean> _function = (Class<?> it) -> {
       return Boolean.valueOf(Asset.class.isAssignableFrom(it));
     };
+    Iterable<Class<?>> _filter = IterableExtensions.<Class<?>>filter(((Iterable<Class<?>>)Conversions.doWrapArray(_classes)), _function);
     final Function1<Class<?>, Class<? extends Asset>> _function_1 = (Class<?> it) -> {
       return ((Class<? extends Asset>) it);
     };
-    return IterableExtensions.<Class<?>, Class<? extends Asset>>map(IterableExtensions.<Class<?>>filter(((Iterable<Class<?>>)Conversions.doWrapArray(Asset.class.getClasses())), _function), _function_1);
+    return IterableExtensions.<Class<?>, Class<? extends Asset>>map(_filter, _function_1);
   }
   
   public static Asset.Factory factoryFrom(final IQuerySpecification<?> query) {
+    List<PAnnotation> _allAnnotations = query.getAllAnnotations();
     final Function1<PAnnotation, Boolean> _function = (PAnnotation it) -> {
       String _name = it.getName();
       return Boolean.valueOf(Objects.equal(_name, "SecurityObject"));
     };
-    final PAnnotation objAnnotation = IterableExtensions.<PAnnotation>findFirst(query.getAllAnnotations(), _function);
+    final PAnnotation objAnnotation = IterableExtensions.<PAnnotation>findFirst(_allAnnotations, _function);
     boolean _notEquals = (!Objects.equal(objAnnotation, null));
     if (_notEquals) {
       final Integer objectPos = Asset.getParameterIndexFromAnnotationValue(objAnnotation, "object", query);
       return Asset.ObjectAsset.factory((objectPos).intValue());
     }
+    List<PAnnotation> _allAnnotations_1 = query.getAllAnnotations();
     final Function1<PAnnotation, Boolean> _function_1 = (PAnnotation it) -> {
       String _name = it.getName();
       return Boolean.valueOf(Objects.equal(_name, "SecurityReference"));
     };
-    final PAnnotation refAnnotation = IterableExtensions.<PAnnotation>findFirst(query.getAllAnnotations(), _function_1);
+    final PAnnotation refAnnotation = IterableExtensions.<PAnnotation>findFirst(_allAnnotations_1, _function_1);
     boolean _notEquals_1 = (!Objects.equal(refAnnotation, null));
     if (_notEquals_1) {
       final Integer srcPos = Asset.getParameterIndexFromAnnotationValue(refAnnotation, "src", query);
@@ -438,11 +448,12 @@ public abstract class Asset {
       final String featureName = ((String) _firstValue);
       return Asset.ReferenceAsset.factory((srcPos).intValue(), featureName, (trgPos).intValue());
     }
+    List<PAnnotation> _allAnnotations_2 = query.getAllAnnotations();
     final Function1<PAnnotation, Boolean> _function_2 = (PAnnotation it) -> {
       String _name = it.getName();
       return Boolean.valueOf(Objects.equal(_name, "SecurityAttribute"));
     };
-    final PAnnotation attrAnnotation = IterableExtensions.<PAnnotation>findFirst(query.getAllAnnotations(), _function_2);
+    final PAnnotation attrAnnotation = IterableExtensions.<PAnnotation>findFirst(_allAnnotations_2, _function_2);
     boolean _notEquals_2 = (!Objects.equal(attrAnnotation, null));
     if (_notEquals_2) {
       final Integer srcPos_1 = Asset.getParameterIndexFromAnnotationValue(attrAnnotation, "src", query);
@@ -450,25 +461,32 @@ public abstract class Asset {
       final String featureName_1 = ((String) _firstValue_1);
       return Asset.AttributeAsset.factory((srcPos_1).intValue(), featureName_1);
     }
-    final String simpleName = IterableExtensions.<String>last(Splitter.on(".").split(query.getFullyQualifiedName()));
+    Splitter _on = Splitter.on(".");
+    String _fullyQualifiedName = query.getFullyQualifiedName();
+    Iterable<String> _split = _on.split(_fullyQualifiedName);
+    final String simpleName = IterableExtensions.<String>last(_split);
     boolean _startsWith = simpleName.startsWith("object");
     if (_startsWith) {
       return Asset.ObjectAsset.factory(0);
     } else {
       boolean _startsWith_1 = simpleName.startsWith("reference");
       if (_startsWith_1) {
-        return Asset.ReferenceAsset.factory(0, simpleName.substring("reference".length()), 1);
+        int _length = "reference".length();
+        String _substring = simpleName.substring(_length);
+        return Asset.ReferenceAsset.factory(0, _substring, 1);
       } else {
         boolean _startsWith_2 = simpleName.startsWith("attribute");
         if (_startsWith_2) {
-          return Asset.AttributeAsset.factory(0, simpleName.substring("attribute".length()));
+          int _length_1 = "attribute".length();
+          String _substring_1 = simpleName.substring(_length_1);
+          return Asset.AttributeAsset.factory(0, _substring_1);
         }
       }
     }
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Pattern ");
-    String _fullyQualifiedName = query.getFullyQualifiedName();
-    _builder.append(_fullyQualifiedName);
+    String _fullyQualifiedName_1 = query.getFullyQualifiedName();
+    _builder.append(_fullyQualifiedName_1, "");
     _builder.append(" unrecognizable as security asset specification without annotations or naming convention.");
     throw new IllegalArgumentException(_builder.toString());
   }
@@ -479,9 +497,11 @@ public abstract class Asset {
       final Object annotationValue = annotation.getFirstValue(annotationValueName);
       String _switchResult = null;
       boolean _matched = false;
-      if (annotationValue instanceof ParameterReference) {
-        _matched=true;
-        _switchResult = ((ParameterReference)annotationValue).getName();
+      if (!_matched) {
+        if (annotationValue instanceof ParameterReference) {
+          _matched=true;
+          _switchResult = ((ParameterReference)annotationValue).getName();
+        }
       }
       if (!_matched) {
         if (annotationValue instanceof String) {
@@ -492,13 +512,13 @@ public abstract class Asset {
       if (!_matched) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Annotation parameter \'");
-        _builder.append(annotationValueName);
+        _builder.append(annotationValueName, "");
         _builder.append("\' not found for annotation @");
         String _name = annotation.getName();
-        _builder.append(_name);
+        _builder.append(_name, "");
         _builder.append(" on query ");
         String _fullyQualifiedName = query.getFullyQualifiedName();
-        _builder.append(_fullyQualifiedName);
+        _builder.append(_fullyQualifiedName, "");
         _builder.append(".");
         throw new IllegalArgumentException(_builder.toString());
       }
@@ -507,13 +527,13 @@ public abstract class Asset {
       if (_equals) {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("Parameter name not given for annotation parameter \'");
-        _builder_1.append(annotationValueName);
+        _builder_1.append(annotationValueName, "");
         _builder_1.append("\' of @");
         String _name_1 = annotation.getName();
-        _builder_1.append(_name_1);
+        _builder_1.append(_name_1, "");
         _builder_1.append(" on query ");
         String _fullyQualifiedName_1 = query.getFullyQualifiedName();
-        _builder_1.append(_fullyQualifiedName_1);
+        _builder_1.append(_fullyQualifiedName_1, "");
         _builder_1.append(".");
         throw new IllegalArgumentException(_builder_1.toString());
       }
@@ -522,13 +542,13 @@ public abstract class Asset {
       if (_equals_1) {
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("Parameter name ");
-        _builder_2.append(paramName);
+        _builder_2.append(paramName, "");
         _builder_2.append(" (as indicated by annotation @");
         String _name_2 = annotation.getName();
-        _builder_2.append(_name_2);
+        _builder_2.append(_name_2, "");
         _builder_2.append(") not found for query ");
         String _fullyQualifiedName_2 = query.getFullyQualifiedName();
-        _builder_2.append(_fullyQualifiedName_2);
+        _builder_2.append(_fullyQualifiedName_2, "");
         _builder_2.append(".");
         throw new IllegalArgumentException(_builder_2.toString());
       }

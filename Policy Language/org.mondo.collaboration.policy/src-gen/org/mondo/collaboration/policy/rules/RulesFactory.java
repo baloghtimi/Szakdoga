@@ -78,22 +78,13 @@ public interface RulesFactory extends EFactory
   Rule createRule();
 
   /**
-   * Returns a new object of class '<em>Rule Constraint</em>'.
+   * Returns a new object of class '<em>Model Fact</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Rule Constraint</em>'.
+   * @return a new object of class '<em>Model Fact</em>'.
    * @generated
    */
-  RuleConstraint createRuleConstraint();
-
-  /**
-   * Returns a new object of class '<em>Asset</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Asset</em>'.
-   * @generated
-   */
-  Asset createAsset();
+  ModelFact createModelFact();
 
   /**
    * Returns a new object of class '<em>Object Fact</em>'.
@@ -130,6 +121,15 @@ public interface RulesFactory extends EFactory
    * @generated
    */
   Binding createBinding();
+
+  /**
+   * Returns a new object of class '<em>Bind</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bind</em>'.
+   * @generated
+   */
+  Bind createBind();
 
   /**
    * Returns the package supported by this factory.

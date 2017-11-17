@@ -15,6 +15,7 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.mondo.collaboration.policy.rules.AttributeFact;
+import org.mondo.collaboration.policy.rules.Bind;
 import org.mondo.collaboration.policy.rules.Binding;
 import org.mondo.collaboration.policy.rules.Group;
 import org.mondo.collaboration.policy.rules.Model;
@@ -22,7 +23,6 @@ import org.mondo.collaboration.policy.rules.ObjectFact;
 import org.mondo.collaboration.policy.rules.Policy;
 import org.mondo.collaboration.policy.rules.ReferenceFact;
 import org.mondo.collaboration.policy.rules.Rule;
-import org.mondo.collaboration.policy.rules.RuleConstraint;
 import org.mondo.collaboration.policy.rules.RulesPackage;
 import org.mondo.collaboration.policy.rules.User;
 import org.mondo.collaboration.policy.services.RulesGrammarAccess;
@@ -43,6 +43,9 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			switch (semanticObject.eClass().getClassifierID()) {
 			case RulesPackage.ATTRIBUTE_FACT:
 				sequence_AttributeFact(context, (AttributeFact) semanticObject); 
+				return; 
+			case RulesPackage.BIND:
+				sequence_Bind(context, (Bind) semanticObject); 
 				return; 
 			case RulesPackage.BINDING:
 				sequence_Binding(context, (Binding) semanticObject); 
@@ -65,9 +68,6 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case RulesPackage.RULE:
 				sequence_Rule(context, (Rule) semanticObject); 
 				return; 
-			case RulesPackage.RULE_CONSTRAINT:
-				sequence_RuleConstraint(context, (RuleConstraint) semanticObject); 
-				return; 
 			case RulesPackage.USER:
 				sequence_User(context, (User) semanticObject); 
 				return; 
@@ -78,7 +78,7 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     Asset returns AttributeFact
+	 *     ModelFact returns AttributeFact
 	 *     AttributeFact returns AttributeFact
 	 *
 	 * Constraint:
@@ -95,6 +95,18 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		feeder.accept(grammarAccess.getAttributeFactAccess().getVariableVariableIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RulesPackage.Literals.ATTRIBUTE_FACT__VARIABLE, false));
 		feeder.accept(grammarAccess.getAttributeFactAccess().getAttributeEAttributeIDTerminalRuleCall_4_0_1(), semanticObject.eGet(RulesPackage.Literals.ATTRIBUTE_FACT__ATTRIBUTE, false));
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Bind returns Bind
+	 *
+	 * Constraint:
+	 *     (valueString=STRING | valueInteger=INT)
+	 */
+	protected void sequence_Bind(ISerializationContext context, Bind semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -125,7 +137,7 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Group returns Group
 	 *
 	 * Constraint:
-	 *     (name=ID users+=[User|ID] users+=[User|ID]*)
+	 *     (name=ID roles+=[Role|ID] roles+=[Role|ID]*)
 	 */
 	protected void sequence_Group(ISerializationContext context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -146,7 +158,7 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     Asset returns ObjectFact
+	 *     ModelFact returns ObjectFact
 	 *     ObjectFact returns ObjectFact
 	 *
 	 * Constraint:
@@ -177,7 +189,7 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     Asset returns ReferenceFact
+	 *     ModelFact returns ReferenceFact
 	 *     ReferenceFact returns ReferenceFact
 	 *
 	 * Constraint:
@@ -202,28 +214,17 @@ public class RulesSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     RuleConstraint returns RuleConstraint
-	 *
-	 * Constraint:
-	 *     (access=AccessibilityLevel operation=OperationType)?
-	 */
-	protected void sequence_RuleConstraint(ISerializationContext context, RuleConstraint semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Rule returns Rule
 	 *
 	 * Constraint:
 	 *     (
 	 *         name=ID 
-	 *         constraint=RuleConstraint 
+	 *         access=AccessibilityLevel 
+	 *         operation=OperationType? 
 	 *         roles+=[Role|ID] 
 	 *         roles+=[Role|ID]* 
 	 *         pattern=[Pattern|STRING] 
-	 *         asset=Asset 
+	 *         asset=ModelFact 
 	 *         bindings+=Binding* 
 	 *         priority=INT?
 	 *     )

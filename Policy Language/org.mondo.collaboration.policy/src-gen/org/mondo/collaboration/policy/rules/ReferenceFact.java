@@ -25,7 +25,7 @@ import org.eclipse.viatra.query.patternlanguage.patternLanguage.Variable;
  * @model
  * @generated
  */
-public interface ReferenceFact extends Asset
+public interface ReferenceFact extends ModelFact
 {
   /**
    * Returns the value of the '<em><b>Source Var</b></em>' reference.

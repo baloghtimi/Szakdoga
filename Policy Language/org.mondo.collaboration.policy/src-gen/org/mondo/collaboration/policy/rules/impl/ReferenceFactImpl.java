@@ -31,7 +31,7 @@ import org.mondo.collaboration.policy.rules.RulesPackage;
  *
  * @generated
  */
-public class ReferenceFactImpl extends AssetImpl implements ReferenceFact
+public class ReferenceFactImpl extends ModelFactImpl implements ReferenceFact
 {
   /**
    * The cached value of the '{@link #getSourceVar() <em>Source Var</em>}' reference.

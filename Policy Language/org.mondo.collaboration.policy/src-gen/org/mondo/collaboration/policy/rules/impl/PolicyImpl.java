@@ -93,7 +93,7 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy
    * @generated
    * @ordered
    */
-  protected static final OperationType OPERATION_EDEFAULT = OperationType.READ;
+  protected static final OperationType OPERATION_EDEFAULT = OperationType.UNSET;
 
   /**
    * The cached value of the '{@link #getOperation() <em>Operation</em>}' attribute.

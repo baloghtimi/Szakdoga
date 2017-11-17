@@ -7,14 +7,14 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Asset</b></em>'.
+ * A representation of the model object '<em><b>Model Fact</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.mondo.collaboration.policy.rules.RulesPackage#getAsset()
+ * @see org.mondo.collaboration.policy.rules.RulesPackage#getModelFact()
  * @model
  * @generated
  */
-public interface Asset extends EObject
+public interface ModelFact extends EObject
 {
-} // Asset
+} // ModelFact

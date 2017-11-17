@@ -171,13 +171,13 @@ public interface RulesPackage extends EPackage
   int GROUP__NAME = ROLE__NAME;
 
   /**
-   * The feature id for the '<em><b>Users</b></em>' reference list.
+   * The feature id for the '<em><b>Roles</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GROUP__USERS = ROLE_FEATURE_COUNT + 0;
+  int GROUP__ROLES = ROLE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Group</em>' class.
@@ -272,86 +272,13 @@ public interface RulesPackage extends EPackage
   int RULE__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Constraint</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__CONSTRAINT = 1;
-
-  /**
-   * The feature id for the '<em><b>Roles</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__ROLES = 2;
-
-  /**
-   * The feature id for the '<em><b>Pattern</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__PATTERN = 3;
-
-  /**
-   * The feature id for the '<em><b>Asset</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__ASSET = 4;
-
-  /**
-   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__BINDINGS = 5;
-
-  /**
-   * The feature id for the '<em><b>Priority</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__PRIORITY = 6;
-
-  /**
-   * The number of structural features of the '<em>Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE_FEATURE_COUNT = 7;
-
-  /**
-   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.RuleConstraintImpl <em>Rule Constraint</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.mondo.collaboration.policy.rules.impl.RuleConstraintImpl
-   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getRuleConstraint()
-   * @generated
-   */
-  int RULE_CONSTRAINT = 6;
-
-  /**
    * The feature id for the '<em><b>Access</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE_CONSTRAINT__ACCESS = 0;
+  int RULE__ACCESS = 1;
 
   /**
    * The feature id for the '<em><b>Operation</b></em>' attribute.
@@ -360,35 +287,80 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RULE_CONSTRAINT__OPERATION = 1;
+  int RULE__OPERATION = 2;
 
   /**
-   * The number of structural features of the '<em>Rule Constraint</em>' class.
+   * The feature id for the '<em><b>Roles</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE_CONSTRAINT_FEATURE_COUNT = 2;
+  int RULE__ROLES = 3;
 
   /**
-   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.AssetImpl <em>Asset</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.mondo.collaboration.policy.rules.impl.AssetImpl
-   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getAsset()
-   * @generated
-   */
-  int ASSET = 7;
-
-  /**
-   * The number of structural features of the '<em>Asset</em>' class.
+   * The feature id for the '<em><b>Pattern</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSET_FEATURE_COUNT = 0;
+  int RULE__PATTERN = 4;
+
+  /**
+   * The feature id for the '<em><b>Asset</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__ASSET = 5;
+
+  /**
+   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__BINDINGS = 6;
+
+  /**
+   * The feature id for the '<em><b>Priority</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__PRIORITY = 7;
+
+  /**
+   * The number of structural features of the '<em>Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_FEATURE_COUNT = 8;
+
+  /**
+   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.ModelFactImpl <em>Model Fact</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.mondo.collaboration.policy.rules.impl.ModelFactImpl
+   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getModelFact()
+   * @generated
+   */
+  int MODEL_FACT = 6;
+
+  /**
+   * The number of structural features of the '<em>Model Fact</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL_FACT_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.ObjectFactImpl <em>Object Fact</em>}' class.
@@ -398,7 +370,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getObjectFact()
    * @generated
    */
-  int OBJECT_FACT = 8;
+  int OBJECT_FACT = 7;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -407,7 +379,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int OBJECT_FACT__VARIABLE = ASSET_FEATURE_COUNT + 0;
+  int OBJECT_FACT__VARIABLE = MODEL_FACT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Object Fact</em>' class.
@@ -416,7 +388,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int OBJECT_FACT_FEATURE_COUNT = ASSET_FEATURE_COUNT + 1;
+  int OBJECT_FACT_FEATURE_COUNT = MODEL_FACT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.ReferenceFactImpl <em>Reference Fact</em>}' class.
@@ -426,7 +398,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getReferenceFact()
    * @generated
    */
-  int REFERENCE_FACT = 9;
+  int REFERENCE_FACT = 8;
 
   /**
    * The feature id for the '<em><b>Source Var</b></em>' reference.
@@ -435,7 +407,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_FACT__SOURCE_VAR = ASSET_FEATURE_COUNT + 0;
+  int REFERENCE_FACT__SOURCE_VAR = MODEL_FACT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Target Var</b></em>' reference.
@@ -444,7 +416,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_FACT__TARGET_VAR = ASSET_FEATURE_COUNT + 1;
+  int REFERENCE_FACT__TARGET_VAR = MODEL_FACT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -453,7 +425,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_FACT__REFERENCE = ASSET_FEATURE_COUNT + 2;
+  int REFERENCE_FACT__REFERENCE = MODEL_FACT_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Reference Fact</em>' class.
@@ -462,7 +434,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_FACT_FEATURE_COUNT = ASSET_FEATURE_COUNT + 3;
+  int REFERENCE_FACT_FEATURE_COUNT = MODEL_FACT_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.AttributeFactImpl <em>Attribute Fact</em>}' class.
@@ -472,7 +444,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getAttributeFact()
    * @generated
    */
-  int ATTRIBUTE_FACT = 10;
+  int ATTRIBUTE_FACT = 9;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -481,7 +453,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_FACT__VARIABLE = ASSET_FEATURE_COUNT + 0;
+  int ATTRIBUTE_FACT__VARIABLE = MODEL_FACT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -490,7 +462,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_FACT__ATTRIBUTE = ASSET_FEATURE_COUNT + 1;
+  int ATTRIBUTE_FACT__ATTRIBUTE = MODEL_FACT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Attribute Fact</em>' class.
@@ -499,7 +471,7 @@ public interface RulesPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_FACT_FEATURE_COUNT = ASSET_FEATURE_COUNT + 2;
+  int ATTRIBUTE_FACT_FEATURE_COUNT = MODEL_FACT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.BindingImpl <em>Binding</em>}' class.
@@ -509,7 +481,7 @@ public interface RulesPackage extends EPackage
    * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getBinding()
    * @generated
    */
-  int BINDING = 11;
+  int BINDING = 10;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -521,7 +493,7 @@ public interface RulesPackage extends EPackage
   int BINDING__VARIABLE = 0;
 
   /**
-   * The feature id for the '<em><b>Bind</b></em>' attribute.
+   * The feature id for the '<em><b>Bind</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -537,6 +509,43 @@ public interface RulesPackage extends EPackage
    * @ordered
    */
   int BINDING_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.mondo.collaboration.policy.rules.impl.BindImpl <em>Bind</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.mondo.collaboration.policy.rules.impl.BindImpl
+   * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getBind()
+   * @generated
+   */
+  int BIND = 11;
+
+  /**
+   * The feature id for the '<em><b>Value String</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BIND__VALUE_STRING = 0;
+
+  /**
+   * The feature id for the '<em><b>Value Integer</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BIND__VALUE_INTEGER = 1;
+
+  /**
+   * The number of structural features of the '<em>Bind</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BIND_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.mondo.collaboration.policy.rules.AccessibilityLevel <em>Accessibility Level</em>}' enum.
@@ -643,15 +652,15 @@ public interface RulesPackage extends EPackage
   EClass getGroup();
 
   /**
-   * Returns the meta object for the reference list '{@link org.mondo.collaboration.policy.rules.Group#getUsers <em>Users</em>}'.
+   * Returns the meta object for the reference list '{@link org.mondo.collaboration.policy.rules.Group#getRoles <em>Roles</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Users</em>'.
-   * @see org.mondo.collaboration.policy.rules.Group#getUsers()
+   * @return the meta object for the reference list '<em>Roles</em>'.
+   * @see org.mondo.collaboration.policy.rules.Group#getRoles()
    * @see #getGroup()
    * @generated
    */
-  EReference getGroup_Users();
+  EReference getGroup_Roles();
 
   /**
    * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.Policy <em>Policy</em>}'.
@@ -740,15 +749,26 @@ public interface RulesPackage extends EPackage
   EAttribute getRule_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.Rule#getConstraint <em>Constraint</em>}'.
+   * Returns the meta object for the attribute '{@link org.mondo.collaboration.policy.rules.Rule#getAccess <em>Access</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Constraint</em>'.
-   * @see org.mondo.collaboration.policy.rules.Rule#getConstraint()
+   * @return the meta object for the attribute '<em>Access</em>'.
+   * @see org.mondo.collaboration.policy.rules.Rule#getAccess()
    * @see #getRule()
    * @generated
    */
-  EReference getRule_Constraint();
+  EAttribute getRule_Access();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.mondo.collaboration.policy.rules.Rule#getOperation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operation</em>'.
+   * @see org.mondo.collaboration.policy.rules.Rule#getOperation()
+   * @see #getRule()
+   * @generated
+   */
+  EAttribute getRule_Operation();
 
   /**
    * Returns the meta object for the reference list '{@link org.mondo.collaboration.policy.rules.Rule#getRoles <em>Roles</em>}'.
@@ -806,46 +826,14 @@ public interface RulesPackage extends EPackage
   EAttribute getRule_Priority();
 
   /**
-   * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.RuleConstraint <em>Rule Constraint</em>}'.
+   * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.ModelFact <em>Model Fact</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Rule Constraint</em>'.
-   * @see org.mondo.collaboration.policy.rules.RuleConstraint
+   * @return the meta object for class '<em>Model Fact</em>'.
+   * @see org.mondo.collaboration.policy.rules.ModelFact
    * @generated
    */
-  EClass getRuleConstraint();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.mondo.collaboration.policy.rules.RuleConstraint#getAccess <em>Access</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Access</em>'.
-   * @see org.mondo.collaboration.policy.rules.RuleConstraint#getAccess()
-   * @see #getRuleConstraint()
-   * @generated
-   */
-  EAttribute getRuleConstraint_Access();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.mondo.collaboration.policy.rules.RuleConstraint#getOperation <em>Operation</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Operation</em>'.
-   * @see org.mondo.collaboration.policy.rules.RuleConstraint#getOperation()
-   * @see #getRuleConstraint()
-   * @generated
-   */
-  EAttribute getRuleConstraint_Operation();
-
-  /**
-   * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.Asset <em>Asset</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Asset</em>'.
-   * @see org.mondo.collaboration.policy.rules.Asset
-   * @generated
-   */
-  EClass getAsset();
+  EClass getModelFact();
 
   /**
    * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.ObjectFact <em>Object Fact</em>}'.
@@ -965,15 +953,47 @@ public interface RulesPackage extends EPackage
   EReference getBinding_Variable();
 
   /**
-   * Returns the meta object for the attribute '{@link org.mondo.collaboration.policy.rules.Binding#getBind <em>Bind</em>}'.
+   * Returns the meta object for the containment reference '{@link org.mondo.collaboration.policy.rules.Binding#getBind <em>Bind</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Bind</em>'.
+   * @return the meta object for the containment reference '<em>Bind</em>'.
    * @see org.mondo.collaboration.policy.rules.Binding#getBind()
    * @see #getBinding()
    * @generated
    */
-  EAttribute getBinding_Bind();
+  EReference getBinding_Bind();
+
+  /**
+   * Returns the meta object for class '{@link org.mondo.collaboration.policy.rules.Bind <em>Bind</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bind</em>'.
+   * @see org.mondo.collaboration.policy.rules.Bind
+   * @generated
+   */
+  EClass getBind();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.mondo.collaboration.policy.rules.Bind#getValueString <em>Value String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value String</em>'.
+   * @see org.mondo.collaboration.policy.rules.Bind#getValueString()
+   * @see #getBind()
+   * @generated
+   */
+  EAttribute getBind_ValueString();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.mondo.collaboration.policy.rules.Bind#getValueInteger <em>Value Integer</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value Integer</em>'.
+   * @see org.mondo.collaboration.policy.rules.Bind#getValueInteger()
+   * @see #getBind()
+   * @generated
+   */
+  EAttribute getBind_ValueInteger();
 
   /**
    * Returns the meta object for enum '{@link org.mondo.collaboration.policy.rules.AccessibilityLevel <em>Accessibility Level</em>}'.
@@ -1093,12 +1113,12 @@ public interface RulesPackage extends EPackage
     EClass GROUP = eINSTANCE.getGroup();
 
     /**
-     * The meta object literal for the '<em><b>Users</b></em>' reference list feature.
+     * The meta object literal for the '<em><b>Roles</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference GROUP__USERS = eINSTANCE.getGroup_Users();
+    EReference GROUP__ROLES = eINSTANCE.getGroup_Roles();
 
     /**
      * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.PolicyImpl <em>Policy</em>}' class.
@@ -1169,12 +1189,20 @@ public interface RulesPackage extends EPackage
     EAttribute RULE__NAME = eINSTANCE.getRule_Name();
 
     /**
-     * The meta object literal for the '<em><b>Constraint</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Access</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference RULE__CONSTRAINT = eINSTANCE.getRule_Constraint();
+    EAttribute RULE__ACCESS = eINSTANCE.getRule_Access();
+
+    /**
+     * The meta object literal for the '<em><b>Operation</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RULE__OPERATION = eINSTANCE.getRule_Operation();
 
     /**
      * The meta object literal for the '<em><b>Roles</b></em>' reference list feature.
@@ -1217,40 +1245,14 @@ public interface RulesPackage extends EPackage
     EAttribute RULE__PRIORITY = eINSTANCE.getRule_Priority();
 
     /**
-     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.RuleConstraintImpl <em>Rule Constraint</em>}' class.
+     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.ModelFactImpl <em>Model Fact</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.mondo.collaboration.policy.rules.impl.RuleConstraintImpl
-     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getRuleConstraint()
+     * @see org.mondo.collaboration.policy.rules.impl.ModelFactImpl
+     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getModelFact()
      * @generated
      */
-    EClass RULE_CONSTRAINT = eINSTANCE.getRuleConstraint();
-
-    /**
-     * The meta object literal for the '<em><b>Access</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute RULE_CONSTRAINT__ACCESS = eINSTANCE.getRuleConstraint_Access();
-
-    /**
-     * The meta object literal for the '<em><b>Operation</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute RULE_CONSTRAINT__OPERATION = eINSTANCE.getRuleConstraint_Operation();
-
-    /**
-     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.AssetImpl <em>Asset</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.mondo.collaboration.policy.rules.impl.AssetImpl
-     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getAsset()
-     * @generated
-     */
-    EClass ASSET = eINSTANCE.getAsset();
+    EClass MODEL_FACT = eINSTANCE.getModelFact();
 
     /**
      * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.ObjectFactImpl <em>Object Fact</em>}' class.
@@ -1349,12 +1351,38 @@ public interface RulesPackage extends EPackage
     EReference BINDING__VARIABLE = eINSTANCE.getBinding_Variable();
 
     /**
-     * The meta object literal for the '<em><b>Bind</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Bind</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute BINDING__BIND = eINSTANCE.getBinding_Bind();
+    EReference BINDING__BIND = eINSTANCE.getBinding_Bind();
+
+    /**
+     * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.impl.BindImpl <em>Bind</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.mondo.collaboration.policy.rules.impl.BindImpl
+     * @see org.mondo.collaboration.policy.rules.impl.RulesPackageImpl#getBind()
+     * @generated
+     */
+    EClass BIND = eINSTANCE.getBind();
+
+    /**
+     * The meta object literal for the '<em><b>Value String</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BIND__VALUE_STRING = eINSTANCE.getBind_ValueString();
+
+    /**
+     * The meta object literal for the '<em><b>Value Integer</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BIND__VALUE_INTEGER = eINSTANCE.getBind_ValueInteger();
 
     /**
      * The meta object literal for the '{@link org.mondo.collaboration.policy.rules.AccessibilityLevel <em>Accessibility Level</em>}' enum.

@@ -38,7 +38,17 @@ public enum AccessibilityLevel implements Enumerator
    * @generated
    * @ordered
    */
-  DENY(1, "DENY", "deny");
+  DENY(1, "DENY", "deny"),
+
+  /**
+   * The '<em><b>OBFUSCATE</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #OBFUSCATE_VALUE
+   * @generated
+   * @ordered
+   */
+  OBFUSCATE(2, "OBFUSCATE", "obfuscate");
 
   /**
    * The '<em><b>ALLOW</b></em>' literal value.
@@ -71,6 +81,21 @@ public enum AccessibilityLevel implements Enumerator
   public static final int DENY_VALUE = 1;
 
   /**
+   * The '<em><b>OBFUSCATE</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>OBFUSCATE</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #OBFUSCATE
+   * @model literal="obfuscate"
+   * @generated
+   * @ordered
+   */
+  public static final int OBFUSCATE_VALUE = 2;
+
+  /**
    * An array of all the '<em><b>Accessibility Level</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -81,6 +106,7 @@ public enum AccessibilityLevel implements Enumerator
     {
       ALLOW,
       DENY,
+      OBFUSCATE,
     };
 
   /**
@@ -147,6 +173,7 @@ public enum AccessibilityLevel implements Enumerator
     {
       case ALLOW_VALUE: return ALLOW;
       case DENY_VALUE: return DENY;
+      case OBFUSCATE_VALUE: return OBFUSCATE;
     }
     return null;
   }

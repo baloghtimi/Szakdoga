@@ -21,6 +21,16 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum OperationType implements Enumerator
 {
   /**
+   * The '<em><b>UNSET</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #UNSET_VALUE
+   * @generated
+   * @ordered
+   */
+  UNSET(0, "UNSET", "unset"),
+
+  /**
    * The '<em><b>READ</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -28,7 +38,7 @@ public enum OperationType implements Enumerator
    * @generated
    * @ordered
    */
-  READ(0, "READ", "R"),
+  READ(1, "READ", "R"),
 
   /**
    * The '<em><b>WRITE</b></em>' literal object.
@@ -38,7 +48,7 @@ public enum OperationType implements Enumerator
    * @generated
    * @ordered
    */
-  WRITE(1, "WRITE", "W"),
+  WRITE(2, "WRITE", "W"),
 
   /**
    * The '<em><b>READWRITE</b></em>' literal object.
@@ -48,7 +58,22 @@ public enum OperationType implements Enumerator
    * @generated
    * @ordered
    */
-  READWRITE(2, "READWRITE", "RW");
+  READWRITE(3, "READWRITE", "RW");
+
+  /**
+   * The '<em><b>UNSET</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>UNSET</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #UNSET
+   * @model literal="unset"
+   * @generated
+   * @ordered
+   */
+  public static final int UNSET_VALUE = 0;
 
   /**
    * The '<em><b>READ</b></em>' literal value.
@@ -63,7 +88,7 @@ public enum OperationType implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int READ_VALUE = 0;
+  public static final int READ_VALUE = 1;
 
   /**
    * The '<em><b>WRITE</b></em>' literal value.
@@ -78,7 +103,7 @@ public enum OperationType implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int WRITE_VALUE = 1;
+  public static final int WRITE_VALUE = 2;
 
   /**
    * The '<em><b>READWRITE</b></em>' literal value.
@@ -93,7 +118,7 @@ public enum OperationType implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int READWRITE_VALUE = 2;
+  public static final int READWRITE_VALUE = 3;
 
   /**
    * An array of all the '<em><b>Operation Type</b></em>' enumerators.
@@ -104,6 +129,7 @@ public enum OperationType implements Enumerator
   private static final OperationType[] VALUES_ARRAY =
     new OperationType[]
     {
+      UNSET,
       READ,
       WRITE,
       READWRITE,
@@ -171,6 +197,7 @@ public enum OperationType implements Enumerator
   {
     switch (value)
     {
+      case UNSET_VALUE: return UNSET;
       case READ_VALUE: return READ;
       case WRITE_VALUE: return WRITE;
       case READWRITE_VALUE: return READWRITE;
