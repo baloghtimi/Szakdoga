@@ -22,9 +22,11 @@ public class FromAllowWriteToAllowRead implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getOperation() == OperationType.WRITE && judgement.getAccess() == AccessibilityLevel.ALLOW){
-			consequences.add(new Judgement(judgement.getAccess(), OperationType.READ, judgement.getAsset(),
-					         judgement.getPriority(), judgement.getResolution()));
+		if(judgement.getOperation() == OperationType.WRITE) {
+			if(judgement.getAccess() == AccessibilityLevel.ALLOW) {
+				consequences.add(new Judgement(judgement.getAccess(), OperationType.READ, judgement.getAsset(),
+				         judgement.getPriority(), judgement.getResolution()));
+		    }
 		}
 		
 		return consequences;

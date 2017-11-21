@@ -27,12 +27,16 @@ public class AllowWriteFromObjectToContainerReference implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof ObjectAsset && judgement.getAccess() == AccessibilityLevel.ALLOW && judgement.getOperation() == OperationType.WRITE){
-			EObject object = ((ObjectAsset) judgement.getAsset()).getObject();
-			if(object.eContainer() != null){
-				ReferenceAsset refAsset = new Asset.ReferenceAsset(object.eContainer(), object.eContainmentFeature(), object);
-	    	    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
-			}
+		if(judgement.getAsset() instanceof ObjectAsset) {
+			if(judgement.getAccess() == AccessibilityLevel.ALLOW) {
+				if(judgement.getOperation() == OperationType.WRITE) {
+					EObject object = ((ObjectAsset) judgement.getAsset()).getObject();
+					if(object.eContainer() != null){
+						ReferenceAsset refAsset = new Asset.ReferenceAsset(object.eContainer(), object.eContainmentFeature(), object);
+			    	    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
+					}
+			    }
+		    }  
 		}
 		
 		return consequences;	

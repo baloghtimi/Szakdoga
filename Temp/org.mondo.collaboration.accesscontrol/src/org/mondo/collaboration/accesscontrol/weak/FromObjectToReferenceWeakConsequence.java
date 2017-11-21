@@ -25,22 +25,24 @@ public class FromObjectToReferenceWeakConsequence implements IConsequence {
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof ObjectAsset && judgement.getAccess() != AccessibilityLevel.OBFUSCATE){
-		    EObject source = ((ObjectAsset)judgement.getAsset()).getObject();
-		    EList<EReference> eReferences = source.eClass().getEAllReferences();
-		    for (EReference reference : eReferences) {
-			    if(reference.isMany()) {
-				    @SuppressWarnings("unchecked")
-				    EList<EObject> targets = (EList<EObject>) source.eGet(reference);
-				    for (EObject target : targets) {
-					    ReferenceAsset refAsset = new Asset.ReferenceAsset(source, reference, target);
-					    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, 0, judgement.getResolution()));
-				    }
-			    } else {
-				    EObject target = (EObject) source.eGet(reference);
-				    if(target != null){
-				        ReferenceAsset refAsset = new Asset.ReferenceAsset(source, reference, target);
-				        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, 0, judgement.getResolution()));
+		if(judgement.getAsset() instanceof ObjectAsset) {
+			if(judgement.getAccess() != AccessibilityLevel.OBFUSCATE) {
+				EObject source = ((ObjectAsset)judgement.getAsset()).getObject();
+			    EList<EReference> eReferences = source.eClass().getEAllReferences();
+			    for (EReference reference : eReferences) {
+				    if(reference.isMany()) {
+					    @SuppressWarnings("unchecked")
+					    EList<EObject> targets = (EList<EObject>) source.eGet(reference);
+					    for (EObject target : targets) {
+						    ReferenceAsset refAsset = new Asset.ReferenceAsset(source, reference, target);
+						    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, 0, judgement.getResolution()));
+					    }
+				    } else {
+					    EObject target = (EObject) source.eGet(reference);
+					    if(target != null){
+					        ReferenceAsset refAsset = new Asset.ReferenceAsset(source, reference, target);
+					        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, 0, judgement.getResolution()));
+					    }
 				    }
 			    }
 		    }

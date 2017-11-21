@@ -25,13 +25,17 @@ public class DenyReadFromIDAttributeToContainerObject implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof AttributeAsset && judgement.getAccess() == AccessibilityLevel.DENY && judgement.getOperation() == OperationType.READ){
-			EAttribute attribute = ((AttributeAsset) judgement.getAsset()).getAttribute();
-        	EObject object = ((AttributeAsset) judgement.getAsset()).getSource();
-    		if(attribute.isID()){
-    			ObjectAsset objAsset = new Asset.ObjectAsset(object);
-    			consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), objAsset, judgement.getPriority(), judgement.getResolution()));
-    		}
+		if(judgement.getAsset() instanceof AttributeAsset) {
+			if(judgement.getAccess() == AccessibilityLevel.DENY) {
+				if(judgement.getOperation() == OperationType.READ) {
+					EAttribute attribute = ((AttributeAsset) judgement.getAsset()).getAttribute();
+		        	EObject object = ((AttributeAsset) judgement.getAsset()).getSource();
+		    		if(attribute.isID()){
+		    			ObjectAsset objAsset = new Asset.ObjectAsset(object);
+		    			consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), objAsset, judgement.getPriority(), judgement.getResolution()));
+		    		}
+			    }
+		    }
 		}
 		
 		return consequences;

@@ -26,13 +26,15 @@ public class FromObjectToAttributeWeakConsequence implements IConsequence {
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof ObjectAsset && judgement.getAccess() != AccessibilityLevel.OBFUSCATE){
-		    EObject source = ((ObjectAsset)judgement.getAsset()).getObject();
-		    EList<EAttribute> eAllAttributes = source.eClass().getEAllAttributes();
-	        for (EAttribute eAttribute : eAllAttributes) {
-	    	    AttributeAsset attrAsset = new Asset.AttributeAsset(source, eAttribute);
-	    	    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), attrAsset, 0, judgement.getResolution()));
-	        }
+		if(judgement.getAsset() instanceof ObjectAsset) {
+			if(judgement.getAccess() != AccessibilityLevel.OBFUSCATE) {
+				EObject source = ((ObjectAsset)judgement.getAsset()).getObject();
+			    EList<EAttribute> eAllAttributes = source.eClass().getEAllAttributes();
+		        for (EAttribute eAttribute : eAllAttributes) {
+		    	    AttributeAsset attrAsset = new Asset.AttributeAsset(source, eAttribute);
+		    	    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), attrAsset, 0, judgement.getResolution()));
+		        }
+		    }
 		}
 		
 		return consequences;

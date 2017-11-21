@@ -1,0 +1,35 @@
+%----------------------------------------------------------------------------
+\chapter{Bevezetés}
+%----------------------------------------------------------------------------
+
+A nagyméretû, komplex ipari szoftverek fejlesztése több ember együttes munkáját igényli. A tervezés modellalapú megközelítése azért is elõnyös, mert a magasszintû modellek akár különbözõ szakterületeken mozgó fejlesztõ csapatok számára is ugyanolyan módon értelmezhetõk, ami elõsegíti a hatékony, összehangolt munkavégzést.
+
+Ezen komplex modellek kollaboratív fejlesztése offline vagy online formában valósul meg. Elõbbi esetben a felhasználók egy közös tárhelyen lévõ, verziókezelt modellbõl kérik le a saját példányukat, majd a módosítások végrehajtása után visszaküldik azokat a szerverre. A többiek csak akkor értesülnek ezekrõl a változásokról, amikor frissítik a sajátjukat a közös modell alapján. Így, ha közben õk is dolgoztak rajta, akkor az összefésülendõ verziók között adódhatnak konfliktusok. Ezzel szemben online kollaboráció során a felhasználók által eszközölt változások mindenki számára rögtön láthatók a modellen.
+
+Offline és online forgatókönyv esetén is felmerül a modellelemek biztonságának, hozzáférés-szabályozásnak a kérdése. Abban az esetben például, amikor egy cég a munka egy bizonyos részét ledelegálja egy másik cégnek, az adott modell megfelelõ részeit elérhetõvé teszi neki. Viszont lehetnek a modellnek bizalmas, a cég szellemi tulajdonának számító elemei, amelyekhez nem akar hozzáférést biztosítani az alvállalkozó számára. Hasonlóan, ha például vannak a modellnek olyan kritikus részei, amelyek fejlesztése speciális szaktudást igényel, akkor ezeket csak a hozzáértõ felhasználók módosíthatják, a többiek nem férhetnek hozzájuk.
+
+Modellek feletti hozzáférés-kezelésre létezõ gyakorlat, hogy a modelleket, modellrészeket tartalmazó fájlokhoz határoznak meg olvasási, írási jogosultságokat. A rendszert újabb felhasználókkal, és számukra meghatározott hozzáférési szabályokkal bõvítve a modell megfelelõ fragmenseit le kell választani, és külön fájlban eltárolni. Ennek hatására a modell elemek ezreire aprózódhat. A fájlszintû szabályozás hátránya, hogy ez a jelenség a rendszert nehezen skálázhatóvá, rugalmatlanná teszi.
+
+\begin{figure}[tb]
+	\begin{center}
+		\includegraphics[width=.8\columnwidth]{src/figures/filelevel}
+		\caption{A fájlszintû hozzáférés-szabályozás problémája}
+		\label{fig:filelevel}
+	\end{center}
+\end{figure}
+
+Erre a problémára a hozzáférések modellszintû szabályozása nyújt megoldást. A MONDO nemzetközi kutatási projektben készült kollaborációs keretrendszer finomszemcsés szabályok alapján végzi a hozzáférés-vezérlést. Ezekben a modell elemi részeire, objektumokra és azok attribútumaira, referenciáira külön-külön lehet hozzáférési jogokat meghatározni a különbözõ felhasználók tekintetében. A kérdéses modellelemeket gráflekérdezés eredményeként kapjuk, amely úgy is megfogalmazható, hogy tetszõleges számú és tulajdonságú elemet adjon vissza. Így egy milliós nagyságrendû modell esetén nem szükséges egyesével minden egyes elemre leírni a jogosultságokat.
+A finomszemcsézettségbõl fakadóan a megadott szabályok között elõfordulhat konfliktus, inkonzisztencia. Ezek feloldásához szükséges egy olyan kiértékelõ komponens, ami eredményként az effektív, valóban érvényre jutó hozzáférési szabályokat adja.
+ 
+A szakdolgozat kidolgozása során kitûzött célok:
+\begin{itemize}
+	\item Szöveges szintaxis definiálása lekérdezés alapú, finomszemcsés szabályok megfogalmazásához
+	\item EMF modellek felett a fenti nyelven megadott szabályok kiértékelését végzõ algoritmus implementálása, ami
+	    \begin{itemize}
+		    \item megvizsgálva az explicit megadott szabályokat,
+		    \item megtartva a modell belsõ konzisztenciáját,
+		    \item kiválasztja közülük azokat, amelyek érvényre jutnak
+	    \end{itemize}
+	\item Az algoritmus mûködésének bemutatása, teljesítményének kiértékelése egy részletesen kidolgozott esettanulmányon
+\end{itemize}
+

@@ -25,13 +25,17 @@ public class AllowWriteFromIDAttributeToContainerReference implements IConsequen
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof AttributeAsset && judgement.getAccess() == AccessibilityLevel.ALLOW && judgement.getOperation() == OperationType.WRITE){
-			EAttribute attribute = ((AttributeAsset) judgement.getAsset()).getAttribute();
-        	EObject object = ((AttributeAsset) judgement.getAsset()).getSource();
-    		if(attribute.isID() && object.eContainmentFeature() != null){
-    			ReferenceAsset refAsset = new Asset.ReferenceAsset(object.eContainer(), object.eContainmentFeature(), object);
-    			consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
-    		}
+		if(judgement.getAsset() instanceof AttributeAsset) {
+			if(judgement.getAccess() == AccessibilityLevel.ALLOW) {
+				if(judgement.getOperation() == OperationType.WRITE) {
+					EAttribute attribute = ((AttributeAsset) judgement.getAsset()).getAttribute();
+		        	EObject object = ((AttributeAsset) judgement.getAsset()).getSource();
+		    		if(attribute.isID() && object.eContainmentFeature() != null){
+		    			ReferenceAsset refAsset = new Asset.ReferenceAsset(object.eContainer(), object.eContainmentFeature(), object);
+		    			consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
+		    		}
+			    }
+		    }
 		}
 		
 		return consequences;

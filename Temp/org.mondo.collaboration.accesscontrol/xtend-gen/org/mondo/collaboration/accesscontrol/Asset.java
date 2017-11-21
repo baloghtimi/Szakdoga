@@ -69,28 +69,38 @@ public abstract class Asset {
     
     @Override
     public boolean equals(final Object o) {
-      if ((o instanceof Asset.ObjectAsset)) {
-        final Asset.ObjectAsset other = ((Asset.ObjectAsset) o);
-        boolean _equals = this.object.equals(other.object);
-        if (_equals) {
-          return true;
+      boolean _xifexpression = false;
+      if ((!(o instanceof Asset.ObjectAsset))) {
+        return false;
+      } else {
+        boolean _xblockexpression = false;
+        {
+          final Asset.ObjectAsset objAsset = ((Asset.ObjectAsset) o);
+          int _hashCode = this.hashCode();
+          int _hashCode_1 = objAsset.hashCode();
+          _xblockexpression = (_hashCode == _hashCode_1);
         }
+        _xifexpression = _xblockexpression;
       }
-      return false;
+      return _xifexpression;
+    }
+    
+    @Override
+    public int hashCode() {
+      int _xblockexpression = (int) 0;
+      {
+        final int prime = 31;
+        int result = 1;
+        int _hashCode = this.object.hashCode();
+        int _plus = ((prime * result) + _hashCode);
+        _xblockexpression = result = _plus;
+      }
+      return _xblockexpression;
     }
     
     public ObjectAsset(final EObject object) {
       super();
       this.object = object;
-    }
-    
-    @Override
-    @Pure
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((this.object== null) ? 0 : this.object.hashCode());
-      return result;
     }
     
     @Override
@@ -217,28 +227,40 @@ public abstract class Asset {
     
     @Override
     public boolean equals(final Object o) {
-      if ((o instanceof Asset.ReferenceAsset)) {
-        final Asset.ReferenceAsset other = ((Asset.ReferenceAsset) o);
-        boolean _and = false;
-        boolean _and_1 = false;
-        boolean _equals = this.source.equals(other.source);
-        if (!_equals) {
-          _and_1 = false;
+      boolean _xblockexpression = false;
+      {
+        if ((!(o instanceof Asset.ReferenceAsset))) {
+          return false;
         } else {
-          boolean _equals_1 = this.reference.equals(other.reference);
-          _and_1 = _equals_1;
+          final Asset.ReferenceAsset refAsset = ((Asset.ReferenceAsset) o);
+          int _hashCode = this.hashCode();
+          int _hashCode_1 = refAsset.hashCode();
+          /* (_hashCode == _hashCode_1); */
         }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          boolean _equals_2 = this.target.equals(other.target);
-          _and = _equals_2;
-        }
-        if (_and) {
-          return true;
-        }
+        int _hashCode_2 = this.hashCode();
+        int _hashCode_3 = o.hashCode();
+        _xblockexpression = (_hashCode_2 == _hashCode_3);
       }
-      return false;
+      return _xblockexpression;
+    }
+    
+    @Override
+    public int hashCode() {
+      int _xblockexpression = (int) 0;
+      {
+        final int prime = 31;
+        int result = 1;
+        int _hashCode = this.source.hashCode();
+        int _plus = ((prime * result) + _hashCode);
+        result = _plus;
+        int _hashCode_1 = this.reference.hashCode();
+        int _plus_1 = ((prime * result) + _hashCode_1);
+        result = _plus_1;
+        int _hashCode_2 = this.target.hashCode();
+        int _plus_2 = ((prime * result) + _hashCode_2);
+        _xblockexpression = result = _plus_2;
+      }
+      return _xblockexpression;
     }
     
     public ReferenceAsset(final EObject source, final EReference reference, final EObject target) {
@@ -246,17 +268,6 @@ public abstract class Asset {
       this.source = source;
       this.reference = reference;
       this.target = target;
-    }
-    
-    @Override
-    @Pure
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((this.source== null) ? 0 : this.source.hashCode());
-      result = prime * result + ((this.reference== null) ? 0 : this.reference.hashCode());
-      result = prime * result + ((this.target== null) ? 0 : this.target.hashCode());
-      return result;
     }
     
     @Override
@@ -350,37 +361,42 @@ public abstract class Asset {
     
     @Override
     public boolean equals(final Object o) {
-      if ((o instanceof Asset.AttributeAsset)) {
-        final Asset.AttributeAsset other = ((Asset.AttributeAsset) o);
-        boolean _and = false;
-        boolean _equals = this.source.equals(other.source);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _equals_1 = this.attribute.equals(other.attribute);
-          _and = _equals_1;
+      boolean _xifexpression = false;
+      if ((!(o instanceof Asset.AttributeAsset))) {
+        return false;
+      } else {
+        boolean _xblockexpression = false;
+        {
+          final Asset.AttributeAsset attrAsset = ((Asset.AttributeAsset) o);
+          int _hashCode = this.hashCode();
+          int _hashCode_1 = attrAsset.hashCode();
+          _xblockexpression = (_hashCode == _hashCode_1);
         }
-        if (_and) {
-          return true;
-        }
+        _xifexpression = _xblockexpression;
       }
-      return false;
+      return _xifexpression;
+    }
+    
+    @Override
+    public int hashCode() {
+      int _xblockexpression = (int) 0;
+      {
+        final int prime = 31;
+        int result = 1;
+        int _hashCode = this.source.hashCode();
+        int _plus = ((prime * result) + _hashCode);
+        result = _plus;
+        int _hashCode_1 = this.attribute.hashCode();
+        int _plus_1 = ((prime * result) + _hashCode_1);
+        _xblockexpression = result = _plus_1;
+      }
+      return _xblockexpression;
     }
     
     public AttributeAsset(final EObject source, final EAttribute attribute) {
       super();
       this.source = source;
       this.attribute = attribute;
-    }
-    
-    @Override
-    @Pure
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((this.source== null) ? 0 : this.source.hashCode());
-      result = prime * result + ((this.attribute== null) ? 0 : this.attribute.hashCode());
-      return result;
     }
     
     @Override

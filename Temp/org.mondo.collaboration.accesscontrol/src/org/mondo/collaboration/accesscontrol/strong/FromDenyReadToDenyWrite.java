@@ -22,9 +22,11 @@ public class FromDenyReadToDenyWrite implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getOperation() == OperationType.READ && judgement.getAccess() == AccessibilityLevel.DENY){
-			consequences.add(new Judgement(judgement.getAccess(), OperationType.WRITE, judgement.getAsset(),
-					         judgement.getPriority(), judgement.getResolution()));
+		if(judgement.getOperation() == OperationType.READ) {
+			if(judgement.getAccess() == AccessibilityLevel.DENY) {
+				consequences.add(new Judgement(judgement.getAccess(), OperationType.WRITE, judgement.getAsset(),
+				         judgement.getPriority(), judgement.getResolution()));
+		    }
 		}
 		
 		return consequences;

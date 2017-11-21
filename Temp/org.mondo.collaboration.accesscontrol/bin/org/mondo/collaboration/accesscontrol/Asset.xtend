@@ -47,11 +47,18 @@ abstract class Asset {
 			println(object.toString);
 		}
 		override equals(Object o){
-			if(o instanceof ObjectAsset){
-				val other = o as ObjectAsset;
-		        if (object.equals(other.object)) return true;
+			if(!(o instanceof ObjectAsset)){
+				return false;
+			} else {
+				val objAsset = o as ObjectAsset;
+				hashCode == objAsset.hashCode;
 			}
-			return false;
+			
+		}
+		override hashCode(){
+			val prime = 31;
+			var result = 1;
+			result = prime * result + object.hashCode();
 		}
 	}
     
@@ -92,12 +99,23 @@ abstract class Asset {
 		override WriteOut(){
 			println(source.toString + " -> " + target.toString + ": " + reference.name);
 		}
+		
 		override equals(Object o){
-			if(o instanceof ReferenceAsset){
-				val other = o as ReferenceAsset;
-		        if (source.equals(other.source) && reference.equals(other.reference) && target.equals(other.target)) return true;
+			if(!(o instanceof ReferenceAsset)){
+				return false;
+			} else {
+				val refAsset = o as ReferenceAsset;
+				hashCode == refAsset.hashCode;
 			}
-		    return false;
+			hashCode == o.hashCode;
+		}
+		
+		override hashCode(){
+			val prime = 31;
+			var result = 1;
+			result = prime * result + source.hashCode();
+			result = prime * result + reference.hashCode();
+			result = prime * result + target.hashCode();
 		}
     }
     @Data public static class AttributeAsset extends Asset {
@@ -123,13 +141,22 @@ abstract class Asset {
 		override WriteOut(){
 			println(source.toString + ": " + attribute.name);
 		}
+		
 		override equals(Object o){
-			if(o instanceof AttributeAsset){
-				val other = o as AttributeAsset;
-		        if (source.equals(other.source) && attribute.equals(other.attribute)) return true;
+			if(!(o instanceof AttributeAsset)){
+				return false;
+			} else {
+				val attrAsset = o as AttributeAsset;
+				hashCode == attrAsset.hashCode;
 			}
-		    return false;
-		}	
+		}
+		
+		override hashCode(){
+			val prime = 31;
+			var result = 1;
+			result = prime * result + source.hashCode();
+			result = prime * result + attribute.hashCode();
+		}
     }
     
    public def static getKinds() {

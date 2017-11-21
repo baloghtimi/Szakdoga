@@ -19,7 +19,7 @@ import WTSpec4M.WTSpec4MPackage;
 public class ModelClass {
     private static final String QUERIES_PATH = "C:\\Sulibuli\\7\\Szakdoga\\runtime-EclipseApplication\\WindTurbine.demo\\src\\windturbine\\demo\\example.vql";
 	private static final String RULES_PATH = "C:\\Sulibuli\\7\\Szakdoga\\runtime-EclipseApplication\\WindTurbine.demo\\src\\windturbine\\demo\\example.rules";
-	private static final String MODELS_PATH = "C:\\Sulibuli\\7\\Szakdoga\\runtime-EclipseApplication\\WindTurbine.demo\\src\\windturbine\\demo\\largeexample.wtspec4m";
+	private static final String MODELS_PATH = "C:\\Sulibuli\\7\\Szakdoga\\runtime-EclipseApplication\\WindTurbine.demo\\src\\windturbine\\demo\\exampleXL.wtspec4m";
 	
 	private XtextResourceSet resourceSet;
 	private Model ruleModel;

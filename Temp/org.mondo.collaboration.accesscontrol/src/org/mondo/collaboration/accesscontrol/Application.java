@@ -1,14 +1,24 @@
 package org.mondo.collaboration.accesscontrol;
 
-import java.util.HashSet;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
+import org.mondo.collaboration.accesscontrol.Asset.AttributeAsset;
+import org.mondo.collaboration.accesscontrol.Asset.ObjectAsset;
+import org.mondo.collaboration.accesscontrol.Asset.ReferenceAsset;
 import org.mondo.collaboration.accesscontrol.strong.AllowReadFromAttributeToContainerObject;
-import org.mondo.collaboration.accesscontrol.strong.ObfuscateReadFromObjectToAttribute;
 import org.mondo.collaboration.accesscontrol.strong.AllowReadFromObjectToContainer;
 import org.mondo.collaboration.accesscontrol.strong.AllowReadFromObjectToIDAttribute;
 import org.mondo.collaboration.accesscontrol.strong.AllowReadFromReferenceToSourceTargetObject;
@@ -22,65 +32,91 @@ import org.mondo.collaboration.accesscontrol.strong.DenyWriteFromContainerRefere
 import org.mondo.collaboration.accesscontrol.strong.FromAllowWriteToAllowRead;
 import org.mondo.collaboration.accesscontrol.strong.FromDenyReadToDenyWrite;
 import org.mondo.collaboration.accesscontrol.strong.FromObfuscateReadToDenyWrite;
+import org.mondo.collaboration.accesscontrol.strong.ObfuscateReadFromObjectToAttribute;
 import org.mondo.collaboration.accesscontrol.weak.FromObjectToAttributeWeakConsequence;
 import org.mondo.collaboration.accesscontrol.weak.FromObjectToReferenceWeakConsequence;
-import org.mondo.collaboration.policy.rules.Role;
 import org.mondo.collaboration.policy.rules.User;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 public class Application {
-	
-	public static Set<IConsequence> defaultWeak = Sets.newHashSet(FromObjectToAttributeWeakConsequence.instance,
-			                                                      FromObjectToReferenceWeakConsequence.instance);
-	public static Set<IConsequence> defaultStrong = Sets.newHashSet(FromAllowWriteToAllowRead.instance,
-			                                                        FromDenyReadToDenyWrite.instance,
-			                                                        FromObfuscateReadToDenyWrite.instance,
-			                                                        AllowReadFromAttributeToContainerObject.instance,
-			                                                        ObfuscateReadFromObjectToAttribute.instance,
-			                                                        AllowReadFromObjectToContainer.instance,
-			                                                        AllowReadFromObjectToIDAttribute.instance,
-			                                                        AllowReadFromReferenceToSourceTargetObject.instance,
-			                                                        AllowWriteFromIDAttributeToContainerReference.instance,
-			                                                        AllowWriteFromObjectToContainerReference.instance,
-			                                                        DenyReadFromContainmentReferenceToChildrenObject.instance,
-			                                                        DenyReadFromObjectToReference.instance,
-			                                                        DenyWriteFromContainerReferenceToChildrenIDAttribute.instance,
-			                                                        AllowWriteFromContainmentReferenceToChildrenObject.instance,
-			                                                        DenyReadFromIDAttributeToContainerObject.instance
-																	);
-	
-	public static void main(String[] args){
-		ModelClass model = new ModelClass();
-		RuleManager ruleManager = new RuleManager(defaultWeak, defaultStrong);
-		Set<Judgement> judgementList = new HashSet<Judgement>();
+	private static Logger LOGGER = Logger.getLogger(Application.class);
+
+	public static Set<IConsequence> weakConsequences = Sets.newHashSet(
+	    FromObjectToAttributeWeakConsequence.instance,
+	    FromObjectToReferenceWeakConsequence.instance
+	);
+	public static Set<IConsequence> strongConsequences = Sets.newHashSet(
+	    FromAllowWriteToAllowRead.instance,
+	    FromDenyReadToDenyWrite.instance,
+	    FromObfuscateReadToDenyWrite.instance,
+	    ObfuscateReadFromObjectToAttribute.instance,
+		AllowReadFromObjectToContainer.instance,
+		AllowReadFromObjectToIDAttribute.instance,
+		AllowWriteFromObjectToContainerReference.instance,
+		DenyReadFromObjectToReference.instance,
+		AllowReadFromReferenceToSourceTargetObject.instance,
+		DenyReadFromContainmentReferenceToChildrenObject.instance,
+		DenyWriteFromContainerReferenceToChildrenIDAttribute.instance,
+		AllowWriteFromContainmentReferenceToChildrenObject.instance,
+		AllowReadFromAttributeToContainerObject.instance,
+	    AllowWriteFromIDAttributeToContainerReference.instance,
+	    DenyReadFromIDAttributeToContainerObject.instance
+	);
+//	public static Set<IConsequence> objStrongConsequences = Sets.newHashSet(
+//		ObfuscateReadFromObjectToAttribute.instance,
+//		AllowReadFromObjectToContainer.instance,
+//		AllowReadFromObjectToIDAttribute.instance,
+//		AllowWriteFromObjectToContainerReference.instance,
+//		DenyReadFromObjectToReference.instance
+//	);
+//	public static Set<IConsequence> refStrongConsequences = Sets.newHashSet(
+//		AllowReadFromReferenceToSourceTargetObject.instance,
+//		DenyReadFromContainmentReferenceToChildrenObject.instance,
+//		DenyWriteFromContainerReferenceToChildrenIDAttribute.instance,
+//		AllowWriteFromContainmentReferenceToChildrenObject.instance
+//	);
+//	public static Set<IConsequence> attrStrongConsequences = Sets.newHashSet(
+//	    AllowReadFromAttributeToContainerObject.instance,
+//	    AllowWriteFromIDAttributeToContainerReference.instance,
+//	    DenyReadFromIDAttributeToContainerObject.instance
+//	);
+
+	public static void main(String[] args) throws ViatraQueryException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
+        
+        ModelClass modelClass = new ModelClass();
+		RuleManager ruleManager = new RuleManager(weakConsequences, strongConsequences);
+		ruleManager.initializeWithRulesOnModel(modelClass.getModelResource(), modelClass.getRuleModel());
+
+		// List<Role> roleList = model.getRuleModel().getRoles();
+		// for (Role role : roleList) {
+		// if(role instanceof User){
+		List<Judgement> judgementList = ruleManager
+				.getEffectivePermissions((User) modelClass.getRuleModel().getRoles().get(0));
+
+		LOGGER.info(String.format("Number of effective judgements: %d", judgementList.size()));
 		
-		List<Role> roleList = model.getRuleModel().getRoles();
-		for (Role role : roleList) {
-			if(role instanceof User){
-				try {
-					judgementList = ruleManager.getEffectivePermissions(model.getModelResource(), model.getRuleModel(), (User) role);
-					
-					System.out.println("\n" + role + ": " + judgementList.size() + " judgements");
-					
-					TreeIterator<EObject> allContents = model.getModelResource().getAllContents();
-					while(allContents.hasNext()){
-						EObject object = allContents.next();
-						System.out.println(new Asset.ObjectAsset(object) + ": ");
-						for(Judgement j : judgementList){
-							if(j.getAsset().equals(new Asset.ObjectAsset(object))){
-								System.out.println(j);
-							}
-						}
-					}
-					
-//					for(Judgement judgement : judgementList){
-//						System.out.println(judgement);
-//					}
-					
-				} catch (ViatraQueryException e) {
-					e.printStackTrace();
-				}
+//		writeOutJudgements(modelClass.getModelResource(), judgementList);
+
+	}
+	
+	public static void writeOutJudgements(Resource model, List<Judgement> judgementList) {
+		Multimap<Asset, Judgement> judgementMultimap = ArrayListMultimap.create();
+		for (Judgement judgement : judgementList) {
+			judgementMultimap.put(judgement.getAsset(), judgement);
+		}
+		
+		Set<Asset> keySet = judgementMultimap.keySet();
+		for (Asset asset : keySet) {
+			Collection<Judgement> collection = judgementMultimap.get(asset);
+			System.out.println("\n" + asset);
+			for (Judgement judgement : collection) {
+				System.out.println(judgement);
 			}
 		}
 	}

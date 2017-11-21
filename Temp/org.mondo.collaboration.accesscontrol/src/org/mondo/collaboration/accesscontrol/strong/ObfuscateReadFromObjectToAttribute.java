@@ -27,16 +27,18 @@ public class ObfuscateReadFromObjectToAttribute implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof ObjectAsset && judgement.getAccess() == AccessibilityLevel.OBFUSCATE){
-			EObject	object = ((ObjectAsset)judgement.getAsset()).getObject();
-			EList<EAttribute> eAllAttributes = object.eClass().getEAllAttributes();
-		    for (EAttribute eAttribute : eAllAttributes) {
-		    	AttributeAsset attrAsset = new Asset.AttributeAsset(object, eAttribute);
-		    	if(eAttribute.isID()){
-		    		consequences.add(new Judgement(AccessibilityLevel.OBFUSCATE, judgement.getOperation(), attrAsset, judgement.getPriority(), judgement.getResolution()));
-		    	} else {
-		    		consequences.add(new Judgement(AccessibilityLevel.DENY, judgement.getOperation(), attrAsset, judgement.getPriority(), judgement.getResolution()));
-		    	}
+		if(judgement.getAsset() instanceof ObjectAsset) {
+			if(judgement.getAccess() == AccessibilityLevel.OBFUSCATE) {
+				EObject	object = ((ObjectAsset)judgement.getAsset()).getObject();
+				EList<EAttribute> eAllAttributes = object.eClass().getEAllAttributes();
+			    for (EAttribute eAttribute : eAllAttributes) {
+			    	AttributeAsset attrAsset = new Asset.AttributeAsset(object, eAttribute);
+			    	if(eAttribute.isID()){
+			    		consequences.add(new Judgement(AccessibilityLevel.OBFUSCATE, judgement.getOperation(), attrAsset, judgement.getPriority(), judgement.getResolution()));
+			    	} else {
+			    		consequences.add(new Judgement(AccessibilityLevel.DENY, judgement.getOperation(), attrAsset, judgement.getPriority(), judgement.getResolution()));
+			    	}
+			    }
 		    }
 		}
 		

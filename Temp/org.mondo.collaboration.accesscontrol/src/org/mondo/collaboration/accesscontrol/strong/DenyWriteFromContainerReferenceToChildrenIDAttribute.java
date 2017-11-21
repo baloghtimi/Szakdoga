@@ -27,15 +27,19 @@ public class DenyWriteFromContainerReferenceToChildrenIDAttribute implements ICo
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 		
-		if(judgement.getAsset() instanceof ReferenceAsset && judgement.getAccess() == AccessibilityLevel.DENY && judgement.getOperation() == OperationType.WRITE){
-		    EObject object = ((ReferenceAsset)judgement.getAsset()).getTarget();
-		    EList<EAttribute> eAllAttributes = object.eClass().getEAllAttributes();
-	        for (EAttribute eAttribute : eAllAttributes) {
-	    	    if(eAttribute.isID()){
-	    		    AttributeAsset attrAsset = new Asset.AttributeAsset(object, eAttribute);
-				    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), attrAsset, judgement.getPriority(), judgement.getResolution()));
-	    	    }
-	        }
+		if(judgement.getAsset() instanceof ReferenceAsset) {
+			if(judgement.getAccess() == AccessibilityLevel.DENY) {
+				if(judgement.getOperation() == OperationType.WRITE) {
+					EObject object = ((ReferenceAsset)judgement.getAsset()).getTarget();
+				    EList<EAttribute> eAllAttributes = object.eClass().getEAllAttributes();
+			        for (EAttribute eAttribute : eAllAttributes) {
+			    	    if(eAttribute.isID()){
+			    		    AttributeAsset attrAsset = new Asset.AttributeAsset(object, eAttribute);
+						    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), attrAsset, judgement.getPriority(), judgement.getResolution()));
+			    	    }
+			        }
+			    }
+		    }
 		}
 	    return consequences;
 	}

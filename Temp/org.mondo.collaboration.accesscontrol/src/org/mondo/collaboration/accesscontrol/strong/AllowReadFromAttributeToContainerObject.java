@@ -26,9 +26,13 @@ public class AllowReadFromAttributeToContainerObject implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof AttributeAsset && judgement.getAccess() == AccessibilityLevel.ALLOW && judgement.getOperation() == OperationType.READ){
-			ObjectAsset objAsset = new Asset.ObjectAsset(((AttributeAsset) judgement.getAsset()).getSource());
-			consequences.add(new Judgement(AccessibilityLevel.OBFUSCATE, judgement.getOperation(), objAsset, judgement.getPriority(), judgement.getResolution()));
+		if(judgement.getAsset() instanceof AttributeAsset){
+			if(judgement.getAccess() == AccessibilityLevel.ALLOW) {
+				if(judgement.getOperation() == OperationType.READ) {
+					ObjectAsset objAsset = new Asset.ObjectAsset(((AttributeAsset) judgement.getAsset()).getSource());
+					consequences.add(new Judgement(AccessibilityLevel.OBFUSCATE, judgement.getOperation(), objAsset, judgement.getPriority(), judgement.getResolution()));
+			    }
+		    }
 		}
 		
 		return consequences;

@@ -26,15 +26,19 @@ public class AllowReadFromObjectToIDAttribute implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof ObjectAsset && judgement.getAccess() == AccessibilityLevel.ALLOW && judgement.getOperation() == OperationType.READ){
-		    EObject object = ((ObjectAsset)judgement.getAsset()).getObject();
-		    EList<EAttribute> eAllAttributes = object.eClass().getEAllAttributes();
-	        for (EAttribute eAttribute : eAllAttributes) {
-	        	if(eAttribute.isID()){
-	        		AttributeAsset attrAsset = new Asset.AttributeAsset(object, eAttribute);
-		    	    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), attrAsset, judgement.getPriority(), judgement.getResolution()));
-	        	}
-	        }
+		if(judgement.getAsset() instanceof ObjectAsset) {
+			if(judgement.getAccess() == AccessibilityLevel.ALLOW) {
+				if(judgement.getOperation() == OperationType.READ) {
+					EObject object = ((ObjectAsset)judgement.getAsset()).getObject();
+				    EList<EAttribute> eAllAttributes = object.eClass().getEAllAttributes();
+			        for (EAttribute eAttribute : eAllAttributes) {
+			        	if(eAttribute.isID()){
+			        		AttributeAsset attrAsset = new Asset.AttributeAsset(object, eAttribute);
+				    	    consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), attrAsset, judgement.getPriority(), judgement.getResolution()));
+			        	}
+			        }
+			    }
+		    }
 		}
 		
 		return consequences;

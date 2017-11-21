@@ -30,48 +30,52 @@ public class DenyReadFromObjectToReference implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof ObjectAsset && judgement.getAccess() == AccessibilityLevel.DENY && judgement.getOperation() == OperationType.READ){
-		    EObject object = ((ObjectAsset)judgement.getAsset()).getObject();
-		    
-		    //incoming references
-		    Collection<Setting> settings = EcoreUtil.CrossReferencer.find(Sets.newHashSet(object)).get(object);
-		    //association
-		    if(settings != null){
-		        for (Setting setting : settings) {
-			        EObject source = setting.getEObject();
-			        EReference reference = (EReference) setting.getEStructuralFeature();
-			        ReferenceAsset refAsset = new Asset.ReferenceAsset(source, reference, object);
-			        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
-		        }
-		    }
-		    //containment reference
-		    if(object.eContainer() != null){
-			    ReferenceAsset refAsset = new Asset.ReferenceAsset(object.eContainer(), object.eContainmentFeature(), object);
-		        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
-		    }
-		    
-		    // outgoing references
-		    EList<EReference> eReferences = object.eClass().getEAllReferences();
-		    for (EReference reference : eReferences) {
-			    //containment
-			    if(reference.isMany()) {
-				    @SuppressWarnings("unchecked")
-				    EList<EObject> targets = (EList<EObject>) object.eGet(reference);
-				    for (EObject target : targets) {
-					    ReferenceAsset refAsset = new Asset.ReferenceAsset(object, reference, target);
+		if(judgement.getAsset() instanceof ObjectAsset) {
+			if(judgement.getAccess() == AccessibilityLevel.DENY) {
+				if(judgement.getOperation() == OperationType.READ) {
+					EObject object = ((ObjectAsset)judgement.getAsset()).getObject();
+				    
+				    //incoming references
+				    Collection<Setting> settings = EcoreUtil.CrossReferencer.find(Sets.newHashSet(object)).get(object);
+				    //association
+				    if(settings != null){
+				        for (Setting setting : settings) {
+					        EObject source = setting.getEObject();
+					        EReference reference = (EReference) setting.getEStructuralFeature();
+					        ReferenceAsset refAsset = new Asset.ReferenceAsset(source, reference, object);
+					        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
+				        }
+				    }
+				    //containment reference
+				    if(object.eContainer() != null){
+					    ReferenceAsset refAsset = new Asset.ReferenceAsset(object.eContainer(), object.eContainmentFeature(), object);
 				        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
 				    }
-		        //association
-			    } else {
-				    EObject target = (EObject) object.eGet(reference);
-				    if(target != null){
-				        ReferenceAsset refAsset = new Asset.ReferenceAsset(object, reference, target);
-				        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
+				    
+				    // outgoing references
+				    EList<EReference> eReferences = object.eClass().getEAllReferences();
+				    for (EReference reference : eReferences) {
+					    //containment
+					    if(reference.isMany()) {
+						    @SuppressWarnings("unchecked")
+						    EList<EObject> targets = (EList<EObject>) object.eGet(reference);
+						    for (EObject target : targets) {
+							    ReferenceAsset refAsset = new Asset.ReferenceAsset(object, reference, target);
+						        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
+						    }
+				        //association
+					    } else {
+						    EObject target = (EObject) object.eGet(reference);
+						    if(target != null){
+						        ReferenceAsset refAsset = new Asset.ReferenceAsset(object, reference, target);
+						        consequences.add(new Judgement(judgement.getAccess(), judgement.getOperation(), refAsset, judgement.getPriority(), judgement.getResolution()));
+						    }
+					    }
 				    }
-			    }
-		    }
+				}
+			}
 		}
-
+		    
 		return consequences;
 	}
 

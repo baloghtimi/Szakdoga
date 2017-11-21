@@ -27,11 +27,15 @@ public class AllowReadFromReferenceToSourceTargetObject implements IConsequence{
 	public Set<Judgement> propagate(Judgement judgement) {
 		HashSet<Judgement> consequences = Sets.newHashSet();
 
-		if(judgement.getAsset() instanceof ReferenceAsset && judgement.getAccess() == AccessibilityLevel.ALLOW && judgement.getOperation() == OperationType.READ){
-			EObject source = ((ReferenceAsset) judgement.getAsset()).getSource();
-        	EObject target= ((ReferenceAsset) judgement.getAsset()).getTarget();
-        	consequences.add(new Judgement(AccessibilityLevel.OBFUSCATE, judgement.getOperation(), new Asset.ObjectAsset(source), judgement.getPriority(), judgement.getResolution()));
-        	consequences.add(new Judgement(AccessibilityLevel.OBFUSCATE, judgement.getOperation(), new Asset.ObjectAsset(target), judgement.getPriority(), judgement.getResolution()));
+		if(judgement.getAsset() instanceof ReferenceAsset) {
+			if(judgement.getAccess() == AccessibilityLevel.ALLOW) {
+				if(judgement.getOperation() == OperationType.READ){
+					EObject source = ((ReferenceAsset) judgement.getAsset()).getSource();
+		        	EObject target= ((ReferenceAsset) judgement.getAsset()).getTarget();
+		        	consequences.add(new Judgement(AccessibilityLevel.OBFUSCATE, judgement.getOperation(), new Asset.ObjectAsset(source), judgement.getPriority(), judgement.getResolution()));
+		        	consequences.add(new Judgement(AccessibilityLevel.OBFUSCATE, judgement.getOperation(), new Asset.ObjectAsset(target), judgement.getPriority(), judgement.getResolution()));
+			    }
+		    }
 		}
 		
 		return consequences;
