@@ -1,17 +1,51 @@
 %----------------------------------------------------------------------------
 \chapter{Esettanulmány}
 %----------------------------------------------------------------------------
-
-
 %----------------------------------------------------------------------------
-\section{}
+\section{Modell}
 %----------------------------------------------------------------------------
 
+Nagy, összetett ipari rendszerek tervezésében széles körben elterjedt módszer a modellvezérelt szoftverfejlesztés. Az ehhez jelenleg rendelkezésre álló modellezõeszközök gyakran ütköznek skálázhatósági korlátokba. A MONDO EU FP7 kutatási projekt célja ezen kihívások megoldása olyan technológiák, algoritmusok, eszközök kifejlesztésével, amelyek a mostaninál nagyobb hatékonyságot, rugalmasságot biztosítanak a rendszermodellezés terén. A projekt nemzetközi ipari résztvevõi közül egy szélturbinavezérlõ egységeket összefogó rendszer esettanulmányát vizsgáltam. A rendszer leegyszerûsített struktúráját \aref{fig:metamodel} ábrán lévõ Ecore metamodell szemlélteti.
+
+\begin{figure}[hb]
+	\begin{center}
+		\includegraphics[width=.8\columnwidth]{src/figures/metamodel}
+		\caption{Szélturbinavezérlõk metamodellje}
+		\label{fig:metamodel}
+	\end{center}
+\end{figure}
+
+A modell gyökéreleme maga a szélturbina (WT - Wind Turbine), ami további egymásba ágyazható alrendszerekben (Subsystem) tárolja a vezérlõegységek (CtrlUnit - Control Unit) bõvíthetõ halmazát az õket azonosító, leíró attribútumaikkal, valamint a modell többi elemére hivatkozó referenciáikkal. Ezek az egységek a megegyezõ attribútumaikat tároló közös õsbõl származnak le (wtc - Wind Turbine Controller). A gyökérelem az alrendszereken kívül tartalmaz még bemenetet, kimenetet, idõzítõt, hibadetektort, paramétert és változót (Input, Output, Timer, Fault, Param, Variable).
+
+\begin{figure}[hb]
+	\begin{center}
+		\includegraphics[width=.5\columnwidth]{src/figures/instancemodel}
+		\caption{Szélturbinavezérlõk példánymodellje}
+		\label{fig:instancemodel}
+	\end{center}
+\end{figure}
+
+A metamodell egy egyszerû példányát mutatja \aref{fig:instancemodel} ábra. A gyökérelem egy vezérlõegységet tartalmaz egy alrendszer alá rendezve, valamint egy-egy bemenetet és kimenetet.
 
 %----------------------------------------------------------------------------
-\section{}
+\section{Feladat}
 %----------------------------------------------------------------------------
 
-%----------------------------------------------------------------------------
-\section{}
-%----------------------------------------------------------------------------
+A modell fejlesztése kollaboratív módon zajlik. Ehhez három különbözõ feladatkörrel rendelkezõ felhasználótípust definiáltam, akiknek beosztásuk vagy szaktudásuk alapján szükséges meghatározni, hogy a rendszer mely elemei felett rendelkezzenek olvasási és/vagy írási jogokkal. Az érvényesíteni kívánt szabályok a következõk:
+
+\begin{itemize}
+	\item A gyökérelemet senki nem módosíthatja.
+	\item Principal Engineer: adminisztrátor jogokkal rendelkezik. A gyökérelemen kívül mindent láthat és módosíthat.
+	\item I/O manager: a be- és kimenetek felelõse, ezeket olvashatja és írhatja, de a modell többi része számára rejtett.
+	\item Subsystem Manager: A Principal Engigeer-hez képest annyival van kevesebb joga, hogy a be- és kimeneteket csak láthatja, de nem módosíthatja.
+\end{itemize} 
+
+A feladat ezeknek a szabályoknak egy általam definiált nyelven való megfogalmazása, majd a [cikk]-ben szereplõ algoritmus implementálása, ami futásának eredményeképp a modell belsõ konzisztenciáját megtartva válogatja ki a lenti \ref{fig:instancemodelperuser} ábrán látható effektív jogosultságokat.
+
+\begin{figure}[t]
+	\begin{center}
+		\includegraphics[width=1\columnwidth]{src/figures/instancemodelperuser}
+		\caption{A felhasználók tervezett jogosultságai}
+		\label{fig:instancemodelperuser}
+	\end{center}
+\end{figure}
