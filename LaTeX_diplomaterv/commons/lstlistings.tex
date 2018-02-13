@@ -1,0 +1,76 @@
+\usepackage{listings}
+\lstset{language=Java,basicstyle=\small,captionpos=b}
+
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+\definecolor{gray20}{gray}{.20}
+
+\lstdefinestyle{shell}{
+  tabsize=2,
+  language=,
+  xleftmargin=.5cm,
+  framexleftmargin=.4cm,
+  keywordstyle=\color{gray20},
+  breaklines=true,
+  captionpos=t,
+  basicstyle=\ttfamily,
+  showstringspaces=false,
+  numberstyle=\ttfamily,
+  numbersep=1.1cm,
+  ,
+  numbers=left,
+  numbersep=5pt,
+  frameround=ftff,
+  showspaces=false,
+  showtabs=false,
+  frame=single,
+  backgroundcolor=\color{gray97},
+  rulesepcolor=\color{black},
+  commentstyle=\color{gray45}
+}
+
+%\lstnewenvironment{Java} {\lstset{
+%  basicstyle=\fontsize{8}{10}\ttfamily,xleftmargin=12pt,
+%  language=Java,
+%  columns=flexible, % add any modifications here
+%}}{}
+
+% standard VIATRA stuff
+\usepackage{color}
+\definecolor{listinggray}{rgb}{0.9,0.9,0.9}
+\definecolor{keywordcolor}{rgb}{0.4,0,0.4}
+\definecolor{commentcolor}{rgb}{0,0.3,0.1}
+\definecolor{stringcolor}{rgb}{0,0,1}
+
+\lstdefinelanguage{viatra}
+{morekeywords={pattern,neg,find,import,true,false,or,@ObservableValue,@Constraint,@QueryBasedObject,@QueryBasedFeature,@Item,@Edge,@Format,@Element,@ContainsItem,@TraceLookup,rule,to,query,bind,value,policy,by,default,resolution,user,group},
+ sensitive=no,
+ morecomment=[l]{//},
+ morecomment=[s]{/*}{*/},
+ morestring=[b]{"},
+ emph={WT,SystemInput,SystemOutput},
+}
+  
+\lstdefinelanguage{rules}
+{morekeywords={user,group,policy,allow,deny,obfuscate,R,W,RW,by,default,rule,to,from,query,select,obj,attr,ref,where,is,bound,with,priority,permissive,restrictive,resolution},
+ 	sensitive=no,
+ 	morecomment=[l]{//},
+ 	morecomment=[s]{/*}{*/},
+ 	morestring=[b]{"},
+} 
+  
+\lstset{basicstyle=\scriptsize\ttfamily}
+\lstset{commentstyle=\itshape\color{commentcolor}\ttfamily}
+\lstset{stringstyle=\color{stringcolor}\ttfamily}
+\lstset{emphstyle=\color{stringcolor}\ttfamily}
+\lstset{frameround=tttt}
+\lstset{captionpos=b}
+\lstset{keywordstyle=\color{keywordcolor}\bfseries\ttfamily}
+\lstset{showstringspaces=false}
+\lstset{tabsize=2}
+\lstset{numbers=left,numberstyle=\scriptsize\ttfamily,stepnumber=1,numbersep=5pt}
+\lstset{language=rules}
+\lstset{xleftmargin=.25in}
+\lstset{escapeinside={(*@}{@*)}}
+

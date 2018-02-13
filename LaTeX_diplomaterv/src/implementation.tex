@@ -1,3 +1,382 @@
-%----------------------------------------------------------------------------
 \chapter{Megvalósítás}
-%----------------------------------------------------------------------------
+
+A szakdolgozat kidolgozása során kitûzött célok egyike egy olyan szöveges konkrét szintaxis készítése, amely lehetõvé teszi EMF modellek feletti hozzáférési szabályok definiálását. A másik pedig egy olyan komponens megvalósítása, ami ilyen módon megadott szabályhalmazt alapul véve, illetve a modell belsõ konzisztenciájának megtartása érdekében a
+közöttük lévõ konfliktusok feloldásával képes meghatározni az effektív hozzáférési jogosultságokat a modell minden egyes elemére.
+
+\section{Hozzáférés-szabályozási nyelv}
+
+\subsection{Nyelvtan}
+Az elsõ feladat megoldását, vagyis a szöveges konkrét szintaxis készítését egy Xtext nyelvtan definiálásával kezdtem. A keretrendszer generálta le a hozzá tartozó metamodellt és szöveges editort. \Aref{fig:impl1} ábra azt mutatja, hogy ebben a szerkesztõben milyen módon lehet a specifikált nyelvtan alapján hozzáférési szabályokat megadni. A forráskódszínezés beállítása szerint a rögzített kulcsszavak és az enumerációkból választható értékek lila színnel jelennek meg, az egyedi azonosításra szolgáló nevek, számértékek és a gráflekérdezések paraméterei feketével, az idézõjelek között megadott stringek pedig kékkel. Az ábra továbbá bekeretezve tartalmazza a felhasználó által megválasztható paramétereket.
+
+A rendszer felhasználóit illetve a belõlük összeállítható csoportokat a szabályok felírása elõtt kell megadni. A késõbbiekben mindegyik az alkalmas kulcsszó (user/group) után írt egyedi névvel azonosítható. A csoport elnevezése után kapcsos zárójelek között adandó meg az azt alkotó felhasználó(k) listája.
+
+A szabályokat egyetlen policy foglalja magába, amelyhez a policy kulcsszó után a nevét, majd a modell összes elemére vonatkozó default jogosultságot lehet megadni. A második egy hozzáférési szintbõl és egy operációtípusból áll, ezek az AccessibilityLevel és OperationType enumerációkból választhatók ki. Elõbbi engedélyezést (allow), tiltást (deny) vagy
+obfuszkálást (obfuscate) tesz lehetõvé, utóbbi pedig alapértelmezetten vonatkozhat olvasásra (R), írásra (W) vagy mindkettõre (RW). (Itt a default jogosultságok megadásánál csak a RW engedélyezett, mert mindegyik operációtípusra meg kell határozni.) A policyt bezáró zárójel után a ResolutionType enumeráció kétféle eleme közül kell kiválasztani, hogy
+melyik határozza meg az egyenként megadott szabályok dominánsságát. A permissive tulajdonságot választva az engedélyezõ szabályok lesznek erõsebbek, restrictive esetén pedig a tiltók.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\columnwidth]{src/figures/grammar}
+	\caption{Szöveges konkrét szintaxis}
+	\label{fig:impl1}
+\end{figure}
+
+A policyn belül tetszõleges számú hozzáférési szabály leírható, ezek is a rule kulcsszó után írt nevükkel különböztethetõk meg. Ugyanebbe a sorba írjuk az adni kívánt jogosultság hozzáférési szintjét és operációtípusát, valamint a to kulcsszó után a felhasználó(ka)t, aki(k)re a szabály vonatkozik. A szabály törzsében fogalmazzuk meg, hogy pontosan mely modellelemekhez adja azt a bizonyos jogosultságot. Ehhez elsõ lépésben a from query után meg kell adni string formájában annak a gráfmintának a nevét, amelynek az illeszkedési eredményébõl szeretnénk kiválasztani a megfelelõ asseteket. Ez a kiválasztás a select kulcsszóval történik, ezután a különbözõ típusú assetek a következõképpen adhatók meg:
+
+\begin{itemize}
+	\item \textbf{Objektum asset: obj(variable)} \\
+	A kívánt objektumtípus kiválasztásához a zárójelek közé kell írni a gráfminta paraméter változói közül a megfelelõt.
+
+	\item \textbf{Attribútum asset: attr(variable : attribute)}\\
+	Az assetet a gráflekérdezés eredményeként kapott találat megfelelõ objektum paramétere és egy alkalmas attribútuma határozza meg.
+		
+	\item \textbf{Referencia asset: ref (sourceVar -> targetVar : reference)}\\
+		A referencia két végpontja, valamint maga a referencia neve definiálja.
+\end{itemize}
+
+A szabály maradék soraiban a select-tel kiválasztott assetek listája szûrhetõ tovább úgy, hogy a gráfminta megfelelõ típusú paraméter változóinak string értékét kötjük meg. Ez is erõsíti a szabályok finomszemcsézettségét, hiszen így a legapróbb részletekig tudjuk specifikálni, hogy mely modellelemekre akarjuk meghatározni a hozzáférési jogosultságot.
+
+\subsection{Extra funkciók}
+
+A szintaxis olyan plusz funkciókkal rendelkezik, amelyek kényelmesebbé teszik a fejlesztést a szabályokat megadó felhasználók számára. Az egyik ilyen az automatikus formázás, a megfelelõ billentyûkombinációt lenyomva a szöveg \aref{code:rules} kódon látható módon tagolódik. 
+
+Egy másik ilyen funkció az úgynevezett scope provider, ami szintén a megfelelõ gyorsbillentyûre reagálva elõhozza az adott helyre írható elemek alternatíváit. A szabályok fejlécének végén a lehetséges felhasználókat, csoportokat, a szabály törzsében a from query kulcsszavak után a létezõ gráfmintákat ajánlja fel. Ha megadtuk ezt a gráfmintát, akkor a következõ sorokban, az asset kiválasztásánál és a szûrõfeltétel fogalmazásánál már annak a paramétereibõl lehet választani. Ha attribútum vagy referencia assetrõl van szó, akkor pedig a leírt paraméter típusának megfelelõ attribútumokat/referenciákat képes megkeresni.
+
+A szabályok logikai helyességének kikényszerítésében pedig egy úgynevezett validator komponens segít. Mivel az obfuszkációt csak az olvasás mûveletére értelmezzük, méghozzá csak objektumok és attribútumok esetén, ezért a validáció egyrészt ellenõrzi, hogy szerepel-e operációtípus a leírt obfuscate kulcsszó után, valamint hogy assetnek referenciát adtunk-e meg. Ezen kívül azt is validálja, hogy a policy fejlécében meg lett-e adva mindkét operációtípus (RW) a default jogosultságok meghatározásához. Ezekben az esetekben a problémát világosan kifejezõ hibaüzenettel figyelmezteti a felhasználót.
+
+\subsection{Esettanulmány}
+Az esettanulmányban felvetett hozzáférés-jogosultsági igények kielégítésére \aref{code:rules} kódon látható szabályokat határoztam meg a fent bemutatott nyelven. Az általuk használt gráfmintákat \aref{code:queries} mutatja. A háromféle munkakör kifejezésére a PrincipalEngineer, IOManager és SubsystemManager felhasználókat vettem fel a rendszerbe. Mivel közülük a PrincipalEnginner-nek és a SubsystemManager-nek is több objektum elérhetõségét engedélyezzük mint tiltjuk, ezért default jogosultságnak azt adtam meg, hogy minden asset írható és olvasható. Így a tiltások kevesebb szabályban is összefoglalhatók. Az esettanulmányban szereplõ követelmények alapján a következõ szabályokat határoztam meg:
+
+\begin{itemize}
+	\item restrictRoot: Az "objectRoot" lekérdezés a modell gyökérelemét adja vissza, erre
+	vonjuk meg az írási jogot az összes felhasználótól.
+	\item restrictNotIO: Az "objectNotIO" a modell összes olyan objektumát visszaadja, ami
+	nem SystemInput vagy SystemOutput típusú. Ezeknek a láthatóságát tiltjuk meg az
+	IOManager felhasználónak.
+	\item restrictIO: A Subsystem Manager számára tiltja a SystemInput és SystemOutput
+	típusú objektumok módosítását.
+	
+\end{itemize}
+
+A szabályokhoz prioritást is rendeltem, a policyhoz pedig restrictive tulajdonság tartozik, vagyis a tiltó szabályok számítanak erõsebbnek. Ezeknek a szabályokat kiértékelõ algoritmus mûködésében lesz jelentõs szerepük.
+
+\lstinputlisting[language=rules, caption=Az esettanulmányhoz definiált hozzáférési szabályok, label=code:rules]{src/code/policy.txt}
+
+\lstinputlisting[language=viatra, caption=Az esettanulmányhoz definiált gráflekérdezések, label=code:queries]{src/code/query.txt}
+
+\clearpage
+
+\section{Szabályokat kiértékelõ komponens}
+
+A 3.2.2 alfejezetben említett különbözõ assetekre és különbözõ operációkra vonatkozó szabályok közötti III. típusú konfliktusok feloldására az olvasási és írási függõségek bevezetése nyújt megoldást.
+
+\subsection{Alapvetõ függõségek}\label{subsec:consequences}
+
+A \cite{commitmde16effective} cikk alapján a megvalósításomban az alábbi konfliktusok feloldására vezettem be olvasási (R) és írási (W) függõségeket. Ezeket egy-egy ábra is szemlélteti a leírások után, amelyekhez \aref{fig:impl2} ábrán lévõ színkódolás tartozik. Sárga jelöli az olvasható modellelemeket, piros a nem olvashatókat, zöld az írhatókat, kék a nem írhatókat és lila az obfuszkáltakat.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.15\columnwidth]{src/figures/legend}
+	\caption{Jelmagyarázat}
+	\label{fig:impl2}
+\end{figure}
+
+\newcommand{\conflict}[0]{$\rightarrow\leftarrow$}
+
+\begin{description}
+
+\item[\label{cons:f1}] \textbf{F1} Objektum olvasható \conflict{} Attribútum nem olvasható \\
+A K1 konzisztencia szabály alapján az attribútumoknak egy-egy létezõ objektumhoz kell tartozniuk, vagyis ha egy attribútum olvasható, akkor a hozzá tartozó objektumnak is meg kell jelennie (legalább obfuszkáltan) a modellnézetben.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.5\columnwidth]{src/figures/r1}
+\end{figure}
+
+\item[\label{cons:f2}] \textbf{F2} Referencia olvasható \conflict{} Kezdõ-/végpontbeli objektum nem olvasható
+
+	\begin{description}
+	\item{a} Az F1 függõséghez hasonlóan a K1 konzisztencia szabály kielégítésére ha egy referencia látható, akkor mivel tartoznia kell két objektumhoz, a kezdõ- és végpontjában lévõ objektumoknak is láthatónak kell lenniük legalább obfuszkálva.
+	
+	\item{b} Ezt kiegészítendõ, ha a forrás vagy a cél objektum nem olvasható, akkor a közöttük lévõ referencia se legyen az.
+	\end{description}
+
+\begin{figure}[h]
+	\begin{subfigure}[h]{\columnwidth}
+		\centering
+		\includegraphics[width=\columnwidth]{src/figures/r2a}
+		\caption{}
+	\end{subfigure}
+	\begin{subfigure}[h]{\columnwidth}
+		\centering
+		\includegraphics[width=.7\columnwidth]{src/figures/r2b}
+		\caption{}
+	\end{subfigure}
+\end{figure}
+
+\item[\label{cons:f3}] \textbf{F3} Objektum olvasható \conflict{} Szülõ objektum nem olvasható
+	\begin{description}
+	\item{a} A K2 konzisztencia szabály értelmében ha egy objektum nem gyökérelem, akkor egy másik által tartalmazottnak kell lennie. Azért, hogy a megjelenített modellben létezzen szülõje, az õt tartalmazó objektumot - ha más szabály esetleg nem engedi a láthatóságát - legalább obfuszkálni kell, a közöttük lévõ referenciát pedig olvashatóvá kell tenni. Többszörös propagálás után ennek eredményeképp az egész tartalmazási hierarchia megjelenik egészen a gyökérelemig.
+	
+	\item{b} Ezt a konfliktust a másik oldalról feloldva, ha egy tartalmazási referencia nem látható, akkor a tartalmazott objektum se legyen az.
+	\end{description}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/r3a}
+		\caption{}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/r3b}
+		\caption{}
+	\end{subfigure}
+\end{figure}
+
+\item[\label{cons:f4}] \textbf{F4} Objektum olvasható \conflict{} ID attribútum nem olvasható
+	\begin{description}
+	\item{a} Mivel objektumok között az egyedi azonosítójukkal tehetünk különbséget, így ha egy objektum látható, akkor az õt azonosító ID attribútum(ok)nak is olvashatónak kell lennie.
+	\item{b} Hasonlóan a másik irányba, ha valamelyik ID attribútum rejtve van, akkor maga az objektum se látszódhat.
+	\end{description}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.6\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/r4a}
+		\caption{}
+	\end{subfigure}
+    \par\bigskip
+	\begin{subfigure}[b]{0.6\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/r4b}
+		\caption{}
+	\end{subfigure}
+\end{figure}
+
+\item[\label{cons:f5}] \textbf{F5} Obfuszkáció \\
+Ha egy objektum vagy attribútum elemre nincs meghatározva olvashatósági engedély, csak azért szerepelnek a modellben, mert az olvasási függõségek kikényszerítik azt, akkor obfuszkáltan jelennek meg. Egy ilyen objektumnak az azonosító attribútumait is obfuszkálni kell, a többi attribútum pedig rejtve marad a modellben.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=.6\columnwidth]{src/figures/o}
+\end{figure}
+
+\item[\label{cons:f6}] \textbf{F6} Objektum írható \conflict{} Tartalmazási referencia nem írható
+	\begin{description}
+	\item{a} Egy objektum eltávolításához nem elég, ha õ maga írható, az is szükséges, hogy a rá mutató tartalmazási referencia is az legyen, mert ebben az esetben azt is törölni kell a modellbõl, hiszen önmagában már nem értelmezhetõ.
+	\item{b} Ezzel összefüggésben, ha egy tartalmazási referencia módosítható, akkor a gyerek objektumok abban az esetben törölhetõk vagy áthelyezhetõk, ha õk is módosíthatók. Azért, hogy ez mindig teljesüljön, az algoritmus ilyen esetben is propagálja az írhatóságot.
+	\end{description}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[h]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/w1a}
+		\caption{}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/w1b}
+		\caption{}
+	\end{subfigure}
+\end{figure}
+
+\item[\label{cons:f7}] \textbf{F7} ID attribútum írható \conflict{} Tartalmazási referencia nem írható
+	\begin{description}
+	\item{a} Az elõzõ konfliktushelyzetet továbbgondolva akkor is törlésre kerül egy objektum, ha valamelyik ID attribútuma módosul. Ilyenkor eltávolítás után egy új objektum kerül a helyére, ami már az új beállított értékkel rendelkezik. Tehát ilyen attribútumok írhatósága esetén erre a helyzetre felkészülve az objektum tartalmazási referenciájának is írhatónak kell lennie.
+	\item{a} Fordított helyzetben ha a referencia nem módosítható, akkor nem csak az objektum, hanem az azt azonosító attribútumok sem módosíthatók.
+	\end{description}
+\end{description}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[h]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{src/figures/w2a}
+		\caption{}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{src/figures/w2b}
+		\caption{}
+	\end{subfigure}
+\end{figure}
+
+\clearpage
+
+Az írási és olvasási függõségek bevezetésével nem csak a III-as, hanem a II-es típusba tartozó konfliktusok is feloldhatók. Ezek az ugyanarra az assetre és különbözõ operációkra vonatkozó szabályok között két helyzetben állnak fent, ezeket oldják fel az alábbi függõségek:
+
+\begin{description}
+	
+\item[\label{cons:f8}] \textbf{F8} Asset írható \conflict{} Asset nem olvasható
+	\begin{description}
+	\item{a} Egy bármilyen asset írhatóságának akkor van értelme, ha olvasható is, hiszen hiába van joga a felhasználónak azt módosítani, ha a számára megjelenõ modellnézetben nincs benne az adott asset. Tehát az írhatósággal minden asset esetében együtt kell hogy járjon az olvashatóság is.
+	\item{b} Fordított irányban, ha egy asset nem látható, akkor értelemszerûen módosítható sem lehet.
+	\end{description}
+\item[\label{cons:f9}] \textbf{F9} Asset obfuszkált \conflict{} Asset írható \\
+Egy asset obfuszkáltsága esetén kérdéses, hogy változtatás után mi történik vele. Ekkor a felhasználók csak obfuszkált értékeket változtathatnak, aminek következtében a visszaállítás után nem feltétlenül a kívánt eredmény érhetõ el. Az én megoldásomban minden obfuszkált assetre tiltva van az írhatóság.
+
+\end{description}
+
+\subsection{Olvasási és írási függõségek konfigurációja}
+Az implementációban egy $IConsequence$ interfészt a $propagate()$ metódusával megvalósítva a felhasználó hozzáadhatja az általa definiálni kívánt függõségeket a komponenshez. Így a modell értelmességét és belsõ konzisztenciáját támogató függõségeken kívül akár még több megkötéssel is konfigurálhatja az effektív hozzáféréseket számító algoritmust.
+
+\clearpage
+
+\subsection{Algoritmus mûködése}
+Az effektív hozzáférési szabályokat kiválasztó függvény a \cite{commitmde16effective} cikkben tárgyalt megoldásból kiindulva az alábbi algoritmus szerint mûködik.
+
+\begin{algorithm}
+	\caption{Effektív jogosultságok számolása}
+	\label{alg:resolve}
+	\begin{algorithmic}
+		\Function{GetEffectivePermissions}{model, strongCons, weakCons, explRules, user}
+		\State $permissionList\gets $ $getInitialPermissions(model, explRules, user)$
+		\State $processed\gets \emptyset$
+		\While{$permissionList$ is not empty}
+		\State $j \gets chooseDominant(permissionList)$
+		\State $processed\gets processed \cup \{j\}$
+		\State $permissionList \gets permissionList \setminus \{j\}$
+		\ForAll{$j' \in permissionList$}
+		\If{$conflict(j, j')$} $\rhd$ I. típusú konfliktus esetén igazzal tér vissza
+		\State $permissionList \gets permissionList \setminus \{j'\} $
+		\EndIf
+		\EndFor
+		\ForAll{$strongCons$}
+		\State $consequences \gets propagate(j)$
+		\State $permissionList \gets permissionList \cup consequences$
+		\EndFor
+		\ForAll{$weakCons$}
+		\State $consequences \gets propagate(j)$
+		\State $permissionList \gets permissionList \cup consequences$
+		\EndFor
+		\EndWhile
+		\EndFunction		
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{enumerate}
+	\item \textbf{Kiindulási judgementek listája:}
+	\begin{enumerate}
+		\item \textbf{Explicit szabályokból:} A kívülrõl megadott explicit hozzáférési szabályok $permissionList$-hez való hozzáadásához végigiterál a kérdéses felhasználóra vonatkozó szabályokon. Minden lépésben létrehozza a gráflekérdezésbõl megkapott, majd a szabályban megfogalmazott feltételekkel szûkített assethalmaz elemeit tartalmazó judgementeket. Ezek tárolják, hogy melyik assetre, milyen operációtípus esetén, milyen hozzáférést szeretnénk, milyen prioritással, és hogy ez a szabály a policy engedélyezõ vagy tiltó tulajdonsága alapján domináns-e vagy sem. A $permissionList$-nek a folyamat többi részének tekintetében is fontos tulajdonsága, hogy az ugyanarra az assetre azonos jogosultságot adó judgement-eket egyenlõnek veszi, és közülük csak a nagyobb prioritásút tartja meg.
+		\item \textbf{Default szabályokból:} A policyban meghatározott default jogosultságok hozzáadásához bejárja a modell minden egyes objektumát, annak attribútumait, referenciáit, és az összes assetre, mindkét operációtípusra létrehozza az adott hozzáférési szintû judgementet a lehetõ legkisebb prioritással. Így a default judgementekbõl összesen kétszer annyi lesz mint a modellelemek száma, hiszen mindegyik olvashatóságáról és írhatóságáról is lesz egy-egy kijelentés.
+	\end{enumerate}
+
+    \item \textbf{Effektív eredmények listája:} A $permissionList$-en kívül egy másik judgementek tárolására szolgáló lista is létrejön, a $processed$, amelybe futása során az algoritmus a már érvényre jutó judgementeket helyezi.
+\end{enumerate}
+
+A judgement-listák inicializálása után megkezdõdik az effektív jogosultságok számítása. A program egy while ciklusban hajtja végre azt az iterációt, melynek során az eredmény a permissionList kiürülése közben a $processed$ listába kerül, és amelynek pontos lépései a következõk:
+
+\begin{enumerate}[resume]
+	\item \textbf{Legdominánsabb judgement kiválasztása:} Ez gyakorlatilag a $permissionList$ elsõ elemének kivételét jelenti, ugyanis a lista eszerint rendezett. Elsõsorban a nagyobb prioritású elemeket veszi elõre, az azonosak közül pedig az engedélyezõ vagy tiltó tulajdonságukból fakadóan dominánsak sorolódnak a prioritási osztály elejére. Egy elem listabeli helye hozzáadáskor alakul ki, ekkor a program egy mapbõl olvassa ki, hogy hol van az elsõ ugyanilyen fontosságú judgement, az elé szúrja be, majd ezek alapján frissíti a mapet.
+	
+	\item \textbf{Kiválasztott judgement áthelyezése  $permissionList$-bõl $processed$-be:} Mivel ennél a judgementnél nincs fontosabb a listában, ezért õ mindenképp érvényre fog jutni, úgyhogy a nominális szabályokat tartalmazó listából átkerül az effektív szabályok közé.
+	
+	\item \textbf{Konfliktusfeloldás:} Judgementek bevezetésével könnyen detektálhatóvá váltak a szabályok közötti I. típusú konfliktusok. A $permissionList$-en végigiterálva olyan elemeket keresünk, amelyek ugyanarra az assetre és ugyanarra az operációtípusra, viszont eltérõ hozzáférési szintre vonatkoznak, mint a kiválasztott judgement. Ezeket egyszerûen kitöröljük a listából, hiszen már úgysem érvényesülhetnek.
+\end{enumerate}
+
+\Aref{subsec:consequences} fejezetrészben felsorolt függõségeket az algoritmus "erõs" konzekvenciaként kezeli, vagyis ha egy judgement érvényre jut, akkor a belõle ezek alapján származtatott judgementek megöröklik a prioritásukat. Ennek köszönhetõen mivel a következõ körökben õk lesznek a legdominánsabbak, szintén érvényre fognak jutni. Ezeken kívül a program "gyenge" konzekvenciákat is figyelembe vesz. Ezek értelmében az objektumok attribútumai és referenciái megöröklik az objektumhoz tartozó hozzáférési jogot, tehát például ha az olvasható, akkor az attribútumok, referenciák is azok lesznek. Ezeket a judgementeket a defaultnál nagyobb, de az erõs konzekvenciáknál kisebb prioritással adja hozzá az algoritmus az érvényesíteni kívánt szabályok halmazához, tehát ez utóbbi felülírhatja õket.
+	
+\begin{enumerate}[resume]
+	\item \textbf{Erõs konzekvenciák propagálása:} A külön erõs konzekvenciákat tároló $strongCons$ listán iterálunk végig, és minden $IConsequence$-t megvalósító osztály $propagate()$ függvényének eredményét, az új judgementeket hozzáadjuk a $permissionList$-hez.
+	
+	\item \textbf{Gyenge konzekvenciák propagálása:} Az elõzõ ponthoz hasonlóan, csak itt a $weakCons$ listán iterálunk végig.
+\end{enumerate}
+
+A különbözõ függõségek propagálása után újraindul a while cikluson belüli folyamat, és egészen addig tart, amíg a $permissionList$ ki nem ürül. Eközben a $getEffectivePermissions()$ függvény visszatérési értéke, a $processed$ lista feltelítõdik az effektív hozzáférési jogokkal.
+
+\subsection{Algoritmus értékelése}
+
+\begin{description}
+	\item[Az algoritmus terminál.] A while ciklus addig fut, amíg a nominális judgementeket tartalmazó $permissionList$ ki nem ürül. Ez akkor lehetséges, ha a hozzáadható judgementek száma véges. A modellelemek számának végessége miatt a lista inicializálásakor hozzáadott explicit és default judgementek száma is az lesz. A ciklus futása alatt pedig a függõségek propagálása miatt bõvül a lista, de mivel a kódban az is szabályozva van, hogy olyan judgementet ne lehessen hozzáadni a $permissionList$-hez, ami már szerepel a $processed$-ben, ezért ezek száma is véges.
+	
+	Utóbbi gondolatra egy példa az F2 és F3 függõségek kapcsolata. Ha érvényesül egy tartalmazási referencia láthatósága, akkor a gyerek objektumnak is láthatónak kell lennie. Ha ez utóbbi is érvényesül, akkor a propagálásnál azt a judgementet adnánk a listához, hogy a rá mutató tartalmazási referencia is olvasható. Ha hozzáadnánk, akkor ennek a kiválasztásánál újraindulna ez a kör, ezt nem engedi az algoritmus.
+	\item[Az algoritmus kétszer annyi judgementet ad vissza mint az assetek száma.] A kétszeres szorzót úgy kapjuk, hogy minden assethez egy darab olvasási és egy írási jogosultságot határozunk meg, vagyis az szükséges, hogy a $processed$ listába minden asset mindkét operációtípusához csak egy judgement kerülhessen át a $permissionList$-bõl.
+	
+	A judgement kiválasztásának pillanatában a listában nem szerepel ugyanerre az operációra és hozzáférési szintre vonatkozó másik judgement, mert a listához adáskor ezt figyelembe veszi a program  és az ilyenek közül csak a magasabb prioritásút teszi bele. Ugyanerre az operációra és különbözõ hozzáférési szintre vonatkozó judgement azonban lehet benne, de a konfliktusfeloldás részeként törlõdnek.
+	
+	Felmerülhet a kérdés, hogy miután már a $processed$ listában van az elem, egy másik judgement függõségeinek propagálásakor nem kerülhet-e be egy ugyanolyan vagy éppen az ellenkezõjét kifejezõ judgement a $permissionList$-be. Az ugyanolyan esetre az elõzõ bizonyításban is szereplõ módszer a megoldás, vagyis arra figyel a program, hogy $processed$-ben lévõ judgement-et még egyszer ne adjon hozzá a listához. Ellentétes hozzáférési szintû judgement pedig az általam definiált függõségek bizonyítható logikussága miatt nem lehetséges.
+\end{description}
+
+\clearpage
+
+\subsection{Esettanulmány}
+A megoldás esettanulmányon való bemutatásához \aref{chap:casestudy} fejezetben meghatározott hozzáférés-szabályozási követelmények alapján \aref{code:rules} kódon látható explicit és default szabályok fogalmazhatók meg. Ezek alapján \aref{fig:instancemodels} ábrán lévõ példánymodellen az I/O Manager felhasználóra \aref{fig:iomanagerrules}  ábrán látható hozzáféréseket szeretnénk biztosítani a különbözõ modellelemekhez. A gyökérelemet csak láthatja, de nem módosíthatja, a SystemInput és SystemOutput objektumokat olvashatja és írhatja is, a Subsystem és Ctrl Unit29 objektumokhoz pedig egyáltalán nem férhet hozzá. Mivel az objektumok attribútumaira és referenciáira nem adtunk meg szabályt, ezért ezekre a default beállítást értelmeznénk, ami mindkét mûveletet engedélyezi.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.6\columnwidth]{src/figures/iomanagerrules}
+		\caption{Az I/O Manager számára adni kívánt hozzáférések}
+		\label{fig:iomanagerrules}
+	\end{center}
+\end{figure}
+
+\begin{enumerate}
+	\item $permissionList$ inicializálása:
+	 \begin{enumerate}
+	 	\item Az explicit szabályok közül a "restrictRoot" a gyökérelemre tiltja meg az írhatóságot 1-es prioritással, a policy tiltó tulajdonságával, így az ebbõl származtatott judgement:
+	 	\\$j(WT, deny, W, 1, true)$
+	 	\\ A másik rá vonatkozó szabály, a "restrictNotIO" nem engedi a gyökérelemen, bemeneteken és kimeneteken kívüli objektumokhoz való hozzáférést, ami ebben az esetben a következõ judgementeket eredményezi:
+	 	\\$j(Subsystem, deny, R, 1, true)$
+	 	\\$j(Ctrl Unit29, deny, R, 1, true)$
+	 	\item A default szabályok a modell minden assetjére olvashatóságot és írhatóságot biztosítanak a lehetõ legkisebb, -1 prioritással, így a két judgement amit mind a 21 modellelemhez rendel, és a $permissionList$-hez az ad az algoritmus:
+	 	\\$j(asset, allow, R, -1, false)$
+	 	\\$j(asset, allow, W, -1, false)$
+	 \end{enumerate}
+ 
+   \item $processed$ lista inicializálása, amibe az effektív eredmény kerül majd
+\end{enumerate}
+
+Ezek után az érvényesíthetõ judgementek $permissionList$-bõl $processed$-be kerülésének iterációnkénti lépései az alábbiak:
+
+\begin{enumerate}[resume]
+	\item Mivel a judgementek dominánssága szerint rendezett $permissionList$-be egymás elé szúrjuk be az ilyen szempontból azonos elemeket, ezért az elsõ tagja:
+	\\$j(Ctrl Unit29, deny, R, 1, true)$
+	
+	\item Mivel ez mindenképp érvényre jut, hozzáadódik a $processed$ listához, feldolgozás után pedig törlõdik a $permissionList$-bõl.
+	
+	\item Azért, hogy a $processed$-be ne kerülhessen olyan judgement, ami az épp kiválasztottal és hozzáadottal konfliktusba kerülhet, az algoritmus még a $permissionList$-bõl kitörli az ugyanarra az assetre, ugyanarra az operációtípusra, viszont más hozzáférési szintre vonatkozó judgement-eket. Ebben az esetben egy konfliktushelyzet adódik:
+	\\$j(Ctrl Unit29, allow, R, -1, false)$
+	\\Ez a defaultként hozzáadott judgement a már érvényre jutottal szemben engedélyezné a Ctrl Unit29 objektum olvashatóságát, ezért törlésre kerül a $permissionList$-bõl.
+	
+	\item Az érvényesülõ judgementre a következõ erõs konzekvenciák vonatkoznak:
+	\begin{itemize}
+		\item F8 értelmében ha egy asset nem olvasható, akkor írható sem lehet, ezért a következõ judgement amit a listához kell adni:
+		\\$j(Ctrl Unit29, deny, W, 1, true)$
+		\item F2 szerint ha egy objektum nem olvasható, akkor a be- és kimenõ referenciák se legyenek azok:
+		\\$j(Subsystem \rightarrow Ctrl Unit29, deny, R, 1, true)$
+		\\$j(Ctrl Unit29 \rightarrow SystemInput, deny, R, 1, true)$
+	\end{itemize}
+
+    \item A gyenge konzekvenciák miatt pedig az objektum attribútumaira és referenciáira ruházzuk tovább az olvashatatlansági jogot a defaultnál nagyobb, de a többinél kisebb 0 prioritással. Mivel az egy szóba jövõ referenciára már az elõzõ pontban megadtunk egy erõsebb judgementet, ezért arra már ezt felesleges lenne a listához adni. Az attribútumokra pedig ezek vonatkoznak:
+    \\$j(Ctrl Unit29.sysID, deny, R, 0, true)$
+    \\$j(Ctrl Unit29.description, deny, R, 0, true)$
+\end{enumerate}
+
+A függõségek propagálása után a while ciklus következõ iterációja jön, ahol a $permissionList$-hez utoljára hozzáadott legdominánsabb judgementet választja ki az algoritmus és teszi át a $processed$ listába, ez pedig a $j(Ctrl Unit29 \rightarrow SystemInput, deny, R, 1, true)$. Konfliktusa szintén az assethez rendelt default hozzáféréssel lesz, a definiált függõségek közül csak az F8 vonatkozik rá, ezért a listához azt a judgementet is hozzá kell adni, ami az asset írhatóságát tiltja.
+
+\clearpage
+
+A cikluson ilyen módon addig iterálunk végig, amíg a $permissionList$ összes elemét fel nem dolgoztuk akár a $processed$ listába való áthelyezéssel, akár törléssel. A folyamat végére az I/O Manager számára a rá vonatkozó effektív hozzáférési szabályok alapján \aref{fig:iomanagerresult} ábrán látható konzisztens modellnézet érvényesül.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.6\columnwidth]{src/figures/iomanagerresult}
+		\caption{Az I/O Manager számára érvényesülõ effektív hozzáférések}
+		\label{fig:iomanagerresult}
+	\end{center}
+\end{figure}
+
+Az esettanulmányban szereplõ másik két felhasználóra futtatva az algoritmust \aref{n} ábrán látható eredmények születtek. Bal oldalon szerepelnek a szabályok által igényelt hozzáférések, jobb oldalon pedig az algoritmus futási eredményeként kapott effektív jogosultságok.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[h]{1\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{src/figures/principalengineerresult}
+		\caption{Principal Engineer}
+	\end{subfigure}
+    \par\bigskip
+	\begin{subfigure}[h]{1\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{src/figures/subsystemmanagerresult}
+		\caption{Subsystem Manager}
+	\end{subfigure}
+\end{figure}

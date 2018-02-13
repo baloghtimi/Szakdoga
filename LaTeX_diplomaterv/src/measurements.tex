@@ -1,3 +1,37 @@
 %----------------------------------------------------------------------------
 \chapter{Kiértékelés}
 %----------------------------------------------------------------------------
+
+Az elkészült szabálykiértékelõ komponenst futási teljesítménye szempontjából értékeltem. A teszteléshez 5 különbözõ méretû példánymodellt készítettem annak vizsgálatára, hogy a modellelemek számának növekedésével milyen arányban nõ az algoritmus számítási ideje, majd ezeket mind a három típusú felhasználóra lefuttattam. A tesztesetek bemenetei a következõk voltak:
+\begin{itemize}
+	\item az esettanulmány követelményei alapján definiált explicit hozzáférési szabályok
+	\item a szabályok által használt gráfminták
+	\item a korábban tárgyalt írási és olvasási függõségek
+	\item példánymodell
+	\item felhasználó
+\end{itemize}
+
+A méréshez Windows10(x64) operációs rendszerû, egy Intel Core i3-as, 1,80 GH-es processzorral és 8 GB memóriával rendelkezõ gépet használtam, Eclipse Neon.3 keretrendszerrel. A teszteseteket egyenként 10-szer lefuttatva, majd a mérési eredményeket átlagolva \aref{fig:principalengineermeasurement}, \aref{fig:iomanagermeasurement} és \aref{fig:subsystemmanagermeasurement} ábrákon látható eredményt kaptam. A grafikonok vízszintes tengelye a modellelemek számát mutatja, függõlegesen pedig a futási idõk olvashatók le róla.
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=.7\columnwidth]{src/figures/principalengineermeasurement}
+	\caption{Principal Engineer}
+	\label{fig:principalengineermeasurement}
+\end{figure}
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=.7\columnwidth]{src/figures/iomanagermeasurement}
+	\caption{I/O Manager}
+	\label{fig:iomanagermeasurement}
+\end{figure}
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=.7\columnwidth]{src/figures/subsystemmanagermeasurement}
+	\caption{Subsystem Manager}
+	\label{fig:subsystemmanagermeasurement}
+\end{figure}
+
+A vártaknak megfelelõen a modell méretének növekedésével egyenes arányosságban emelkedik a futási idõ, hiszen így több szabályt is kell kiértékelni. Megfigyelhetõ még, hogy a másik két felhasználóhoz képest az I/O Manager-hez tartozó effektív jogosultságokat nagyságrendekkel több ideig tart kiszámolni. Ennek szintén a nagyobb méretû judgementhalmaz-kezelés az oka, mert erre a felhasználóra olyan szabályok lettek explicit módon megadva, amelyek függõségei miatt még több jogosultság propagálódik.

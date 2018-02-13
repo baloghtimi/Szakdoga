@@ -1,3 +1,39 @@
 %----------------------------------------------------------------------------
 \chapter{Áttekintés}
 %----------------------------------------------------------------------------
+%----------------------------------------------------------------------------
+\section{Kétirányú modelltranszformáció}
+%----------------------------------------------------------------------------
+
+Modellek kollaboratív fejlesztésekor a teljes modell egy közös tárhelyen érhetõ el, a munkában résztvevõk ezen végeznek különbözõ módosításokat. Hozzáférés-szabályozással nem csak azt lehet megszabni, hogy ki milyen változtatásokat hajthat végre a modellen, hanem azt is, hogy egyáltalán mely modellrészekrõl lehet tudomása. Olvasási hozzáférési szabályok alapján minden felhasználó számára a teljes modellnek egy olyan - szintén teljes és konzisztens modellnek tûnõ - nézetét kell biztosítani, amiben csak olyan elemek szerepelnek, amelyeknek a láthatósága engedélyezett.
+
+Az egyedi nézetek modelltranszformáció segítségével alakulnak ki. Mivel a többi fejlesztõ úgy értesülhet az ezen végzett változásokról, ha azok a teljes modellen is megjelennek, ezért a mûveletet visszafele is végre kell hajtani. Ez a kétirányú modelltranszformációs típus az úgynevezett lencse \cite{Diskin2008}, amelynek a mûködését \aref{fig:lens} ábra szemlélteti.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.7\columnwidth]{src/figures/lens}
+		\caption{Kétirányú modelltranszformáció}
+		\label{fig:lens}
+	\end{center}
+\end{figure}
+
+A kétféle transzformáció a GET és a PUTBACK. Az elõbbi az adott felhasználóra definiált olvashatósági szabályoknak megfelelõen alakítja a modellt. Az utóbbi pedig visszatöltési szándék esetén elõször ellenõrzi, hogy az adott modellelem módosítására van-e engedély a szabályok gyûjteményében. Ha igen, végrehajtja a transzformációt, és ezzel a többiek számára is elérhetõ változtatásokat a teljes modellben.
+%----------------------------------------------------------------------------
+\section{Hozzáférési szabályok kiértékelése}
+%----------------------------------------------------------------------------
+
+A modelltranszformációt végzõ lencse a már végleges, a modell belsõ konzisztenciájának megtartását elõsegítõ hozzáférési szabályok alapján mûködik. A kívülrõl megadott, nominális szabályokból \aref{fig:algorithm} ábrán látható mechanizmus kalkulálja ki ezeket az effektív szabályokat.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.7\columnwidth]{src/figures/algorithm}
+		\caption{Effektív hozzáférési szabályok számítása}
+		\label{fig:algorithm}
+	\end{center}
+\end{figure}
+
+A megvalósított algoritmus egy nulladik lépésben a VIATRA lekérdezõnyelvén megfogalmazott gráfmintákat illeszti a szintén bemenetként kapott modellre. Így késõbb a találatokból már csak ki kell választani a szükséges elemeket.
+
+A kívülrõl megadható hozzáférési szabályokat az általam definiált Xtext nyelvtannal lehet leírni. Megfogalmazható, hogy melyik felhasználónak, pontosan mely assetekre engedélyezzük vagy tiltjuk az olvasás/írás mûveletét. A szabályokhoz prioritás is rendelhetõ, az õket összefogó policyhoz pedig olyan tulajdonság, ami meghatározza, hogy az engedélyezõ vagy a tiltó szabályok közül melyek az erõsebbek. Ezekkel egyfajta fontossági sorrend állítható fel a szabályok között. Azokra az assetekre, amelyeket nem akarunk külön szabályba foglalni, megadható egy globális default hozzáférés.
+
+Ezeket a nominális szabályokat judgementekre bontva - vagyis minden asset minden mûveletére megfogalmazva - az algoritmus összeállítja a hozzáférések kezdeti halmazát. Ezek közül pedig ciklikusan kiválasztja a legerõsebbet, aminek mindenképp érvényesülnie kell, majd a halmaz maradék elemei közül kiszórja azokat, amelyek ezzel ellentmondásban állnak. A folyamat bemeneteként megadható írási és olvasási függõségi szabályokat figyelembe véve az algoritmus felveszi a listába az érvényesülõ judgement által eredményezett újabb judgementeket. A legdominánsabb szabály kiválasztása, a konfliktusfeloldás és függõség-propagálás ciklusa addig tart, amíg a listában lévõ összes judgement feldolgozásra nem kerül. Az eredmény, a folyamat kimenete pedig az adott felhasználóra vonatkozó, ténylegesen érvényre jutó, effektív hozzáférési szabályok, amelyeket alkalmazva a modell teljes és konzisztens marad.

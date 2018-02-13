@@ -1,5 +1,16 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: diploma.aux
 The style file: plain.bst
-I found no \citation commands---while reading file diploma.aux
 Database file #1: bib/mybib.bib
-(There was 1 error message)
+Warning--can't use both author and editor fields in Andova2012
+Warning--can't use both author and editor fields in Diskin2008
+Warning--empty booktitle in mondoeufp7
+Warning--empty year in mondoeufp7
+Warning--empty booktitle in xacml
+Warning--empty year in xacml
+Warning--empty booktitle in emf
+Warning--empty year in emf
+Warning--empty booktitle in viatra
+Warning--empty year in viatra
+Warning--empty booktitle in xtext
+Warning--empty year in xtext
+(There were 12 warnings)

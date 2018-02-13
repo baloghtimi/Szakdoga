@@ -1,0 +1,30 @@
+\begin{thebibliography}{1}
+
+\bibitem{bagnato2014flexible}
+Alessandra Bagnato, Etienne Brosse, Andrey Sadovykh, Pedro Mal{\'o}, Salvador
+  Trujillo, Xabier Mendialdua, and Xabier De~Carlos.
+\newblock Flexible and scalable modelling in the {MONDO} project: Industrial
+  case studies.
+\newblock In {\em XM@ MoDELS}, pages 42--51, 2014.
+
+\bibitem{models16accesscontrol}
+G{\'{a}}bor Bergmann, Csaba Debreceni, Istv{\'{a}}n R{\'{a}}th, and
+  D{\'{a}}niel Varr{\'{o}}.
+\newblock Query-based access control for secure collaborative modeling using
+  bidirectional transformations.
+\newblock In {\em Proceedings of the {ACM/IEEE} 19th International Conference
+  on Model Driven Engineering Languages and Systems, Saint-Malo, France,
+  October 2-7, 2016}, pages 351--361, 2016.
+
+\bibitem{commitmde16effective}
+Csaba Debreceni, G{\'{a}}bor Bergmann, Istv{\'{a}}n R{\'{a}}th, and
+  D{\'{a}}niel Varr{\'{o}}.
+\newblock Deriving effective permissions for modeling artifacts from
+  fine-grained access control rules.
+\newblock In {\em Proceedings of the 1st International Workshop on
+  Collaborative Modelling in {MDE} (COMMitMDE 2016) co-located with {ACM/IEEE}
+  19th International Conference on Model Driven Engineering Languages and
+  Systems (MoDELS 2016), St. Malo, France, October 4, 2016.}, pages 17--26,
+  2016.
+
+\end{thebibliography}

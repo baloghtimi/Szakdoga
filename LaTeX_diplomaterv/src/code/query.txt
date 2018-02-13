@@ -1,0 +1,14 @@
+pattern objectRoot(root : WT) {
+ WT(root);
+}
+
+pattern objectIO(object) {
+ SystemInput(object);
+} or {
+ SystemOutput(object);
+}
+
+pattern objectNotIO(object) {
+ find objectAllObjectsWithoutRoot(object);
+ neg find objectIO(object);
+}

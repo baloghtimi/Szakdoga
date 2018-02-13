@@ -8,6 +8,7 @@ import org.mondo.collaboration.policy.rules.AccessibilityLevel
 import org.mondo.collaboration.policy.rules.OperationType
 import org.mondo.collaboration.policy.rules.Rule
 import org.mondo.collaboration.policy.rules.ReferenceFact
+import org.mondo.collaboration.policy.rules.Policy
 
 /**
  * This class contains custom validation rules. 
@@ -18,6 +19,14 @@ class RulesValidator extends AbstractRulesValidator {
 	
 	public static val INVALID_NAME = 'invalidName'
 
+    @Check
+	def checkPolicyOperation(Policy policy) {
+		val operation = policy.eClass.EAllStructuralFeatures.findFirst[x | x.name.equals("operation")]
+		if(policy.operation != OperationType::READWRITE){
+			error("Both operation types have to be defined", policy, operation)
+		}
+	}
+	
 	@Check
 	def checkOperationTypeAfterObfuscate(Rule rule) {
 		val operation = rule.eClass.EAllStructuralFeatures.findFirst[x | x.name.equals("operation")]

@@ -1,13 +1,37 @@
-\select@language {magyar} \contentsline {chapter}{Kivonat}{3}{chapter*.2}
-\select@language {magyar} \contentsline {chapter}{Abstract}{4}{chapter*.3}
-\select@language {magyar} \contentsline {chapter}{\numberline {1}Bevezet\'es}{5}{chapter.1}
-\select@language {magyar} \contentsline {chapter}{\numberline {2}Esettanulm\'any}{7}{chapter.2}
-\select@language {magyar} \contentsline {section}{\numberline {2.1}Modell}{7}{section.2.1}
-\select@language {magyar} \contentsline {section}{\numberline {2.2}Feladat}{8}{section.2.2}
-\select@language {magyar} \contentsline {chapter}{\numberline {3}H\'att\'ertechnol\'ogi\'ak}{10}{chapter.3}
-\select@language {magyar} \contentsline {chapter}{\numberline {4}\'Attekint\'es}{11}{chapter.4}
-\select@language {magyar} \contentsline {chapter}{\numberline {5}Megval\'os\IeC {\'\i }t\'as}{12}{chapter.5}
-\select@language {magyar} \contentsline {chapter}{\numberline {6}Ki\'ert\'ekel\'es}{13}{chapter.6}
-\select@language {magyar} \contentsline {chapter}{\numberline {7}Kapcsol\'od\'o munk\'ak}{14}{chapter.7}
-\select@language {magyar} \contentsline {chapter}{\numberline {8}\"Osszefoglal\'as}{15}{chapter.8}
-\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{16}{chapter*.8}
+\select@language {magyar} \contentsline {chapter}{Kivonat}{4}{chapter*.2}
+\select@language {magyar} \contentsline {chapter}{Abstract}{5}{chapter*.3}
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Bevezet\'es}{6}{chapter.1}
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Esettanulm\'any}{9}{chapter.2}
+\select@language {magyar} \contentsline {chapter}{\numberline {3}H\'att\'ertechnol\'ogi\'ak, ismeretek}{12}{chapter.3}
+\select@language {magyar} \contentsline {section}{\numberline {3.1}Modellez\'es}{12}{section.3.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.1}Modellvez\'erelt szoftverfejleszt\'es}{12}{subsection.3.1.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.2}Eclipse Modeling Framework}{12}{subsection.3.1.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.3}Modellez\'esi nyelvek}{14}{subsection.3.1.3}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.4}Xtext}{14}{subsection.3.1.4}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.5}VIATRA Query}{14}{subsection.3.1.5}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.6}Bels\H o inkonzisztencia \'es j\'olform\'alts\'agi k\'enyszerek}{14}{subsection.3.1.6}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.7}Asset}{15}{subsection.3.1.7}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.8}Modell obfuszk\'aci\'o}{15}{subsection.3.1.8}
+\select@language {magyar} \contentsline {section}{\numberline {3.2}Hozz\'af\'er\'es-szab\'alyoz\'as}{16}{section.3.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}Hozz\'af\'er\'esi szab\'aly}{16}{subsection.3.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}Szab\'alyok k\"oz\"otti konfliktusok}{16}{subsection.3.2.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.3}Effekt\IeC {\'\i }v jogosults\'agok}{17}{subsection.3.2.3}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}\'Attekint\'es}{19}{chapter.4}
+\select@language {magyar} \contentsline {section}{\numberline {4.1}K\'etir\'any\'u modelltranszform\'aci\'o}{19}{section.4.1}
+\select@language {magyar} \contentsline {section}{\numberline {4.2}Hozz\'af\'er\'esi szab\'alyok ki\'ert\'ekel\'ese}{20}{section.4.2}
+\select@language {magyar} \contentsline {chapter}{\numberline {5}Megval\'os\IeC {\'\i }t\'as}{22}{chapter.5}
+\select@language {magyar} \contentsline {section}{\numberline {5.1}Hozz\'af\'er\'es-szab\'alyoz\'asi nyelv}{22}{section.5.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.1.1}Nyelvtan}{22}{subsection.5.1.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.1.2}Extra funkci\'ok}{24}{subsection.5.1.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.1.3}Esettanulm\'any}{24}{subsection.5.1.3}
+\select@language {magyar} \contentsline {section}{\numberline {5.2}Szab\'alyokat ki\'ert\'ekel\H o komponens}{25}{section.5.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.2.1}Alap\'ertelmezett f\"ugg\H os\'egek}{26}{subsection.5.2.1}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.2.2}Olvas\'asi \'es \IeC {\'\i }r\'asi f\"ugg\H os\'egek konfigur\'aci\'oja}{29}{subsection.5.2.2}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.2.3}Algoritmus m\H uk\"od\'ese}{30}{subsection.5.2.3}
+\select@language {magyar} \contentsline {subsection}{\numberline {5.2.4}Esettanulm\'any}{32}{subsection.5.2.4}
+\select@language {magyar} \contentsline {chapter}{\numberline {6}Ki\'ert\'ekel\'es}{34}{chapter.6}
+\select@language {magyar} \contentsline {chapter}{\numberline {7}Kapcsol\'od\'o munk\'ak}{36}{chapter.7}
+\select@language {magyar} \contentsline {section}{\numberline {7.1}F\'ajl alap\'u hozz\'af\'er\'es-szab\'alyoz\'as}{36}{section.7.1}
+\select@language {magyar} \contentsline {section}{\numberline {7.2}XML dokumentumok hozz\'af\'er\'es-szab\'alyoz\'asa}{36}{section.7.2}
+\select@language {magyar} \contentsline {chapter}{\numberline {8}\"Osszefoglal\'as}{37}{chapter.8}
+\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{39}{chapter*.25}

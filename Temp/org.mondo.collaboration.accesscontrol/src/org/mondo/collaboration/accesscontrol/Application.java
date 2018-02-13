@@ -66,24 +66,6 @@ public class Application {
 	    AllowWriteFromIDAttributeToContainerReference.instance,
 	    DenyReadFromIDAttributeToContainerObject.instance
 	);
-//	public static Set<IConsequence> objStrongConsequences = Sets.newHashSet(
-//		ObfuscateReadFromObjectToAttribute.instance,
-//		AllowReadFromObjectToContainer.instance,
-//		AllowReadFromObjectToIDAttribute.instance,
-//		AllowWriteFromObjectToContainerReference.instance,
-//		DenyReadFromObjectToReference.instance
-//	);
-//	public static Set<IConsequence> refStrongConsequences = Sets.newHashSet(
-//		AllowReadFromReferenceToSourceTargetObject.instance,
-//		DenyReadFromContainmentReferenceToChildrenObject.instance,
-//		DenyWriteFromContainerReferenceToChildrenIDAttribute.instance,
-//		AllowWriteFromContainmentReferenceToChildrenObject.instance
-//	);
-//	public static Set<IConsequence> attrStrongConsequences = Sets.newHashSet(
-//	    AllowReadFromAttributeToContainerObject.instance,
-//	    AllowWriteFromIDAttributeToContainerReference.instance,
-//	    DenyReadFromIDAttributeToContainerObject.instance
-//	);
 
 	public static void main(String[] args) throws ViatraQueryException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -97,11 +79,11 @@ public class Application {
 		// for (Role role : roleList) {
 		// if(role instanceof User){
 		List<Judgement> judgementList = ruleManager
-				.getEffectivePermissions((User) modelClass.getRuleModel().getRoles().get(0));
+				.getEffectivePermissions((User) modelClass.getRuleModel().getRoles().get(1));
 
 		LOGGER.info(String.format("Number of effective judgements: %d", judgementList.size()));
 		
-//		writeOutJudgements(modelClass.getModelResource(), judgementList);
+		writeOutJudgements(modelClass.getModelResource(), judgementList);
 
 	}
 	

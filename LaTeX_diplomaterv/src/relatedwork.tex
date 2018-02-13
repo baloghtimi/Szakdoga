@@ -1,3 +1,18 @@
 %----------------------------------------------------------------------------
 \chapter{Kapcsolódó munkák}
 %----------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+\section{Fájl alapú hozzáférés-szabályozás}
+%----------------------------------------------------------------------------
+
+A dolgozat bevezetésében is említett fájl alapú hozzáférés-szabályozásban a fájlrendszerek megkövetelik a fájloktól, mappáktól, hogy valamilyen hozzáférési jog explicit legyen hozzájuk definiálva. Ez történhet például az objektumhoz csatolt úgynevezett Access Control List (ACL) formájában, aminek egy-egy bejegyzése tartalmazza, hogy mely felhasználók vagy rendszerfolyamatok férhetnek hozzá az objektumhoz, illetve, hogy milyen mûveleteket hajthatnak végre rajta. Például az (Alice: read,write; Bob: read) tartalmú ACL olvasási és írási jogot biztosít az Alice nevû felhasználónak, valamint csak olvasási jogot Bob-nak. A listában lévõ szabályok közötti ellentmondásokat a sorrendjük alapján meghatározott prioritásuk oldja fel, a II-es és III-a típusú konfliktusok esetén pedig a tiltó szabályok részesülnek elõnyben.
+
+Modellvezérelt fejlesztés során ez a hozzáférés-szabályozási módszer is alkalmazható, bár a szakdolgozatban bemutatott megoldás ezzel szemben több elõnnyel is rendelkezik. Többek között biztosítja a szabályok finomszemcsézettségét, akár egyesével is meg lehet határozni a különbözõ elemekre vonatkozó jogosultságokat, nem csak az egy fájlban lévõ elemek csoportjára. Ezen kívül a szabályok implicit módon megfogalmazhatók,  azok alkalmazásakor figyelembe veszi a modell belsõ konzisztenciáját és rugalmasabb megoldást nyújt konfliktusok kezelésére.
+
+%----------------------------------------------------------------------------
+\section{XML dokumentumok hozzáférés-szabályozása}
+%----------------------------------------------------------------------------
+
+XML dokumentumokhoz finomszemcsés hozzáférés-szabályozást többek között az eXtensible Access Control Markup Language (XACML) \cite{xacml} is nyújt, amellyel XML-ben lehet felhasználók objektumokra vonatkozó hozzáférési szabályait megfogalmazni. Ez a típusú dokumentum modellekhez hasonlítható, ugyanis csomópontok attribútumokkal, és ezeken belül tartalmazható csomópontok találhatók benne. Az egymásnak ellentmondó szabályok feloldásához az XACML több egymással is kombinálható algoritmust nyújt, a szakdolgozatban is megvalósított logika alapján képes kiválasztani a dominánsabb szabályokat.
+

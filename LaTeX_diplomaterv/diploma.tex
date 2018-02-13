@@ -7,6 +7,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumerate}
+\usepackage{enumitem}
 \usepackage[thmmarks]{ntheorem}
 \usepackage{graphics}
 \usepackage{epsfig}
@@ -19,13 +20,19 @@
 \usepackage{sectsty}
 \usepackage{setspace}  % Ettol a tablazatok, abrak, labjegyzetek maradnak 1-es sorkozzel!
 \usepackage[hang]{caption}
+\usepackage{subcaption}
 \usepackage{hyperref}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
 
 %--------------------------------------------------------------------------------------
 % Main variables
 %--------------------------------------------------------------------------------------
 \newcommand{\vikszerzo}{Balogh Tímea}
 \newcommand{\vikkonzulens}{Debreceni Csaba}
+\newcommand{\vikbeosztasa}{MTA-BME Lendület}
+\newcommand{\vikbeosztasb}{Kiber-fizikai Rendszerek Kutatócsoport}
 \newcommand{\vikcim}{Modellelemek effektív jogosultságainak származtatása finomszemcsés hozzáférési szabályokból}
 \newcommand{\viktanszek}{Méréstechnika és Információs Rendszerek Tanszék}
 \newcommand{\vikdoktipus}{Szakdolgozat}
@@ -43,14 +50,17 @@
 %\setlength{\parindent}{0pt} % áttekinthetõbb, angol nyelvû dokumentumokban jellemzõ
 %\setlength{\parskip}{8pt plus 3pt minus 3pt} % áttekinthetõbb, angol nyelvû dokumentumokban jellemzõ
 \setlength{\parindent}{12pt} % magyar nyelvû dokumentumokban jellemzõ
-\setlength{\parskip}{0pt}    % magyar nyelvû dokumentumokban jellemzõ
+\setlength{\parskip}{4pt}    % magyar nyelvû dokumentumokban jellemzõ
 
 \marginsize{35mm}{25mm}{15mm}{15mm} % anysize package
 \setcounter{secnumdepth}{0}
 \sectionfont{\large\upshape\bfseries}
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
 \singlespacing
 \frenchspacing
+
+\sloppy % Margón túllógó sorok tiltása.
+\widowpenalty=10000 \clubpenalty=10000 %A fattyú- és árvasorok elkerülése
 
 %--------------------------------------------------------------------------------------
 %	Setup hyperref package
@@ -75,19 +85,20 @@
 %--------------------------------------------------------------------------------------
 % Set up listings
 %--------------------------------------------------------------------------------------
-\lstset{
-	basicstyle=\scriptsize\ttfamily, % print whole listing small
-	keywordstyle=\color{black}\bfseries\underbar, % underlined bold black keywords
-	identifierstyle=, 					% nothing happens
-	commentstyle=\color{white}, % white comments
-	stringstyle=\scriptsize\sffamily, 			% typewriter type for strings
-	showstringspaces=false,     % no special string spaces
-	aboveskip=3pt,
-	belowskip=3pt,
-	columns=fixed,
-	backgroundcolor=\color{lightgray},
-} 		
-\def\lstlistingname{lista}	
+%\lstset{
+%	basicstyle=\scriptsize\ttfamily, % print whole listing small
+%	keywordstyle=\color{black}\bfseries\underbar, % underlined bold black keywords
+%	identifierstyle=, 					% nothing happens
+%	commentstyle=\color{white}, % white comments
+%	stringstyle=\scriptsize\sffamily, 			% typewriter type for strings
+%	showstringspaces=false,     % no special string spaces
+%	aboveskip=3pt,
+%	belowskip=3pt,
+%	columns=fixed,
+%	backgroundcolor=\color{white},
+%} 		
+\def\lstlistingname{Forráskód}
+\include{commons/lstlistings}
 
 %--------------------------------------------------------------------------------------
 %	Some new commands and declarations
@@ -107,11 +118,13 @@
 \DeclareMathOperator{\rot}{rot}
 \definecolor{lightgray}{rgb}{0.95,0.95,0.95}
 
+\makeatletter
+\renewcommand{\ALG@name}{Algoritmus}
+\makeatother
+
 \author{\vikszerzo}
 \title{\vikcim}
 \includeonly{
-	guideline,%
-	project,%
 	titlepage,%
 	declaration,%
 	abstract,%
@@ -123,7 +136,6 @@
 	measurements,%
 	relatedwork,%
 	conclusionandfuturework,%
-	appendices,%
 }
 %--------------------------------------------------------------------------------------
 %	Setup captions
@@ -143,7 +155,6 @@ aboveskip=10pt}
 %--------------------------------------------------------------------------------------
 \begin{document}
 \singlespacing
-\input{src/project}
 
 \pagenumbering{arabic}
 \onehalfspacing

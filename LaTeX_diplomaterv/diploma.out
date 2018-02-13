@@ -1,0 +1,38 @@
+\BOOKMARK [0][-]{chapter*.2}{Kivonat}{}% 1
+\BOOKMARK [0][-]{chapter*.3}{Abstract}{}% 2
+\BOOKMARK [0][-]{chapter.1}{Bevezet\351s}{}% 3
+\BOOKMARK [0][-]{chapter.2}{Esettanulm\341ny}{}% 4
+\BOOKMARK [0][-]{chapter.3}{H\341tt\351rtechnol\363gi\341k, ismeretek}{}% 5
+\BOOKMARK [1][-]{section.3.1}{Modellez\351s}{chapter.3}% 6
+\BOOKMARK [2][-]{subsection.3.1.1}{Modellvez\351relt szoftverfejleszt\351s}{section.3.1}% 7
+\BOOKMARK [2][-]{subsection.3.1.2}{Eclipse Modeling Framework}{section.3.1}% 8
+\BOOKMARK [2][-]{subsection.3.1.3}{Modellez\351si nyelvek}{section.3.1}% 9
+\BOOKMARK [2][-]{subsection.3.1.4}{Xtext}{section.3.1}% 10
+\BOOKMARK [2][-]{subsection.3.1.5}{VIATRA Query}{section.3.1}% 11
+\BOOKMARK [2][-]{subsection.3.1.6}{Belso konzisztencia}{section.3.1}% 12
+\BOOKMARK [2][-]{subsection.3.1.7}{Asset}{section.3.1}% 13
+\BOOKMARK [2][-]{subsection.3.1.8}{Modell obfuszk\341ci\363}{section.3.1}% 14
+\BOOKMARK [1][-]{section.3.2}{Hozz\341f\351r\351s-szab\341lyoz\341s}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.2.1}{Hozz\341f\351r\351si szab\341ly}{section.3.2}% 16
+\BOOKMARK [2][-]{subsection.3.2.2}{Szab\341lyok k\366z\366tti konfliktusok}{section.3.2}% 17
+\BOOKMARK [2][-]{subsection.3.2.3}{Effekt\355v jogosults\341gok}{section.3.2}% 18
+\BOOKMARK [0][-]{chapter.4}{\301ttekint\351s}{}% 19
+\BOOKMARK [1][-]{section.4.1}{K\351tir\341ny\372 modelltranszform\341ci\363}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.2}{Hozz\341f\351r\351si szab\341lyok ki\351rt\351kel\351se}{chapter.4}% 21
+\BOOKMARK [0][-]{chapter.5}{Megval\363s\355t\341s}{}% 22
+\BOOKMARK [1][-]{section.5.1}{Hozz\341f\351r\351s-szab\341lyoz\341si nyelv}{chapter.5}% 23
+\BOOKMARK [2][-]{subsection.5.1.1}{Nyelvtan}{section.5.1}% 24
+\BOOKMARK [2][-]{subsection.5.1.2}{Extra funkci\363k}{section.5.1}% 25
+\BOOKMARK [2][-]{subsection.5.1.3}{Esettanulm\341ny}{section.5.1}% 26
+\BOOKMARK [1][-]{section.5.2}{Szab\341lyokat ki\351rt\351kelo komponens}{chapter.5}% 27
+\BOOKMARK [2][-]{subsection.5.2.1}{Alapveto f\374ggos\351gek}{section.5.2}% 28
+\BOOKMARK [2][-]{subsection.5.2.2}{Olvas\341si \351s \355r\341si f\374ggos\351gek konfigur\341ci\363ja}{section.5.2}% 29
+\BOOKMARK [2][-]{subsection.5.2.3}{Algoritmus muk\366d\351se}{section.5.2}% 30
+\BOOKMARK [2][-]{subsection.5.2.4}{Algoritmus \351rt\351kel\351se}{section.5.2}% 31
+\BOOKMARK [2][-]{subsection.5.2.5}{Esettanulm\341ny}{section.5.2}% 32
+\BOOKMARK [0][-]{chapter.6}{Ki\351rt\351kel\351s}{}% 33
+\BOOKMARK [0][-]{chapter.7}{Kapcsol\363d\363 munk\341k}{}% 34
+\BOOKMARK [1][-]{section.7.1}{F\341jl alap\372 hozz\341f\351r\351s-szab\341lyoz\341s}{chapter.7}% 35
+\BOOKMARK [1][-]{section.7.2}{XML dokumentumok hozz\341f\351r\351s-szab\341lyoz\341sa}{chapter.7}% 36
+\BOOKMARK [0][-]{chapter.8}{\326sszefoglal\341s}{}% 37
+\BOOKMARK [0][-]{chapter*.29}{Irodalomjegyz\351k}{}% 38

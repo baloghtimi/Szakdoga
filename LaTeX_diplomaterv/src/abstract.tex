@@ -3,9 +3,9 @@
 %----------------------------------------------------------------------------
 \chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
 
-Bizonyos informatikai rendszerek üzemeltetése esetén a velük szemben támasztott elsõdleges követelmény, hogy ne veszélyeztessenek emberi életeket, ne okozzanak anyagi, természeti károkat. Ilyen úgynevezett biztonságkritikus rendszerek például a vasúti-, repülõgép irányítási berendezések, nukleáris erõmûvek.
+Bizonyos informatikai rendszerek üzemeltetése esetén a velük szemben támasztott elsõdleges követelmény, hogy ne veszélyeztessenek emberi életeket, ne okozzanak anyagi, természeti károkat. Ilyen úgynevezett biztonságkritikus rendszerek például a vasúti-, repülõgép-irányítási berendezések, nukleáris erõmûvek.
 
-Komplexitásuk miatt ezek tradicionális kód alapú fejlesztését egyre inkább felváltja a modellvezérelt megközelítés, amely során magasszintû modellekbõl kiindulva, azokat tovább finomítva a rendszer a legapróbb részletekig megtervezhetõ. A metodika elõnyei többek között az automatikus kód-, teszteset- és dokumentáció-generálás, valamint, hogy a létrejövõ modellek verifikálásával már a fejlesztés korai szakaszában kiszûrhetõk bizonyos hibák.
+Komplexitásuk miatt ezek tradicionális kód alapú fejlesztését egyre inkább felváltja a modellvezérelt megközelítés, amely során magasszintû modellekbõl kiindulva, azokat tovább finomítva a rendszer a legapróbb részletekig megtervezhetõ. A metodika elõnyei többek között az automatikus kód-, teszteset- és dokumentáció-generálás, valamint, hogy a modellek verifikálásával már a fejlesztés korai szakaszában kiszûrhetõk bizonyos hibák.
 
 Ezeken a komplex rendszereken általában egy vagy akár több cég fejlesztõ csapatai kollaboratív módon dolgoznak. Így felmerül a modellelemek biztonságának kérdése is, legyen szó olyan bizalmas adatról, létrejövõ szellemi tulajdonról, amelyhez csak bizonyos pozíciókban lévõ felhasználók férhetnek hozzá, vagy a rendszernek olyan kritikus részérõl, amelyet csak megfelelõ szaktudással rendelkezõ fejlesztõk módosíthatnak.
 
@@ -19,6 +19,15 @@ Munkám során szöveges szintaxist definiáltam a hozzáférési szabályok meghatározá
 %----------------------------------------------------------------------------
 \chapter*{Abstract}\addcontentsline{toc}{chapter}{Abstract}
 
+Certain software systems have to meet the requirements of not to threaten human lives and not to cause financial or environmental damage. Examples for these so-called safety-critical systems can be controller devices of trains, airplanes or nuclear power stations.
+
+Due to their complexity the traditional code-based development of these systems seems to be replaced by a model-driven approach. With this process starting from high-level models and through their refinement the system can be designed to the smallest details. The advantages of this method are for example the automatic generation of souce code, test cases, documentation and also that with model verification errors can be detected in the earlier phases of the development.
+
+These complex systems are designed collaboratively by developer teams of one or more companies. This situation raises the question of security of model elements. They can be confidential or intellectual property of a company and therefore be accessible only by users in certain positions. Moreover, systems can have critical parts which should be modifiable only by developers with specialized knowledge.
+
+A collaboration framework was built within the confines of the international research project of MONDO. It uses rule-based access control where read and write permissions can be defined in fine-grained rules for each user. The model elements which rules refer can be accessed through graph queries.
+
+In my work firstly I defined a textual concrete syntax for writing access control rules. Then I implemented a method that can evaluate such rules over EMF models and calculate the ones which will be enforced. The algorithm was tested on one of MONDO project's case studies of a windturbine model. Finally, the access control language and the evaluation component were integrated into the collaboration framework.
 
 \vfill
 

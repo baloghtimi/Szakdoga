@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.mondo.collaboration.policy.rules.AccessibilityLevel;
 import org.mondo.collaboration.policy.rules.ModelFact;
 import org.mondo.collaboration.policy.rules.OperationType;
+import org.mondo.collaboration.policy.rules.Policy;
 import org.mondo.collaboration.policy.rules.ReferenceFact;
 import org.mondo.collaboration.policy.rules.Rule;
 import org.mondo.collaboration.policy.validation.AbstractRulesValidator;
@@ -25,6 +26,22 @@ import org.mondo.collaboration.policy.validation.AbstractRulesValidator;
 @SuppressWarnings("all")
 public class RulesValidator extends AbstractRulesValidator {
   public final static String INVALID_NAME = "invalidName";
+  
+  @Check
+  public void checkPolicyOperation(final Policy policy) {
+    EClass _eClass = policy.eClass();
+    EList<EStructuralFeature> _eAllStructuralFeatures = _eClass.getEAllStructuralFeatures();
+    final Function1<EStructuralFeature, Boolean> _function = (EStructuralFeature x) -> {
+      String _name = x.getName();
+      return Boolean.valueOf(_name.equals("operation"));
+    };
+    final EStructuralFeature operation = IterableExtensions.<EStructuralFeature>findFirst(_eAllStructuralFeatures, _function);
+    OperationType _operation = policy.getOperation();
+    boolean _notEquals = (!Objects.equal(_operation, OperationType.READWRITE));
+    if (_notEquals) {
+      this.error("Both operation types have to be defined", policy, operation);
+    }
+  }
   
   @Check
   public void checkOperationTypeAfterObfuscate(final Rule rule) {

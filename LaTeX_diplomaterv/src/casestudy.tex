@@ -1,51 +1,56 @@
 %----------------------------------------------------------------------------
-\chapter{Esettanulmány}
-%----------------------------------------------------------------------------
-%----------------------------------------------------------------------------
-\section{Modell}
+\chapter{Esettanulmány}\label{chap:casestudy}
 %----------------------------------------------------------------------------
 
-Nagy, összetett ipari rendszerek tervezésében széles körben elterjedt módszer a modellvezérelt szoftverfejlesztés. Az ehhez jelenleg rendelkezésre álló modellezõeszközök gyakran ütköznek skálázhatósági korlátokba. A MONDO EU FP7 kutatási projekt célja ezen kihívások megoldása olyan technológiák, algoritmusok, eszközök kifejlesztésével, amelyek a mostaninál nagyobb hatékonyságot, rugalmasságot biztosítanak a rendszermodellezés terén. A projekt nemzetközi ipari résztvevõi közül egy szélturbinavezérlõ egységeket összefogó rendszer esettanulmányát vizsgáltam. A rendszer leegyszerûsített struktúráját \aref{fig:metamodel} ábrán lévõ Ecore metamodell szemlélteti.
+Nagy, összetett ipari rendszerek tervezésében széles körben elterjedt módszer a modellvezérelt szoftverfejlesztés. Az ehhez jelenleg rendelkezésre álló modellezõeszközök gyakran ütköznek skálázhatósági korlátokba. A MONDO EU FP7 kutatási projekt \cite{mondoeufp7} célja ezen kihívások megoldása olyan technológiák, algoritmusok, eszközök kifejlesztésével, amelyek a mostaninál nagyobb hatékonyságot, rugalmasságot biztosítanak a rendszermodellezés terén. A projekt nemzetközi ipari résztvevõi közül egy szélturbina-vezérlõ egységeket összefogó rendszer esettanulmányát vizsgáltam.
 
-\begin{figure}[hb]
+A rendszer leegyszerûsített struktúráját \aref{fig:metamodel} ábra szemlélteti. A szélturbina vezérlõegységei a modellen belül alrendszerekbe csoportosulnak, ezeken kívül pedig még bemenetek, kimenetek, hibadetektorok, idõzítõk, változók és paraméterek is vannak a rendszerben.
+
+\begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=.8\columnwidth]{src/figures/metamodel}
-		\caption{Szélturbinavezérlõk metamodellje}
-		\label{fig:metamodel}
+		\includegraphics[width=0.6\columnwidth]{src/figures/windturbinemodel}
+		\caption{A szélturbina-vezérlõ rendszer felépítése}
+		\label{fig:windturbinemodel}
 	\end{center}
 \end{figure}
 
-A modell gyökéreleme maga a szélturbina (WT - Wind Turbine), ami további egymásba ágyazható alrendszerekben (Subsystem) tárolja a vezérlõegységek (CtrlUnit - Control Unit) bõvíthetõ halmazát az õket azonosító, leíró attribútumaikkal, valamint a modell többi elemére hivatkozó referenciáikkal. Ezek az egységek a megegyezõ attribútumaikat tároló közös õsbõl származnak le (wtc - Wind Turbine Controller). A gyökérelem az alrendszereken kívül tartalmaz még bemenetet, kimenetet, idõzítõt, hibadetektort, paramétert és változót (Input, Output, Timer, Fault, Param, Variable).
-
-\begin{figure}[hb]
-	\begin{center}
-		\includegraphics[width=.5\columnwidth]{src/figures/instancemodel}
-		\caption{Szélturbinavezérlõk példánymodellje}
-		\label{fig:instancemodel}
-	\end{center}
-\end{figure}
-
-A metamodell egy egyszerû példányát mutatja \aref{fig:instancemodel} ábra. A gyökérelem egy vezérlõegységet tartalmaz egy alrendszer alá rendezve, valamint egy-egy bemenetet és kimenetet.
-
-%----------------------------------------------------------------------------
-\section{Feladat}
-%----------------------------------------------------------------------------
-
-A modell fejlesztése kollaboratív módon zajlik. Ehhez három különbözõ feladatkörrel rendelkezõ felhasználótípust definiáltam, akiknek beosztásuk vagy szaktudásuk alapján szükséges meghatározni, hogy a rendszer mely elemei felett rendelkezzenek olvasási és/vagy írási jogokkal. Az érvényesíteni kívánt szabályok a következõk:
+A modell fejlesztése kollaboratív módon zajlik. Különbözõ beosztású és szaktudású mérnökök dolgoznak rajta, akik számára a modellnek egy-egy olyan egyedi nézetét kell biztosítani, amelyben csak a számukra szükséges elemek találhatók. Továbbá azt is szabályozni kell, hogy csak azokon a részeken végezhessenek módosításokat, amelyekhez értenek, vagy pozíciójukból adódóan joguk van hozzá. Jelen esetben három különbözõ feladatkörrel rendelkezõ felhasználótípust definiáltam: Principal Engineer, I/O Manager és Subsystem Manager, akikre az érvényesíteni kívánt hozzáférési szabályok a következõk:
 
 \begin{itemize}
-	\item A gyökérelemet senki nem módosíthatja.
-	\item Principal Engineer: adminisztrátor jogokkal rendelkezik. A gyökérelemen kívül mindent láthat és módosíthat.
-	\item I/O manager: a be- és kimenetek felelõse, ezeket olvashatja és írhatja, de a modell többi része számára rejtett.
-	\item Subsystem Manager: A Principal Engigeer-hez képest annyival van kevesebb joga, hogy a be- és kimeneteket csak láthatja, de nem módosíthatja.
-\end{itemize} 
+	\item A fõ szerkezeti egységet senki nem módosíthatja.
+	\item \textbf{Principal Engineer:} adminisztrátor jogokkal rendelkezik. A fõ szerkezeti egységen kívül mindent láthat és módosíthat.
+	\item \textbf{I/O Manager:} a be- és kimenetek felelõse, ezeket olvashatja és írhatja, de a modell többi része számára rejtett.
+	\item \textbf{Subsystem Manager:} A Principal Engineer-hez képest annyival van kevesebb joga, hogy a be- és kimeneteket csak láthatja, de nem módosíthatja.
+\end{itemize}
 
-A feladat ezeknek a szabályoknak egy általam definiált nyelven való megfogalmazása, majd a [cikk]-ben szereplõ algoritmus implementálása, ami futásának eredményeképp a modell belsõ konzisztenciáját megtartva válogatja ki a lenti \ref{fig:instancemodelperuser} ábrán látható effektív jogosultságokat.
+Ezeket a szabályokat szemlélteti \aref{fig:permissions} ábra, amelyen zöld keret jelöli azokat a modellelemeket, amelyekhez az adott felhasználó olvasási és írási jogosultsággal is rendelkezik, sárga azokat, amelyeket csak láthat, de nem módosíthat, valamit piros azokat, amelyekhez egyáltalán nem férhet hozzá.
 
-\begin{figure}[t]
-	\begin{center}
-		\includegraphics[width=1\columnwidth]{src/figures/instancemodelperuser}
-		\caption{A felhasználók tervezett jogosultságai}
-		\label{fig:instancemodelperuser}
-	\end{center}
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/principalengineer}
+		\caption{Principal Engineer}
+		\label{fig:principalengineer}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/iomanager}
+		\caption{I/O Manager}
+		\label{fig:iomanager}
+	\end{subfigure}
+    \par\bigskip
+    \begin{subfigure}[b]{0.4\textwidth}
+	    \includegraphics[width=\textwidth]{src/figures/subsystemmanager}
+	    \caption{Subsystem Manager}
+	    \label{fig:subsystemmanager}
+    \end{subfigure}
+    \par\bigskip
+    \begin{subfigure}[b]{0.35\textwidth}
+    	\includegraphics[width=\textwidth]{src/figures/legend1}
+    	\caption{Jelmagyarázat}
+    	\label{fig:legend}
+    \end{subfigure}
+	\caption{A felhasználókra vonatkozó hozzáférési szabályok}
+	\label{fig:permissions}
 \end{figure}
+
+A feladat elsõ lépésben ezeknek a szabályoknak egy erre a célra kifejlesztett, egyszerû nyelven való megfogalmazása. A közöttük adódó konfliktusok feloldására pedig szükséges egy olyan komponens implementálása, ami képes ezeket szabályokat értelmezni, ha vannak, akkor a közöttük lévõ ellentmondásokat feloldani, majd futásának eredményeképp kiválogatni közülük a ténylegesen érvényre jutó, effektív jogosultságokat. 

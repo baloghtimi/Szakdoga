@@ -1,3 +1,31 @@
 %----------------------------------------------------------------------------
 \chapter{Összefoglalás}
 %----------------------------------------------------------------------------
+
+A nagyméretû ipari szoftverek tervezése egy vagy akár több céghez tartozó fejlesztõ csapatok együttes munkáját igényli. A modellvezérelt szoftverfejlesztési paradigma elõnye az automatikus kód-, teszteset-, dokumentációgeneráláson kívül, hogy az átlátható, magas absztrakciós szintû modellek különféle szakterületekhez értõ mérnökök számára is ugyanolyan módon értelmezhetõk, ezzel összehangolva a közös munkavégzést.
+
+Ilyen komplex modellek és ennyi különbözõ szerepkörû, érdekeltségû kollaborátor esetén elengedhetetlen a modellek hozzáférés-szabályozása. Egyrészt egy adott domain szakemberének is megkönnyíti a fejlesztést, ha csak a számára releváns részeit látja a modellnek, másrészt lehetnek benne olyan bizalmas vagy kritikus elemek is, amelyekhez ideális esetben kizárólagos joggal rendelkeznek a hozzáértõk.
+
+A modellszintû hozzáférés-szabályozás lényege, hogy finomszemcsés szabályokban fogalmazhatjuk meg, pontosan mely modellelemekre milyen írási és olvasási jogot szeretnénk biztosítani. Ezeket a szabályokat azonban nem tudja közvetlenül felhasználni az a modelltranszformáció, amely az adott felhasználó számára elkészíti az általa olvasható elemekbõl álló modellnézetet, mert a szabályok finomhangolási lehetõségei miatt adódhatnak közöttük olyan konfliktusok, amelyek veszélyeztetik a modell transzformáció után is megtartandó belsõ konzisztenciáját. 
+
+A szakdolgozat célja egy ilyen modellszintû hozzáférés-szabályozás helyes mûködésének támogatása volt, amelyhez az alábbi részfeladatokat valósítottam meg:
+
+\begin{enumerate}
+	\item Készítettem egy hozzáférési szabályok leírására alkalmas szöveges konkrét szintaxist, amely az alábbi jellemzõkkel rendelkezik:
+	\begin{itemize}
+		\item Gráflekérdezéssel a szabályban tetszõleges modellelemek halmazára fogalmazható meg a jogosultság.
+		\item Finomszemcsézett, mert a gráflekérdezés akár egyetlen assetet is adhat eredményként, assethalmazra pedig további szûrõfeltételek is megadhatók.
+	 	\item A szabályok között fontossági sorrend állítható fel a hozzájuk rendelt prioritás és a policy-hez rendelt engedélyezõ vagy tiltó tulajdonság segítségével.
+		\item A policy-hoz alacsony prioritású default hozzáférési jog is definiálható, amely azokra az assetekre érvényesül, amire más szabály semmit nem mond.
+	\end{itemize}
+
+    \item Megvalósítottam a szabályokat EMF modellek felett kiértékelõ algoritmust,
+    \begin{itemize}
+        \item amely értelmezi a felhasználó által megadott szabályokat,
+        \item és a modell belsõ konzisztenciáját a judgement-ek közötti függõségek propagálásával megtartva,
+    	\item a közöttük emiatt esetlegesen kialakuló konfliktusokat feloldva
+    	\item a modell minden elemére eredményül adja a hozzá tartozó, valóban érvényesülõ olvasási és írási jogosultságokat.
+    \end{itemize}
+\end{enumerate}
+
+Az elvégzett feladat egy további fejlesztési iránya lehet a rendszer inkrementalitásának bevezetése, hogy a szabályokon végzett kisebb változtatás után a most megvalósított számítás újrafuttatása nélkül frissülhessen az effektív hozzáférési jogosultságok halmaza.

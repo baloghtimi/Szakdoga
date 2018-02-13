@@ -1,3 +1,154 @@
 %----------------------------------------------------------------------------
-\chapter{Háttértechnológiák}
+\chapter{Háttértechnológiák, ismeretek}
 %----------------------------------------------------------------------------
+%----------------------------------------------------------------------------
+\section{Modellezés}
+%----------------------------------------------------------------------------
+%----------------------------------------------------------------------------
+\subsection{Modellvezérelt szoftverfejlesztés}
+%----------------------------------------------------------------------------
+
+Az MDE (Model-Driven Engineering) \cite{Andova2012} egy olyan szoftvertervezési módszer, amelynek célja a rendszer magasszintû modellekkel való leírása és az automatizálás növelése a fejlesztés során. A magas absztrakciós szint a nagyméretû, akár több millió kódsort tartalmazó, összetett szoftvereket átláthatóvá, könnyen kezelhetõvé teszi, ugyanakkor a modellt tovább finomítva a rendszer a legapróbb részletekig megtervezhetõ. A modellbõl többek között futtatható forráskód, tesztesetek vagy dokumentáció is automatikusan generálható. Ez és a magasszintû modellek tervezés közbeni verifikációja csökkenti az implementálás során elõfordulható emberi hibák mértékét, ami különösen elõnyös például biztonságkritikus rendszerek fejlesztése esetén.
+
+A magas absztrakciós szintû modellek elõnye, hogy különbözõ iparágak - informatikához és programozáshoz nem feltétlenül értõ - szakértõi számára is érthetõvé tehetõk. Azt a folyamatot, amikor a modellt egy adott szakterület (domain) szerint tervezünk, szakterület-specifikus modellezésnek nevezzük. Ilyen domain-specifikus modell az esettanulmányban említett szélturbina-vezérlõk modellje is, amit a hozzá definiált felhasználók ugyanolyan módon tudnak értelmezni.
+
+%----------------------------------------------------------------------------
+\subsection{Eclipse Modeling Framework}
+%----------------------------------------------------------------------------
+
+Az Eclipse Modeling Framework (EMF) \cite{emf} egy modellezõ és kódgeneráló keretrendszer domain-specifikus modellek fejlesztéséhez. Megkülönbözteti a metamodellt a tényleges modelltõl, elõbbi a modell struktúráját írja le, utóbbi a metamodell egy konkrét példánya.
+
+Az úgynevezett ecore fájlban tárolt metamodell egy UML osztálydiagramhoz hasonló módon épül fel. Ennek elemeit az EMF Ecore nevû (meta)metamodellje biztosítja. Az általunk elkészíthetõ metamodell osztályokat reprezentáló EClass-okat tartalmaz, amelyek tulajdonságait EAttribute-ok írják le, a közöttük lévõ kapcsolatokat pedig EReference-ek jelzik. Ezek a referenciák lehetnek egyszerû asszociációk vagy tartalmazások is. 
+
+Az esettanulmány szélturbina modelljét \aref{fig:metamodel} ábra mutatja. A modell gyökéreleme maga a szélturbina (WT), ami további egymásba ágyazható alrendszerekben (Subsystem) tárolja a vezérlõegységek (CtrlUnit) bõvíthetõ halmazát az õket azonosító, leíró attribútumokkal, valamint a modell többi elemére hivatkozó referenciákkal. Ezek az egységek a megegyezõ attribútumaikat tároló közös õsbõl származnak le (wtc). A gyökérelem az alrendszereken kívül tartalmaz még bemenetet, kimenetet, idõzítõt, hibadetektort, paramétert és változót (Input, Output, Timer, Fault, Param, Variable).
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.8\columnwidth]{src/figures/metamodel}
+		\caption{Szélturbina-vezérlõk metamodellje}
+		\label{fig:metamodel}
+	\end{center}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/instancemodel}
+		\label{fig:instancemodel}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{src/figures/treeeditor}
+		\label{fig:treeeditor}
+	\end{subfigure}
+	\caption{Szélturbina-vezérlõk példánymodellje}
+	\label{fig:instancemodels}
+\end{figure}
+
+Az ecore metamodellbõl újrafelhasználható Java kódok generálhatók, többek között egy olyan fa struktúrájú szerkesztõ plugin, amellyel a modell különbözõ konkrét példányait lehet létrehozni. A szélturbina-vezérlõk metamodelljének egy egyszerû példányát mutatja \aref{fig:instancemodels} ábra, melynek jobb oldalán látható az EMF alapértelmezett tree editorja. A gyökérelem egy vezérlõegységet tartalmaz egy alrendszer alá rendezve, valamint egy-egy bemenetet és kimenetet, amelyek közül a vezérlõ az elõbbire tartalmaz referenciát.
+
+%----------------------------------------------------------------------------
+\subsection{Modellezési nyelvek}
+%----------------------------------------------------------------------------
+
+A modellek leírásához szakterület-specifikus modellezési nyelveket használunk. Ezeknek részei az absztrakt szintaxis és a konkrét szintaxisok. Elõbbi azt határozza meg, hogy a nyelvnek milyen típusú elemei vannak és ezek milyen kapcsolatban állnak egymással, vagyis ez maga a metamodell. Ehhez több konkrét szintaxis is megadható (ilyen például az EMF által generált tree editor is), amik szöveges vagy grafikus megjelenítést biztosítanak a példánymodellhez. Ezektõl válik az adott szakterület hozzáértõi számára olvashatóvá és szerkeszthetõvé.
+
+%----------------------------------------------------------------------------
+\subsection{Xtext}
+%----------------------------------------------------------------------------
+
+Az Xtext keretrendszer \cite{xtext} segítségével szöveges konkrét szintaxis készíthetõ. Ehhez egy nyelvtant kell megadni, az ehhez tartozó absztrakt szintaxis egy EMF modell lesz, ezt a metamodellt le tudja generálni a keretrendszer, és hozzá egy egyszerû editort is nyújt, amiben az adott nyelvtannak megfelelõen lehet fejleszteni. Ez a folyamat fordított irányban is történhet, már létezõ ecore modellhez is generálható nyelvtan. Egyéb szolgáltatásai például a forráskódszínezés (syntax highlighting), hibajelzés (validation) és automatikus kiegészítés (content assist), ezek Java-ban való tovább finomítására is van lehetõség.
+
+%----------------------------------------------------------------------------
+\subsection{VIATRA Query}
+%----------------------------------------------------------------------------
+
+A VIATRA Query \cite{viatra} egy deklaratív lekérdezési nyelvvel rendelkezõ modelltranszformációs eszköz. A nyelv segítségével a lekérdezéshez gráfmintákat fogalmazhatunk meg a metamodell osztályaival, attribútumaival, referenciáival, a rendszer pedig azokat a modellelemeket adja vissza, amelyek illeszkednek a megadott mintára. \Aref{code:pattern} egyszerû gráfminta például a szélturbina-modell összes SystemInput típusú objektumát adja vissza.
+
+\lstinputlisting[language=viatra, caption=Egy egyszerû gráfminta, label=code:pattern]{src/code/pattern.txt}
+
+%----------------------------------------------------------------------------
+\subsection{Belsõ konzisztencia}\label{internalconsistency}
+%----------------------------------------------------------------------------
+
+Offline kollaboráció során amikor a felhasználó lekéri a modellt a szerverrõl, akkor annak egy olyan reprezentációját tölti le, amiben a hozzáférési szabályok által engedélyezett modellelemek találhatók. Ahhoz, hogy ezzel a részmodellel lokálisan dolgozni tudjon (például végigiteráljon rajta vagy sorosítsa), ennek egy teljes, érvényes modellnek kell lennie. Ez úgy valósulhat meg, ha a központi modellhez hasonlóan megfelel bizonyos kényszereknek, amik fenntartják a modell belsõ konzisztenciáját:
+
+\begin{description}
+	\item[K1\label{cons:C1}] \textbf{Objektum létezése:} \\ Attribútumok és referenciák létezése azt feltételezi, hogy van mögöttük egy megfelelõ típusú objektum, ami tartalmazza õket.
+	
+	\item[K2\label{cons:C2}] \textbf{Tartalmazási hierarchia:} \\ Ha egy objektum nem gyökérelem, akkor tartalmazottnak kell lennie egy gyökérelem által akár közvetlenül, akár közvetetten objektumok láncolatán keresztül.
+	
+	\item[K3\label{cons:C3}] \textbf{Ellentétes referenciák:} \\ A kétirányú referenciatípusok párban példányosíthatók.
+	
+	\item[K4\label{cons:C4}] \textbf{Számossági kényszerek:} \\ Egy objektum adott típusú referenciáinak száma meg kell hogy feleljen a típushoz definiált számosságnak.
+\end{description}
+
+Mivel a modell lekérésekor történõ modelltranszformáció során kerül sor a hozzáférés-szabályozásra is, ezért a belsõ konzisztencia megtartása azon is múlik, hogy milyen hozzáférési szabályok érvényesülnek a modellen.
+
+%----------------------------------------------------------------------------
+\subsection{Asset}
+%----------------------------------------------------------------------------
+
+Modellszintû hozzáférési szabályokkal a modell logikai egységeire határozhatunk meg olvasási és írási jogosultságokat. Ezeket a modellelemeket \cite{models16accesscontrol} alapján asseteknek nevezzük, és EMF modellek esetén a következõképpen csoportosítjuk õket:
+
+\begin{itemize}
+	\item \textbf{Objektum asset:} egy modellelem és az õ típusa, vagyis egy EObject és egy EClass párosa határozza meg. Az esettanulmányban pl. obj(I\_1, System Input).
+	\item \textbf{Attribútum asset:} az õt tartalmazó EObject illetve az attribútum nevének (EAttribute) és értékének hármasa alkotja, pl. attr(I\_1, description, input 1).
+	\item \textbf{Referencia asset:} a kezdõ- és végpontjában lévõ modellelemek, valamint a referencia típusa, vagyis két EObject és egy EReference hármasa azonosítja mind az asszociációt és a tartalmazást is, pl. ref(CU29\_1, Input\_iInput1, I\_1).
+\end{itemize}
+
+%----------------------------------------------------------------------------
+\subsection{Modell obfuszkáció}
+%----------------------------------------------------------------------------
+
+Az obfuszkáció lényege, hogy egy kívülállók elõl elrejteni kívánt információt eltorzítunk olyan módon, hogy az minél nehezebben értelmezhetõ legyen, ugyanakkor visszafejtés után az eredeti adatot kapjuk vissza. Vagyis például két megegyezõ információ obfuszkált értéke teljesen eltér egymástól, de egyedi azonosítójukat megõrizve visszafejtés után is azonosak lesznek. Modellek hozzáférés-kezelésénél akkor használunk obfuszkációt, ha egy assetnek csak a létezésére akarunk utalni anélkül, hogy annak tulajdonságait láthatóvá tennénk. Ha objektumról van szó, akkor az azonosító attribútumait is obfuszkáljuk, a többi jellemzõje pedig rejtve marad.
+
+%----------------------------------------------------------------------------
+\section{Hozzáférés-szabályozás}
+%----------------------------------------------------------------------------
+%----------------------------------------------------------------------------
+\subsection{Hozzáférési szabály}
+%----------------------------------------------------------------------------
+
+Egy hozzáférési szabálynak \cite{models16accesscontrol} alapján négy alapvetõ eleme van. Az egyik a hozzáférés szintje, vagyis hogy engedélyezünk, tiltunk, vagy obfuszkálunk. A második az operáció típusa, ami olvasás vagy írás lehet. Azt is meg kell határozni, hogy melyik felhasználóra vagy azoknak mely csoportjára vonatkozik a szabály, valamint ki kell választanunk asseteknek azt a halmazát, amelyekhez szabályozzuk a hozzáférést. \Aref{fig:accessrule} ábra azt a szabályt szemlélteti, amelyben a Subsystem Manager felhasználó számára tiltjuk a System Input típusú modellelemek írását.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.8\columnwidth]{src/figures/accessrule}
+		\caption{Hozzáférési szabály felépítése}
+		\label{fig:accessrule}
+	\end{center}
+\end{figure}
+
+Az, hogy egy szabály egyszerre több assetre is értelmezhetõ, gráflekérdezések segítségével érhetõ el. Különbözõ gráfmintákban fogalmazzuk meg, hogy pontosan milyen tulajdonságú elemekre van szükségünk, a rendszer pedig visszaadja a mintára illeszkedõ találatokat. A szabályban egy ilyen gráfmintára hivatkozunk, és akár még több szûrõ feltétel megadásával kiválasztjuk a találatok közül azokat az asseteket, amelyekre szabályozni akarjuk a hozzáférést. A fenti szabályban az objectInput(input) mintára hivatkozunk, amely a modell összes System Input típusú objektumát adja vissza.
+
+Gráflekérdezéssel ugyan nem kell egyesével definiálni a hozzáférést minden egyes assetre, viszont egy kellõen nagy modellnél még assetek csoportjaira is túl sok szabályt kellene megfogalmazni. Ezért is jó megoldás, ha a szabályokat egy nagyobb egységbe, úgynevezett policyba zárjuk, amire megszabhatunk default jogosultságokat. Ezeket használhatjuk, ha valamelyik modellelemre nem találunk megadott hozzáférést.
+
+%----------------------------------------------------------------------------
+\subsection{Szabályok közötti konfliktusok}\label{conflicts}
+%----------------------------------------------------------------------------
+
+A hozzáférési szabályok finomszemcsézettsége miatt elõfordulhatnak közöttük az ésszerûség ellen szóló vagy a modell belsõ konzisztenciáját megbontó konfliktusok. Ezeket \cite{commitmde16effective} szerint három típusba soroljuk az alapján, hogy melyik assetre és operációra vonatkoznak.
+
+\begin{itemize}
+	\item \textbf{I. típusú konfliktus:} Ugyanarra az assetre éa ugyanarra az operációra vonatkozó szabályok ellentmondása, például egy adott assetre az egyik szabály engedélyezi az olvasást, a másik pedig tiltja azt.
+	\item \textbf{II. típusú konfliktus:} Ugyanarra az assetre de különbözõ operációkra vonatkozó szabályok esetén abban az esetben fordul elõ, amikor az egyik szabály engedélyezi az asset módosítását, a másik viszont tiltja a láthatóságát. Az ésszerûség úgy diktálná, hogy ha egy asset írható, akkor legyen olvasható is, vagy ha nem olvasható, akkor írni se lehessen.
+	\item \textbf{III. típusú konfliktus:} Különbözõ assetekre és különbözõ operációkra vonatkozó szabályok a modell belsõ konzisztencia kényszerei miatt kerülhetnek konfliktusba egymással. Ha például egy attribútum olvasható, de az õt tartalmazó objektum nem, az \aref{internalconsistency} részben említett K1 konzisztencia szabálynak mond ellent, hiszen a felhasználó, akire a hozzáférés vonatkozik, csak az attribútumot fogja látni a modellben, mintha nem létezne mögötte objektum. Az ilyen és ehhez hasonló konfliktusok feloldására az olvasási és írási függõségek bevezetése a megoldás. A fenti esetben, ha az attribútumra vonatkozó hozzáférés teljesül, akkor az õt tartalmazó objektumra is ki kell kényszeríteni az olvashatóságot.
+\end{itemize}
+
+%----------------------------------------------------------------------------
+\subsection{Effektív jogosultságok}
+%----------------------------------------------------------------------------
+
+A megadott hozzáférések tehát csak nominális szabályok, a valóban érvényre jutó, effektív jogosultságok ezektõl különbözõek lehetnek. A kiértékelés során a modell belsõ konzisztenciájának megtartása érdekében fel kell oldani a felmerülõ konfliktusokat. Ehhez a feloldáshoz a szabályokból az általa meghatározott összes assetre elõször úgynevezett judgementeket származtatunk, amelyek \aref{fig:judgement} ábrán látható módon épülnek fel.
+
+A felhasználó és a default beállítás által közvetetten megadott judgementekbõl  \aref{conflicts} részben említett olvasási és írási függõségek alapján újabb judgementeket határozunk meg. Így kapunk egy olyan jogosultsághalmazt, amiben a modell minden egyes assetjére megtalálhatók az érvényesíteni kívánt jogok. Ekkor jutunk el oda, hogy már csak azt kell vizsgálnunk, hogy egy adott asset esetén a különbözõ operációkra milyen engedélyt adunk. Vagyis ezzel a módszerrel minden konfliktust I. típusúra egyszerûsítünk, ami már könnyen feloldható.
+
+Ehhez az I. típusú konfliktusfeloldáshoz a judgementek az eddig említett asseten, hozzáférési szinten és operációtípuson kívül prioritást és dominanciát jelzõ flaget is tartalmaznak. Az utóbbi két jellemzõ alapján döntjük el, hogy melyik judgement az erõsebb, és ezáltal melyik fog érvényre jutni a kettõ közül. Az elsõdleges szempont a prioritás, ezt a felhasználó hozzáférési szabályonként állíthatja be. Ha egy prioritási osztályban vannak, akkor a dominancia dönthet közöttük. A szabályokat összefogó policyhoz lehet engedélyezõ vagy tiltó tulajdonságot beállítani, amik közül az elõbbi az engedélyezõ szabályokat teszi dominánssá a tiltókkal szemben, az utóbbi pedig fordítva.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.8\columnwidth]{src/figures/judgement}
+		\caption{Judgement felépítése}
+		\label{fig:judgement}
+	\end{center}
+\end{figure}

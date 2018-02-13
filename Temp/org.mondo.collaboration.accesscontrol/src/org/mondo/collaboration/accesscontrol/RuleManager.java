@@ -46,14 +46,9 @@ import com.google.common.collect.Maps;
 public class RuleManager {
 	private Logger LOGGER = Logger.getLogger(RuleManager.class);
 	
-	private List<Judgement> permissionSet;
+	private List<Judgement> permissionList;
 	private Collection<IConsequence> weakConsequences;
 	private Collection<IConsequence> strongConsequences;
-//	private Collection<IConsequence> objStrongConsequences;
-//	private Collection<IConsequence> refStrongConsequences;
-//	private Collection<IConsequence> attrStrongConsequences;
-	
-	
 	private Resource model;
 	private Model rules;
 	private AdvancedViatraQueryEngine advancedQueryEngine;
@@ -65,16 +60,6 @@ public class RuleManager {
 		this.weakConsequences = weakConsequences;
 		this.strongConsequences = strongConsequences;
 	}
-	
-//	public RuleManager(Collection<IConsequence> weakConsequences, Collection<IConsequence> strongConsequences,
-//			Collection<IConsequence> objStrongConsequences, Collection<IConsequence> refStrongConsequences,
-//			Collection<IConsequence> attrStrongConsequences) {
-//		this.weakConsequences = weakConsequences;
-//		this.strongConsequences = strongConsequences;
-//		this.objStrongConsequences = objStrongConsequences;
-//		this.refStrongConsequences = refStrongConsequences;
-//		this.attrStrongConsequences = attrStrongConsequences;
-//	}
 	
 	@SuppressWarnings("unchecked")
 	public void initializeWithRulesOnModel(Resource model, Model rules) throws ViatraQueryException {
@@ -97,22 +82,22 @@ public class RuleManager {
 	}
 	
 	public List<Judgement> getEffectivePermissions(User user) throws ViatraQueryException {
-		permissionSet = Lists.newArrayList();
+		permissionList = Lists.newArrayList();
 		processed = Lists.newArrayList();
 		
 		addInitialPermissions(user);
-		
+		LOGGER.info("Number of initial permissions: " + permissionList.size());
 		LOGGER.info("Calculating effective permissions");
 		long start = System.nanoTime();
 		
-		int i = permissionSet.size();
+		int i = permissionList.size();
 		int numOfConsequences = 0;
-		while(!permissionSet.isEmpty()) {
+		while(!permissionList.isEmpty()) {
 			Judgement j = chooseDominant();
 			if(j != null) {
 				processed.add(j);
-				removeFromPermissionSet(j);
-//				permissionSet.remove(j);
+				removeFromPermissionList(j);
+//				permissionList.remove(j);
 				resolveConflict(j);
 				
 				if(j.getPriority() > -1){
@@ -120,8 +105,8 @@ public class RuleManager {
 					numOfConsequences += propagateWeakConsequences(j);
 				}
 			}
-//			if(permissionSet.size() <= i -1000) {
-//				LOGGER.info(permissionSet.size());
+//			if(permissionList.size() <= i -1000) {
+//				LOGGER.info(permissionList.size());
 //				i -= 1000;
 //			}
 			
@@ -139,9 +124,9 @@ public class RuleManager {
 	
 	private void addExplicitPermissions(User user) throws ViatraQueryException {
 //		LOGGER.info("Initialize exlipcit permissions");
-		int numOfExplicits = 0; 
 		long start = System.nanoTime();
 		for (Rule rule : rules.getPolicy().getRules()) {
+			int numOfExplicits = 0;
 			for (Role role : rule.getRoles()){
 				if(getRolesOfUser(rules, user).contains(role)){
 //					LOGGER.info(String.format("Executing Rule: %s", rule.getName()));
@@ -214,15 +199,27 @@ public class RuleManager {
 		LOGGER.info(String.format("Number of assets: %d", numOfAssets));
 	}
 	
+//	private void addDefaultPermission(Asset asset){
+//		AccessibilityLevel access = rules.getPolicy().getAccess();
+//		OperationType operation = rules.getPolicy().getOperation();
+//		ResolutionType resolution = rules.getPolicy().getResolution();
+//		if(operation == OperationType.READWRITE){
+//			permissionList.add(new Judgement(access, OperationType.READ, asset, -1, resolution));
+//			permissionList.add(new Judgement(access, OperationType.WRITE, asset, -1, resolution));
+//		} else if(operation == OperationType.READ || operation == OperationType.WRITE) {
+//			permissionList.add(new Judgement(access, operation, asset, -1, resolution));
+//		}
+//	}
+	
 	private void addDefaultPermission(Asset asset){
 		AccessibilityLevel access = rules.getPolicy().getAccess();
 		OperationType operation = rules.getPolicy().getOperation();
 		ResolutionType resolution = rules.getPolicy().getResolution();
 		if(operation == OperationType.READWRITE){
-			permissionSet.add(new Judgement(access, OperationType.READ, asset, -1, resolution));
-			permissionSet.add(new Judgement(access, OperationType.WRITE, asset, -1, resolution));
+			addToOrderedPermissionList(new Judgement(access, OperationType.READ, asset, -1, resolution));
+			addToOrderedPermissionList(new Judgement(access, OperationType.WRITE, asset, -1, resolution));
 		} else if(operation == OperationType.READ || operation == OperationType.WRITE) {
-			permissionSet.add(new Judgement(access, operation, asset, -1, resolution));
+			addToOrderedPermissionList(new Judgement(access, operation, asset, -1, resolution));
 		}
 	}
 	
@@ -231,20 +228,20 @@ public class RuleManager {
 		ResolutionType resolution = ((Policy)rule.eContainer()).getResolution();
 		int priority = rule.getPriority();
 		if(access == AccessibilityLevel.OBFUSCATE){
-			addToOrderedPermissionSet(new Judgement(access, OperationType.READ, asset, priority, resolution));
+			addToOrderedPermissionList(new Judgement(access, OperationType.READ, asset, priority, resolution));
 		} else {
 			OperationType operation = rule.getOperation();
 		    if(operation == OperationType.READWRITE){
-		    	addToOrderedPermissionSet(new Judgement(access, OperationType.READ, asset, priority, resolution));
-		    	addToOrderedPermissionSet(new Judgement(access, OperationType.WRITE, asset, priority, resolution));
+		    	addToOrderedPermissionList(new Judgement(access, OperationType.READ, asset, priority, resolution));
+		    	addToOrderedPermissionList(new Judgement(access, OperationType.WRITE, asset, priority, resolution));
 			} else if(operation == OperationType.READ || operation == OperationType.WRITE) {
-				addToOrderedPermissionSet(new Judgement(access, operation, asset, priority, resolution));
+				addToOrderedPermissionList(new Judgement(access, operation, asset, priority, resolution));
 			}
 		}
 	}
 	
 	private Judgement chooseDominant() {
-		return permissionSet.isEmpty() ? null : permissionSet.get(0);
+		return permissionList.isEmpty() ? null : permissionList.get(0);
 	}
 	
 	private int propagateWeakConsequences(Judgement judgement) {
@@ -252,7 +249,7 @@ public class RuleManager {
 		for (IConsequence weakConsequence : weakConsequences) {
 			Set<Judgement> consequences = weakConsequence.propagate(judgement);
 			for(Judgement j : consequences) {
-				addToOrderedPermissionSet(j);
+				addToOrderedPermissionList(j);
 				numOfConsequences++;
 			}
 		}
@@ -264,51 +261,31 @@ public class RuleManager {
 		for (IConsequence strongConsequence : strongConsequences) {
 			Set<Judgement> consequences = strongConsequence.propagate(judgement);
 			for(Judgement j : consequences) {
-				addToOrderedPermissionSet(j);
+				addToOrderedPermissionList(j);
 				numOfConsequences++;
 			}
 		}
 		return numOfConsequences;
-		
-//		if(judgement.getAsset() instanceof ObjectAsset) {
-//			for (IConsequence strongConsequence : objStrongConsequences) {
-//				Set<Judgement> consequences = strongConsequence.propagate(judgement);
-//				for(Judgement j : consequences) {
-//					addToOrderedPermissionSet(j);
-//				}
-//			}
-//			return;
-//		}
-//		if(judgement.getAsset() instanceof ReferenceAsset) {
-//			for (IConsequence strongConsequence : refStrongConsequences) {
-//				Set<Judgement> consequences = strongConsequence.propagate(judgement);
-//				for(Judgement j : consequences) {
-//					addToOrderedPermissionSet(j);
-//				}
-//			}
-//			return;
-//		}
-//		if(judgement.getAsset() instanceof AttributeAsset) {
-//			for (IConsequence strongConsequence : attrStrongConsequences) {
-//				Set<Judgement> consequences = strongConsequence.propagate(judgement);
-//				for(Judgement j : consequences) {
-//					addToOrderedPermissionSet(j);
-//				}
-//			}
-//		}
 	}
 	
 	
-	private void addToOrderedPermissionSet(Judgement judgement){
-		if(processed.contains(judgement)) return;
-		
-		if(permissionSet.contains(judgement)) {
-			int index = permissionSet.indexOf(judgement);
-			Judgement oldJudgement = permissionSet.get(index);
+	private void addToOrderedPermissionList(Judgement judgement){
+//		if(processed.contains(judgement)) return;
+		for(Judgement processedJudgement : processed) {
+			if(processedJudgement.getAsset().equals(judgement.getAsset()) && processedJudgement.getOperation() == judgement.getOperation()) return;
+		}
+			
+		if(permissionList.contains(judgement)) {
+			int index = permissionList.indexOf(judgement);
+			Judgement oldJudgement = permissionList.get(index);
 			if(judgement.getPriority() <= oldJudgement.getPriority()) {
 				return;
 			} else {
-				oldJudgement.setPriority(judgement.getPriority());
+//				oldJudgement.setPriority(judgement.getPriority());
+				
+				removeFromPermissionList(oldJudgement);
+				addToOrderedPermissionList(judgement);
+				
 				return;
 			}
 		}
@@ -316,39 +293,39 @@ public class RuleManager {
 		JudgementKey key = judgement.new JudgementKey(judgement.getPriority(), judgement.isDominant());
 		if(firstOccurences.containsKey(key)){
 			Judgement judgementWithSamePrior = firstOccurences.get(key);
-			int index = permissionSet.indexOf(judgementWithSamePrior);
-			permissionSet.add(index, judgement);
+			int index = permissionList.indexOf(judgementWithSamePrior);
+			permissionList.add(index, judgement);
 			firstOccurences.put(key, judgement);
 		} else {
 			boolean isAdded = false;
-			for (Judgement oldJudgement : permissionSet) {
+			for (Judgement oldJudgement : permissionList) {
 				if(judgement.getPriority() > oldJudgement.getPriority()){
-					permissionSet.add(permissionSet.indexOf(oldJudgement), judgement);
+					permissionList.add(permissionList.indexOf(oldJudgement), judgement);
 					isAdded = true;
 					break;
 				} else if(judgement.getPriority() == oldJudgement.getPriority() && judgement.isDominant()){
-					permissionSet.add(permissionSet.indexOf(oldJudgement), judgement);
+					permissionList.add(permissionList.indexOf(oldJudgement), judgement);
 					isAdded = true;
 					break;
 				}
 			}
 			if(!isAdded){
-				permissionSet.add(judgement);
+				permissionList.add(judgement);
 			}
 			firstOccurences.put(key, judgement);
 		}
 	}
 	
-	private void removeFromPermissionSet(Judgement judgement) {
+	private void removeFromPermissionList(Judgement judgement) {
 		if(firstOccurences.containsValue(judgement)){
 	    	firstOccurences.remove(judgement.new JudgementKey(judgement.getPriority(), judgement.isDominant()));
 	    }
-		permissionSet.remove(judgement);
+		permissionList.remove(judgement);
 	}
 	
 	private void resolveConflict(Judgement j){
 		List<Judgement> conflictingJudgements = new ArrayList<Judgement>();
-		for (Judgement judgement : permissionSet) {
+		for (Judgement judgement : permissionList) {
 			if(j.getAsset().equals(judgement.getAsset())){
 				if(j.getOperation() == judgement.getOperation()){
 					if(j.getAccess() != judgement.getAccess()){
@@ -366,7 +343,7 @@ public class RuleManager {
 			}
 		}
 		for (Judgement conflictingJudgement : conflictingJudgements) {
-			removeFromPermissionSet(conflictingJudgement);
+			removeFromPermissionList(conflictingJudgement);
 		}
 	}
 

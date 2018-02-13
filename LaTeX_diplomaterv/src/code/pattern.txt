@@ -1,0 +1,3 @@
+pattern objectInput(input : SystemInput) {
+    SystemInput(input);
+}
