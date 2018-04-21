@@ -159,8 +159,7 @@ import org.mondo.collaboration.policy.rules.provider.RulesItemProviderAdapterFac
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.provider.PatternLanguageItemProviderAdapterFactory;
-
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.util.PatternLanguageAdapterFactory;
 import org.eclipse.xtext.common.types.provider.TypesItemProviderAdapterFactory;
 
 
@@ -707,7 +706,7 @@ public class RulesEditor
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new RulesItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new PatternLanguageItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new PatternLanguageAdapterFactory());
 		adapterFactory.addAdapterFactory(new TypesItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="windturbine.demo.Example" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:windturbine.demo.Example" id="windturbine.demo.Example">
+      <query-specification fqn="windturbine.demo.objectAll"/>
+      <query-specification fqn="windturbine.demo.allFacts"/>
+      <query-specification fqn="windturbine.demo.objectRoot"/>
+      <query-specification fqn="windturbine.demo.objectRootWithId"/>
+      <query-specification fqn="windturbine.demo.referenceitsInputs"/>
+      <query-specification fqn="windturbine.demo.referenceitsOutputs"/>
+      <query-specification fqn="windturbine.demo.referenceitsParams"/>
+      <query-specification fqn="windturbine.demo.referenceitsTimers"/>
+      <query-specification fqn="windturbine.demo.referenceitsFaults"/>
+      <query-specification fqn="windturbine.demo.referenceitsVariables"/>
+      <query-specification fqn="windturbine.demo.referenceitsMainSubsystems"/>
+      <query-specification fqn="windturbine.demo.objectWTC"/>
+      <query-specification fqn="windturbine.demo.objectAllObject"/>
+      <query-specification fqn="windturbine.demo.objectIO"/>
+      <query-specification fqn="windturbine.demo.objectNotIO"/>
+      <query-specification fqn="windturbine.demo.objectInput"/>
+      <query-specification fqn="windturbine.demo.objectOutput"/>
+      <query-specification fqn="windturbine.demo.objectFault"/>
+      <query-specification fqn="windturbine.demo.objectParam"/>
+      <query-specification fqn="windturbine.demo.objectTimer"/>
+      <query-specification fqn="windturbine.demo.objectVariable"/>
+      <query-specification fqn="windturbine.demo.objectSubsystemWithName"/>
+      <query-specification fqn="windturbine.demo.objectIOFaultTimerVariable"/>
+      <query-specification fqn="windturbine.demo.attributeenabled"/>
+      <query-specification fqn="windturbine.demo.lockParameterValues"/>
+      <query-specification fqn="windturbine.demo.objectAllObjectsWithoutRoot"/>
+    </group>
+  </extension>
+</plugin>

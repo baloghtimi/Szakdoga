@@ -1,0 +1,36 @@
+user PrincipalEngineer
+user SubsystemManager
+user IOManager
+
+policy DemoPolicy allow RW by default {
+    rule restrictRoot deny W to PrincipalEngineer, IOManager, SubsystemManager {
+		from query "objectRoot"
+		select obj(root)
+	} with 1 priority
+	
+	rule enableNonRoot allow RW to PrincipalEngineer {
+		from query "objectAllObjectsWithoutRoot"
+		select obj(object)
+	} with 1 priority
+	
+	rule enableIO allow RW to IOManager {
+		from query "objectIO"
+		select obj(object)
+	} with 1 priority
+
+    rule restrictNonIO deny R to IOManager {
+    	from query "objectNotIO"
+    	select obj(object)
+    } with 1 priority
+    
+    rule enableNonIO allow RW to SubsystemManager {
+    	from query "objectNotIO"
+    	select obj(object)
+    } with 1 priority
+    
+    rule restrictIO deny W to SubsystemManager {
+		from query "objectIO"
+		select obj(object)
+	} with 1 priority
+	
+} with restrictive resolution

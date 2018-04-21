@@ -1,0 +1,509 @@
+package windturbine.demo
+
+import "http://WTSpec4M/5.0M"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+pattern objectAll(obj: EObject) {
+	EObject(obj);
+}
+
+pattern allFacts(fact: EObject) {
+	EObject(fact);
+} or {
+	EAttribute(fact);
+	EClass.eAttributes(_, fact);
+} or {
+	EReference(fact);
+	EClass.eReferences(_, fact);
+}
+
+pattern objectRoot(root : WT) {
+	WT(root);
+}
+
+pattern objectRootWithId(root : WT, id) {
+	WT.sysId(root, id);
+}
+
+pattern referenceitsInputs(root : WT, input : SystemInput) {
+	WT.itsInputs(root, input);
+}
+
+pattern referenceitsOutputs(root : WT, output : SystemOutput) {
+	WT.itsOutputs(root, output);
+}
+
+pattern referenceitsParams(root : WT, param : SystemParam) {
+	WT.itsParams(root, param);
+}
+
+pattern referenceitsTimers(root : WT, timer : SystemTimer) {
+	WT.itsTimers(root, timer);
+}
+
+pattern referenceitsFaults(root : WT, fault : SystemFault) {
+	WT.itsFaults(root, fault);
+}
+
+pattern referenceitsVariables(root : WT, variable : SystemVariable) {
+	WT.itsVariables(root, variable);
+}
+
+pattern referenceitsMainSubsystems(root : WT, subsystem : MainSubsystem) {
+	WT.itsSubsystems(root, subsystem);
+}
+
+pattern objectWTC(ctrl : wtc) {
+	wtc(ctrl);
+}
+
+pattern objectAllObject(object : EObject) {
+	EObject(object);
+}
+
+/*pattern objectNotIO(object) {
+	neg find objectIO(object);
+	neg find objectRoot(object);
+}*/
+
+/*pattern objectIO(object : EObject) {
+	SystemInput(object);
+}*/
+
+pattern objectIO(object: EObject) {
+	SystemInput(object);
+} or {
+	SystemOutput(object);
+}
+
+pattern objectNotIO(object: EObject) {
+	find objectAllObjectsWithoutRoot(object);
+	neg find objectIO(object);
+}
+
+pattern objectInput(input : SystemInput) {
+	SystemInput(input);
+}
+
+pattern objectOutput(output : SystemOutput) {
+	SystemOutput(output);
+}
+
+pattern objectFault(fault : SystemFault) {
+	SystemFault(fault);
+}
+
+pattern objectParam(param : SystemParam) {
+	SystemParam(param);
+}
+
+pattern objectTimer(timer : SystemTimer) {
+	SystemTimer(timer);
+}
+
+pattern objectVariable(variable : SystemVariable) {
+	SystemVariable(variable);
+}
+
+pattern objectSubsystemWithName(subSystem : MainSubsystem, name : java String) {
+	MainSubsystem.sysId(subSystem, name);
+}
+
+pattern objectIOFaultTimerVariable(object: EObject) {
+	SystemInput(object);
+} or {
+	SystemOutput(object);
+} or {
+	SystemFault(object);
+} or {
+	SystemParam(object);
+} or {
+	SystemTimer(object);
+} or {
+	SystemVariable(object);
+}
+
+pattern attributeenabled(wtc : wtc, value) {
+	wtc.enabled(wtc, value);
+}
+
+pattern lockParameterValues(param : SystemParam, value) {
+	SystemParam.value(param,value);
+}
+
+pattern objectAllObjectsWithoutRoot(object: EObject) {
+	MainSubsystem(object);
+} or {
+	Subsystem(object);
+} or {
+	SystemInput(object);
+} or {
+	SystemOutput(object);
+} or {
+	SystemFault(object);
+} or {
+	SystemParam(object);
+} or {
+	SystemTimer(object);
+} or {
+	SystemVariable(object);
+} or {
+	CtrlUnit5(object);
+} or {
+	CtrlUnit9(object);
+} or {
+	CtrlUnit10(object);
+} or {
+	CtrlUnit11(object);
+} or {
+	CtrlUnit13(object);
+} or {
+	CtrlUnit15(object);
+} or {
+	CtrlUnit18(object);
+} or {
+	CtrlUnit27(object);
+} or {
+	CtrlUnit29(object);
+} or {
+	CtrlUnit31(object);
+} or {
+	CtrlUnit34(object);
+} or {
+	CtrlUnit36(object);
+} or {
+	CtrlUnit37(object);
+} or {
+	CtrlUnit39(object);
+} or {
+	CtrlUnit40(object);
+} or {
+	CtrlUnit44(object);
+} or {
+	CtrlUnit46(object);
+} or {
+	CtrlUnit47(object);
+} or {
+	CtrlUnit49(object);
+} or {
+	CtrlUnit50(object);
+} or {
+	CtrlUnit58(object);
+} or {
+	CtrlUnit59(object);
+} or {
+	CtrlUnit65(object);
+} or {
+	CtrlUnit68(object);
+} or {
+	CtrlUnit71(object);
+} or {
+	CtrlUnit73(object);
+} or {
+	CtrlUnit78(object);
+} or {
+	CtrlUnit80(object);
+} or {
+	CtrlUnit92(object);
+} or {
+	CtrlUnit94(object);
+} or {
+	CtrlUnit102(object);
+} or {
+	CtrlUnit124(object);
+} or {
+	CtrlUnit125(object);
+} or {
+	CtrlUnit126(object);
+}
+
+/*pattern referenceAllReference(source, target) {
+	WT.itsFaults(source, target);
+} or {
+	WT.itsInputs(source, target);
+} or {
+	WT.itsOutputs(source, target);
+} or {
+	WT.itsParams(source, target);
+} or {
+	WT.itsSubsystems(source, target);
+} or {
+	WT.itsTimers(source, target);
+} or {
+	WT.itsVariables(source, target);
+} or {
+	MainSubsystem.itsSubsystems(source, target);
+} or {
+	MainSubsystem.itsWTCs(source, target);
+}
+
+pattern attributeAllAttribute(object, attribute) {
+	WT.model(object, attribute);
+} or {
+	WT.sysId(object, attribute);
+} or {
+	WT.version(object, attribute);
+} or {
+	MainSubsystem.description(object, attribute);
+} or {
+	MainSubsystem.sysId(object, attribute);
+} or {
+	SystemInput.description(object, attribute);
+} or {
+	SystemInput.sysId(object, attribute);
+} or {
+	SystemOutput.description(object, attribute);
+} or {
+	SystemOutput.sysId(object, attribute);
+} or {
+	SystemFault.description(object, attribute);
+} or {
+	SystemFault.sysId(object, attribute);
+} or {
+	SystemFault.value(object, attribute);
+} or {
+	SystemParam.description(object, attribute);
+} or {
+	SystemParam.settable(object, attribute);
+} or {
+	SystemParam.sysId(object, attribute);
+} or {
+	SystemParam.value(object, attribute);
+} or {
+	SystemTimer.description(object, attribute);
+} or {
+	SystemTimer.sysId(object, attribute);
+} or {
+	SystemTimer.value(object, attribute);
+} or {
+	SystemVariable.description(object, attribute);
+} or {
+	SystemVariable.sysId(object, attribute);
+}*/
+
+/*pattern lockIO(eObject : EObject) {
+	SystemInput(eObject);
+} or {
+	SystemOutput(eObject);
+} or {
+	find lockIOReferredByCtrl(_,eObject);
+}
+
+pattern lockIOReferredByCtrlUnderSubSystem(subSystem : Subsystem, ctrl : wtc, eObject : EObject) {
+	Subsystem.itsWTCs(subSystem,ctrl);
+	find lockIOReferredByCtrl(ctrl,eObject);
+} or {
+	find allSubsystemInSubsystems+(subSystem,subSubSystem);
+	Subsystem.itsWTCs(subSubSystem,ctrl);
+	find lockIOReferredByCtrl(ctrl,eObject);
+}
+
+private pattern allSubsystemInSubsystems(parent : Subsystem, child : Subsystem) {
+	Subsystem.itsSubsystems(parent,child);
+}
+
+pattern lockIOReferredByCtrl(ctrl : wtc, eObject : EObject) {
+	CtrlUnit80.Input__iInput3(ctrl, eObject);
+} or {
+	CtrlUnit80.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit80.Input__iInput5(ctrl, eObject);
+} or {
+	CtrlUnit80.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit80.Input__iInput4(ctrl, eObject);
+} or {
+	CtrlUnit80.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit18.Input__iInput6(ctrl, eObject);
+} or {
+	CtrlUnit18.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit18.Input__iInput5(ctrl, eObject);
+} or {
+	CtrlUnit18.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit18.Input__iInput4(ctrl, eObject);
+} or {
+	CtrlUnit18.Input__iInput3(ctrl, eObject);
+} or {
+	CtrlUnit18.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit65.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit73.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit73.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit10.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit10.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit9.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit9.Input__iInput4(ctrl, eObject);
+} or {
+	CtrlUnit9.Input__iInput3(ctrl, eObject);
+} or {
+	CtrlUnit9.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit9.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit94.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit94.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit47.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit39.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit39.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit13.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit13.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit13.Input__iInput3(ctrl, eObject);
+} or {
+	CtrlUnit13.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit102.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit102.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit102.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit125.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit125.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit15.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit15.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit5.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit5.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit5.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit27.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit27.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit27.Output__oOutput2(ctrl, eObject);
+} or {
+	CtrlUnit27.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit58.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit58.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit36.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit36.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit31.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit31.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit40.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit40.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit34.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit34.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit34.Output__oOutput2(ctrl, eObject);
+} or {
+	CtrlUnit34.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit124.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit124.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit124.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit49.Input__iInput4(ctrl, eObject);
+} or {
+	CtrlUnit49.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit49.Input__iInput3(ctrl, eObject);
+} or {
+	CtrlUnit49.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit49.Output__oOutput2(ctrl, eObject);
+} or {
+	CtrlUnit49.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit29.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit29.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit59.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit59.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit78.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit78.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit78.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit44.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit44.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit37.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit37.Input__iInput3(ctrl, eObject);
+} or {
+	CtrlUnit37.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit37.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit11.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit11.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit11.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit68.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit68.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit68.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit92.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit92.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit71.Input__iInput6(ctrl, eObject);
+} or {
+	CtrlUnit71.Input__iInput3(ctrl, eObject);
+} or {
+	CtrlUnit71.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit71.Input__iInput5(ctrl, eObject);
+} or {
+	CtrlUnit71.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit71.Input__iInput4(ctrl, eObject);
+} or {
+	CtrlUnit71.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit71.Output__oOutput2(ctrl, eObject);
+} or {
+	CtrlUnit126.Input__iInput2(ctrl, eObject);
+} or {
+	CtrlUnit126.Input__iInput1(ctrl, eObject);
+} or {
+	CtrlUnit126.Output__oOutput2(ctrl, eObject);
+} or {
+	CtrlUnit126.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit50.Output__oOutput1(ctrl, eObject);
+} or {
+	CtrlUnit46.Output__oOutput1(ctrl, eObject);
+}*/

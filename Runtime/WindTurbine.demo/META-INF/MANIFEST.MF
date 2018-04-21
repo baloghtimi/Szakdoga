@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WindTurbine.demo
+Bundle-SymbolicName: WindTurbine.demo;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Export-Package: windturbine.demo,
+ windturbine.demo.util
+Require-Bundle: org.eclipse.emf.ecore,
+ org.eclipse.viatra.query.runtime,
+ org.eclipse.xtext.xbase.lib,
+ org.mondo.wt.cstudy.metamodel;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.apache.log4j
